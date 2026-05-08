@@ -5,6 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sun Wukong — The Monkey King | Celestial Archive</title>
   <meta name="description" content="Explore the legend of Sun Wukong, the Monkey King — from stone-born rebel to the Victorious Fighting Buddha.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://celestial-archive.com/deities/sun-wukong/">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sun Wukong — The Monkey King | Celestial Archive">
+  <meta property="og:description" content="Explore the legend of Sun Wukong, the Monkey King — from stone-born rebel to the Victorious Fighting Buddha.">
+  <meta property="og:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sun Wukong — 工笔重彩风格">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://celestial-archive.com/deities/sun-wukong/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sun Wukong — The Monkey King | Celestial Archive">
+  <meta name="twitter:description" content="Explore the legend of Sun Wukong, the Monkey King — from stone-born rebel to the Victorious Fighting Buddha.">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta name="twitter:image:alt" content="Sun Wukong — 工笔重彩风格">
   <link rel="stylesheet" href="../../css/global.css">
   <style>
     /* ============================================================
@@ -45,7 +64,7 @@
       font-size: 0.85rem;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: var(--accent-gold);
+      color: #dac98a;
       margin-bottom: var(--space-xs);
     }
     .hero-title {
@@ -393,6 +412,227 @@
         grid-auto-columns: 160px;
       }
     }
+
+    /* ============================================================
+       区块6：金石铭文 —— 给孙悟空留言
+       ============================================================ */
+    .inscription-section {
+      padding: var(--space-xxl) 0;
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(232,220,200,0.08);
+    }
+    .inscription-title {
+      color: var(--text-on-dark);
+      margin-bottom: var(--space-xs);
+    }
+    .inscription-subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* 输入区 */
+    .inscription-form {
+      max-width: 600px;
+      margin: 0 auto var(--space-xl);
+    }
+    .inscription-input-wrap {
+      display: flex;
+      gap: var(--space-sm);
+    }
+    .inscription-input {
+      flex: 1;
+      background: #3d3428;
+      border: 1px solid rgba(184,160,110,0.3);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-on-dark);
+      resize: none;
+      min-height: 56px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+    .inscription-input::placeholder {
+      color: rgba(232,220,200,0.35);
+      font-style: italic;
+    }
+    .inscription-input:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 16px rgba(184,160,110,0.15);
+    }
+    .inscription-submit {
+      flex-shrink: 0;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--bg-dark);
+      background: var(--accent-gold);
+      border: none;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.3s, box-shadow 0.3s;
+      white-space: nowrap;
+    }
+    .inscription-submit:hover {
+      background: #c9b380;
+      box-shadow: var(--shadow-glow);
+    }
+    .inscription-submit:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* 输入框云纹装饰 */
+    .inscription-input-wrap {
+      position: relative;
+    }
+    .inscription-input-wrap::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 12px;
+      width: 24px;
+      height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='18' viewBox='0 0 24 18'%3E%3Cpath d='M6 14c-3 0-5-2-5-5s2-5 5-5c1-4 4-7 8-7 3 0 6 2 8 5 1 0 2-1 3-1 4 0 6 3 6 7s-3 6-6 6' fill='none' stroke='rgba(184,160,110,0.2)' stroke-width='1'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+
+    /* 动画遮罩 */
+    .inscription-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(45,36,24,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: all;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .inscription-overlay.active {
+      opacity: 1;
+    }
+    .inscription-overlay-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: #fff;
+      text-align: center;
+      max-width: 600px;
+      padding: var(--space-lg);
+      transition: color 0.6s ease, text-shadow 0.6s ease;
+    }
+    .inscription-overlay-text.golden {
+      color: var(--accent-gold);
+      text-shadow: 0 0 30px rgba(184,160,110,0.6), 0 0 80px rgba(184,160,110,0.3);
+    }
+    /* 金箍棒光柱 */
+    .jingu-beam {
+      position: absolute;
+      top: -100%;
+      left: 50%;
+      width: 4px;
+      height: 200%;
+      background: linear-gradient(to bottom, transparent, rgba(184,160,110,0.8), rgba(255,220,140,0.9), rgba(184,160,110,0.6), transparent);
+      transform: translateX(-50%);
+      animation: beam-strike 0.6s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes beam-strike {
+      0% { top: -100%; opacity: 0; }
+      30% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+    /* 云烟粒子 */
+    .cloud-particle {
+      position: absolute;
+      width: 18px;
+      height: 12px;
+      background: radial-gradient(ellipse, rgba(232,220,200,0.5), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: cloud-drift 2.5s ease-in-out forwards;
+    }
+    @keyframes cloud-drift {
+      0% { transform: translate(0, 0) scale(0); opacity: 0; }
+      20% { transform: translate(20px, -30px) scale(1); opacity: 0.6; }
+      60% { transform: translate(80px, -180px) scale(1.4); opacity: 0.3; }
+      100% { transform: translate(120px, -320px) scale(0.2); opacity: 0; }
+    }
+
+    /* 金石铭文列表 */
+    .inscription-gallery {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .inscription-card {
+      background: #3a3028;
+      border: 1px solid rgba(184,160,110,0.15);
+      border-radius: var(--radius-sm);
+      padding: var(--space-md);
+      margin-bottom: var(--space-sm);
+      position: relative;
+      overflow: hidden;
+      animation: card-fade-in 0.6s ease forwards;
+    }
+    .inscription-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M10 40c-4 0-7-3-7-7s3-7 7-7c1-5 6-10 11-10 4 0 9 3 10 7 1 0 2-1 3-1 5 0 8 4 8 9s-4 9-8 9H10z' fill='rgba(184,160,110,0.03)'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    @keyframes card-fade-in {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .inscription-card-text {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: var(--accent-gold);
+      line-height: 1.7;
+      margin-bottom: var(--space-xs);
+      position: relative;
+      z-index: 1;
+    }
+    .inscription-card-text::before {
+      content: '金石 ';
+      font-family: var(--font-chinese-display);
+      font-size: 0.8rem;
+      opacity: 0.3;
+      margin-right: 4px;
+    }
+    .inscription-card-time {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      text-align: right;
+      position: relative;
+      z-index: 1;
+    }
+    .inscription-empty {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      padding: var(--space-lg);
+    }
+
+    /* 响应式 */
+    @media (max-width: 767px) {
+      .inscription-input-wrap {
+        flex-direction: column;
+      }
+      .inscription-submit {
+        width: 100%;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -403,7 +643,7 @@
   <section class="hero" aria-label="Hero">
     <div class="hero-bg-cloud bg-cloud-pattern"></div>
     <div class="hero-image">
-      <img src="../../images/sun-wukong/sun-wukong-hero.png" alt="Sun Wukong — 工笔重彩风格" class="mural-filter">
+      <img src="../../images/sun-wukong/sun-wukong-hero.jpg" alt="Sun Wukong — 工笔重彩风格" class="mural-filter">
     </div>
     <div class="hero-inner">
       <div></div>
@@ -428,6 +668,7 @@
   <!-- 区块2：身份速览卡片 -->
   <!-- ============================================================ -->
   <section class="identity-cards section" aria-label="Identity overview">
+    <h2 class="sr-only">At a Glance</h2>
     <div class="container">
       <div class="cards-grid">
         <div class="identity-card fade-in">
@@ -458,6 +699,7 @@
   <!-- 区块3：微型叙事片段 -->
   <!-- ============================================================ -->
   <section class="narrative-snippets section" aria-label="Narrative snippets">
+    <h2 class="sr-only">The Legend in Fragments</h2>
     <div class="container">
       <div class="snippet">
         <h3 class="snippet-title">The Rebel</h3>
@@ -471,7 +713,7 @@
         <p class="snippet-text">He spent 500 years pinned under a mountain, fed only molten copper, waiting for a second chance.</p>
       </div>
       <div class="snippet-divider">
-        <img src="../../images/sun-wukong/cloud-divider2.svg" alt="" aria-hidden="true">
+        <img src="../../images/sun-wukong/cloud-divider.svg" alt="" aria-hidden="true">
       </div>
       <div class="snippet">
         <h3 class="snippet-title">The Protector</h3>
@@ -492,7 +734,7 @@
       <div class="hub-grid">
         <a href="origins.html" class="hub-card">
           <div class="hub-card-art bg-cloud-pattern-light">
-            <img src="../../images/sun-wukong/lotus-icon.svg" alt="" aria-hidden="true">
+            <img src="../../images/sun-wukong/lotus-icon.jpg" alt="" aria-hidden="true">
           </div>
           <h3 class="hub-card-title">The Journey</h3>
           <p class="hub-card-desc">From a stone egg on Flower-Fruit Mountain to the thunderous havoc in heaven — trace every step of his legendary path.</p>
@@ -500,7 +742,7 @@
         </a>
         <a href="arsenal.html" class="hub-card">
           <div class="hub-card-art bg-cloud-pattern-light">
-            <img src="../../images/sun-wukong/lotus-icon2.svg" alt="" aria-hidden="true">
+            <img src="../../images/sun-wukong/lotus-icon.jpg" alt="" aria-hidden="true">
           </div>
           <h3 class="hub-card-title">Divine Arsenal</h3>
           <p class="hub-card-desc">The legendary staff that can touch the heavens. The eyes that see through all deception. Explore the weapons that made him unstoppable.</p>
@@ -508,7 +750,7 @@
         </a>
         <a href="legacy.html" class="hub-card">
           <div class="hub-card-art bg-cloud-pattern-light">
-            <img src="../../images/sun-wukong/lotus-icon3.svg" alt="" aria-hidden="true">
+            <img src="../../images/sun-wukong/lotus-icon.jpg" alt="" aria-hidden="true">
           </div>
           <h3 class="hub-card-title">Across the World</h3>
           <p class="hub-card-desc">From Peking Opera to Black Myth: Wukong, Dragon Ball to Hollywood — discover how the Monkey King inspired the world.</p>
@@ -561,11 +803,11 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <h4 class="footer-brand">Celestial Archive</h4>
+          <div class="footer-brand">Celestial Archive</div>
           <p class="footer-desc">Exploring the myths, legends, and divine beings of Eastern mythology — one story at a time.</p>
         </div>
         <div class="footer-col">
-          <h4 class="footer-heading">Navigate</h4>
+          <div class="footer-heading">Navigate</div>
           <nav class="footer-nav">
             <a href="origins.html">The Journey</a>
             <a href="arsenal.html">Divine Arsenal</a>
@@ -573,7 +815,7 @@
           </nav>
         </div>
         <div class="footer-col">
-          <h4 class="footer-heading">Follow</h4>
+          <div class="footer-heading">Follow</div>
           <div class="social-icons">
             <span class="social-icon" aria-label="Twitter">T</span>
             <span class="social-icon" aria-label="YouTube">Y</span>
@@ -586,6 +828,31 @@
     </div>
   </footer>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Sun Wukong — The Monkey King",
+    "description": "Explore the legend of Sun Wukong, the Monkey King — from stone-born rebel to the Victorious Fighting Buddha.",
+    "image": "https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg",
+    "author": { "@type": "Organization", "name": "Celestial Archive" },
+    "publisher": { "@type": "Organization", "name": "Celestial Archive", "url": "https://celestial-archive.com" },
+    "url": "https://celestial-archive.com/deities/sun-wukong/",
+    "datePublished": "2026-01-01",
+    "inLanguage": "en",
+    "mainEntityOfPage": "https://celestial-archive.com/deities/sun-wukong/"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Celestial Archive", "item": "https://celestial-archive.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Sun Wukong", "item": "https://celestial-archive.com/deities/sun-wukong/" }
+    ]
+  }
+  </script>
   <script src="../../js/main.js"></script>
 </body>
 </html>
