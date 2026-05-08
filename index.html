@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celestial Archive — Eastern Mythology</title>
+  <meta name="description" content="Explore the myths, legends, and divine beings of Eastern mythology. From the Monkey King to the Jade Emperor — discover the stories that shaped a civilization.">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .landing {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-xl) var(--space-md);
+      background: var(--bg-dark);
+      position: relative;
+      overflow: hidden;
+    }
+    .landing-bg {
+      position: absolute; inset: 0;
+      background-image: url("images/sun-wukong/sun-wukong-hero.png");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25;
+      filter: var(--filter-mural);
+    }
+    .landing-content {
+      position: relative; z-index: 2;
+      max-width: 640px;
+    }
+    .landing-icon {
+      width: 80px; height: 80px;
+      margin: 0 auto var(--space-lg);
+      opacity: 0.7;
+    }
+    .landing-kicker {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: var(--space-md);
+    }
+    .landing-title {
+      font-family: var(--font-chinese-display);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      color: #fff;
+      margin-bottom: var(--space-sm);
+      text-shadow: 0 0 40px rgba(184,160,110,0.25);
+    }
+    .landing-subtitle {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--text-on-dark);
+      margin-bottom: var(--space-lg);
+      font-style: italic;
+    }
+    .landing-divider {
+      width: 60px; height: 2px;
+      background: var(--accent-gold);
+      margin: 0 auto var(--space-lg);
+    }
+    .landing-desc {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--text-on-dark);
+      margin-bottom: var(--space-xl);
+    }
+    .landing-cta {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--bg-dark);
+      background: var(--accent-gold);
+      padding: 14px 40px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .landing-cta:hover {
+      background: #c9b380;
+      box-shadow: var(--shadow-glow);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="landing" aria-label="Celestial Archive — landing">
+    <div class="landing-bg"></div>
+    <div class="landing-content">
+      <img src="images/sun-wukong/lotus-icon.svg" alt="" class="landing-icon" aria-hidden="true">
+      <p class="landing-kicker">Celestial Archive</p>
+      <h1 class="landing-title">天宫档案</h1>
+      <p class="landing-subtitle">The Celestial Archive</p>
+      <div class="landing-divider"></div>
+      <p class="landing-desc">
+        Exploring the myths, legends, and divine beings of Eastern mythology —<br>
+        from the stone-born Monkey King to the celestial halls of the Jade Emperor.
+      </p>
+      <a href="deities/sun-wukong/index.html" class="landing-cta">Enter the Archive</a>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 class="footer-brand">Celestial Archive</h4>
+          <p class="footer-desc">Exploring the myths, legends, and divine beings of Eastern mythology — one story at a time.</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Explore</h4>
+          <nav class="footer-nav">
+            <a href="deities/sun-wukong/index.html">Sun Wukong</a>
+            <a href="deities/sun-wukong/origins.html">The Journey</a>
+            <a href="deities/sun-wukong/arsenal.html">Divine Arsenal</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Follow</h4>
+          <div class="social-icons">
+            <span class="social-icon" aria-label="Twitter">T</span>
+            <span class="social-icon" aria-label="YouTube">Y</span>
+            <span class="social-icon" aria-label="X">X</span>
+            <span class="social-icon" aria-label="Pinterest">P</span>
+          </div>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
