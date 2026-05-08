@@ -890,5 +890,181 @@
   }
   </script>
   <script src="../../js/main.js"></script>
+  <script>
+  /**
+   * Golden Inscriptions — localStorage persistence + send animation
+   */
+  (function () {
+    'use strict';
+
+    var STORAGE_KEY = 'celestial-archive-messages';
+
+    var input = document.getElementById('inscription-input');
+    var submitBtn = document.getElementById('inscription-submit');
+    var gallery = document.getElementById('inscription-gallery');
+    var overlay = document.getElementById('inscription-overlay');
+    var overlayText = document.getElementById('inscription-overlay-text');
+
+    /* ============================================================
+       localStorage 读写
+       ============================================================ */
+    function loadMessages() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveMessages(messages) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      } catch (e) {
+        /* localStorage full — silently ignore */
+      }
+    }
+
+    /* ============================================================
+       渲染铭文列表
+       ============================================================ */
+    function renderGallery() {
+      var messages = loadMessages();
+      if (!gallery) return;
+
+      if (messages.length === 0) {
+        gallery.innerHTML = '<p class="inscription-empty">No inscriptions yet. Be the first to write to the Monkey King.</p>';
+        return;
+      }
+
+      /* 最新在前 */
+      var sorted = messages.slice().sort(function (a, b) { return b.timestamp - a.timestamp; });
+
+      var html = '';
+      sorted.forEach(function (msg) {
+        var date = new Date(msg.timestamp);
+        var timeStr = date.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+        var escapedText = msg.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        html += '<div class="inscription-card">'
+          + '<p class="inscription-card-text">' + escapedText + '</p>'
+          + '<p class="inscription-card-time">' + timeStr + '</p>'
+          + '</div>';
+      });
+      gallery.innerHTML = html;
+    }
+
+    /* ============================================================
+       发送消息 + 触发动画
+       ============================================================ */
+    function sendMessage() {
+      var text = input.value.trim();
+      if (!text) return;
+
+      /* 禁用交互 */
+      submitBtn.disabled = true;
+      input.disabled = true;
+
+      /* 显示遮罩 */
+      overlay.classList.add('active');
+      overlayText.textContent = text;
+      overlayText.classList.remove('golden');
+
+      /* 生成云烟粒子 */
+      spawnCloudParticles();
+
+      /* 阶段1→2：点金（1.8s后） */
+      setTimeout(function () {
+        overlayText.classList.add('golden');
+        spawnBeam();
+      }, 1800);
+
+      /* 阶段3：完成，保存并刷新列表（3s后） */
+      setTimeout(function () {
+        /* 存储 */
+        var messages = loadMessages();
+        messages.push({
+          id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+          text: text,
+          timestamp: Date.now()
+        });
+        saveMessages(messages);
+
+        /* 隐藏遮罩 */
+        overlay.classList.remove('active');
+        overlayText.textContent = '';
+        overlayText.classList.remove('golden');
+
+        /* 清理粒子 */
+        clearParticles();
+
+        /* 重置表单 */
+        input.value = '';
+        submitBtn.disabled = false;
+        input.disabled = false;
+        input.focus();
+
+        /* 刷新列表 */
+        renderGallery();
+        /* 滚动到新卡片 */
+        var firstCard = gallery.querySelector('.inscription-card');
+        if (firstCard) {
+          firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 3000);
+    }
+
+    /* ============================================================
+       动画效果
+       ============================================================ */
+    function spawnCloudParticles() {
+      var count = 8;
+      var inputRect = input.getBoundingClientRect();
+      var startX = inputRect.left + inputRect.width / 2;
+      var startY = inputRect.top;
+
+      for (var i = 0; i < count; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'cloud-particle';
+        particle.style.left = (startX + (Math.random() - 0.5) * 60) + 'px';
+        particle.style.top = (startY + Math.random() * 20) + 'px';
+        particle.style.animationDelay = (i * 0.12) + 's';
+        particle.style.animationDuration = (2 + Math.random() * 1.5) + 's';
+        overlay.appendChild(particle);
+      }
+    }
+
+    function spawnBeam() {
+      var beam = document.createElement('div');
+      beam.className = 'jingu-beam';
+      overlay.appendChild(beam);
+      setTimeout(function () {
+        if (beam.parentNode) beam.parentNode.removeChild(beam);
+      }, 700);
+    }
+
+    function clearParticles() {
+      var particles = overlay.querySelectorAll('.cloud-particle, .jingu-beam');
+      particles.forEach(function (p) { p.parentNode.removeChild(p); });
+    }
+
+    /* ============================================================
+       事件绑定
+       ============================================================ */
+    submitBtn.addEventListener('click', sendMessage);
+
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    /* 页面加载时渲染历史消息 */
+    renderGallery();
+  })();
+  </script>
 </body>
 </html>
