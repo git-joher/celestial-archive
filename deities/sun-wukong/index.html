@@ -440,11 +440,14 @@
     .inscription-input-wrap {
       display: flex;
       gap: var(--space-sm);
+      background: linear-gradient(135deg, rgba(184,160,110,0.5), rgba(184,160,110,0.15));
+      border-radius: var(--radius-sm);
+      padding: 1px;
     }
     .inscription-input {
       flex: 1;
       background: #3d3428;
-      border: 1px solid rgba(184,160,110,0.3);
+      border: none;
       border-radius: var(--radius-sm);
       padding: 14px 18px;
       font-family: var(--font-body);
@@ -460,8 +463,10 @@
       font-style: italic;
     }
     .inscription-input:focus {
-      border-color: var(--accent-gold);
       box-shadow: 0 0 16px rgba(184,160,110,0.15);
+    }
+    .inscription-input-wrap:focus-within {
+      background: linear-gradient(135deg, rgba(184,160,110,0.8), rgba(184,160,110,0.3));
     }
     .inscription-submit {
       flex-shrink: 0;
@@ -505,6 +510,7 @@
 
     /* 动画遮罩 */
     .inscription-overlay {
+      position: relative;
       position: fixed;
       inset: 0;
       z-index: 200;
@@ -972,6 +978,32 @@
       overlayText.textContent = text;
       overlayText.classList.remove('golden');
 
+      /* Position overlay text at input position for rise animation */
+      var inputRect = input.getBoundingClientRect();
+      overlayText.style.position = 'absolute';
+      overlayText.style.left = inputRect.left + 'px';
+      overlayText.style.top = inputRect.top + 'px';
+      overlayText.style.width = inputRect.width + 'px';
+      overlayText.style.transform = 'none';
+      overlayText.style.transition = 'none';
+      overlayText.style.color = '#fff';
+      overlayText.style.textShadow = 'none';
+      overlayText.style.fontSize = '1rem';
+      overlayText.style.textAlign = 'left';
+      overlayText.style.maxWidth = 'none';
+
+      /* Force reflow then animate to center */
+      overlayText.offsetHeight;
+
+      overlayText.style.transition = 'all 1.8s cubic-bezier(0.25, 0.1, 0.25, 1)';
+      overlayText.style.left = '50%';
+      overlayText.style.top = '50%';
+      overlayText.style.transform = 'translate(-50%, -50%)';
+      overlayText.style.width = 'auto';
+      overlayText.style.maxWidth = '600px';
+      overlayText.style.fontSize = '';
+      overlayText.style.textAlign = 'center';
+
       /* 生成云烟粒子 */
       spawnCloudParticles();
 
@@ -981,38 +1013,49 @@
         spawnBeam();
       }, 1800);
 
-      /* 阶段3：完成，保存并刷新列表（3s后） */
+      /* 阶段3：金色文字下降（3s后） */
       setTimeout(function () {
-        /* 存储 */
-        var messages = loadMessages();
-        messages.push({
-          id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
-          text: text,
-          timestamp: Date.now()
-        });
-        saveMessages(messages);
+        /* Animate golden text descent toward gallery */
+        var galleryRect = gallery.getBoundingClientRect();
+        overlayText.style.transition = 'all 0.8s cubic-bezier(0.55, 0, 0.45, 1)';
+        overlayText.style.top = (galleryRect.top + 40) + 'px';
+        overlayText.style.opacity = '0';
+        overlayText.style.transform = 'translate(-50%, 0)';
 
-        /* 隐藏遮罩 */
-        overlay.classList.remove('active');
-        overlayText.textContent = '';
-        overlayText.classList.remove('golden');
+        /* 完成：保存并刷新列表（800ms后） */
+        setTimeout(function () {
+          /* 存储 */
+          var messages = loadMessages();
+          messages.push({
+            id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+            text: text,
+            timestamp: Date.now()
+          });
+          saveMessages(messages);
 
-        /* 清理粒子 */
-        clearParticles();
+          /* 隐藏遮罩 */
+          overlay.classList.remove('active');
+          overlayText.style.cssText = '';
+          overlayText.textContent = '';
+          overlayText.classList.remove('golden');
 
-        /* 重置表单 */
-        input.value = '';
-        submitBtn.disabled = false;
-        input.disabled = false;
-        input.focus();
+          /* 清理粒子 */
+          clearParticles();
 
-        /* 刷新列表 */
-        renderGallery();
-        /* 滚动到新卡片 */
-        var firstCard = gallery.querySelector('.inscription-card');
-        if (firstCard) {
-          firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+          /* 重置表单 */
+          input.value = '';
+          submitBtn.disabled = false;
+          input.disabled = false;
+          input.focus();
+
+          /* 刷新列表 */
+          renderGallery();
+          /* 滚动到新卡片 */
+          var firstCard = gallery.querySelector('.inscription-card');
+          if (firstCard) {
+            firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 800);
       }, 3000);
     }
 
