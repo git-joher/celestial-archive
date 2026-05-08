@@ -797,7 +797,43 @@
   </section>
 
   <!-- ============================================================ -->
-  <!-- 区块6：页脚 -->
+  <!-- 区块6：金石铭文 —— 给孙悟空留言 -->
+  <!-- ============================================================ -->
+  <section class="inscription-section" aria-label="Send a message to Sun Wukong">
+    <div class="container">
+      <h2 class="section-title inscription-title">
+        <span class="title-ornament"></span>
+        A Message for the Great Sage
+      </h2>
+      <p class="inscription-subtitle">Send your words to the Monkey King. They will be transformed into golden inscriptions, preserved forever in the stone of Flower-Fruit Mountain.</p>
+
+      <div class="inscription-form">
+        <div class="inscription-input-wrap">
+          <textarea
+            class="inscription-input"
+            id="inscription-input"
+            placeholder="Write your message to the Monkey King..."
+            maxlength="500"
+            rows="2"
+            aria-label="Your message to Sun Wukong"
+          ></textarea>
+          <button class="inscription-submit" id="inscription-submit" type="button">Send to the Great Sage</button>
+        </div>
+      </div>
+
+      <div class="inscription-gallery" id="inscription-gallery" aria-label="Previous messages">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 动画遮罩层 -->
+  <div class="inscription-overlay" id="inscription-overlay" aria-hidden="true">
+    <div class="inscription-overlay-text" id="inscription-overlay-text"></div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 区块7：页脚 -->
   <!-- ============================================================ -->
   <footer class="site-footer" role="contentinfo">
     <div class="container">
