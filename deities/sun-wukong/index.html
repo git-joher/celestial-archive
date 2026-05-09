@@ -517,11 +517,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      pointer-events: all;
+      pointer-events: none;
       opacity: 0;
       transition: opacity 0.4s ease;
     }
     .inscription-overlay.active {
+      pointer-events: all;
       opacity: 1;
     }
     .inscription-overlay-text {
@@ -641,6 +642,13 @@
   </style>
 </head>
 <body>
+
+  <!-- 导航栏 -->
+  <nav class="nav-bar" aria-label="Navigation">
+    <a href="../../index.html" class="nav-back">
+      <span class="nav-back-arrow"></span> Back to Celestial Archive
+    </a>
+  </nav>
 
   <!-- ============================================================ -->
   <!-- 区块1：首屏 Hero 区 -->
@@ -1051,9 +1059,9 @@
             if (firstCard) {
               firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-          }, { once: true });
+          });
         }, 400);
-      }, { once: true });
+      });
     }
 
     /* ============================================================
