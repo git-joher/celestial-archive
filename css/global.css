@@ -76,6 +76,19 @@ h1, h2, h3, h4 {
   line-height: 1.3;
 }
 
+/* 无障碍：仅屏幕阅读器可见 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 a {
   color: var(--accent-stone);
   text-decoration: none;
@@ -255,7 +268,7 @@ img.mural-filter,
   font-size: 0.8rem;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--accent-gold);
+  color: #dac98a;
   margin-bottom: var(--space-xs);
 }
 .page-hero-title {
