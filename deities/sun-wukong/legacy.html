@@ -113,6 +113,26 @@
       margin-right: var(--space-sm);
       margin-top: var(--space-xs);
     }
+    .legacy-external {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      color: var(--accent-gold);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(184,160,110,0.4);
+      margin-right: var(--space-md);
+      margin-top: var(--space-sm);
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .legacy-external:hover {
+      color: #dac98a;
+      border-color: #dac98a;
+    }
+    .legacy-external::after {
+      content: ' ↗';
+      font-size: 0.7rem;
+      opacity: 0.6;
+    }
 
     /* 底部CTA */
     .cta-section {
@@ -185,6 +205,9 @@
           <p>Peking Opera transformed Wukong into one of its most iconic roles. With painted face, pheasant-feather headdress, and acrobatic fight choreography, the Monkey King became a staple of Chinese stagecraft. The role demands an actor who can sing, act, and perform breathtaking martial stunts — often all at once. Even today, a great Wukong performance can fill an opera house, and the character's signature "jingju" mask is recognized worldwide.</p>
           <span class="legacy-tag">Chinese Opera</span>
           <span class="legacy-tag">Traditional Arts</span>
+          <div>
+            <a href="https://en.wikipedia.org/wiki/Peking_opera" target="_blank" rel="noopener" class="legacy-external">Peking Opera on Wikipedia</a>
+          </div>
         </div>
       </div>
 
@@ -200,6 +223,10 @@
           <span class="legacy-tag">Live-Action</span>
           <span class="legacy-tag">Television</span>
           <span class="legacy-tag">China</span>
+          <div>
+            <a href="https://www.imdb.com/title/tt1163129/" target="_blank" rel="noopener" class="legacy-external">Journey to the West on IMDB</a>
+            <a href="https://en.wikipedia.org/wiki/Journey_to_the_West_(1986_TV_series)" target="_blank" rel="noopener" class="legacy-external">Series on Wikipedia</a>
+          </div>
         </div>
       </div>
 
@@ -215,6 +242,10 @@
           <span class="legacy-tag">Manga</span>
           <span class="legacy-tag">Anime</span>
           <span class="legacy-tag">Japan</span>
+          <div>
+            <a href="https://en.dragon-ball-official.com/" target="_blank" rel="noopener" class="legacy-external">Dragon Ball Official Site</a>
+            <a href="https://en.wikipedia.org/wiki/Dragon_Ball" target="_blank" rel="noopener" class="legacy-external">Dragon Ball on Wikipedia</a>
+          </div>
         </div>
       </div>
 
@@ -230,6 +261,10 @@
           <span class="legacy-tag">AAA Game</span>
           <span class="legacy-tag">Global Hit</span>
           <span class="legacy-tag">China</span>
+          <div>
+            <a href="https://www.heishenhua.com/" target="_blank" rel="noopener" class="legacy-external">Black Myth: Wukong — Official Site</a>
+            <a href="https://store.steampowered.com/app/2358720/Black_Myth_Wukong/" target="_blank" rel="noopener" class="legacy-external">Black Myth: Wukong on Steam</a>
+          </div>
         </div>
       </div>
 
@@ -245,6 +280,10 @@
           <span class="legacy-tag">Film</span>
           <span class="legacy-tag">Animation</span>
           <span class="legacy-tag">International</span>
+          <div>
+            <a href="https://en.wikipedia.org/wiki/Havoc_in_Heaven" target="_blank" rel="noopener" class="legacy-external">Havoc in Heaven (1964) on Wikipedia</a>
+            <a href="https://www.imdb.com/title/tt2775801/" target="_blank" rel="noopener" class="legacy-external">The Monkey King on IMDB</a>
+          </div>
         </div>
       </div>
 
@@ -260,6 +299,10 @@
           <span class="legacy-tag">Literature</span>
           <span class="legacy-tag">Translation</span>
           <span class="legacy-tag">Global</span>
+          <div>
+            <a href="https://en.wikipedia.org/wiki/Journey_to_the_West" target="_blank" rel="noopener" class="legacy-external">Journey to the West on Wikipedia</a>
+            <a href="https://www.gutenberg.org/ebooks/search/?query=journey+to+the+west" target="_blank" rel="noopener" class="legacy-external">Project Gutenberg — Journey to the West</a>
+          </div>
         </div>
       </div>
 
@@ -296,6 +339,13 @@
             <span class="social-icon" aria-label="X">X</span>
             <span class="social-icon" aria-label="Pinterest">P</span>
           </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Legal</div>
+          <nav class="footer-nav">
+            <a href="../../privacy-policy.html">Privacy Policy</a>
+            <a href="../../contact.html">Contact</a>
+          </nav>
         </div>
       </div>
       <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
