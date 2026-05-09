@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divine Arsenal — Sun Wukong | Celestial Archive</title>
+  <meta name="description" content="The legendary staff, the eyes of truth, the cloud that crosses the world — explore the weapons that made the Monkey King unstoppable.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://celestial-archive.com/deities/sun-wukong/arsenal.html">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Divine Arsenal — Sun Wukong | Celestial Archive">
+  <meta property="og:description" content="The legendary staff, the eyes of truth, the cloud that crosses the world — explore the weapons that made the Monkey King unstoppable.">
+  <meta property="og:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero3.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sun Wukong — Divine Arsenal hero">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://celestial-archive.com/deities/sun-wukong/arsenal.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Divine Arsenal — Sun Wukong | Celestial Archive">
+  <meta name="twitter:description" content="The legendary staff, the eyes of truth, the cloud that crosses the world — explore the weapons that made the Monkey King unstoppable.">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero3.jpg">
+  <meta name="twitter:image:alt" content="Sun Wukong — Divine Arsenal hero">
+  <link rel="stylesheet" href="../../css/global.css">
+  <style>
+    /* Hero 区自定义（高度 + 背景图） */
+    .page-hero {
+      height: 55vh; min-height: 420px;
+    }
+    .page-hero-bg {
+      background-image: url("../../images/sun-wukong/sun-wukong-hero3.jpg");
+      background-position: center 25%;
+      opacity: 0.3;
+    }
+    }
+
+    /* ============================================================
+       武器卡片网格
+       ============================================================ */
+    .arsenal-section {
+      padding: var(--space-xxl) 0;
+      background: var(--bg-primary);
+    }
+    .arsenal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+
+    .arsenal-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .arsenal-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .arsenal-card-image {
+      height: 220px;
+      background: var(--bg-dark);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .arsenal-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .arsenal-card:hover .arsenal-card-image img {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+    .arsenal-card-image .cloud-pattern-overlay {
+      position: absolute; inset: 0;
+      pointer-events: none;
+    }
+    .arsenal-card-body {
+      padding: var(--space-md);
+    }
+    .arsenal-card-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--accent-vermillion);
+      margin-bottom: var(--space-xs);
+    }
+    .arsenal-card-chinese {
+      font-size: 0.95rem;
+      color: var(--accent-gold);
+      margin-bottom: var(--space-sm);
+    }
+    .arsenal-card-desc {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-sm);
+    }
+    .arsenal-card-stat {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: var(--accent-stone);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border: 1px solid var(--accent-stone);
+      border-radius: 20px;
+    }
+
+    /* ============================================================
+       对比区块
+       ============================================================ */
+    .duality-section {
+      padding: var(--space-xxl) 0;
+      background: linear-gradient(180deg, var(--bg-primary), #ece5d8);
+    }
+    .duality-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+    .duality-text h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--text-primary);
+      margin-bottom: var(--space-sm);
+    }
+    .duality-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+    }
+    .duality-visual {
+      background: var(--bg-dark);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      text-align: center;
+    }
+    .duality-visual img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: var(--space-md);
+      opacity: 0.7;
+    }
+    .duality-visual h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--text-on-dark);
+      margin-bottom: var(--space-xs);
+    }
+    .duality-visual p {
+      font-size: 0.95rem;
+      color: var(--accent-gold);
+    }
+
+    /* 响应式 */
+    @media (max-width: 1023px) {
+      .arsenal-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 767px) {
+      .arsenal-grid { grid-template-columns: 1fr; }
+      .arsenal-card-image { height: 180px; }
+      .duality-grid { grid-template-columns: 1fr; }
+      .page-hero { height: 45vh; min-height: 340px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-bar" aria-label="Navigation">
+    <a href="index.html" class="nav-back">
+      <span class="nav-back-arrow"></span> Back
+    </a>
+  </nav>
+
+  <section class="page-hero" aria-label="Page hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-text">
+      <p class="page-hero-kicker">Weapons &amp; Powers</p>
+      <h1 class="page-hero-title">Divine Arsenal</h1>
+      <p class="page-hero-sub">The legendary staff that can touch the heavens. The eyes that see through all deception. The weapons that made him unstoppable.</p>
+    </div>
+  </section>
+
+  <!-- 武器卡片 -->
+  <section class="arsenal-section" aria-label="Arsenal cards">
+    <h2 class="sr-only">Divine Weapons and Powers</h2>
+    <div class="container">
+      <div class="arsenal-grid">
+
+        <div class="arsenal-card fade-in">
+          <div class="arsenal-card-image">
+            <div class="cloud-pattern-overlay bg-cloud-pattern-light"></div>
+            <img src="../../images/sun-wukong/jingu-bang.jpg" alt="Ruyi Jingu Bang">
+          </div>
+          <div class="arsenal-card-body">
+            <h3 class="arsenal-card-name">Ruyi Jingu Bang</h3>
+            <p class="arsenal-card-chinese">如意金箍棒</p>
+            <p class="arsenal-card-desc">The legendary staff that once held the ocean floor steady. Weighing 17,550 pounds, it obeys only Wukong — shrinking to the size of a needle or expanding to pierce the heavens. Engraved with golden bands at each end, it is the weapon that subdued dragons and shattered celestial armies.</p>
+            <span class="arsenal-card-stat">Divine Iron</span>
+          </div>
+        </div>
+
+        <div class="arsenal-card fade-in">
+          <div class="arsenal-card-image">
+            <div class="cloud-pattern-overlay bg-cloud-pattern-light"></div>
+            <img src="../../images/sun-wukong/somersault-cloud.jpg" alt="Somersault Cloud">
+          </div>
+          <div class="arsenal-card-body">
+            <h3 class="arsenal-card-name">Somersault Cloud</h3>
+            <p class="arsenal-card-chinese">筋斗云</p>
+            <p class="arsenal-card-desc">A single somersault carries Wukong 108,000 li — one-third the circumference of the Earth. Conjured with a hand seal taught by Patriarch Subodhi, this nimbus cloud obeys thought itself. It can outrun the fastest immortals and slip between realms, making Wukong the most mobile warrior in creation.</p>
+            <span class="arsenal-card-stat">Cloud Magic</span>
+          </div>
+        </div>
+
+        <div class="arsenal-card fade-in">
+          <div class="arsenal-card-image">
+            <div class="cloud-pattern-overlay bg-cloud-pattern-light"></div>
+            <img src="../../images/sun-wukong/fiery-eyes.jpg" alt="Fiery Eyes">
+          </div>
+          <div class="arsenal-card-body">
+            <h3 class="arsenal-card-name">Fiery Eyes, Golden Gaze</h3>
+            <p class="arsenal-card-chinese">火眼金睛</p>
+            <p class="arsenal-card-desc">Refined in the flames of Laozi's Eight Trigrams Furnace, this sight penetrates all illusion. Demons, spirits, and shape-shifters can hide nothing from Wukong's gaze — though smoke and soot left his eyes permanently sensitive, a flaw his enemies sometimes exploit. Still, no disguise evades him.</p>
+            <span class="arsenal-card-stat">Divine Sight</span>
+          </div>
+        </div>
+
+        <div class="arsenal-card fade-in">
+          <div class="arsenal-card-image">
+            <div class="cloud-pattern-overlay bg-cloud-pattern-light"></div>
+            <img src="../../images/sun-wukong/tightening-fillet.jpg" alt="Tightening Fillet">
+          </div>
+          <div class="arsenal-card-body">
+            <h3 class="arsenal-card-name">The Tightening Fillet</h3>
+            <p class="arsenal-card-chinese">紧箍咒</p>
+            <p class="arsenal-card-desc">Not a weapon of Wukong's choosing, but the one that defined his redemption. Disguised as a golden headband by Guanyin, this magical band tightens with unbearable pain when Tripitaka chants the sutra. It is the leash on the untamable — a constant reminder that freedom without discipline is destruction.</p>
+            <span class="arsenal-card-stat">Restraint</span>
+          </div>
+        </div>
+
+        <div class="arsenal-card fade-in">
+          <div class="arsenal-card-image">
+            <div class="cloud-pattern-overlay bg-cloud-pattern-light"></div>
+            <img src="../../images/sun-wukong/sun-wukong-hero4.jpg" alt="72 Transformations">
+          </div>
+          <div class="arsenal-card-body">
+            <h3 class="arsenal-card-name">72 Earthly Transformations</h3>
+            <p class="arsenal-card-chinese">七十二变</p>
+            <p class="arsenal-card-desc">Taught by Patriarch Subodhi, this art allows Wukong to become anything — a bird, a fish, a temple, a tree, another person. Each strand of his hair can be transformed into a clone warrior. In a heartbeat, he can be anywhere as anyone. Mastery of form is mastery of the world itself.</p>
+            <span class="arsenal-card-stat">Shape-Shifting</span>
+          </div>
+        </div>
+
+        <div class="arsenal-card fade-in">
+          <div class="arsenal-card-image">
+            <div class="cloud-pattern-overlay bg-cloud-pattern-light"></div>
+            <img src="../../images/sun-wukong/sun-wukong-hero5.jpg" alt="Immortality">
+          </div>
+          <div class="arsenal-card-body">
+            <h3 class="arsenal-card-name">Layers of Immortality</h3>
+            <p class="arsenal-card-chinese">万劫长生</p>
+            <p class="arsenal-card-desc">Wukong stacks immortality like armor. He erased his name from the Book of Life and Death. He devoured the Peaches of Immortality. He drank celestial wine that grants eternal youth. He swallowed Laozi's pills of longevity. Then he survived the Eight Trigrams Furnace. Killing him isn't just difficult — it's cosmically redundant.</p>
+            <span class="arsenal-card-stat">Eternal Life</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 双面性 -->
+  <section class="duality-section" aria-label="Duality">
+    <div class="container">
+      <div class="duality-grid">
+        <div class="duality-text">
+          <h2>Power and Restraint</h2>
+          <p>The Monkey King's arsenal is the most complete expression of his nature: boundless power, tempered — barely — by a golden band. The Ruyi Jingu Bang embodies his limitless ambition; the Tightening Fillet, his grudging discipline. The Fiery Eyes see truth; the 72 Transformations obscure it. Every weapon in his arsenal tells the same story differently: absolute freedom colliding with the discipline required to earn it. He is the most dangerous being in the celestial hierarchy — not because his weapons are the deadliest, but because he is the only one who mastered both the tools of chaos and the tool of self-control.</p>
+        </div>
+        <div class="duality-visual">
+          <img src="../../images/sun-wukong/lotus-icon4.jpg" alt="" aria-hidden="true">
+          <h3>The Paradox of the Sage</h3>
+          <p>"To be equal to heaven, one must first learn to bow."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">Celestial Archive</div>
+          <p class="footer-desc">Exploring the myths, legends, and divine beings of Eastern mythology — one story at a time.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Navigate</div>
+          <nav class="footer-nav">
+            <a href="index.html">Sun Wukong</a>
+            <a href="origins.html">The Journey</a>
+            <a href="legacy.html">Across the World</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Follow</div>
+          <div class="social-icons">
+            <span class="social-icon" aria-label="Twitter">T</span>
+            <span class="social-icon" aria-label="YouTube">Y</span>
+            <span class="social-icon" aria-label="X">X</span>
+            <span class="social-icon" aria-label="Pinterest">P</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Legal</div>
+          <nav class="footer-nav">
+            <a href="../../privacy-policy.html">Privacy Policy</a>
+            <a href="../../contact.html">Contact</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Divine Arsenal — Sun Wukong",
+    "description": "The legendary staff, the eyes of truth, the cloud that crosses the world — explore the weapons that made the Monkey King unstoppable.",
+    "image": "https://celestial-archive.com/images/sun-wukong/sun-wukong-hero3.jpg",
+    "author": { "@type": "Organization", "name": "Celestial Archive" },
+    "publisher": { "@type": "Organization", "name": "Celestial Archive", "url": "https://celestial-archive.com" },
+    "url": "https://celestial-archive.com/deities/sun-wukong/arsenal.html",
+    "datePublished": "2026-01-01",
+    "inLanguage": "en",
+    "mainEntityOfPage": "https://celestial-archive.com/deities/sun-wukong/arsenal.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Celestial Archive", "item": "https://celestial-archive.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Sun Wukong", "item": "https://celestial-archive.com/deities/sun-wukong/" },
+      { "@type": "ListItem", "position": 3, "name": "Divine Arsenal", "item": "https://celestial-archive.com/deities/sun-wukong/arsenal.html" }
+    ]
+  }
+  </script>
+  <script src="../../js/main.js"></script>
+</body>
+</html>
