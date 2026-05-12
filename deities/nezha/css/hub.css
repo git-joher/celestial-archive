@@ -1,0 +1,187 @@
+/* ================================================================
+   Nezha Hub — "Neon Rebellion"
+   Dark electric rebel-prince identity. Zero SWK DNA.
+   ================================================================ */
+
+:root {
+  --nz-bg: #08080c;
+  --nz-surface: #111118;
+  --nz-flame: #ff2d55;
+  --nz-flame-glow: #ff3b6e;
+  --nz-purple: #7b2fff;
+  --nz-purple-glow: #9b4dff;
+  --nz-gold: #ffd700;
+  --nz-white: #f0e6f6;
+  --nz-muted: #8888a0;
+}
+
+/* ---- nav: ghostly fixed ---- */
+.nz-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 32px; display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(180deg, rgba(8,8,12,0.95) 0%, rgba(8,8,12,0) 100%);
+  pointer-events: none;
+}
+.nz-nav a {
+  pointer-events: auto; color: var(--nz-muted); text-decoration: none;
+  font-size: 0.82rem; letter-spacing: 3px; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nz-nav a:hover { color: var(--nz-flame); }
+
+/* hero bg image layer */
+.nz-hero-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+}
+.nz-hero-bg-img img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  opacity: 0.35; filter: saturate(0.8);
+  mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 75%);
+}
+
+/* ---- hero: fullscreen centered + fire particles ---- */
+.nz-hero {
+  position: relative; min-height: 100vh; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+  background: var(--nz-bg); overflow: hidden;
+}
+.nz-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,45,85,0.13) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 65%, rgba(123,47,255,0.09) 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 55%, rgba(255,215,0,0.05) 0%, transparent 40%);
+  animation: nz-ambient 8s ease-in-out infinite;
+}
+@keyframes nz-ambient { 0%,100%{opacity:0.7} 50%{opacity:1} }
+
+/* fire sparks via JS-injected spans */
+.nz-sparks { position:absolute; inset:0; pointer-events:none; }
+.nz-spark {
+  position:absolute; width:3px; height:3px; border-radius:50%;
+  background:var(--nz-flame);
+  box-shadow:0 0 6px var(--nz-flame-glow),0 0 14px var(--nz-flame);
+  animation:nz-rise var(--dur) var(--delay) infinite ease-out; opacity:0;
+}
+@keyframes nz-rise {
+  0%{transform:translateY(0) translateX(0) scale(1);opacity:0}
+  10%{opacity:1}
+  100%{transform:translateY(-100vh) translateX(var(--drift)) scale(0);opacity:0}
+}
+
+.nz-hero-content { position:relative; z-index:2; max-width:780px; padding:0 24px; }
+.nz-hero-sigil {
+  font-size:5rem; margin-bottom:12px;
+  animation:nz-float 3.2s ease-in-out infinite;
+  filter:drop-shadow(0 0 24px rgba(255,45,85,0.55));
+  display:inline-block;
+}
+@keyframes nz-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+.nz-hero-kicker {
+  font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:7px;
+  color:var(--nz-purple-glow); text-transform:uppercase; margin-bottom:10px;
+}
+.nz-hero-title {
+  font-family:'Cinzel',serif; font-size:clamp(3.5rem,8vw,7rem); font-weight:700;
+  color:var(--nz-white); line-height:1.04;
+  text-shadow:0 0 60px rgba(255,45,85,0.4),0 0 120px rgba(123,47,255,0.25);
+  margin-bottom:6px;
+}
+.nz-hero-name-zh {
+  font-family:'Ma Shan Zheng',cursive; font-size:2.3rem; color:var(--nz-flame);
+  margin-bottom:14px;
+}
+.nz-hero-divider {
+  width:55px; height:3px;
+  background:linear-gradient(90deg,var(--nz-flame),var(--nz-purple));
+  margin:0 auto 18px;
+}
+.nz-hero-tagline { font-size:1.1rem; color:var(--nz-muted); line-height:1.8; max-width:480px; margin:0 auto; }
+.nz-hero-tagline strong { color:var(--nz-flame-glow); font-weight:600; }
+
+.nz-scroll-hint { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); z-index:2; }
+.nz-scroll-hint span {
+  display:block; width:20px; height:34px; border:2px solid var(--nz-muted);
+  border-radius:12px; position:relative;
+}
+.nz-scroll-hint span::after {
+  content:''; position:absolute; top:6px; left:50%; transform:translateX(-50%);
+  width:3px; height:8px; background:var(--nz-flame); border-radius:2px;
+  animation:nz-dot 2s ease-in-out infinite;
+}
+@keyframes nz-dot { 0%,100%{top:6px;opacity:1} 50%{top:17px;opacity:0.25} }
+
+/* ---- stat cards: RPG character-sheet ---- */
+.nz-stats-section { background:var(--nz-surface); padding:80px 0; }
+.nz-stats-grid {
+  display:grid; grid-template-columns:repeat(5,1fr);
+  gap:1px; background:rgba(255,255,255,0.025);
+}
+.nz-stat {
+  background:var(--nz-surface); padding:40px 20px; text-align:center;
+  transition:background 0.3s,transform 0.3s; position:relative; overflow:hidden;
+}
+.nz-stat:hover { background:#181820; transform:translateY(-4px); }
+.nz-stat::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--nz-flame),transparent);
+  transform:scaleX(0); transition:transform 0.4s;
+}
+.nz-stat:hover::after { transform:scaleX(1); }
+.nz-stat-icon { font-size:2.4rem; margin-bottom:6px; }
+.nz-stat-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:3px; color:var(--nz-muted); margin-bottom:6px; }
+.nz-stat-value { font-family:'Cinzel',serif; font-size:1.05rem; font-weight:600; color:var(--nz-white); }
+
+/* ---- timeline narrative ---- */
+.nz-timeline-section { background:var(--nz-bg); padding:100px 0; }
+.nz-timeline { position:relative; max-width:660px; margin:0 auto; padding:0 24px; }
+.nz-timeline::before {
+  content:''; position:absolute; left:50%; top:0; bottom:0; width:2px;
+  background:linear-gradient(180deg,var(--nz-flame),var(--nz-purple),var(--nz-flame));
+  transform:translateX(-50%);
+}
+.nz-tl-node { position:relative; margin-bottom:56px; width:50%; padding-right:44px; }
+.nz-tl-node:nth-child(even) { margin-left:50%; padding-right:0; padding-left:44px; }
+.nz-tl-dot {
+  position:absolute; right:-7px; top:4px; width:14px; height:14px; border-radius:50%;
+  background:var(--nz-flame); box-shadow:0 0 10px var(--nz-flame),0 0 22px var(--nz-flame-glow); z-index:2;
+}
+.nz-tl-node:nth-child(even) .nz-tl-dot { right:auto; left:-7px; }
+.nz-tl-emoji { font-size:1.8rem; margin-bottom:6px; }
+.nz-tl-node h3 { font-family:'Cinzel',serif; font-size:1.2rem; color:var(--nz-white); margin-bottom:4px; }
+.nz-tl-node p { font-size:0.92rem; line-height:1.75; color:var(--nz-muted); }
+
+/* ---- hub: stacked full-width cards ---- */
+.nz-hub-section { background:var(--nz-surface); padding:100px 0; }
+.nz-hub-stack { max-width:800px; margin:0 auto; padding:0 24px; display:flex; flex-direction:column; gap:18px; }
+.nz-hub-card {
+  display:grid; grid-template-columns:110px 1fr auto; gap:20px; align-items:center;
+  padding:28px 32px; background:#16161e; border-left:3px solid transparent;
+  text-decoration:none; color:inherit; border-radius:2px;
+  transition:border-color 0.3s,background 0.3s,transform 0.3s;
+}
+.nz-hub-card:nth-child(1){--ac:var(--nz-flame)}
+.nz-hub-card:nth-child(2){--ac:var(--nz-purple)}
+.nz-hub-card:nth-child(3){--ac:var(--nz-gold)}
+.nz-hub-card:hover { border-left-color:var(--ac); background:#1c1c26; transform:translateX(6px); }
+.nz-hub-card-icon { font-size:3rem; text-align:center; }
+.nz-hub-card-body h3 { font-family:'Cinzel',serif; font-size:1.1rem; color:var(--nz-white); margin-bottom:2px; }
+.nz-hub-card-body p { font-size:0.88rem; color:var(--nz-muted); line-height:1.55; }
+.nz-hub-card-arrow { font-size:1.6rem; color:var(--nz-muted); transition:color 0.3s,transform 0.3s; }
+.nz-hub-card:hover .nz-hub-card-arrow { color:var(--ac); transform:translateX(5px); }
+
+/* ---- related + inscriptions ---- */
+.nz-related-section { background:var(--nz-bg); padding:80px 0; }
+.nz-inscriptions-section { background:var(--nz-surface); padding:80px 0; }
+
+/* ---- responsive ---- */
+@media (max-width:1024px) { .nz-stats-grid{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:767px) {
+  .nz-stats-grid{grid-template-columns:repeat(2,1fr)}
+  .nz-timeline::before{left:18px}
+  .nz-tl-node,.nz-tl-node:nth-child(even){width:100%;margin-left:0!important;padding-left:44px;padding-right:0}
+  .nz-tl-dot,.nz-tl-node:nth-child(even) .nz-tl-dot{left:11px!important;right:auto!important}
+  .nz-hub-card{grid-template-columns:1fr;text-align:center}
+  .nz-hub-card-arrow{display:none}
+}

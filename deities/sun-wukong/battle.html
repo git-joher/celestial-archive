@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Havoc in Heaven — Sun Wukong | Celestial Archive</title>
+  <meta name="description" content="The battle that shook the cosmos — how one monkey declared war on heaven itself, fought the entire celestial army, and nearly won.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://celestial-archive.com/deities/sun-wukong/battle.html">
+  <meta property="og:title" content="Havoc in Heaven — Sun Wukong | Celestial Archive">
+  <meta property="og:description" content="How one monkey declared war on heaven itself — and nearly won.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://celestial-archive.com/deities/sun-wukong/battle.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Havoc in Heaven — Sun Wukong | Celestial Archive">
+  <meta name="twitter:description" content="How one monkey declared war on heaven itself — and nearly won.">
+  <meta property="og:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
+  <meta property="og:image:alt" content="Sun Wukong in battle — Havoc in Heaven">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta name="twitter:image:alt" content="Sun Wukong in battle">
+  <link rel="stylesheet" href="../../css/global.css">
+  <style>
+    :root {
+      --earth: #1a1209;
+      --surf: #231a0e;
+      --verm: #c44d34;
+      --gold: #b8a06e;
+      --cream: #e8dcc8;
+      --mut: #8a7a60;
+      --ember: #d4683c;
+    }
+    body { background: var(--earth); }
+
+    .swk-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 28px;
+      background: linear-gradient(180deg, rgba(26,18,9,0.95) 0%, rgba(26,18,9,0) 100%);
+      pointer-events: none;
+    }
+    .swk-nav a {
+      pointer-events: auto; color: var(--mut); text-decoration: none;
+      font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+      font-family: 'Cinzel', serif; transition: color 0.3s;
+    }
+    .swk-nav a:hover { color: var(--cream); }
+
+    .pg-hero {
+      min-height: 60vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; background: var(--earth); position: relative; overflow: hidden;
+      padding: 120px 24px 50px;
+    }
+    .pg-hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(196,77,52,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 25% 60%, rgba(184,160,110,0.06) 0%, transparent 45%);
+    }
+    .pg-hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .pg-hero-bg img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 25%;
+      opacity: 0.3;
+    }
+    .pg-hero-content { position: relative; z-index: 2; max-width: 680px; }
+    .pg-hero-kicker {
+      font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 6px;
+      color: var(--verm); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .pg-hero-title {
+      font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700; color: var(--cream); margin-bottom: 14px;
+      text-shadow: 0 0 40px rgba(196,77,52,0.25);
+    }
+    .pg-hero-sub {
+      font-size: 1.05rem; color: var(--mut); line-height: 1.8;
+      max-width: 520px; margin: 0 auto;
+    }
+    .pg-hero-sub strong { color: var(--ember); }
+
+    /* Chronicle phases */
+    .chronicle-section { padding: 40px 0 80px; background: var(--earth); }
+    .phases { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .phase {
+      display: grid; grid-template-columns: 100px 1fr; gap: 28px;
+      padding: 48px 0; border-bottom: 1px solid rgba(196,77,52,0.10);
+      align-items: start;
+    }
+    .phase:last-child { border-bottom: none; }
+    .phase-marker { text-align: right; }
+    .phase-num {
+      font-family: 'Cinzel', serif; font-size: 4.5rem; font-weight: 700;
+      color: var(--verm); opacity: 0.18; line-height: 0.8;
+    }
+    .phase-emoji { font-size: 1.5rem; margin-top: 4px; }
+    .phase-body h3 {
+      font-family: 'Cinzel', serif; font-size: 1.25rem; color: var(--cream);
+      margin-bottom: 4px;
+    }
+    .phase-label {
+      display: inline-block; font-size: 0.7rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--verm); margin-bottom: 12px;
+    }
+    .phase-body p { font-size: 0.98rem; line-height: 1.85; color: var(--mut); }
+    .phase-body p strong { color: var(--ember); }
+    .phase-body img {
+      width: 100%; max-width: 420px; border-radius: 3px; margin: 14px 0;
+      opacity: 0.65; transition: opacity 0.3s;
+    }
+    .phase-body img:hover { opacity: 1; }
+    .phase-stat {
+      display: flex; gap: 24px; margin-top: 14px; flex-wrap: wrap;
+    }
+    .phase-stat-item {
+      font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold); border: 1px solid rgba(184,160,110,0.2);
+      padding: 4px 12px; border-radius: 16px;
+    }
+
+    /* Video section */
+    .video-section { padding: 60px 0 80px; background: var(--surf); }
+    .video-section h2 {
+      text-align: center; margin-bottom: 32px;
+    }
+    .video-card {
+      max-width: 700px; margin: 0 auto; background: rgba(196,77,52,0.04);
+      border: 1px solid rgba(196,77,52,0.12); border-radius: 4px;
+      padding: 28px; text-align: center;
+    }
+    .video-card-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .video-card h3 {
+      font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .video-card p { font-size: 0.9rem; color: var(--mut); line-height: 1.7; margin-bottom: 16px; }
+    .video-link {
+      display: inline-block; font-family: 'Cinzel', serif; font-size: 0.85rem;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--cream); background: var(--verm);
+      padding: 12px 32px; border-radius: 4px; text-decoration: none;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .video-link:hover { background: #d45a40; box-shadow: 0 0 24px rgba(196,77,52,0.3); }
+
+    @media(max-width: 767px) {
+      .phase { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; }
+      .phase-marker { text-align: left; }
+      .phase-num { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="swk-nav" aria-label="Navigation">
+    <a href="index.html">← Back to Sun Wukong</a>
+    <a href="../../index.html">Celestial Archive</a>
+  </nav>
+
+  <section class="pg-hero" aria-label="Hero">
+    <div class="pg-hero-bg"><img src="../../images/sun-wukong/sun-wukong-hero.jpg" alt="" aria-hidden="true"></div>
+    <div class="pg-hero-content">
+      <p class="pg-hero-kicker">The Battle</p>
+      <h1 class="pg-hero-title">Havoc in Heaven</h1>
+      <p class="pg-hero-sub"><strong>One monkey against the entire celestial army.</strong> No heavenly general could stop him. No divine weapon could hold him. The day Sun Wukong declared himself equal to heaven — and proved it.</p>
+    </div>
+  </section>
+
+  <section class="chronicle-section" aria-label="The five phases of the Havoc">
+    <h2 class="sr-only">The chronicle</h2>
+    <div class="phases">
+
+      <div class="phase fade-in">
+        <div class="phase-marker"><div class="phase-num">I</div><div class="phase-emoji">🍑</div></div>
+        <div class="phase-body">
+          <span class="phase-label">The Spark</span>
+          <h3>The Snub at the Peach Banquet</h3>
+          <p>The Queen Mother of the West hosted the grandest feast in heaven — the Peach Banquet of Immortality. Every deity of rank was invited. <strong>Every deity except Sun Wukong.</strong> Why? Because the Jade Emperor had given him the empty title "Great Sage Equal to Heaven" but assigned him to guard the celestial stables — a position of zero prestige. When the Monkey King discovered he'd been excluded from the banquet, he understood the truth: heaven never respected him. So he ate the peaches of immortality himself. Drank the celestial wine. Devoured Laozi's pills of longevity. And when the celestial army came to arrest him — he was ready.</p>
+        </div>
+      </div>
+
+      <div class="phase fade-in">
+        <div class="phase-marker"><div class="phase-num">II</div><div class="phase-emoji">⚔️</div></div>
+        <div class="phase-body">
+          <span class="phase-label">The Unleashing</span>
+          <h3>Against 100,000 Celestial Soldiers</h3>
+          <p>The Jade Emperor dispatched the full might of heaven: <strong>100,000 celestial soldiers</strong>, the Four Heavenly Kings, Marshal Li Jing, and the child-warrior Nezha. They surrounded Flower-Fruit Mountain. Sun Wukong stood alone at the summit with his Ruyi Jingu Bang — the 8-ton iron pillar he wielded like a toothpick — and laughed. One by one, the celestial generals fell. The Four Heavenly Kings' magical weapons — the sword, the lute, the umbrella, the snake — were useless against him. Nezha, the lotus-born prodigy, was struck down in single combat. By nightfall, the "invincible" army had been shattered by one monkey with a staff.</p>
+          <img src="../../images/sun-wukong/jingu-bang.jpg" alt="The Ruyi Jingu Bang — Sun Wukong's staff" loading="lazy">
+          <div class="phase-stat">
+            <span class="phase-stat-item">100,000 Soldiers Defeated</span>
+            <span class="phase-stat-item">4 Heavenly Kings Routed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase fade-in">
+        <div class="phase-marker"><div class="phase-num">III</div><div class="phase-emoji">🦅</div></div>
+        <div class="phase-body">
+          <span class="phase-label">The Rival</span>
+          <h3>The Shapeshifting Duel — Sun Wukong vs Erlang Shen</h3>
+          <p>With the army in ruins, the Jade Emperor turned to his nephew: <strong>Erlang Shen</strong>, the god with a third truth-seeing eye. Erlang was no ordinary general — he had killed flood dragons, tamed mountains, and was the only being in existence who matched Sun Wukong in the art of 72 transformations. What followed was the most famous duel in Chinese mythology. Sun Wukong became a sparrow. Erlang became a hawk. Wukong became a fish. Erlang became a cormorant. Wukong became a temple — with his eyes as windows and his tail a flagpole. Erlang saw through every transformation with his third eye. The duel raged across heaven and earth until Laozi himself intervened, striking Wukong from behind with his diamond snare while Erlang's hound bit down.</p>
+          <img src="../../images/sun-wukong/somersault-cloud.jpg" alt="Sun Wukong — the shapeshifting duel" loading="lazy">
+        </div>
+      </div>
+
+      <div class="phase fade-in">
+        <div class="phase-marker"><div class="phase-num">IV</div><div class="phase-emoji">🔥</div></div>
+        <div class="phase-body">
+          <span class="phase-label">The Furnace</span>
+          <h3>49 Days In the Eight Trigrams Furnace</h3>
+          <p>Heaven could not kill an immortal. So they tried to <strong>burn the immortality out of him</strong>. Laozi — the supreme philosopher-god — placed Sun Wukong inside his Eight Trigrams Furnace, a divine crucible designed to refine elixirs of eternal life. For 49 days, the furnace burned with sacred fire hot enough to reduce gods to ash. Sun Wukong survived by hiding in the Xun (巽) position — the wind trigram, where the flames were weakest. The smoke irritated his eyes, but it did not blind him. When the furnace doors opened on the 49th day, Sun Wukong burst out — alive, enraged, and changed. The smoke had given him <strong style="color:var(--ember)">Fiery Golden Eyes (火眼金睛)</strong> — the ability to see through all illusion, all deception, all evil. What was meant to destroy him had made him more powerful than ever.</p>
+          <img src="../../images/sun-wukong/fiery-eyes.jpg" alt="Sun Wukong emerging from the Eight Trigrams Furnace — fiery golden eyes" loading="lazy">
+        </div>
+      </div>
+
+      <div class="phase fade-in">
+        <div class="phase-marker"><div class="phase-num">V</div><div class="phase-emoji">👑</div></div>
+        <div class="phase-body">
+          <span class="phase-label">The Climax</span>
+          <h3>Trashing the Celestial Palace</h3>
+          <p>What happened next was pure, unbridled <strong>destruction</strong>. Sun Wukong rampaged through the Imperial Palace, swinging his staff at everything that moved. Celestial guards scattered. Ministers fled. The great pillars of heaven cracked under the blows of the Jingu Bang. The Monkey King drove the Jade Emperor himself from his throne and declared: <strong>"The Jade Emperor doesn't have to be the Jade Emperor forever. Let me have a turn!"</strong> The entire celestial bureaucracy — the most powerful organization in the cosmos — had been brought to its knees by one being who refused to bow. In desperation, the Jade Emperor sent word to the Western Paradise. Only one being in the universe could stop what Sun Wukong had become: the Buddha himself.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="video-section" aria-label="Watch the battle">
+    <div class="container">
+      <h2 class="section-title" style="color:var(--cream);text-align:center;">
+        <span class="title-ornament"></span>
+        Watch the Legend
+      </h2>
+      <div class="video-card">
+        <div class="video-card-icon">🎬</div>
+        <h3>Havoc in Heaven (大闹天宫) — 120fps Remastered</h3>
+        <p>The legendary 1964 Shanghai Animation Film Studio classic, digitally remastered — featuring Sun Wukong's battle against Nezha and the celestial army in stunning hand-drawn animation.</p>
+        <a href="https://youtu.be/dP8OgPy6FIE" target="_blank" rel="noopener noreferrer" class="video-link">Watch on YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">Celestial Archive</div>
+          <p class="footer-desc">Exploring the myths, legends, and divine beings of Eastern mythology — one story at a time.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Navigate</div>
+          <nav class="footer-nav">
+            <a href="index.html">Sun Wukong</a>
+            <a href="origins.html">The Journey</a>
+            <a href="arsenal.html">Divine Arsenal</a>
+          </nav>
+          <div class="footer-heading" style="margin-top:var(--space-md)">More Deities</div>
+          <nav class="footer-nav" data-footer="deities"></nav>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Follow</div>
+          <div class="social-icons">
+            <span class="social-icon" aria-label="Twitter">T</span>
+            <span class="social-icon" aria-label="YouTube">Y</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <nav class="footer-nav">
+            <a href="../../about.html">About Us</a>
+            <a href="../../contact.html">Contact Us</a>
+            <a href="../../privacy-policy.html">Privacy Policy</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"Article",
+    "headline":"Havoc in Heaven — Sun Wukong",
+    "description":"The battle that shook the cosmos — how one monkey declared war on heaven itself and nearly won.",
+    "author":{"@type":"Organization","name":"Celestial Archive"},
+    "publisher":{"@type":"Organization","name":"Celestial Archive","url":"https://celestial-archive.com"},
+    "url":"https://celestial-archive.com/deities/sun-wukong/battle.html",
+    "datePublished":"2026-05-12","inLanguage":"en",
+    "mainEntityOfPage":"https://celestial-archive.com/deities/sun-wukong/battle.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Celestial Archive","item":"https://celestial-archive.com/"},
+      {"@type":"ListItem","position":2,"name":"Sun Wukong","item":"https://celestial-archive.com/deities/sun-wukong/"},
+      {"@type":"ListItem","position":3,"name":"Havoc in Heaven","item":"https://celestial-archive.com/deities/sun-wukong/battle.html"}
+    ]
+  }
+  </script>
+  <script src="../../js/deities.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/config.js"></script>
+  <script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
+</body>
+</html>

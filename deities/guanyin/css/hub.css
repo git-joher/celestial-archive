@@ -1,0 +1,282 @@
+/* ============================================================
+   Guanyin — Hub CSS ("Moonlit Compassion")
+   Theme: moon silver #d4d8e0, jade #7ec8a0, soft white #f8f6f4,
+          pale gold #e8d5a3, deep water #1a3040
+   ============================================================ */
+
+/* --- Design Tokens --- */
+:root {
+  --gy-deep: #1a3040;
+  --gy-teal: #1e3a4c;
+  --gy-water: #244a5c;
+  --gy-moon: #d4d8e0;
+  --gy-jade: #7ec8a0;
+  --gy-white: #f8f6f4;
+  --gy-pale-gold: #e8d5a3;
+  --gy-soft: #c8d4c4;
+  --gy-mut: #8a9a94;
+}
+
+/* --- Hero --- */
+.gy-hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  background: var(--gy-deep);
+  position: relative; overflow: hidden;
+}
+.gy-hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(212,216,224,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 70%, rgba(126,200,160,0.04) 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 60%, rgba(232,213,163,0.04) 0%, transparent 40%);
+}
+
+/* Moon glow */
+.gy-moon {
+  position: absolute;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(212,216,224,0.15) 0%, rgba(212,216,224,0.04) 40%, transparent 70%);
+  top: 22%; left: 50%; transform: translate(-50%, 0);
+  z-index: 0;
+  animation: gy-moon-breathe 8s ease-in-out infinite;
+}
+@keyframes gy-moon-breathe {
+  0%, 100% { box-shadow: 0 0 60px rgba(212,216,224,0.08), 0 0 120px rgba(212,216,224,0.03); }
+  50% { box-shadow: 0 0 100px rgba(212,216,224,0.14), 0 0 200px rgba(212,216,224,0.06); }
+}
+
+/* Water ripple effect */
+.gy-ripples {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+  z-index: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 20px,
+      rgba(212,216,224,0.02) 20px,
+      rgba(212,216,224,0.02) 21px
+    );
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
+}
+
+/* Bamboo silhouettes */
+.gy-bamboo-left, .gy-bamboo-right {
+  position: absolute; bottom: 0; z-index: 0; pointer-events: none;
+  width: 60px; height: 40%;
+  opacity: 0.06;
+}
+.gy-bamboo-left {
+  left: 8%;
+  background: linear-gradient(to top, var(--gy-jade) 0%, transparent 95%);
+  mask-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 14px,
+    rgba(0,0,0,0.6) 14px,
+    rgba(0,0,0,0.6) 16px
+  );
+  -webkit-mask-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 14px,
+    rgba(0,0,0,0.6) 14px,
+    rgba(0,0,0,0.6) 16px
+  );
+}
+.gy-bamboo-right {
+  right: 8%;
+  background: linear-gradient(to top, var(--gy-jade) 0%, transparent 95%);
+  mask-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 18px,
+    rgba(0,0,0,0.5) 18px,
+    rgba(0,0,0,0.5) 20px
+  );
+  -webkit-mask-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 18px,
+    rgba(0,0,0,0.5) 18px,
+    rgba(0,0,0,0.5) 20px
+  );
+}
+
+.gy-hero-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+}
+.gy-hero-bg-img img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 35%;
+  opacity: 0.2;
+  mask-image: radial-gradient(ellipse at 50% 30%, black 25%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 25%, transparent 70%);
+}
+
+.gy-hero-content {
+  position: relative; z-index: 2; max-width: 600px;
+}
+.gy-hero-sigil { font-size: 2.5rem; margin-bottom: 14px; opacity: 0.85; }
+.gy-hero-kicker {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem; letter-spacing: 8px; text-transform: uppercase;
+  color: var(--gy-jade); margin-bottom: 12px;
+}
+.gy-hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.5rem, 5.5vw, 3.8rem); font-weight: 700;
+  color: var(--gy-white); margin-bottom: 8px;
+  text-shadow: 0 0 50px rgba(212,216,224,0.2);
+}
+.gy-hero-name-zh {
+  font-family: 'Ma Shan Zheng', 'Noto Serif SC', serif;
+  font-size: 2rem; color: var(--gy-jade); opacity: 0.6;
+  margin-bottom: 16px;
+}
+.gy-hero-divider {
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gy-moon), transparent);
+  margin: 0 auto 16px;
+}
+.gy-hero-tagline {
+  font-size: 0.95rem; line-height: 1.9; color: var(--gy-soft);
+  max-width: 500px; margin: 0 auto;
+}
+.gy-hero-tagline strong { color: var(--gy-moon); }
+
+/* Scroll hint */
+.gy-scroll-hint {
+  position: absolute; bottom: 36px; left: 50%; z-index: 2;
+  transform: translateX(-50%);
+}
+.gy-scroll-hint span {
+  display: block; width: 20px; height: 20px;
+  border-right: 1px solid var(--gy-moon);
+  border-bottom: 1px solid var(--gy-moon);
+  transform: rotate(45deg);
+  animation: scroll-bob 2s ease-in-out infinite;
+  opacity: 0.35;
+}
+
+/* --- Nav --- */
+.gy-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 28px;
+  background: linear-gradient(180deg, rgba(26,48,64,0.95) 0%, rgba(26,48,64,0) 100%);
+  pointer-events: none;
+}
+.gy-nav a {
+  pointer-events: auto; color: var(--gy-mut); text-decoration: none;
+  font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+  font-family: 'Cinzel', serif; transition: color 0.3s;
+}
+.gy-nav a:hover { color: var(--gy-jade); }
+
+/* --- Mercy Cards --- */
+.gy-mercy-section {
+  padding: var(--space-xxl) 0; background: var(--gy-teal);
+}
+.gy-mercy-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; max-width: 880px; margin: 0 auto; padding: 0 24px;
+}
+.gy-mercy-card {
+  text-align: center; padding: 32px 20px;
+  background: rgba(212,216,224,0.02);
+  border: 1px solid rgba(126,200,160,0.06);
+  border-radius: 50%;
+  width: 180px; height: 180px; margin: 0 auto;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.gy-mercy-card:hover {
+  border-color: rgba(126,200,160,0.25);
+  transform: scale(1.06);
+}
+.gy-mercy-emoji { font-size: 2rem; margin-bottom: 6px; }
+.gy-mercy-label {
+  font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gy-jade); margin-bottom: 4px;
+}
+.gy-mercy-title {
+  font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--gy-white);
+}
+
+/* --- Whisper Fragments --- */
+.gy-whisper-section {
+  padding: var(--space-xxl) 0; background: var(--gy-deep);
+}
+.gy-whisper {
+  max-width: 600px; margin: 0 auto; padding: 32px 24px;
+  text-align: center;
+  border-bottom: 1px solid rgba(126,200,160,0.05);
+}
+.gy-whisper:last-child { border-bottom: none; }
+.gy-whisper-icon { font-size: 1.6rem; margin-bottom: 8px; opacity: 0.7; }
+.gy-whisper h3 {
+  font-family: 'Cinzel', serif; font-size: 1rem;
+  color: var(--gy-jade); margin-bottom: 8px;
+}
+.gy-whisper p {
+  font-size: 0.93rem; line-height: 1.8; color: var(--gy-soft);
+}
+
+/* --- Hub Cards — Lotus Petals --- */
+.gy-hub-section {
+  padding: var(--space-xxl) 0; background: var(--gy-teal);
+}
+.gy-lotus-petals {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 24px; max-width: 720px; margin: 0 auto; padding: 0 24px;
+}
+.gy-petal {
+  display: flex; flex-direction: column;
+  background: rgba(212,216,224,0.02);
+  border: 1px solid rgba(126,200,160,0.06);
+  border-radius: 48% 48% 4px 4px;
+  padding: 40px 24px 32px; text-decoration: none;
+  transition: border-color 0.3s, transform 0.3s, background 0.3s;
+}
+.gy-petal:hover {
+  border-color: rgba(126,200,160,0.25);
+  background: rgba(212,216,224,0.04);
+  transform: translateY(-6px);
+}
+.gy-petal-icon { font-size: 2rem; margin-bottom: 14px; text-align: center; }
+.gy-petal h3 {
+  font-family: 'Cinzel', serif; font-size: 1.05rem;
+  color: var(--gy-white); margin-bottom: 8px; text-align: center;
+}
+.gy-petal p {
+  font-size: 0.85rem; line-height: 1.7; color: var(--gy-soft);
+  flex: 1; margin-bottom: 14px; text-align: center;
+}
+.gy-petal-link {
+  font-family: 'Cinzel', serif; font-size: 0.7rem;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gy-jade); text-align: center;
+}
+
+/* --- Section title override --- */
+.gy-title {
+  text-align: center; margin-bottom: 48px;
+  font-family: 'Cinzel', serif; font-size: 1.5rem;
+  color: var(--gy-white);
+}
+.gy-title .title-ornament {
+  display: inline-block; width: 40px; height: 1px;
+  background: var(--gy-moon); vertical-align: middle;
+  margin: 0 16px; opacity: 0.4;
+}
+
+@media(max-width: 767px) {
+  .gy-mercy-grid { grid-template-columns: 1fr; }
+  .gy-mercy-card { width: 150px; height: 150px; }
+  .gy-lotus-petals { grid-template-columns: 1fr; }
+}

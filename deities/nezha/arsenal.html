@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divine Arsenal — Nezha | Celestial Archive</title>
+  <meta name="description" content="Five sacred weapons bestowed by immortals — the Wind Fire Wheels, Fire-Tipped Spear, Universal Ring, Red Armillary Sash, and the Golden Brick.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://celestial-archive.com/deities/nezha/arsenal.html">
+  <meta property="og:title" content="Divine Arsenal — Nezha | Celestial Archive">
+  <meta property="og:description" content="Five sacred weapons bestowed by immortals, tested in cosmic battle.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://celestial-archive.com/deities/nezha/arsenal.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Divine Arsenal — Nezha | Celestial Archive">
+  <meta name="twitter:description" content="Five sacred weapons bestowed by immortals.">
+  <meta property="og:image" content="https://celestial-archive.com/images/nezha/nz2.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
+  <meta property="og:image:alt" content="Nezha — the lotus-born warrior god, three-headed and six-armed, riding wheels of fire">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/nezha/nz2.jpg">
+  <meta name="twitter:image:alt" content="Nezha — the lotus-born warrior god, three-headed and six-armed, riding wheels of fire">
+  <link rel="stylesheet" href="../../css/global.css">
+  <style>
+    :root{--bg:#08080c;--surf:#111118;--flame:#ff2d55;--flame2:#ff3b6e;--purp:#7b2fff;--gold:#ffd700;--wht:#f0e6f6;--mut:#8888a0}
+    body{background:var(--bg)}
+    .nz-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 28px;background:linear-gradient(180deg,rgba(8,8,12,0.95) 0%,rgba(8,8,12,0) 100%);pointer-events:none}
+    .nz-nav a{pointer-events:auto;color:var(--mut);text-decoration:none;font-size:0.82rem;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s}
+    .nz-nav a:hover{color:var(--flame)}
+
+    .pg-hero{min-height:45vh;display:flex;align-items:center;justify-content:center;text-align:center;background:var(--bg);position:relative;overflow:hidden;padding:120px 24px 40px}
+    .pg-hero::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 60% 20%,rgba(255,215,0,0.08) 0%,transparent 50%),radial-gradient(ellipse at 40% 60%,rgba(255,45,85,0.06) 0%,transparent 50%)}
+    .pg-hero-bg{position:absolute;inset:0;z-index:0}
+    .pg-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 25%;opacity:0.28}
+    .pg-hero-content{position:relative;z-index:2;max-width:650px}
+    .pg-hero-kicker{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+    .pg-hero-title{font-family:'Cinzel',serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;color:var(--wht);margin-bottom:12px;text-shadow:0 0 40px rgba(255,45,85,0.3)}
+    .pg-hero-sub{font-size:1.05rem;color:var(--mut);line-height:1.8;max-width:500px;margin:0 auto}
+
+    /* Weapon Cards with rarity + stats */
+    .arsenal-section{padding:40px 0 100px;background:var(--bg)}
+    .arsenal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto;padding:0 24px}
+    .wpn-card{background:var(--surf);border-radius:4px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;position:relative}
+    .wpn-card:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(0,0,0,0.5)}
+    .wpn-card:nth-child(1){--clr:var(--flame);--rare:'LEGENDARY'}
+    .wpn-card:nth-child(2){--clr:var(--flame2);--rare:'LEGENDARY'}
+    .wpn-card:nth-child(3){--clr:var(--purp);--rare:'MYTHIC'}
+    .wpn-card:nth-child(4){--clr:var(--gold);--rare:'LEGENDARY'}
+    .wpn-card:nth-child(5){--clr:#e8752a;--rare:'EPIC'}
+    .wpn-card-art{height:160px;display:flex;align-items:center;justify-content:center;font-size:4rem;background:radial-gradient(circle at center,rgba(255,255,255,0.02) 0%,transparent 60%),url(../../images/nezha/nz3.jpg) center/cover;position:relative}
+    .wpn-card-art::after{content:var(--rare);position:absolute;top:12px;right:12px;font-size:0.6rem;letter-spacing:3px;color:var(--clr);font-family:'Cinzel',serif;padding:3px 8px;border:1px solid var(--clr);opacity:0.7}
+    .wpn-card-body{padding:24px}
+    .wpn-card-name{font-family:'Cinzel',serif;font-size:1.15rem;color:var(--wht);margin-bottom:2px}
+    .wpn-card-zh{font-size:0.9rem;color:var(--clr);margin-bottom:10px}
+    .wpn-card-desc{font-size:0.88rem;line-height:1.65;color:var(--mut);margin-bottom:16px}
+    /* stat bars */
+    .wpn-stats{display:flex;flex-direction:column;gap:6px}
+    .wpn-stat{display:flex;align-items:center;gap:8px;font-size:0.7rem;text-transform:uppercase;letter-spacing:1px}
+    .wpn-stat-label{color:var(--mut);min-width:60px}
+    .wpn-stat-bar{flex:1;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
+    .wpn-stat-fill{height:100%;background:var(--clr);border-radius:2px;transition:width 0.6s ease-out}
+    .wpn-stat-val{color:var(--clr);min-width:24px;text-align:right}
+
+    @media(max-width:1024px){.arsenal-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:767px){.arsenal-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+  <nav class="nz-nav" aria-label="Navigation">
+    <a href="index.html">← Back to Nezha</a>
+    <a href="../../index.html">Celestial Archive</a>
+  </nav>
+
+  <section class="pg-hero" aria-label="Hero">
+    <div class="pg-hero-bg"><img src="../../images/nezha/nz2.jpg" alt="" aria-hidden="true"></div>
+    <div class="pg-hero-content">
+      <p class="pg-hero-kicker">Arsenal</p>
+      <h1 class="pg-hero-title">Divine Arsenal</h1>
+      <p class="pg-hero-sub">Five sacred weapons. Bestowed by immortals. Tested in cosmic battle. Each one a legend in its own right.</p>
+    </div>
+  </section>
+
+  <section class="arsenal-section" aria-label="Sacred weapons">
+    <h2 class="sr-only">Weapons of the Third Prince</h2>
+    <div class="arsenal-grid">
+      <div class="wpn-card fade-in">
+        <div class="wpn-card-art">🔥</div>
+        <div class="wpn-card-body">
+          <h3 class="wpn-card-name">Wind Fire Wheels</h3>
+          <p class="wpn-card-zh">风火轮</p>
+          <p class="wpn-card-desc">Twin wheels of wind and flame. They carry Nezha across oceans and through the clouds at blinding speed, leaving trails of fire in their wake.</p>
+          <div class="wpn-stats">
+            <div class="wpn-stat"><span class="wpn-stat-label">Speed</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:98%"></span></span><span class="wpn-stat-val">98</span></div>
+            <div class="wpn-stat"><span class="wpn-stat-label">Mobility</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:95%"></span></span><span class="wpn-stat-val">95</span></div>
+            <div class="wpn-stat"><span class="wpn-stat-label">Damage</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:40%"></span></span><span class="wpn-stat-val">40</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="wpn-card fade-in">
+        <div class="wpn-card-art">🔱</div>
+        <div class="wpn-card-body">
+          <h3 class="wpn-card-name">Fire-Tipped Spear</h3>
+          <p class="wpn-card-zh">火尖枪</p>
+          <p class="wpn-card-desc">A spear whose tip burns with an eternal flame — never extinguished by water or wind. His signature weapon. Pierces dragon scales and celestial shields alike.</p>
+          <div class="wpn-stats">
+            <div class="wpn-stat"><span class="wpn-stat-label">Piercing</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:96%"></span></span><span class="wpn-stat-val">96</span></div>
+            <div class="wpn-stat"><span class="wpn-stat-label">Precision</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:90%"></span></span><span class="wpn-stat-val">90</span></div>
+            <div class="wpn-stat"><span class="wpn-stat-label">Range</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:75%"></span></span><span class="wpn-stat-val">75</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="wpn-card fade-in">
+        <div class="wpn-card-art">💍</div>
+        <div class="wpn-card-body">
+          <h3 class="wpn-card-name">Universal Ring</h3>
+          <p class="wpn-card-zh">乾坤圈</p>
+          <p class="wpn-card-desc">A golden ring forged from the essence of heaven and earth. Shrinks to fit on a finger. Expands to crush mountains. Seeks its target across any distance.</p>
+          <div class="wpn-stats">
+            <div class="wpn-stat"><span class="wpn-stat-label">Impact</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:97%"></span></span><span class="wpn-stat-val">97</span></div>
+            <div class="wpn-stat"><span class="wpn-stat-label">Seeking</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:93%"></span></span><span class="wpn-stat-val">93</span></div>
+            <div class="wpn-stat"><span class="wpn-stat-label">Utility</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:85%"></span></span><span class="wpn-stat-val">85</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="wpn-card fade-in">
+        <div class="wpn-card-art">🎀</div>
+        <div class="wpn-card-body">
+          <h3 class="wpn-card-name">Red Armillary Sash</h3>
+          <p class="wpn-card-zh">混天绫</p>
+          <p class="wpn-card-desc">A flowing crimson sash. Stretches for miles. Binds armies. Churns oceans into storms. Beautiful as a sunset — deadly as a typhoon. This sash started the war.</p>
+          <div class="wpn-stats">
+            <div class="wpn-stat"><span class="wpn-stat-label">Binding</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:94%"></span></span><span class="wpn-stat-val">94</span></div>
+            <div class="wpn-stat"><span class="wpn-stat-label">Control</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:91%"></span></span><span class="wpn-stat-val">91</span></div>
+            <div class="wpn-stat"><span class="wpn-stat-label">Reach</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:88%"></span></span><span class="wpn-stat-val">88</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="wpn-card fade-in">
+        <div class="wpn-card-art">🧱</div>
+        <div class="wpn-card-body">
+          <h3 class="wpn-card-name">Golden Brick</h3>
+          <p class="wpn-card-zh">金砖</p>
+          <p class="wpn-card-desc">Deceptively simple. Strikes with the weight of a mountain. Multiplies mid-flight into a storm of golden projectiles. Blunt, brutal, direct — just like its wielder.</p>
+          <div class="wpn-stats">
+            <div class="wpn-stat"><span class="wpn-stat-label">Force</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:92%"></span></span><span class="wpn-stat-val">92</span></div>
+            <div class="wpn-stat"><span class="wpn-stat-label">Multi-Hit</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:86%"></span></span><span class="wpn-stat-val">86</span></div>
+            <div class="wpn-stat"><span class="wpn-stat-label">Finesse</span><span class="wpn-stat-bar"><span class="wpn-stat-fill" style="width:20%"></span></span><span class="wpn-stat-val">20</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">Celestial Archive</div>
+          <p class="footer-desc">Exploring the myths, legends, and divine beings of Eastern mythology — one story at a time.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Navigate</div>
+          <nav class="footer-nav">
+            <a href="index.html">Nezha</a>
+            <a href="origins.html">The Lotus Rebirth</a>
+            <a href="legend.html">Warrior Legend</a>
+          </nav>
+          <div class="footer-heading" style="margin-top:var(--space-md)">More Deities</div>
+          <nav class="footer-nav" data-footer="deities"></nav>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Follow</div>
+          <div class="social-icons">
+            <span class="social-icon" aria-label="Twitter">T</span>
+            <span class="social-icon" aria-label="YouTube">Y</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <nav class="footer-nav">
+            <a href="../../about.html">About Us</a>
+            <a href="../../contact.html">Contact Us</a>
+            <a href="../../privacy-policy.html">Privacy Policy</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"Article",
+    "headline":"Divine Arsenal — Nezha",
+    "description":"The sacred weapons of the Third Prince — bestowed by immortals, tested in cosmic battle.",
+    "author":{"@type":"Organization","name":"Celestial Archive"},
+    "publisher":{"@type":"Organization","name":"Celestial Archive","url":"https://celestial-archive.com"},
+    "url":"https://celestial-archive.com/deities/nezha/arsenal.html",
+    "datePublished":"2026-05-12","inLanguage":"en",
+    "mainEntityOfPage":"https://celestial-archive.com/deities/nezha/arsenal.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Celestial Archive","item":"https://celestial-archive.com/"},
+      {"@type":"ListItem","position":2,"name":"Nezha","item":"https://celestial-archive.com/deities/nezha/"},
+      {"@type":"ListItem","position":3,"name":"Divine Arsenal","item":"https://celestial-archive.com/deities/nezha/arsenal.html"}
+    ]
+  }
+  </script>
+  <script src="../../js/deities.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/config.js"></script>
+<script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
+</body>
+</html>

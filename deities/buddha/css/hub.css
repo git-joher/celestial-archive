@@ -1,0 +1,250 @@
+/* ============================================================
+   Buddha — Hub CSS ("Cosmic Enlightenment")
+   Theme: gold #daa520, ivory #faf8f0, deep indigo #0d1b3e, amber #c88a3c
+   ============================================================ */
+
+/* --- Design Tokens --- */
+:root {
+  --bd-dk: #0d1b3e;
+  --bd-navy: #0f2045;
+  --bd-midnight: #16265c;
+  --bd-gold: #daa520;
+  --bd-amber: #c88a3c;
+  --bd-ivory: #faf8f0;
+  --bd-linen: #ede4cc;
+  --bd-stone: #9e9a8e;
+  --bd-mut: #6b7a94;
+}
+
+/* --- Hero --- */
+.bd-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--bd-dk);
+  position: relative;
+  overflow: hidden;
+}
+.bd-hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(218,165,32,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 35% 65%, rgba(200,138,60,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 50%, rgba(218,165,32,0.03) 0%, transparent 40%);
+}
+
+/* Mandala geometry background */
+.bd-mandala {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(218,165,32,0.04) 0%, transparent 28%),
+    radial-gradient(circle at 50% 30%, rgba(218,165,32,0.03) 0%, transparent 18%),
+    radial-gradient(circle at 50% 30%, rgba(218,165,32,0.02) 0%, transparent 8%);
+  mask-image: radial-gradient(ellipse at 50% 30%, black 50%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 50%, transparent 85%);
+}
+
+/* Floating lotus petals — pure CSS */
+.bd-petals {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+}
+.bd-petal {
+  position: absolute;
+  width: 8px; height: 14px;
+  background: radial-gradient(ellipse at center, rgba(218,165,32,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: bd-petal-float 12s linear infinite;
+  opacity: 0;
+}
+@keyframes bd-petal-float {
+  0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(720deg) scale(1.5); opacity: 0; }
+}
+
+.bd-hero-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+}
+.bd-hero-bg-img img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+  opacity: 0.18;
+  mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 70%);
+}
+
+.bd-hero-content {
+  position: relative; z-index: 2; max-width: 600px;
+}
+.bd-hero-sigil {
+  font-size: 3rem; margin-bottom: 16px;
+  animation: bd-glow-pulse 3s ease-in-out infinite;
+}
+@keyframes bd-glow-pulse {
+  0%, 100% { text-shadow: 0 0 20px rgba(218,165,32,0.3); }
+  50% { text-shadow: 0 0 50px rgba(218,165,32,0.7), 0 0 80px rgba(218,165,32,0.3); }
+}
+.bd-hero-kicker {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem; letter-spacing: 8px; text-transform: uppercase;
+  color: var(--bd-gold); margin-bottom: 12px;
+}
+.bd-hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.5rem, 5.5vw, 4rem); font-weight: 700;
+  color: var(--bd-ivory); margin-bottom: 8px;
+  text-shadow: 0 0 60px rgba(218,165,32,0.3);
+}
+.bd-hero-name-zh {
+  font-family: 'Ma Shan Zheng', 'Noto Serif SC', serif;
+  font-size: 2rem; color: var(--bd-gold); opacity: 0.7;
+  margin-bottom: 16px;
+}
+.bd-hero-divider {
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bd-gold), transparent);
+  margin: 0 auto 16px;
+}
+.bd-hero-tagline {
+  font-size: 0.95rem; line-height: 1.9; color: var(--bd-stone);
+  max-width: 500px; margin: 0 auto;
+}
+.bd-hero-tagline strong { color: var(--bd-gold); }
+
+/* Scroll hint */
+.bd-scroll-hint {
+  position: absolute; bottom: 36px; left: 50%; z-index: 2;
+  transform: translateX(-50%);
+}
+.bd-scroll-hint span {
+  display: block; width: 20px; height: 20px;
+  border-right: 1px solid var(--bd-gold);
+  border-bottom: 1px solid var(--bd-gold);
+  transform: rotate(45deg);
+  animation: scroll-bob 2s ease-in-out infinite;
+  opacity: 0.4;
+}
+
+/* --- Nav --- */
+.bd-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 28px;
+  background: linear-gradient(180deg, rgba(13,27,62,0.95) 0%, rgba(13,27,62,0) 100%);
+  pointer-events: none;
+}
+.bd-nav a {
+  pointer-events: auto; color: var(--bd-mut); text-decoration: none;
+  font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+  font-family: 'Cinzel', serif; transition: color 0.3s;
+}
+.bd-nav a:hover { color: var(--bd-gold); }
+
+/* --- Identity Cards --- */
+.bd-identity-section {
+  padding: var(--space-xxl) 0; background: var(--bd-navy);
+}
+.bd-identity-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; max-width: 880px; margin: 0 auto; padding: 0 24px;
+}
+.bd-id-card {
+  text-align: center; padding: 28px 16px;
+  background: rgba(218,165,32,0.03);
+  border: 1px solid rgba(218,165,32,0.06);
+  border-radius: 4px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.bd-id-card:hover {
+  border-color: rgba(218,165,32,0.2);
+  transform: translateY(-4px);
+}
+.bd-id-label {
+  font-size: 0.65rem; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--bd-amber);
+  margin-bottom: 8px;
+}
+.bd-id-value {
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem; color: var(--bd-ivory);
+}
+
+/* --- Insight Fragments --- */
+.bd-insights-section {
+  padding: var(--space-xxl) 0; background: var(--bd-dk);
+}
+.bd-insight {
+  max-width: 620px; margin: 0 auto; padding: 28px 24px;
+  text-align: center;
+  border-bottom: 1px solid rgba(218,165,32,0.06);
+}
+.bd-insight:last-child { border-bottom: none; }
+.bd-insight-icon { font-size: 1.8rem; margin-bottom: 8px; }
+.bd-insight h3 {
+  font-family: 'Cinzel', serif; font-size: 1.05rem;
+  color: var(--bd-gold); margin-bottom: 8px;
+}
+.bd-insight p {
+  font-size: 0.93rem; line-height: 1.8; color: var(--bd-stone);
+}
+
+/* --- Hub Cards — Sutra Scroll Style --- */
+.bd-hub-section {
+  padding: var(--space-xxl) 0; background: var(--bd-navy);
+}
+.bd-scrolls {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; max-width: 900px; margin: 0 auto; padding: 0 24px;
+}
+.bd-scroll {
+  display: flex; flex-direction: column;
+  background: rgba(218,165,32,0.03);
+  border: 1px solid rgba(218,165,32,0.07);
+  border-radius: 3px;
+  padding: 32px 24px; text-decoration: none;
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative; overflow: hidden;
+}
+.bd-scroll::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--bd-gold), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.bd-scroll:hover {
+  border-color: rgba(218,165,32,0.25);
+  transform: translateY(-6px);
+}
+.bd-scroll:hover::before { opacity: 1; }
+.bd-scroll-icon { font-size: 2rem; margin-bottom: 14px; }
+.bd-scroll h3 {
+  font-family: 'Cinzel', serif; font-size: 1.05rem;
+  color: var(--bd-ivory); margin-bottom: 8px;
+}
+.bd-scroll p {
+  font-size: 0.85rem; line-height: 1.7; color: var(--bd-stone);
+  flex: 1; margin-bottom: 14px;
+}
+.bd-scroll-link {
+  font-family: 'Cinzel', serif; font-size: 0.7rem;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--bd-gold);
+}
+
+/* --- Section title override --- */
+.bd-title {
+  text-align: center; margin-bottom: 48px;
+  font-family: 'Cinzel', serif; font-size: 1.5rem;
+  color: var(--bd-ivory);
+}
+.bd-title .title-ornament {
+  display: inline-block; width: 40px; height: 1px;
+  background: var(--bd-gold); vertical-align: middle;
+  margin: 0 16px; opacity: 0.5;
+}
+
+@media(max-width: 767px) {
+  .bd-identity-grid { grid-template-columns: repeat(2, 1fr); }
+  .bd-scrolls { grid-template-columns: 1fr; }
+}

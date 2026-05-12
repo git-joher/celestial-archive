@@ -1,0 +1,242 @@
+/* ============================================================
+   Sun Wukong — Hub Page Styles
+   孙悟空专属：全屏 Hero、五行身份卡、故事片段
+   ============================================================ */
+
+/* ============================================================
+   Hero — Full-viewport custom layout
+   ============================================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.hero-bg-cloud {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  height: 100%;
+  align-items: end;
+  background: linear-gradient(
+    to right,
+    transparent 40%,
+    var(--bg-dark) 100%
+  );
+}
+.hero-text {
+  padding: var(--space-xl) var(--space-lg);
+  padding-bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.hero-kicker {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #dac98a;
+  margin-bottom: var(--space-xs);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--space-md);
+}
+.hero-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--accent-gold);
+  margin-bottom: var(--space-sm);
+}
+.hero-chinese {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--accent-gold);
+  margin-bottom: var(--space-sm);
+}
+.hero-divine-title {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--accent-vermillion);
+  margin-bottom: var(--space-md);
+}
+.hero-declaration {
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.8;
+  color: #ffffff;
+  max-width: 480px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.hero-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  z-index: 0;
+}
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    transparent 35%,
+    var(--bg-dark) 100%
+  );
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+.scroll-arrow {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-right: 2px solid var(--accent-gold);
+  border-bottom: 2px solid var(--accent-gold);
+  transform: rotate(45deg);
+  animation: scroll-bob 2s ease-in-out infinite;
+}
+@keyframes scroll-bob {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(8px); }
+}
+
+/* ============================================================
+   Identity Cards — 5-column glance grid
+   ============================================================ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-md);
+}
+.identity-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.card-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+.card-value {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   Narrative Snippets — Story fragments with cloud dividers
+   ============================================================ */
+.narrative-snippets {
+  background: linear-gradient(180deg, var(--bg-primary), #ece5d8);
+  padding: var(--space-xxl) 0;
+  text-align: center;
+}
+.snippet {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.snippet-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent-vermillion);
+  margin-bottom: var(--space-xs);
+}
+.snippet-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+.snippet-divider {
+  padding: var(--space-md) 0;
+}
+.snippet-divider img {
+  width: 40px;
+  height: auto;
+  opacity: 0.5;
+}
+
+/* Nav hub section — extra padding */
+.nav-hub {
+  padding: var(--space-xxl) 0;
+}
+
+/* ============================================================
+   Responsive — Mobile < 768px
+   ============================================================ */
+@media (max-width: 767px) {
+  .hero {
+    min-height: 100vh;
+  }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    background: linear-gradient(
+      to top,
+      var(--bg-dark) 45%,
+      transparent 100%
+    );
+  }
+  .hero-image {
+    width: 100%;
+    height: 55%;
+  }
+  .hero-image::after {
+    background: linear-gradient(
+      to top,
+      var(--bg-dark) 0%,
+      transparent 100%
+    );
+  }
+  .hero-text {
+    padding: var(--space-lg) var(--space-md);
+    padding-bottom: 100px;
+    align-items: flex-start;
+  }
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .hero-chinese {
+    font-size: 1.5rem;
+  }
+  .hero-declaration {
+    font-size: 0.95rem;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
