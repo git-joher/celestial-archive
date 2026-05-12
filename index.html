@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Celestial Archive — Eastern Mythology</title>
-  <meta name="description" content="Explore the myths, legends, and divine beings of Eastern mythology. From the Monkey King to the Jade Emperor — discover the stories that shaped a civilization.">
+  <meta name="description" content="Explore the myths, legends, and divine beings of Eastern mythology. From the stone-born Monkey King to the lotus-reborn Nezha — discover the stories that shaped a civilization.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://celestial-archive.com/">
   <!-- Open Graph -->
   <meta property="og:title" content="Celestial Archive — Eastern Mythology">
-  <meta property="og:description" content="Explore the myths, legends, and divine beings of Eastern mythology. From the Monkey King to the Jade Emperor — discover the stories that shaped a civilization.">
+  <meta property="og:description" content="Explore the myths, legends, and divine beings of Eastern mythology. From the stone-born Monkey King to the lotus-reborn Nezha — discover the stories that shaped a civilization.">
   <meta property="og:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -21,7 +21,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Celestial Archive — Eastern Mythology">
-  <meta name="twitter:description" content="Explore the myths, legends, and divine beings of Eastern mythology. From the Monkey King to the Jade Emperor — discover the stories that shaped a civilization.">
+  <meta name="twitter:description" content="Explore the myths, legends, and divine beings of Eastern mythology. From the stone-born Monkey King to the lotus-reborn Nezha — discover the stories that shaped a civilization.">
   <meta name="twitter:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
   <meta name="twitter:image:alt" content="Sun Wukong — 工笔重彩风格">
   <link rel="stylesheet" href="css/global.css">
@@ -120,11 +120,24 @@
       <div class="landing-divider"></div>
       <p class="landing-desc">
         Exploring the myths, legends, and divine beings of Eastern mythology —<br>
-        from the stone-born Monkey King to the celestial halls of the Jade Emperor.
+        from the stone-born Monkey King to the lotus-reborn Nezha,<br>
+        from celestial marshals to the humblest pilgrims.
       </p>
-      <a href="deities/sun-wukong/index.html" class="landing-cta">Enter the Archive</a>
+      <a href="#browse" class="landing-cta">Enter the Archive</a>
     </div>
   </main>
+
+  <section class="pantheon section" id="browse" aria-label="Browse the Archive">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="title-ornament"></span>
+        Browse the Archive
+      </h2>
+      <div class="pantheon-grid" id="pantheon-grid">
+        <!-- Populated by JS from CELESTIAL_DEITIES registry -->
+      </div>
+    </div>
+  </section>
 
   <footer class="site-footer" role="contentinfo">
     <div class="container">
@@ -135,9 +148,7 @@
         </div>
         <div class="footer-col">
           <div class="footer-heading">Explore</div>
-          <nav class="footer-nav">
-            <a href="deities/sun-wukong/index.html">Sun Wukong</a>
-          </nav>
+          <nav class="footer-nav" data-footer="deities"></nav>
         </div>
         <div class="footer-col">
           <div class="footer-heading">Follow</div>
@@ -186,7 +197,9 @@
     ]
   }
   </script>
+  <script src="js/deities.js"></script>
   <script src="js/main.js"></script>
-<script type="text/javascript"> var infolinks_pid = 3445396; var infolinks_wsid = 0; </script> <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
+<script src="js/config.js"></script>
+<script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
 </body>
 </html>

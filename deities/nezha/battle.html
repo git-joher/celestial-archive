@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battle of the Dragon Kings — Nezha | Celestial Archive</title>
+  <meta name="description" content="When the Dragon Kings terrorized the mortal world, a seven-year-old boy stood alone against the sea — and changed the cosmic order forever.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://celestial-archive.com/deities/nezha/battle.html">
+  <meta property="og:title" content="Battle of the Dragon Kings — Nezha | Celestial Archive">
+  <meta property="og:description" content="A seven-year-old boy against all four Dragon Kings. The rebellion that shook heaven and sea.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://celestial-archive.com/deities/nezha/battle.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Battle of the Dragon Kings — Nezha | Celestial Archive">
+  <meta name="twitter:description" content="A seven-year-old boy against all four Dragon Kings.">
+  <meta property="og:image" content="https://celestial-archive.com/images/nezha/nz2.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
+  <meta property="og:image:alt" content="Nezha in battle against the Dragon Kings">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/nezha/nz2.jpg">
+  <meta name="twitter:image:alt" content="Nezha in battle">
+  <link rel="stylesheet" href="../../css/global.css">
+  <style>
+    :root {
+      --void: #08080c;
+      --flame: #ff2d55;
+      --purp: #7b2fff;
+      --ember: #ff6b8a;
+      --ash: #1a1a24;
+      --mut: #888;
+      --light: #e0d8f0;
+    }
+    body { background: var(--void); }
+
+    .nz-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 28px;
+      background: linear-gradient(180deg, rgba(8,8,12,0.95) 0%, rgba(8,8,12,0) 100%);
+      pointer-events: none;
+    }
+    .nz-nav a {
+      pointer-events: auto; color: var(--mut); text-decoration: none;
+      font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+      font-family: 'Cinzel', serif; transition: color 0.3s;
+    }
+    .nz-nav a:hover { color: var(--flame); }
+
+    .pg-hero {
+      min-height: 60vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; background: var(--void); position: relative; overflow: hidden;
+      padding: 120px 24px 50px;
+    }
+    .pg-hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background:
+        radial-gradient(ellipse at 45% 25%, rgba(255,45,85,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 55% 60%, rgba(123,47,255,0.06) 0%, transparent 45%);
+    }
+    .pg-hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .pg-hero-bg img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+      opacity: 0.25;
+    }
+    .pg-hero-content { position: relative; z-index: 2; max-width: 680px; }
+    .pg-hero-kicker {
+      font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 6px;
+      color: var(--flame); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .pg-hero-title {
+      font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700; color: var(--light); margin-bottom: 14px;
+      text-shadow: 0 0 40px rgba(255,45,85,0.2);
+    }
+    .pg-hero-sub {
+      font-size: 1.05rem; color: var(--mut); line-height: 1.8;
+      max-width: 520px; margin: 0 auto;
+    }
+    .pg-hero-sub strong { color: var(--ember); }
+
+    /* Battle phases — dark comic panels */
+    .battle-section { padding: 40px 0 80px; background: var(--void); }
+    .acts { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .act {
+      display: grid; grid-template-columns: 90px 1fr; gap: 24px;
+      padding: 44px 0; border-bottom: 1px solid rgba(255,45,85,0.08);
+      align-items: start;
+    }
+    .act:last-child { border-bottom: none; }
+    .act-marker { text-align: right; }
+    .act-num {
+      font-family: 'Cinzel', serif; font-size: 4rem; font-weight: 700;
+      color: var(--flame); opacity: 0.15; line-height: 0.8;
+    }
+    .act-emoji { font-size: 1.4rem; margin-top: 4px; }
+    .act-body h3 {
+      font-family: 'Cinzel', serif; font-size: 1.25rem; color: var(--light);
+      margin-bottom: 4px;
+    }
+    .act-label {
+      display: inline-block; font-size: 0.7rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--flame); margin-bottom: 12px;
+    }
+    .act-body p { font-size: 0.98rem; line-height: 1.85; color: var(--mut); }
+    .act-body p strong { color: var(--ember); }
+    .act-body img {
+      width: 100%; max-width: 420px; border-radius: 3px; margin: 14px 0;
+      opacity: 0.6; transition: opacity 0.3s;
+    }
+    .act-body img:hover { opacity: 0.9; }
+
+    /* VS card styling for the climax */
+    .vs-card {
+      margin-top: 16px; background: rgba(255,45,85,0.04);
+      border: 1px solid rgba(255,45,85,0.10); border-radius: 4px;
+      padding: 24px; text-align: center;
+    }
+    .vs-header {
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      gap: 16px; margin-bottom: 12px;
+    }
+    .vs-combatant { font-family: 'Cinzel', serif; color: var(--light); font-size: 0.95rem; }
+    .vs-divider {
+      font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700;
+      color: var(--flame);
+    }
+    .vs-result { font-size: 0.88rem; line-height: 1.7; color: var(--mut); }
+
+    /* Video section */
+    .video-section { padding: 60px 0 80px; background: var(--ash); }
+    .video-section h2 { text-align: center; margin-bottom: 32px; }
+    .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    .video-card {
+      background: rgba(123,47,255,0.04); border: 1px solid rgba(123,47,255,0.10);
+      border-radius: 4px; padding: 24px; text-align: center;
+    }
+    .video-card-icon { font-size: 2rem; margin-bottom: 10px; }
+    .video-card h3 {
+      font-family: 'Cinzel', serif; font-size: 0.95rem; color: var(--light);
+      margin-bottom: 6px;
+    }
+    .video-card p { font-size: 0.82rem; color: var(--mut); line-height: 1.6; margin-bottom: 14px; }
+    .video-link {
+      display: inline-block; font-family: 'Cinzel', serif; font-size: 0.78rem;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--light); background: var(--flame);
+      padding: 10px 24px; border-radius: 4px; text-decoration: none;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .video-link:hover { background: #ff4d6a; box-shadow: 0 0 20px rgba(255,45,85,0.3); }
+    .video-link.alt { background: var(--purp); }
+    .video-link.alt:hover { background: #8b4fff; box-shadow: 0 0 20px rgba(123,47,255,0.3); }
+
+    @media(max-width: 767px) {
+      .act { grid-template-columns: 1fr; gap: 10px; padding: 32px 0; }
+      .act-marker { text-align: left; }
+      .act-num { font-size: 2.2rem; }
+      .video-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nz-nav" aria-label="Navigation">
+    <a href="index.html">← Back to Nezha</a>
+    <a href="../../index.html">Celestial Archive</a>
+  </nav>
+
+  <section class="pg-hero" aria-label="Hero">
+    <div class="pg-hero-bg"><img src="../../images/nezha/nz2.jpg" alt="" aria-hidden="true"></div>
+    <div class="pg-hero-content">
+      <p class="pg-hero-kicker">The Battle</p>
+      <h1 class="pg-hero-title">Battle of the Dragon Kings</h1>
+      <p class="pg-hero-sub"><strong>A seven-year-old boy against the lords of the sea.</strong> When the Dragon Kings terrorized Chentang Pass, one child-warrior refused to kneel. What followed was the rebellion that defined a god.</p>
+    </div>
+  </section>
+
+  <section class="battle-section" aria-label="The five acts of the battle">
+    <h2 class="sr-only">The conflict</h2>
+    <div class="acts">
+
+      <div class="act fade-in">
+        <div class="act-marker"><div class="act-num">I</div><div class="act-emoji">🌊</div></div>
+        <div class="act-body">
+          <span class="act-label">The Oppression</span>
+          <h3>The Dragon King's Terror</h3>
+          <p>The East Sea Dragon King <strong>Ao Guang</strong> was not a benevolent water spirit. He was a tyrant who demanded tribute, abducted children, and drowned villages that displeased him. When his gaze fell upon Chentang Pass — a prosperous coastal town — he demanded child sacrifices. The people were helpless. Mortals could not defy the sea. But Chentang Pass had a secret: the commandant's third son, <strong style="color:var(--ember)">Nezha</strong>, was no ordinary child. Born from a three-year pregnancy after his mother dreamed of a celestial being, Nezha had been gifted with divine weapons by his immortal master, Taiyi Zhenren. He was seven years old. And he was about to announce himself to the world.</p>
+        </div>
+      </div>
+
+      <div class="act fade-in">
+        <div class="act-marker"><div class="act-num">II</div><div class="act-emoji">🦑</div></div>
+        <div class="act-body">
+          <span class="act-label">First Blood</span>
+          <h3>The Yaksha Slain</h3>
+          <p>Playing by the sea, Nezha saw the Dragon King's enforcer — <strong>Li Gen, the Yaksha</strong> — dragging a child toward the waves. Nezha did not hesitate. With his Universal Ring (乾坤圈), he struck the Yaksha dead. The first emissary of the Dragon King had fallen to a seven-year-old. When news reached Ao Guang, he sent his third son to handle this insolent mortal: <strong>Ao Bing</strong>, the dragon prince, armored in scales harder than any human weapon, riding the waves with an army of sea creatures in his wake. The Dragon King assumed the matter would be settled in minutes. He was wrong.</p>
+          <img src="../../images/nezha/nz1.jpg" alt="Nezha facing the sea — an impossible stand" loading="lazy">
+        </div>
+      </div>
+
+      <div class="act fade-in">
+        <div class="act-marker"><div class="act-num">III</div><div class="act-emoji">🐉</div></div>
+        <div class="act-body">
+          <span class="act-label">The Dragon Falls</span>
+          <h3>Nezha vs Ao Bing — Prince Against Prince</h3>
+          <p>Ao Bing rose from the sea in his true dragon form — a serpent of jade scales and divine fury. The ocean churned. The sky darkened. Nezha stood on the shore, the Red Armillary Sash (混天绫) swirling around him, his Fire-Tipped Spear crackling with lotus flame. The battle was not long. For all of Ao Bing's divine heritage, he had never faced someone who <strong style="color:var(--ember)">did not fear gods</strong>. Nezha's Universal Ring shattered the dragon prince's defenses. His spear found its mark. Ao Bing fell — the first dragon ever slain by a mortal child. Nezha, with the casual brutality of a boy who didn't yet understand consequence, <strong style="color:var(--ember)">pulled the dragon's tendons from its body</strong>. He planned to make a belt for his father.</p>
+        </div>
+      </div>
+
+      <div class="act fade-in">
+        <div class="act-marker"><div class="act-num">IV</div><div class="act-emoji">💔</div></div>
+        <div class="act-body">
+          <span class="act-label">The Sacrifice</span>
+          <h3>Flesh and Bone Returned</h3>
+          <p>When Ao Guang learned of his son's death, his grief became a weapon. He rallied <strong>all four Dragon Kings</strong> — East, South, West, and North Seas united in rage. They surrounded Chentang Pass with apocalyptic storms. The demand was absolute: Nezha's life, or every soul in Chentang Pass would drown. Nezha's father, Li Jing — ever the obedient official — prepared to hand his son over. But Nezha did not wait for his father's betrayal. Standing before the Dragon Kings, the seven-year-old drew his sword and <strong style="color:var(--ember)">cut the flesh from his own bones</strong>. "I return my flesh to my mother. I return my bones to my father. From this moment, I owe them nothing." As he fell, the storm receded. The Dragon Kings had their payment. But Nezha was not finished — not yet.</p>
+          <img src="../../images/nezha/nz4.jpg" alt="The lotus pond where Nezha was reborn" loading="lazy">
+        </div>
+      </div>
+
+      <div class="act fade-in">
+        <div class="act-marker"><div class="act-num">V</div><div class="act-emoji">🪷</div></div>
+        <div class="act-body">
+          <span class="act-label">The Reckoning</span>
+          <h3>Lotus Reborn — The Dragon Palace Falls</h3>
+          <p>Taiyi Zhenren, Nezha's immortal master, gathered the boy's spirit and reshaped it with lotus roots and petals — a body purer than flesh, immune to soul-stealing and poison. Nezha arose <strong style="color:var(--ember)">stronger than before</strong>. With new weapons bestowed by his master — including the Wind-Fire Wheels that let him ride the sky — Nezha descended upon the Eastern Sea Dragon Palace. This time, there was no negotiation, no sacrifice, no mercy. He shattered the palace gates. He routed the sea armies. He cornered Ao Guang himself and, in the ultimate humiliation, <strong style="color:var(--ember)">turned the Dragon King into his mount</strong>. The tyrant who once demanded child sacrifices now served as Nezha's steed. The cosmic order had been rewritten. The seven-year-old who died had returned as the immortal marshal of the celestial armies — and every tyrant in the cosmos took notice.</p>
+          <div class="vs-card">
+            <div class="vs-header">
+              <span class="vs-combatant">Nezha</span>
+              <span class="vs-divider">VS</span>
+              <span class="vs-combatant">Ao Guang</span>
+            </div>
+            <p class="vs-result">The Dragon King, once the terror of the eastern seas, was subdued and turned into a mount — the ultimate symbol of Nezha's complete victory over the old cosmic order.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="video-section" aria-label="Watch the battle">
+    <div class="container">
+      <h2 class="section-title" style="color:var(--light);text-align:center;">
+        <span class="title-ornament"></span>
+        Watch the Legend
+      </h2>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-card-icon">🎬</div>
+          <h3>Ne Zha (2019) — Official Trailer</h3>
+          <p>The highest-grossing Chinese animated film. Nezha defies destiny itself in this visually stunning reimagining.</p>
+          <a href="https://www.youtube.com/watch?v=Sup4GUf8vLo" target="_blank" rel="noopener noreferrer" class="video-link">Watch Trailer</a>
+        </div>
+        <div class="video-card">
+          <div class="video-card-icon">🎞️</div>
+          <h3>Nezha Conquers the Dragon King (1979)</h3>
+          <p>The classic Shanghai Animation Film Studio masterpiece — the definitive telling of Nezha's battle against the Dragon Kings.</p>
+          <a href="https://archive.org/details/nezha-conquers-the-dragon-king" target="_blank" rel="noopener noreferrer" class="video-link alt">Watch Full Film</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">Celestial Archive</div>
+          <p class="footer-desc">Exploring the myths, legends, and divine beings of Eastern mythology — one story at a time.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Navigate</div>
+          <nav class="footer-nav">
+            <a href="index.html">Nezha</a>
+            <a href="origins.html">Lotus Reborn</a>
+            <a href="arsenal.html">Divine Arsenal</a>
+          </nav>
+          <div class="footer-heading" style="margin-top:var(--space-md)">More Deities</div>
+          <nav class="footer-nav" data-footer="deities"></nav>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Follow</div>
+          <div class="social-icons">
+            <span class="social-icon" aria-label="Twitter">T</span>
+            <span class="social-icon" aria-label="YouTube">Y</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <nav class="footer-nav">
+            <a href="../../about.html">About Us</a>
+            <a href="../../contact.html">Contact Us</a>
+            <a href="../../privacy-policy.html">Privacy Policy</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"Article",
+    "headline":"Battle of the Dragon Kings — Nezha",
+    "description":"When the Dragon Kings terrorized the mortal world, a seven-year-old boy stood alone against the sea.",
+    "author":{"@type":"Organization","name":"Celestial Archive"},
+    "publisher":{"@type":"Organization","name":"Celestial Archive","url":"https://celestial-archive.com"},
+    "url":"https://celestial-archive.com/deities/nezha/battle.html",
+    "datePublished":"2026-05-12","inLanguage":"en",
+    "mainEntityOfPage":"https://celestial-archive.com/deities/nezha/battle.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Celestial Archive","item":"https://celestial-archive.com/"},
+      {"@type":"ListItem","position":2,"name":"Nezha","item":"https://celestial-archive.com/deities/nezha/"},
+      {"@type":"ListItem","position":3,"name":"Battle of the Dragon Kings","item":"https://celestial-archive.com/deities/nezha/battle.html"}
+    ]
+  }
+  </script>
+  <script src="../../js/deities.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/config.js"></script>
+  <script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
+</body>
+</html>

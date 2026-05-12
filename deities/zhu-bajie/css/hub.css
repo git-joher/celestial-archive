@@ -1,0 +1,197 @@
+/* ================================================================
+   Zhu Bajie Hub — "Tavern Tale"
+   Warm, earthy, folk-story aesthetic. Zero SWK DNA.
+   ================================================================ */
+
+:root {
+  --zb-earth: #1a1209;
+  --zb-surface: #231a0e;
+  --zb-terra: #c1440e;
+  --zb-wheat: #d4a44a;
+  --zb-cream: #f0dfc0;
+  --zb-ember: #e8752a;
+  --zb-muted: #9a8a70;
+  --zb-dark-gold: #8b6914;
+}
+
+/* ---- nav: simple, grounded ---- */
+.zb-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 28px; display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(180deg, rgba(26,18,9,0.95) 0%, rgba(26,18,9,0) 100%);
+  pointer-events: none;
+}
+.zb-nav a {
+  pointer-events: auto; color: var(--zb-muted); text-decoration: none;
+  font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+  transition: color 0.3s; font-family: 'Cinzel', serif;
+}
+.zb-nav a:hover { color: var(--zb-wheat); }
+
+/* hero bg image layer */
+.zb-hero-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+}
+.zb-hero-bg-img img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+  opacity: 0.4;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 35%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 35%, transparent 72%);
+}
+
+/* ---- hero: landscape with moon & clouds ---- */
+.zb-hero {
+  position: relative; min-height: 100vh; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+  background: var(--zb-earth); overflow: hidden;
+}
+/* big moon */
+.zb-hero-moon {
+  position: absolute; width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle at 45% 40%, rgba(212,164,74,0.18) 0%, rgba(212,164,74,0.06) 35%, transparent 65%),
+              radial-gradient(circle at 55% 45%, rgba(232,117,42,0.1) 0%, transparent 50%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  box-shadow: 0 0 120px rgba(212,164,74,0.08), 0 0 200px rgba(193,68,14,0.04);
+  animation: zb-moon-breathe 8s ease-in-out infinite;
+}
+.zb-hero-moon::after {
+  content: ''; position: absolute; inset: 30px; border-radius: 50%;
+  border: 1px solid rgba(212,164,74,0.08);
+}
+@keyframes zb-moon-breathe {
+  0%,100% { transform:translate(-50%,-50%) scale(1); opacity:0.8; }
+  50% { transform:translate(-50%,-50%) scale(1.04); opacity:1; }
+}
+/* cloud layers */
+.zb-clouds { position:absolute; inset:0; pointer-events:none; }
+.zb-cloud {
+  position:absolute; height:60px; border-radius:50%;
+  background:rgba(240,223,192,0.03);
+  animation:zb-cloud-drift var(--dur) var(--delay) infinite linear;
+}
+@keyframes zb-cloud-drift {
+  0%{transform:translateX(-120px);opacity:0}
+  30%{opacity:1}
+  70%{opacity:1}
+  100%{transform:translateX(calc(100vw + 120px));opacity:0}
+}
+
+.zb-hero-content { position:relative; z-index:2; max-width:700px; padding:0 24px; }
+.zb-hero-sigil {
+  font-size:5rem; margin-bottom:10px; display:inline-block;
+  animation:zb-waddle 4s ease-in-out infinite;
+}
+@keyframes zb-waddle {
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(-5deg)}
+  75%{transform:rotate(5deg)}
+}
+.zb-hero-kicker {
+  font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:6px;
+  color:var(--zb-terra); text-transform:uppercase; margin-bottom:10px;
+}
+.zb-hero-title {
+  font-family:'Cinzel',serif; font-size:clamp(3rem,7vw,6rem); font-weight:700;
+  color:var(--zb-cream); line-height:1.04;
+  text-shadow:0 0 40px rgba(212,164,74,0.3),0 0 80px rgba(193,68,14,0.15);
+  margin-bottom:6px;
+}
+.zb-hero-name-zh {
+  font-family:'Ma Shan Zheng',cursive; font-size:2.2rem; color:var(--zb-wheat);
+  margin-bottom:12px;
+}
+.zb-hero-divider {
+  width:70px; height:3px; margin:0 auto 16px;
+  background:linear-gradient(90deg,var(--zb-terra),var(--zb-wheat),var(--zb-terra));
+}
+.zb-hero-tagline {
+  font-size:1.1rem; color:var(--zb-muted); line-height:1.8; max-width:480px; margin:0 auto;
+}
+.zb-hero-tagline strong { color:var(--zb-ember); font-weight:600; }
+
+.zb-scroll-hint { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); z-index:2; }
+.zb-scroll-hint span {
+  display:block; width:22px; height:36px; border:2px solid var(--zb-muted);
+  border-radius:12px; position:relative;
+}
+.zb-scroll-hint span::after {
+  content:''; position:absolute; top:6px; left:50%; transform:translateX(-50%);
+  width:4px; height:8px; background:var(--zb-wheat); border-radius:2px;
+  animation:zb-dot 2s ease-in-out infinite;
+}
+@keyframes zb-dot { 0%,100%{top:6px;opacity:1} 50%{top:18px;opacity:0.2} }
+
+/* ---- trait cards: personality-driven + humor ---- */
+.zb-traits-section { background:var(--zb-surface); padding:80px 0; }
+.zb-traits-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+}
+.zb-trait {
+  background:#2a1f12; padding:36px 28px; text-align:center;
+  border-radius:4px; transition:transform 0.3s,box-shadow 0.3s;
+  position:relative; overflow:hidden;
+}
+.zb-trait:hover { transform:translateY(-6px); box-shadow:0 12px 32px rgba(0,0,0,0.4); }
+.zb-trait::before {
+  content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+  background:linear-gradient(180deg,rgba(212,164,74,0.04) 0%,transparent 60%);
+  pointer-events:none;
+}
+.zb-trait-emoji { font-size:3rem; margin-bottom:8px; }
+.zb-trait-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:3px; color:var(--zb-terra); margin-bottom:8px; }
+.zb-trait-title { font-family:'Cinzel',serif; font-size:1.15rem; color:var(--zb-cream); margin-bottom:8px; font-weight:600; }
+.zb-trait-desc { font-size:0.88rem; line-height:1.7; color:var(--zb-muted); }
+
+/* ---- story fragments: 3-column visual narrative ---- */
+.zb-story-section { background:var(--zb-earth); padding:100px 0; }
+.zb-story-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+}
+.zb-story-card {
+  text-align:center; padding:0 16px;
+}
+.zb-story-number {
+  font-family:'Cinzel',serif; font-size:4rem; color:var(--zb-terra); opacity:0.2;
+  line-height:1; margin-bottom:8px;
+}
+.zb-story-card h3 {
+  font-family:'Cinzel',serif; font-size:1.2rem; color:var(--zb-cream); margin-bottom:10px;
+}
+.zb-story-card p {
+  font-size:0.92rem; line-height:1.75; color:var(--zb-muted);
+}
+
+/* ---- hub cards: tavern-menu style ---- */
+.zb-hub-section { background:var(--zb-surface); padding:100px 0; }
+.zb-menu {
+  max-width:720px; margin:0 auto; padding:0 24px; display:flex; flex-direction:column; gap:16px;
+}
+.zb-menu-card {
+  display:flex; align-items:center; gap:20px; padding:24px 28px;
+  background:#2a1f12; border-radius:3px; text-decoration:none; color:inherit;
+  border-bottom:2px solid transparent; transition:border-color 0.3s,background 0.3s,transform 0.3s;
+}
+.zb-menu-card:nth-child(1){--mb:var(--zb-terra)}
+.zb-menu-card:nth-child(2){--mb:var(--zb-wheat)}
+.zb-menu-card:hover { border-bottom-color:var(--mb); background:#302418; transform:translateY(-3px); }
+.zb-menu-card-icon { font-size:2.5rem; min-width:60px; text-align:center; }
+.zb-menu-card-body { flex:1; }
+.zb-menu-card-body h3 { font-family:'Cinzel',serif; font-size:1.1rem; color:var(--zb-cream); margin-bottom:2px; }
+.zb-menu-card-body p { font-size:0.85rem; color:var(--zb-muted); line-height:1.5; }
+.zb-menu-card-arrow { font-size:1.5rem; color:var(--zb-muted); }
+.zb-menu-card:hover .zb-menu-card-arrow { color:var(--mb); }
+
+/* ---- related ---- */
+.zb-related-section { background:var(--zb-earth); padding:80px 0; }
+
+/* ---- inscriptions ---- */
+.zb-inscriptions-section { background:var(--zb-surface); padding:80px 0; }
+
+/* ---- responsive ---- */
+@media (max-width:1024px) { .zb-traits-grid{grid-template-columns:repeat(2,1fr)} .zb-story-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:767px) {
+  .zb-traits-grid,.zb-story-grid{grid-template-columns:1fr}
+  .zb-hero-moon{width:280px;height:280px}
+  .zb-menu-card{flex-direction:column;text-align:center}
+  .zb-menu-card-arrow{display:none}
+}

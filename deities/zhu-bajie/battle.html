@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battle of Tongtian River — Zhu Bajie | Celestial Archive</title>
+  <meta name="description" content="The one battle where the pig was the hero — how Zhu Bajie's forgotten naval mastery saved the pilgrimage at Tongtian River.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://celestial-archive.com/deities/zhu-bajie/battle.html">
+  <meta property="og:title" content="Battle of Tongtian River — Zhu Bajie | Celestial Archive">
+  <meta property="og:description" content="How Zhu Bajie's forgotten naval mastery saved the pilgrimage.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://celestial-archive.com/deities/zhu-bajie/battle.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Battle of Tongtian River — Zhu Bajie | Celestial Archive">
+  <meta name="twitter:description" content="How Zhu Bajie's forgotten naval mastery saved the pilgrimage.">
+  <meta property="og:image" content="https://celestial-archive.com/images/zhu-bajie/zbj2.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
+  <meta property="og:image:alt" content="Zhu Bajie at Tongtian River — the water battle">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/zhu-bajie/zbj2.jpg">
+  <meta name="twitter:image:alt" content="Zhu Bajie at Tongtian River">
+  <link rel="stylesheet" href="../../css/global.css">
+  <style>
+    :root {
+      --earth: #1a1209;
+      --surf: #231a0e;
+      --terra: #c1440e;
+      --wheat: #d4a44a;
+      --cream: #f0dfc0;
+      --ember: #e8752a;
+      --mut: #9a8a70;
+      --dk-gold: #8b6914;
+    }
+    body { background: var(--earth); }
+
+    .zb-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 28px;
+      background: linear-gradient(180deg, rgba(26,18,9,0.95) 0%, rgba(26,18,9,0) 100%);
+      pointer-events: none;
+    }
+    .zb-nav a {
+      pointer-events: auto; color: var(--mut); text-decoration: none;
+      font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+      font-family: 'Cinzel', serif; transition: color 0.3s;
+    }
+    .zb-nav a:hover { color: var(--wheat); }
+
+    .pg-hero {
+      min-height: 55vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; background: var(--earth); position: relative; overflow: hidden;
+      padding: 120px 24px 50px;
+    }
+    .pg-hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(212,164,74,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at 30% 65%, rgba(193,68,14,0.05) 0%, transparent 45%);
+    }
+    .pg-hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .pg-hero-bg img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
+      opacity: 0.3;
+    }
+    .pg-hero-content { position: relative; z-index: 2; max-width: 680px; }
+    .pg-hero-kicker {
+      font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 6px;
+      color: var(--ember); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .pg-hero-title {
+      font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3.3rem);
+      font-weight: 700; color: var(--cream); margin-bottom: 14px;
+      text-shadow: 0 0 40px rgba(212,164,74,0.2);
+    }
+    .pg-hero-sub {
+      font-size: 1.05rem; color: var(--mut); line-height: 1.8;
+      max-width: 520px; margin: 0 auto;
+    }
+    .pg-hero-sub strong { color: var(--ember); }
+
+    /* Tavern tale chapters */
+    .tale-section { padding: 40px 0 80px; background: var(--earth); }
+    .chapters { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .ch {
+      display: grid; grid-template-columns: 100px 1fr; gap: 28px;
+      padding: 44px 0; border-bottom: 1px solid rgba(212,164,74,0.08);
+      align-items: start;
+    }
+    .ch:last-child { border-bottom: none; }
+    .ch-marker { text-align: right; }
+    .ch-num {
+      font-family: 'Cinzel', serif; font-size: 4.5rem; font-weight: 700;
+      color: var(--terra); opacity: 0.15; line-height: 0.8;
+    }
+    .ch-emoji { font-size: 1.5rem; margin-top: 4px; }
+    .ch-body h3 {
+      font-family: 'Cinzel', serif; font-size: 1.25rem; color: var(--cream);
+      margin-bottom: 4px;
+    }
+    .ch-tag {
+      display: inline-block; font-size: 0.7rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--ember); margin-bottom: 12px;
+    }
+    .ch-body p { font-size: 0.98rem; line-height: 1.85; color: var(--mut); }
+    .ch-body p::first-letter {
+      font-size: 2.8rem; float: left; line-height: 0.8;
+      padding-right: 8px; padding-top: 4px;
+      font-family: 'Cinzel', serif; color: var(--wheat);
+    }
+    .ch-body p strong { color: var(--ember); }
+    .ch-body img {
+      width: 100%; max-width: 400px; border-radius: 3px; margin: 14px 0;
+      opacity: 0.65; transition: opacity 0.3s;
+    }
+    .ch-body img:hover { opacity: 1; }
+
+    /* Field note callout — for Bajie's MVP moment */
+    .field-note {
+      margin-top: 16px; background: rgba(212,164,74,0.04);
+      border: 1px solid rgba(212,164,74,0.12); border-radius: 4px;
+      padding: 20px 24px; text-align: center;
+    }
+    .field-note-icon { font-size: 2rem; margin-bottom: 6px; }
+    .field-note h4 {
+      font-family: 'Cinzel', serif; color: var(--wheat); font-size: 0.9rem;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px;
+    }
+    .field-note p { font-size: 0.88rem; line-height: 1.7; color: var(--mut); }
+
+    @media(max-width: 767px) {
+      .ch { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; }
+      .ch-marker { text-align: left; }
+      .ch-num { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="zb-nav" aria-label="Navigation">
+    <a href="index.html">← Back to Zhu Bajie</a>
+    <a href="../../index.html">Celestial Archive</a>
+  </nav>
+
+  <section class="pg-hero" aria-label="Hero">
+    <div class="pg-hero-bg"><img src="../../images/zhu-bajie/zbj2.jpg" alt="" aria-hidden="true"></div>
+    <div class="pg-hero-content">
+      <p class="pg-hero-kicker">The Battle</p>
+      <h1 class="pg-hero-title">Battle of Tongtian River</h1>
+      <p class="pg-hero-sub"><strong>The one battle where the pig was the hero.</strong> Eight hundred li of impossible water. A monster that could freeze rivers with a spell. And only one pilgrim who could fight where Sun Wukong could not.</p>
+    </div>
+  </section>
+
+  <section class="tale-section" aria-label="The story of Tongtian River">
+    <h2 class="sr-only">The tale</h2>
+    <div class="chapters">
+
+      <div class="ch fade-in">
+        <div class="ch-marker"><div class="ch-num">I</div><div class="ch-emoji">🌊</div></div>
+        <div class="ch-body">
+          <span class="ch-tag">The Obstacle</span>
+          <h3>A River That Swallowed Horizons</h3>
+          <p>The Tongtian River — "Heaven-Reaching River" — was no ordinary crossing. It stretched <strong style="color:var(--ember)">eight hundred li wide</strong> (roughly 400 kilometers), its currents so wild that even birds dared not cross its full width. When the pilgrims arrived at its banks, even Sun Wukong — who could somersault across the cosmos — understood that water was not his element. The Monkey King's combat strength diminished by half beneath the surface. Tang Sanzang could only pray. Sha Wujing could fight in water but lacked Bajie's commander instincts. And so, for the first time on the pilgrimage, <strong style="color:var(--ember)">the fate of the journey fell to Zhu Bajie</strong> — the fallen marshal who had once commanded 80,000 sailors of the Heavenly River.</p>
+          <img src="../../images/zhu-bajie/zbj1.jpg" alt="Zhu Bajie at the edge of a vast river, moon rising" loading="lazy">
+        </div>
+      </div>
+
+      <div class="ch fade-in">
+        <div class="ch-marker"><div class="ch-num">II</div><div class="ch-emoji">🐟</div></div>
+        <div class="ch-body">
+          <span class="ch-tag">The Monster</span>
+          <h3>The Inspiration King Demands Sacrifice</h3>
+          <p>The pilgrims discovered a nearby village in mourning. Each year, the river monster — calling itself the <strong style="color:var(--ember)">Inspiration King (灵感大王)</strong> — demanded a boy and a girl as offerings. In return, he would keep the waters calm. This year, it was the village headman's own children. Sun Wukong, ever the trickster, proposed a plan: he would transform into the boy, and Zhu Bajie would transform into the girl. They would be presented at the monster's temple. Bajie — never enthusiastic about any plan that involved danger — grumbled mightily about this assignment. But when the night came, he played his part. His disguise was so convincing that when the monster arrived to claim his "prize," it was Bajie's rake that greeted him instead.</p>
+          <img src="../../images/zhu-bajie/zbj5.jpg" alt="The river monster's temple, dark waters beneath a cold moon" loading="lazy">
+        </div>
+      </div>
+
+      <div class="ch fade-in">
+        <div class="ch-marker"><div class="ch-num">III</div><div class="ch-emoji">❄️</div></div>
+        <div class="ch-body">
+          <span class="ch-tag">The Trap</span>
+          <h3>Summer Turns to Ice</h3>
+          <p>Enraged by the ambush, the Inspiration King retreated to his underwater lair and devised a cruel revenge. He called upon a spell that <strong style="color:var(--ember)">froze the entire Tongtian River solid</strong> in the middle of summer. Snow fell. The air turned bitter. The pilgrims, trapped on the wrong side of the river with no food and no way forward, watched as the impossible happened. Then Tang Sanzang, in his infinite naivety, saw the frozen surface and believed it was divine providence — a path across. Against Bajie's protests, the monk stepped onto the ice. The moment he reached the center of the river, the ice shattered. Tang Sanzang plunged into the freezing water, and the Inspiration King seized him, dragging him to the bottom of the river palace. The pilgrimage had lost its heart.</p>
+        </div>
+      </div>
+
+      <div class="ch fade-in">
+        <div class="ch-marker"><div class="ch-num">IV</div><div class="ch-emoji">🔱</div></div>
+        <div class="ch-body">
+          <span class="ch-tag">The Marshal Returns</span>
+          <h3>Underwater — Where Bajie Rules</h3>
+          <p>Sun Wukong could not fight underwater. He could hold his breath, cast water-repelling charms, and swing his staff — but every movement was sluggish, every strike at half-strength. He looked at Zhu Bajie. And Zhu Bajie, for the first time since his banishment, <strong style="color:var(--ember)">remembered who he was</strong>. Taking Sha Wujing with him, the former Marshal Tianpeng dove into the river and transformed the water into his battlefield. Together, Bajie and Sha Wujing fought the Inspiration King <strong style="color:var(--ember)">for two full hours</strong> underwater — a marathon of aquatic combat. The nine-toothed rake, forged by Laozi himself for a naval commander, was in its element. Bajie attacked with precision, fury, and the muscle memory of thousands of years commanding celestial sailors. He drove the monster back. He would have beaten the creature outright — but the Inspiration King barricaded himself in the deep palace and refused to emerge.</p>
+          <div class="field-note">
+            <div class="field-note-icon">⭐</div>
+            <h4>Bajie's Finest Hour</h4>
+            <p>For one battle, Zhu Bajie was not the comic relief. He was not the coward hiding behind Sun Wukong. He was the commander who had once sailed the Milky Way — and in the water, even the Monkey King deferred to him.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ch fade-in">
+        <div class="ch-marker"><div class="ch-num">V</div><div class="ch-emoji">🪷</div></div>
+        <div class="ch-body">
+          <span class="ch-tag">The Revelation</span>
+          <h3>Guanyin's Goldfish — The Cosmic Joke</h3>
+          <p>With the monster sealed in his underwater palace, Sun Wukong went to seek help. He found <strong style="color:var(--ember)">Guanyin</strong>, the Goddess of Mercy, who listened to his report with an expression of faint embarrassment. She walked with him to the river's edge, carrying nothing but a bamboo basket woven with lotus flowers. She lowered the basket into the water and spoke a single verse. Moments later, a <strong style="color:var(--ember)">goldfish</strong> — shimmering and magnificent — leaped into her basket. The Inspiration King, the terror of Tongtian River, the monster who froze rivers and demanded children's lives, was Guanyin's escaped pet goldfish. It had snuck away from her lotus pond, found the river, and set itself up as a minor god. The battle that nearly ended the pilgrimage — the battle that saw Zhu Bajie reclaim his lost glory — was caused by a <strong style="color:var(--ember)">fish from a goddess's garden pond</strong>. Guanyin carried it away in her basket. The ice melted. The river returned to summer. And the pilgrims crossed to the far shore — with Bajie walking a little taller than before.</p>
+          <img src="../../images/zhu-bajie/zbj4.jpg" alt="A divine figure beside a vast body of water — the revelation" loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">Celestial Archive</div>
+          <p class="footer-desc">Exploring the myths, legends, and divine beings of Eastern mythology — one story at a time.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Navigate</div>
+          <nav class="footer-nav">
+            <a href="index.html">Zhu Bajie</a>
+            <a href="origins.html">Fall from Heaven</a>
+            <a href="journey.html">Journey &amp; Folk Image</a>
+          </nav>
+          <div class="footer-heading" style="margin-top:var(--space-md)">More Deities</div>
+          <nav class="footer-nav" data-footer="deities"></nav>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Follow</div>
+          <div class="social-icons">
+            <span class="social-icon" aria-label="Twitter">T</span>
+            <span class="social-icon" aria-label="YouTube">Y</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <nav class="footer-nav">
+            <a href="../../about.html">About Us</a>
+            <a href="../../contact.html">Contact Us</a>
+            <a href="../../privacy-policy.html">Privacy Policy</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"Article",
+    "headline":"Battle of Tongtian River — Zhu Bajie",
+    "description":"The one battle where the pig was the hero — how Zhu Bajie's forgotten naval mastery saved the pilgrimage.",
+    "author":{"@type":"Organization","name":"Celestial Archive"},
+    "publisher":{"@type":"Organization","name":"Celestial Archive","url":"https://celestial-archive.com"},
+    "url":"https://celestial-archive.com/deities/zhu-bajie/battle.html",
+    "datePublished":"2026-05-12","inLanguage":"en",
+    "mainEntityOfPage":"https://celestial-archive.com/deities/zhu-bajie/battle.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Celestial Archive","item":"https://celestial-archive.com/"},
+      {"@type":"ListItem","position":2,"name":"Zhu Bajie","item":"https://celestial-archive.com/deities/zhu-bajie/"},
+      {"@type":"ListItem","position":3,"name":"Battle of Tongtian River","item":"https://celestial-archive.com/deities/zhu-bajie/battle.html"}
+    ]
+  }
+  </script>
+  <script src="../../js/deities.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/config.js"></script>
+  <script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
+</body>
+</html>
