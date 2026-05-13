@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /deepseek_html_20260512_144b76.html
+
+Sitemap: https://celestial-archive.com/sitemap.xml

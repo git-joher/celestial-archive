@@ -71,7 +71,7 @@
 }
 .bd-hero-bg-img img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
-  opacity: 0.18;
+  opacity: 0.65;
   mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 70%);
 }
