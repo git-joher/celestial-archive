@@ -1,0 +1,11 @@
+{
+  "name": "Celestial Archive",
+  "short_name": "Celestial Archive",
+  "description": "Exploring the myths, legends, and divine beings of Eastern mythology",
+  "start_url": "/",
+  "display": "browser",
+  "theme_color": "#1a1410",
+  "background_color": "#1a1410",
+  "lang": "en",
+  "categories": ["education", "culture", "reference"]
+}

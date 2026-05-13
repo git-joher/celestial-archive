@@ -247,8 +247,7 @@ img.mural-filter,
   inset: 0;
   background-size: cover;
   background-position: center 30%;
-  opacity: 0.35;
-  filter: var(--filter-mural);
+  opacity: 0.7;
 }
 .page-hero-overlay {
   position: absolute;
