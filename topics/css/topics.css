@@ -1,0 +1,245 @@
+/* ============================================================
+   Topics — Long-form SEO Articles
+   Shared styles for gateway traffic pages.
+   Palette: warm parchment + dark accent (Dunhuang heritage)
+   ============================================================ */
+
+:root {
+  --tp-ink: #1a1814;
+  --tp-paper: #f1ebe0;
+  --tp-accent: #7a5c0f;
+  --tp-accent-light: #b8932c;
+  --tp-border: #d9cebc;
+  --tp-muted: #5c5245;
+}
+
+body { background: var(--tp-paper); }
+
+/* ---- Navigation ---- */
+.tp-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: var(--space-sm) var(--space-lg);
+  background: rgba(241,235,224,0.94); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--tp-border);
+}
+.tp-nav a {
+  font-family: var(--font-display);
+  font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--tp-muted); text-decoration: none;
+}
+.tp-nav a:hover { color: var(--tp-accent); }
+
+/* ---- Article Hero ---- */
+.tp-hero {
+  padding: 120px 0 var(--space-xxl);
+  text-align: center;
+  background: linear-gradient(180deg, #e6dccb 0%, var(--tp-paper) 100%);
+}
+.tp-hero-kicker {
+  font-family: var(--font-display);
+  font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--tp-accent); margin-bottom: var(--space-sm);
+}
+.tp-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--tp-ink); max-width: 720px; margin: 0 auto var(--space-sm);
+  line-height: 1.25;
+}
+.tp-hero-sub {
+  font-family: var(--font-body);
+  font-size: 1.1rem; color: var(--tp-muted); font-style: italic;
+  max-width: 560px; margin: 0 auto;
+}
+
+/* ---- Article body ---- */
+.tp-body {
+  max-width: 760px; margin: 0 auto; padding: 0 var(--space-md) var(--space-xxl);
+}
+.tp-body h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem; color: var(--tp-ink);
+  margin: var(--space-xl) 0 var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--tp-border);
+}
+.tp-body h2:first-of-type { border-top: none; padding-top: 0; }
+.tp-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem; color: var(--tp-ink); margin: var(--space-md) 0 var(--space-xs);
+}
+.tp-body p {
+  font-family: var(--font-body);
+  font-size: 1.05rem; line-height: 1.9; color: #3a3630;
+  margin-bottom: var(--space-md);
+}
+.tp-body p strong { color: var(--tp-accent); }
+.tp-body a { color: var(--tp-accent); text-decoration: none; border-bottom: 1px solid rgba(122,92,15,0.25); }
+.tp-body a:hover { border-color: var(--tp-accent); }
+.tp-body ul, .tp-body ol {
+  font-family: var(--font-body); font-size: 1.05rem; line-height: 1.9;
+  color: #3a3630; margin: 0 0 var(--space-md) var(--space-md);
+  padding: 0;
+}
+.tp-body li { margin-bottom: var(--space-xs); }
+
+/* ---- TL;DR featured snippet box ---- */
+.tp-tldr {
+  background: #f8f4ec; border: 2px solid var(--tp-accent-light);
+  border-radius: var(--radius-sm); padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+.tp-tldr-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--tp-accent); margin-bottom: var(--space-xs);
+}
+.tp-tldr p {
+  font-size: 1.08rem; line-height: 1.8; color: var(--tp-ink); margin: 0;
+}
+
+/* ---- Table of Contents ---- */
+.tp-toc {
+  background: #f8f4ec; border: 1px solid var(--tp-border);
+  border-radius: var(--radius-sm); padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+.tp-toc-label {
+  font-family: var(--font-display);
+  font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--tp-muted); margin-bottom: var(--space-sm);
+}
+.tp-toc ol {
+  margin: 0; padding-left: 1.2em;
+  font-family: var(--font-body); font-size: 1rem; line-height: 2;
+}
+.tp-toc a { color: var(--tp-accent); text-decoration: none; }
+.tp-toc a:hover { text-decoration: underline; }
+
+/* ---- Character card (embedded from deity hub) ---- */
+.tp-char-card {
+  display: flex; gap: var(--space-md); align-items: center;
+  background: #f8f4ec; border: 1px solid var(--tp-border);
+  border-radius: var(--radius-sm); padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  text-decoration: none; transition: border-color 0.3s, box-shadow 0.3s;
+}
+.tp-char-card:hover { border-color: var(--tp-accent-light); box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+.tp-char-avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1.4rem; color: #fff;
+  flex-shrink: 0;
+}
+.tp-char-info { flex: 1; }
+.tp-char-name {
+  font-family: var(--font-display); font-size: 1.05rem; color: var(--tp-ink);
+}
+.tp-char-title {
+  font-size: 0.85rem; color: var(--tp-muted); font-style: italic;
+}
+.tp-char-arrow {
+  font-size: 1.2rem; color: var(--tp-accent-light); flex-shrink: 0;
+}
+
+/* ---- Info box ---- */
+.tp-info-box {
+  background: rgba(184,147,44,0.07);
+  border-left: 3px solid var(--tp-accent-light);
+  padding: var(--space-md); margin: var(--space-md) 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.tp-info-box p { margin: 0; font-size: 1rem; }
+
+/* ---- FAQ section ---- */
+.tp-faq {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 2px solid var(--tp-border);
+}
+.tp-faq h2 {
+  border-top: none; padding-top: 0;
+}
+.tp-faq-item {
+  margin-bottom: var(--space-md);
+}
+.tp-faq-q {
+  font-family: var(--font-display);
+  font-size: 1.05rem; color: var(--tp-ink); margin-bottom: var(--space-xs);
+  cursor: default;
+}
+.tp-faq-a {
+  font-size: 1rem; color: var(--tp-muted); line-height: 1.8;
+}
+
+/* ---- External links ---- */
+.tp-external {
+  margin-top: var(--space-xl); padding-top: var(--space-md);
+  border-top: 1px solid var(--tp-border);
+}
+.tp-external a {
+  display: inline-block; margin-right: var(--space-md);
+  font-family: var(--font-display); font-size: 0.82rem;
+  color: var(--tp-accent); text-decoration: none;
+  border-bottom: 1px dashed rgba(122,92,15,0.3);
+}
+.tp-external a::after { content: ' ↗'; font-size: 0.7rem; opacity: 0.5; }
+.tp-external a:hover { border-bottom-color: var(--tp-accent); }
+
+/* ---- CTA ---- */
+.tp-cta {
+  text-align: center; padding: var(--space-xxl) var(--space-md);
+  background: #e6dccb;
+}
+.tp-cta p { font-size: 1.1rem; color: var(--tp-muted); margin-bottom: var(--space-md); }
+.tp-cta a {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
+  color: #fff; background: var(--tp-accent);
+  padding: 14px 36px; border-radius: var(--radius-sm); text-decoration: none;
+  transition: background 0.3s;
+}
+.tp-cta a:hover { background: #8e6b11; }
+
+/* ---- Comparison Tables ---- */
+.tp-table-wrap {
+  overflow-x: auto;
+  margin: var(--space-md) 0 var(--space-lg);
+}
+.tp-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: #f8f4ec;
+  border: 1px solid var(--tp-border);
+  border-radius: var(--radius-sm);
+}
+.tp-table-wrap th {
+  font-family: var(--font-display);
+  font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase;
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  background: #e6dccb;
+  border-bottom: 2px solid var(--tp-accent-light);
+  color: var(--tp-accent);
+}
+.tp-table-wrap td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--tp-border);
+  color: #3a3630;
+  line-height: 1.7;
+}
+.tp-table-wrap tr:last-child td { border-bottom: none; }
+.tp-table-wrap tr:hover td { background: rgba(184,147,44,0.07); }
+
+/* ---- Mobile ---- */
+@media (max-width: 767px) {
+  .tp-nav { padding: var(--space-xs) var(--space-sm); }
+  .tp-hero { padding: 100px 0 var(--space-xl); }
+  .tp-body h2 { font-size: 1.25rem; }
+  .tp-body p { font-size: 1rem; }
+  .tp-char-card { flex-direction: column; text-align: center; }
+}
