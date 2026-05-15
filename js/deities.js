@@ -53,5 +53,25 @@ var CELESTIAL_DEITIES = [
     status: 'live',
     avatarBg: '#7ec8a0',
     avatarInitial: 'G'
+  },
+  {
+    slug: 'tang-sanzang',
+    name: 'Tang Sanzang',
+    nameZh: '唐三藏',
+    title: 'The Pilgrim Monk',
+    description: 'The heart of the journey. A mortal monk carrying heaven\'s mandate through a world of demons — his faith is the pilgrimage\'s true compass.',
+    status: 'live',
+    avatarBg: '#4a6fa5',
+    avatarInitial: 'T'
+  },
+  {
+    slug: 'erlang-shen',
+    name: 'Erlang Shen',
+    nameZh: '二郎神',
+    title: 'The Equal Rival',
+    description: 'Heaven\'s greatest warrior. The only being who ever fought the Monkey King to a standstill — with a third eye that sees through all deception.',
+    status: 'live',
+    avatarBg: '#5a7a8c',
+    avatarInitial: 'E'
   }
 ];

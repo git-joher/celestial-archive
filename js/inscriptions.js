@@ -56,6 +56,20 @@
       { zh: '菩提本无树，明镜亦非台。\n愿你心如明镜，照见真实。', en: 'No tree of wisdom, no stand for the mirror — may your heart be a clear mirror reflecting truth.' },
       { zh: '大千世界，不过一念。\n愿你妄念不起，真心常存。', en: 'The cosmos is but a single thought — may delusions fade and your true mind shine forever.' }
     ],
+    'tang-sanzang': [
+      { zh: '心诚则灵，路遥知力。\n愿你信念坚定，终达彼岸。', en: 'A sincere heart moves heaven — may your faith be your compass and every step bring you closer to the far shore.' },
+      { zh: '九九八十一难皆为空，\n愿你逢凶化吉，平安喜乐。', en: 'Eighty-one trials, each a door to grace — may every hardship you face transform into blessing.' },
+      { zh: '若不至天竺，终不东归一步。\n愿你矢志不渝，所愿皆成。', en: '"Not one step east until I reach the Western Heaven" — may your resolve never waver and your destination find you.' },
+      { zh: '出家人不打诳语，慈悲为怀。\n愿你心怀善意，所遇皆温柔。', en: 'A monk speaks only truth, a heart holds only compassion — may kindness be your language and gentleness your reward.' },
+      { zh: '佛光普照，众生皆渡。\n愿你身心清净，福慧无边。', en: 'The Buddha\'s light shines on all — may your spirit be clear as morning and your wisdom boundless as the sutras.' }
+    ],
+    'erlang-shen': [
+      { zh: '天眼所及，真假立辨。\n愿你明辨是非，不受蒙蔽。', en: 'The Heavenly Eye sees through all falsehood — may you discern truth from deception and walk in clarity.' },
+      { zh: '三尖两刃刀镇守四方，\n愿你勇不可挡，所向披靡。', en: 'The three-pointed spear guards all directions — may your courage never falter and your strength never wane.' },
+      { zh: '七十二变化，应变无穷。\n愿你随机应变，万难皆克。', en: 'Seventy-two transformations, infinite resource — may you adapt to every challenge and overcome every obstacle.' },
+      { zh: '灌江口上，自在为王。\n愿你心无拘束，活出真我。', en: 'At Guanjiangkou, he answers to no one — may you live free from constraint and true to your own nature.' },
+      { zh: '啸天犬忠诚不二，\n愿你良友相伴，永不孤单。', en: 'The Sky-Howling Hound, loyal beyond measure — may true companions walk beside you and loyalty never leave your side.' }
+    ],
     '_default': [
       { zh: '金石之言已达天听，\n愿你心想事成，福运绵长。', en: 'Your golden words have reached the celestial realm — may every wish find its way home, and fortune flow endlessly.' },
       { zh: '祥云已至，紫气东来，\n愿你万事如意，好运连连。', en: 'Auspicious clouds gather, purple mist rises — may all things go your way, and luck follow every step.' },

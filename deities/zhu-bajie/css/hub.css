@@ -77,14 +77,6 @@
 }
 
 .zb-hero-content { position:relative; z-index:2; max-width:700px; padding:0 24px; }
-.zb-hero-sigil {
-  font-size:5rem; margin-bottom:10px; display:inline-block;
-  animation:zb-waddle 4s ease-in-out infinite;
-}
-@keyframes zb-waddle {
-  0%,100%{transform:rotate(0)}
-  25%{transform:rotate(-5deg)}
-  75%{transform:rotate(5deg)}
 }
 .zb-hero-kicker {
   font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:6px;
