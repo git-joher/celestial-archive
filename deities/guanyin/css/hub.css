@@ -49,64 +49,6 @@
   50% { box-shadow: 0 0 100px rgba(212,216,224,0.14), 0 0 200px rgba(212,216,224,0.06); }
 }
 
-/* Water ripple effect */
-.gy-ripples {
-  position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
-  z-index: 0; pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 20px,
-      rgba(212,216,224,0.02) 20px,
-      rgba(212,216,224,0.02) 21px
-    );
-  mask-image: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
-}
-
-/* Bamboo silhouettes */
-.gy-bamboo-left, .gy-bamboo-right {
-  position: absolute; bottom: 0; z-index: 0; pointer-events: none;
-  width: 60px; height: 40%;
-  opacity: 0.06;
-}
-.gy-bamboo-left {
-  left: 8%;
-  background: linear-gradient(to top, var(--gy-jade) 0%, transparent 95%);
-  mask-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 14px,
-    rgba(0,0,0,0.6) 14px,
-    rgba(0,0,0,0.6) 16px
-  );
-  -webkit-mask-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 14px,
-    rgba(0,0,0,0.6) 14px,
-    rgba(0,0,0,0.6) 16px
-  );
-}
-.gy-bamboo-right {
-  right: 8%;
-  background: linear-gradient(to top, var(--gy-jade) 0%, transparent 95%);
-  mask-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 18px,
-    rgba(0,0,0,0.5) 18px,
-    rgba(0,0,0,0.5) 20px
-  );
-  -webkit-mask-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 18px,
-    rgba(0,0,0,0.5) 18px,
-    rgba(0,0,0,0.5) 20px
-  );
-}
 
 .gy-hero-bg-img {
   position: absolute; inset: 0; z-index: 0;
@@ -121,7 +63,6 @@
 .gy-hero-content {
   position: relative; z-index: 2; max-width: 600px;
 }
-.gy-hero-sigil { font-size: 2.5rem; margin-bottom: 14px; opacity: 0.85; }
 .gy-hero-kicker {
   font-family: 'Cinzel', serif;
   font-size: 0.75rem; letter-spacing: 8px; text-transform: uppercase;

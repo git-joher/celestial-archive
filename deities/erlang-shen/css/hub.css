@@ -1,0 +1,205 @@
+/* ============================================================
+   Erlang Shen Hub — "Celestial General"
+   Cool silver / steel / jade-green palette.
+   Noble, disciplined, sharp geometry. Military precision.
+   ============================================================ */
+
+:root {
+  --es-steel: #4a5568;
+  --es-silver: #a0aec0;
+  --es-jade: #5a8a7a;
+  --es-onyx: #1a1f2b;
+  --es-gold-muted: #b8a06e;
+  --es-cream: #f0ede8;
+  --es-mist: #8899aa;
+}
+
+/* ---- Navigation ---- */
+.es-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-lg);
+  background: rgba(26,31,43,0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,160,110,0.15);
+}
+.es-nav a {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--es-silver);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.es-nav a:hover { color: var(--es-gold-muted); }
+
+/* ---- Hero ---- */
+.es-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(170deg, #0f1419 0%, #1a1f2b 35%, #222b3a 65%, #1a1f2b 100%);
+  overflow: hidden;
+}
+.es-hero-bg-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.es-hero-bg-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+  filter: brightness(0.7) saturate(0.8);
+}
+.es-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(15,20,25,0.6) 100%);
+  pointer-events: none;
+}
+.es-hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 660px;
+  padding: var(--space-lg);
+}
+.es-hero-kicker {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--es-jade);
+  margin-bottom: var(--space-xs);
+}
+.es-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  color: var(--es-silver);
+  text-shadow: 0 0 30px rgba(160,174,192,0.15);
+  margin-bottom: var(--space-xs);
+}
+.es-hero-chinese {
+  font-family: var(--font-chinese-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: rgba(160,174,192,0.28);
+  margin-bottom: var(--space-sm);
+}
+.es-hero-divider {
+  width: 80px; height: 1px;
+  background: var(--es-jade);
+  margin: var(--space-md) auto;
+  opacity: 0.5;
+}
+.es-hero-sub {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--es-mist);
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.es-hero-stat {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--es-gold-muted);
+  border: 1px solid rgba(184,160,110,0.2);
+  padding: 12px 24px;
+  margin-top: var(--space-md);
+}
+
+/* ---- Scroll ---- */
+.es-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.es-scroll-arrow { display: block; width: 20px; height: 20px; border-right: 1px solid rgba(160,174,192,0.3); border-bottom: 1px solid rgba(160,174,192,0.3); transform: rotate(45deg); animation: es-scroll-bob 2s ease-in-out infinite; }
+@keyframes es-scroll-bob { 0%, 100% { transform: rotate(45deg) translate(0,0); opacity: 0.3; } 50% { transform: rotate(45deg) translate(5px,5px); opacity: 0.7; } }
+
+/* ---- Titles Grid ---- */
+.es-titles {
+  padding: var(--space-xxl) 0;
+  background: var(--es-cream);
+}
+.es-titles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  max-width: 960px; margin: 0 auto;
+}
+.es-title-card {
+  text-align: center;
+  padding: var(--space-md);
+  background: #fff;
+  border: 1px solid rgba(74,85,104,0.06);
+  border-radius: var(--radius-sm);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.es-title-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(26,31,43,0.06); }
+.es-title-icon { font-size: 2rem; margin-bottom: var(--space-xs); }
+.es-title-label { font-family: var(--font-display); font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--es-mist); display: block; margin-bottom: 4px; }
+.es-title-value { font-family: var(--font-chinese-display); font-size: 1rem; color: var(--es-steel); }
+
+/* ---- Chronicle ---- */
+.es-chronicle {
+  padding: var(--space-xxl) 0;
+  background: #f7f5f2;
+}
+.es-chapter {
+  max-width: 680px;
+  margin: 0 auto var(--space-xl);
+  padding: var(--space-lg);
+  background: #fff;
+  border-left: 3px solid var(--es-jade);
+}
+.es-chapter:last-child { margin-bottom: 0; }
+.es-chapter-num { font-family: var(--font-display); font-size: 2.5rem; color: rgba(90,138,122,0.12); float: left; line-height: 1; margin-right: var(--space-md); }
+.es-chapter-label { font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--es-jade); margin-bottom: 4px; }
+.es-chapter-title { font-family: var(--font-display); font-size: 1.2rem; color: var(--es-onyx); margin-bottom: var(--space-sm); }
+.es-chapter-body { font-family: var(--font-body); font-size: 1rem; color: var(--text-secondary); line-height: 1.8; }
+.es-chapter-body strong { color: var(--es-steel); }
+
+/* ---- Hub ---- */
+.es-hub {
+  padding: var(--space-xxl) 0;
+  background: var(--es-cream);
+}
+.es-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  max-width: 960px; margin: 0 auto;
+}
+.es-hub-card {
+  display: block; text-decoration: none;
+  background: #fff;
+  border: 1px solid rgba(74,85,104,0.06);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.es-hub-card:hover { border-color: var(--es-jade); box-shadow: 0 4px 20px rgba(26,31,43,0.05); }
+.es-hub-card-icon { font-size: 2.4rem; margin-bottom: var(--space-sm); }
+.es-hub-card-title { font-family: var(--font-display); font-size: 1.05rem; color: var(--es-onyx); margin-bottom: var(--space-xs); }
+.es-hub-card-desc { font-family: var(--font-body); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* ---- Mobile ---- */
+@media (max-width: 767px) {
+  .es-titles-grid { grid-template-columns: repeat(2, 1fr); }
+  .es-hub-grid { grid-template-columns: 1fr; }
+  .es-nav { padding: var(--space-xs) var(--space-sm); }
+  .es-chapter-num { float: none; display: block; margin-bottom: var(--space-sm); }
+}

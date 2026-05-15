@@ -33,13 +33,10 @@
 
   <!-- Hero -->
   <section class="bd-hero" aria-label="Hero">
-    <div class="bd-mandala" aria-hidden="true"></div>
-    <div class="bd-petals" id="bd-petals" aria-hidden="true"></div>
     <div class="bd-hero-bg-img">
       <img src="../../images/buddha/rlfz1.jpg" alt="" aria-hidden="true">
     </div>
     <div class="bd-hero-content">
-      <div class="bd-hero-sigil">☸</div>
       <p class="bd-hero-kicker">The Enlightened One</p>
       <h1 class="bd-hero-title">The Buddha</h1>
       <p class="bd-hero-name-zh">如来佛</p>
@@ -208,21 +205,6 @@
     </div>
   </footer>
 
-  <script>
-  (function(){
-    var box = document.getElementById('bd-petals');
-    if(!box) return;
-    for(var i=0;i<25;i++){
-      var p=document.createElement('span');
-      p.className='bd-petal';
-      p.style.left=Math.random()*100+'%';
-      p.style.top=(70+Math.random()*30)+'%';
-      p.style.setProperty('--dur',(8+Math.random()*14)+'s');
-      p.style.animationDelay=Math.random()*12+'s';
-      box.appendChild(p);
-    }
-  })();
-  </script>
   <script src="../../js/deities.js"></script>
   <script src="../../js/main.js"></script>
   <script src="../../js/inscriptions.js"></script>

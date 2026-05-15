@@ -38,9 +38,7 @@
     <div class="nz-hero-bg-img">
       <img src="../../images/nezha/nz2.jpg" alt="" aria-hidden="true">
     </div>
-    <div class="nz-sparks" id="nz-sparks" aria-hidden="true"></div>
     <div class="nz-hero-content">
-      <div class="nz-hero-sigil">🔥</div>
       <p class="nz-hero-kicker">The Third Prince</p>
       <h1 class="nz-hero-title">Nezha</h1>
       <p class="nz-hero-name-zh">哪吒</p>
@@ -235,23 +233,6 @@
     </div>
   </footer>
 
-  <script>
-  // Fire spark particles
-  (function(){
-    var box=document.getElementById('nz-sparks');
-    if(!box)return;
-    for(var i=0;i<50;i++){
-      var s=document.createElement('span');
-      s.className='nz-spark';
-      s.style.left=Math.random()*100+'%';
-      s.style.top=(60+Math.random()*40)+'%';
-      s.style.setProperty('--dur',(2+Math.random()*5)+'s');
-      s.style.setProperty('--delay',Math.random()*6+'s');
-      s.style.setProperty('--drift',((Math.random()-0.5)*120)+'px');
-      box.appendChild(s);
-    }
-  })();
-  </script>
   <script src="../../js/deities.js"></script>
   <script src="../../js/main.js"></script>
   <script src="../../js/inscriptions.js"></script>

@@ -36,35 +36,6 @@
     radial-gradient(ellipse at 70% 50%, rgba(218,165,32,0.03) 0%, transparent 40%);
 }
 
-/* Mandala geometry background */
-.bd-mandala {
-  position: absolute; inset: 0; z-index: 0;
-  background:
-    radial-gradient(circle at 50% 30%, rgba(218,165,32,0.04) 0%, transparent 28%),
-    radial-gradient(circle at 50% 30%, rgba(218,165,32,0.03) 0%, transparent 18%),
-    radial-gradient(circle at 50% 30%, rgba(218,165,32,0.02) 0%, transparent 8%);
-  mask-image: radial-gradient(ellipse at 50% 30%, black 50%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 50%, transparent 85%);
-}
-
-/* Floating lotus petals — pure CSS */
-.bd-petals {
-  position: absolute; inset: 0; z-index: 0; pointer-events: none;
-}
-.bd-petal {
-  position: absolute;
-  width: 8px; height: 14px;
-  background: radial-gradient(ellipse at center, rgba(218,165,32,0.25) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: bd-petal-float 12s linear infinite;
-  opacity: 0;
-}
-@keyframes bd-petal-float {
-  0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-10vh) rotate(720deg) scale(1.5); opacity: 0; }
-}
 
 .bd-hero-bg-img {
   position: absolute; inset: 0; z-index: 0;
@@ -78,14 +49,6 @@
 
 .bd-hero-content {
   position: relative; z-index: 2; max-width: 600px;
-}
-.bd-hero-sigil {
-  font-size: 3rem; margin-bottom: 16px;
-  animation: bd-glow-pulse 3s ease-in-out infinite;
-}
-@keyframes bd-glow-pulse {
-  0%, 100% { text-shadow: 0 0 20px rgba(218,165,32,0.3); }
-  50% { text-shadow: 0 0 50px rgba(218,165,32,0.7), 0 0 80px rgba(218,165,32,0.3); }
 }
 .bd-hero-kicker {
   font-family: 'Cinzel', serif;

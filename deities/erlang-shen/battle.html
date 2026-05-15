@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Shapeshifting Duel — Erlang Shen | Celestial Archive</title>
+  <meta name="description" content="The legendary shapeshifting duel between Erlang Shen and Sun Wukong — hawk against fish, temple against wolf, two masters of seventy-two transformations in the greatest duel of Chinese mythology.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://celestial-archive.com/deities/erlang-shen/battle.html">
+  <meta property="og:title" content="The Shapeshifting Duel — Erlang Shen | Celestial Archive">
+  <meta property="og:description" content="Hawk against fish, temple against wolf — the greatest shapeshifting duel in mythology.">
+  <meta property="og:image" content="https://celestial-archive.com/images/erlang-shen/es2.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Erlang Shen vs Sun Wukong — the shapeshifting duel">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://celestial-archive.com/deities/erlang-shen/battle.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Shapeshifting Duel — Erlang Shen | Celestial Archive">
+  <meta name="twitter:description" content="The greatest shapeshifting duel in mythology.">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/erlang-shen/es2.jpg">
+  <meta name="twitter:image:alt" content="Erlang Shen vs Sun Wukong">
+  <link rel="stylesheet" href="../../css/global.css">
+  <style>
+    :root { --earth: #131820; --surf: #1a1f2b; --verm: #c44d34; --es-jade: #5a8a7a; --gold: #b8a06e; --cream: #e8dcc8; --silver: #a0aec0; --mist: #8899aa; }
+    body { background: var(--earth); }
+    .es-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: var(--space-sm) var(--space-lg); background: rgba(19,24,32,0.94); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(184,160,110,0.1); }
+    .es-nav a { font-family: var(--font-display); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--silver); text-decoration: none; }
+    .es-nav a:hover { color: var(--gold); }
+    .pg-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(170deg, #0c1118 0%, #131820 40%, #1a1f2b 70%, #0c1118 100%); overflow: hidden; }
+    .pg-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(184,160,110,0.04) 0%, transparent 70%); pointer-events: none; }
+    .pg-hero-inner { position: relative; z-index: 2; max-width: 640px; padding: var(--space-lg); }
+    .pg-hero-sigil { font-size: 3rem; margin-bottom: var(--space-sm); }
+    .pg-hero-kicker { font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 4px; text-transform: uppercase; color: var(--es-jade); margin-bottom: var(--space-xs); }
+    .pg-hero-title { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3rem); color: var(--silver); text-shadow: 0 0 30px rgba(160,174,192,0.1); margin-bottom: var(--space-sm); }
+    .pg-hero-sub { font-family: var(--font-body); font-size: 1.05rem; color: var(--mist); font-style: italic; line-height: 1.6; }
+    .pg-hero-vs { display: inline-block; font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(184,160,110,0.2); padding: 10px 20px; margin-top: var(--space-md); }
+
+    .duel { padding: var(--space-xxl) 0; }
+    .phase { display: grid; grid-template-columns: 100px 1fr; gap: 28px; max-width: 760px; margin: 0 auto var(--space-xl); padding-bottom: var(--space-xl); border-bottom: 1px solid rgba(196,77,52,0.08); }
+    .phase:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .phase-marker { text-align: right; }
+    .phase-num { font-family: var(--font-display); font-size: 4rem; color: rgba(196,77,52,0.12); line-height: 1; }
+    .phase-emoji { font-size: 1.8rem; margin-top: var(--space-xs); }
+    .phase-label { font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--verm); margin-bottom: 4px; }
+    .phase-title { font-family: var(--font-display); font-size: 1.3rem; color: var(--cream); margin-bottom: var(--space-sm); }
+    .phase-body { font-family: var(--font-body); font-size: 1rem; color: var(--mist); line-height: 1.8; }
+    .phase-body strong { color: var(--gold); }
+    .phase-stat { display: flex; gap: var(--space-sm); margin-top: var(--space-md); flex-wrap: wrap; }
+    .phase-stat-item { font-family: var(--font-display); font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: var(--es-jade); background: rgba(90,138,122,0.06); border: 1px solid rgba(90,138,122,0.12); padding: 5px 12px; border-radius: 20px; }
+
+    .epilogue { max-width: 760px; margin: var(--space-xxl) auto; padding: var(--space-lg); background: var(--surf); border: 1px solid rgba(184,160,110,0.1); border-radius: var(--radius-sm); text-align: center; }
+    .epilogue-title { font-family: var(--font-display); font-size: 1.15rem; color: var(--gold); margin-bottom: var(--space-sm); }
+    .epilogue-text { font-family: var(--font-body); font-size: 1.05rem; color: var(--mist); font-style: italic; line-height: 1.7; }
+    .external-links { max-width: 760px; margin: 0 auto var(--space-xxl); text-align: center; }
+    .external-links a { display: inline-block; font-family: var(--font-display); font-size: 0.8rem; color: var(--gold); text-decoration: none; border-bottom: 1px dashed rgba(184,160,110,0.35); margin: 0 var(--space-sm); transition: color 0.3s; }
+    .external-links a:hover { color: #dac98a; }
+    .external-links a::after { content: ' ↗'; font-size: 0.65rem; opacity: 0.5; }
+
+    @media (max-width: 767px) { .phase { grid-template-columns: 1fr; } .phase-marker { text-align: left; display: flex; align-items: center; gap: var(--space-sm); } .phase-num { font-size: 2.5rem; } }
+  </style>
+</head>
+<body>
+
+  <nav class="es-nav" aria-label="Navigation">
+    <a href="index.html">← Back to Erlang Shen</a>
+    <a href="../../index.html">Celestial Archive</a>
+  </nav>
+
+  <section class="pg-hero" aria-label="Hero" style="background-image:url('../../images/erlang-shen/es-battle.jpg');background-size:cover;background-position:center;">
+    <div style="position:absolute;inset:0;background:rgba(12,17,24,0.7);z-index:0;"></div>
+    <div class="pg-hero-inner">
+      <div class="pg-hero-sigil">⚡</div>
+      <p class="pg-hero-kicker">Havoc in Heaven</p>
+      <h1 class="pg-hero-title">The Shapeshifting Duel</h1>
+      <p class="pg-hero-sub">When 100,000 celestial soldiers failed, the Jade Emperor sent for his nephew. What followed was the one duel in all of Chinese mythology where neither combatant could win — and neither would lose.</p>
+      <div class="pg-hero-vs">Erlang Shen ⚔️ Sun Wukong</div>
+    </div>
+  </section>
+
+  <section class="duel section" aria-label="The duel chronicle">
+    <h2 class="sr-only">The Seven Phases of the Duel</h2>
+    <div class="container">
+
+      <div class="phase fade-in">
+        <div class="phase-marker"><div class="phase-num">I</div><div class="phase-emoji">📜</div></div>
+        <div>
+          <span class="phase-label">The Summons</span>
+          <h3 class="phase-title">Heaven Calls Its General</h3>
+          <p class="phase-body">Four Heavenly Kings. 100,000 celestial soldiers. Nezha. All had failed. The Monkey King had defeated every force heaven threw at him. The Jade Emperor, swallowing his pride, issued the summons no one expected: <strong>Send for Erlang Shen.</strong> The general received the decree at Guanjiangkou, where he lived apart from the celestial court by choice. He accepted not out of loyalty to his uncle — whose imprisonment of his mother still burned — but because a warrior answers when the realm is threatened. He gathered his <strong>1,200 grass-headed divine soldiers</strong>, leashed his Sky-Howling Hound, and descended.</p>
+        </div>
+      </div>
+
+      <div class="phase fade-in">
+        <div class="phase-marker"><div class="phase-num">II</div><div class="phase-emoji">🤝</div></div>
+        <div>
+          <span class="phase-label">The Proposal</span>
+          <h3 class="phase-title">A Duel Between Equals</h3>
+          <p class="phase-body">Erlang Shen did not arrive with overwhelming force. He made the other generals withdraw their armies and faced Wukong alone. <strong>"Let us duel,"</strong> he proposed, "one against one. No armies. No interference. If you win, I will withdraw. If I win, you will submit." Wukong, who had never met a worthy opponent, laughed and accepted. Neither knew that the Jade Emperor's real plan was unfolding above them — Laozi's Diamond Snare was already descending from the clouds. But for this moment, on this battlefield, <strong>two warriors faced each other as equals</strong> for the first and only time in the Monkey King's rebellion.</p>
+          <div class="phase-stat"><span class="phase-stat-item">One-on-One</span><span class="phase-stat-item">No Armies</span><span class="phase-stat-item">Honor Bound</span></div>
+        </div>
+      </div>
+
+      <div class="phase fade-in">
+        <div class="phase-marker"><div class="phase-num">III</div><div class="phase-emoji">🦅</div></div>
+        <div>
+          <span class="phase-label">The Hawk and the Fish</span>
+          <h3 class="phase-title">The First Transformation</h3>
+          <p class="phase-body">Spear met staff. Three hundred rounds. Neither gained an inch. Wukong, recognizing an equal, <strong>leapt into the air and became a sparrow.</strong> Erlang Shen transformed into a hawk and dove. Wukong became a cormorant diving into a river. Erlang Shen became a fish-hawk skimming the surface. Wukong became a fish darting through the current. Erlang Shen became a crane. <strong>Through hawk and finch, cormorant and fish-hawk, the chase rippled across the landscape</strong> — each form anticipated by the next, each transformation answered before it was complete.</p>
+          <div class="phase-stat"><span class="phase-stat-item">Sparrow → Hawk</span><span class="phase-stat-item">Cormorant → Fish-Hawk</span><span class="phase-stat-item">300+ Rounds</span></div>
+        </div>
+      </div>
+
+      <div class="phase fade-in">
+        <div class="phase-marker"><div class="phase-num">IV</div><div class="phase-emoji">🏛️</div></div>
+        <div>
+          <span class="phase-label">The Temple Trick</span>
+          <h3 class="phase-title">Wukong's Ambush</h3>
+          <p class="phase-body">Wukong rolled down a mountainside and transformed into <strong>a temple</strong> — mouth as the door, eyes as windows, tongue as a Buddha statue. But his tail, which could not be hidden, became a <strong>flagpole standing behind the temple.</strong> Erlang Shen's third eye saw the deception instantly: temples place flagpoles in front, never behind. "I see you, monkey," he said, raising his spear to strike. Wukong burst from the temple form, and before Erlang Shen's spear could land, the Monkey King had already become the general's <strong>exact double</strong> — and flew toward Guanjiangkou to wreak havoc in Erlang Shen's own domain.</p>
+          <div class="phase-stat"><span class="phase-stat-item">Temple Ruse</span><span class="phase-stat-item">Third Eye Sees Through</span><span class="phase-stat-item">Identity Theft</span></div>
+        </div>
+      </div>
+
+      <div class="phase fade-in">
+        <div class="phase-marker"><div class="phase-num">V</div><div class="phase-emoji">☁️</div></div>
+        <div>
+          <span class="phase-label">The Intervention</span>
+          <h3 class="phase-title">Laozi's Diamond Snare</h3>
+          <p class="phase-body">The celestial court had been watching. As the duel raged across heaven and earth, <strong>Laozi dropped the Diamond Snare</strong> — a weapon of pure cosmic essence — from the clouds. It struck Wukong in the head, staggering him. The Sky-Howling Hound lunged and bit into the Monkey King's leg. Wukong fell. <strong>Erlang Shen did not celebrate.</strong> He had not won. His uncle's court had intervened in what was meant to be a duel between equals. The general had come as a warrior; he was being used as a lure. He bound Wukong and delivered him to heaven — but the victory tasted of the Jade Emperor's politics, not a warrior's honor.</p>
+          <div class="phase-stat"><span class="phase-stat-item">Laozi Intervenes</span><span class="phase-stat-item">Diamond Snare</span><span class="phase-stat-item">Honor Tainted</span></div>
+        </div>
+      </div>
+
+      <div class="epilogue">
+        <h3 class="epilogue-title">The Tie That Wasn't</h3>
+        <p class="epilogue-text">"The duel ended with Wukong in chains — but everyone, including Erlang Shen himself, knew the truth. The general had not lost. The Monkey King had not been defeated. Heaven had cheated. They would meet again — not as enemies, but as two beings who alone understood what it meant to face a mirror that could fight back."</p>
+      </div>
+
+      <div class="external-links">
+        <a href="https://en.wikipedia.org/wiki/Erlang_Shen" target="_blank" rel="noopener">Erlang Shen on Wikipedia</a>
+        <a href="https://en.wikipedia.org/wiki/Journey_to_the_West" target="_blank" rel="noopener">Journey to the West on Wikipedia</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col"><div class="footer-brand">Celestial Archive</div><p class="footer-desc">Exploring the myths, legends, and divine beings of Eastern mythology — one story at a time.</p></div>
+        <div class="footer-col"><div class="footer-heading">Navigate</div><nav class="footer-nav"><a href="origins.html">Divine Lineage</a><a href="arsenal.html">Celestial Arsenal</a><a href="battle.html">Shapeshifting Duel</a></nav><div class="footer-heading" style="margin-top:var(--space-md)">More Deities</div><nav class="footer-nav" data-footer="deities"></nav></div>
+        <div class="footer-col"><div class="footer-heading">Follow</div><div class="social-icons"><span class="social-icon" aria-label="Twitter">T</span><span class="social-icon" aria-label="YouTube">Y</span></div></div>
+        <div class="footer-col"><div class="footer-heading">Company</div><nav class="footer-nav"><a href="../../about.html">About Us</a><a href="../../contact.html">Contact Us</a><a href="../../privacy-policy.html">Privacy Policy</a></nav></div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The Shapeshifting Duel — Erlang Shen","description":"The legendary shapeshifting duel between Erlang Shen and Sun Wukong — hawk against fish, temple against wolf, two masters of 72 transformations.","image":"https://celestial-archive.com/images/erlang-shen/es2.jpg","author":{"@type":"Organization","name":"Celestial Archive"},"publisher":{"@type":"Organization","name":"Celestial Archive","url":"https://celestial-archive.com"},"url":"https://celestial-archive.com/deities/erlang-shen/battle.html","datePublished":"2026-01-01","inLanguage":"en","mainEntityOfPage":"https://celestial-archive.com/deities/erlang-shen/battle.html"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Celestial Archive","item":"https://celestial-archive.com/"},{"@type":"ListItem","position":2,"name":"Erlang Shen","item":"https://celestial-archive.com/deities/erlang-shen/"},{"@type":"ListItem","position":3,"name":"The Shapeshifting Duel","item":"https://celestial-archive.com/deities/erlang-shen/battle.html"}]}</script>
+  <script src="../../js/deities.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/config.js"></script>
+<script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
+</body>
+</html>
