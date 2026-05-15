@@ -647,7 +647,7 @@ img.mural-filter,
    用于所有神祇 hub 页
    ============================================================ */
 .inscription-section {
-  padding: var(--space-xxl) 0;
+  padding: var(--space-xxl) 0 0;
   background: var(--bg-dark);
   border-top: 1px solid rgba(232,220,200,0.08);
 }
@@ -1019,4 +1019,49 @@ img.mural-filter,
   color: var(--text-secondary);
   font-style: italic;
   padding: var(--space-lg);
+}
+
+/* ============================================================
+   Dive Deeper — topic cross-links on deity pages
+   Full-width warm parchment band bridges content and footer
+   ============================================================ */
+.dive-deeper {
+  max-width: 100%;
+  margin: 0;
+  padding: 40px var(--space-md);
+  text-align: center;
+  background: linear-gradient(180deg, #e8dfcf 0%, #ddd2bd 100%);
+  border-top: 1px solid rgba(139, 105, 20, 0.12);
+  border-bottom: 1px solid rgba(139, 105, 20, 0.12);
+}
+.dive-deeper-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #8b6914;
+  margin-bottom: 16px;
+}
+.dive-deeper-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.dive-deeper-links a {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  color: #5c4a1e;
+  text-decoration: none;
+  padding: 9px 20px;
+  border: 1px solid rgba(139, 105, 20, 0.28);
+  border-radius: 20px;
+  transition: color 0.25s, border-color 0.25s, background 0.25s;
+  white-space: nowrap;
+}
+.dive-deeper-links a:hover {
+  color: #8b6914;
+  border-color: rgba(139, 105, 20, 0.55);
+  background: rgba(139, 105, 20, 0.07);
 }
