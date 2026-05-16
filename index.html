@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Celestial Archive — Eastern Mythology</title>
-  <meta name="description" content="Celestial Archive — explore Journey to the West, Chinese mythology, and the legendary gods, demons, and immortals of Eastern folklore. Sun Wukong, Nezha, Buddha, Guanyin, and more.">
+  <title>Chinese Mythology — Gods, Creatures & Legends | Celestial Archive</title>
+  <meta name="description" content="Chinese mythology is a rich system of gods, creatures, and legends spanning 5,000 years. Explore Chinese gods, mythological creatures, Journey to the West, dragons, and the complete celestial hierarchy.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://celestial-archive.com/">
   <!-- Open Graph -->
-  <meta property="og:title" content="Celestial Archive — Eastern Mythology">
-  <meta property="og:description" content="Celestial Archive — explore Journey to the West, Chinese mythology, and the legendary gods, demons, and immortals of Eastern folklore. Sun Wukong, Nezha, Buddha, Guanyin, and more.">
+  <meta property="og:title" content="Chinese Mythology — Gods, Creatures & Legends | Celestial Archive">
+  <meta property="og:description" content="Chinese mythology is a rich system of gods, creatures, and legends spanning 5,000 years. Explore Chinese gods, mythological creatures, Journey to the West, dragons, and the complete celestial hierarchy.">
   <meta property="og:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -20,8 +20,8 @@
   <meta property="og:site_name" content="Celestial Archive">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Celestial Archive — Eastern Mythology">
-  <meta name="twitter:description" content="Celestial Archive — explore Journey to the West, Chinese mythology, and the legendary gods, demons, and immortals of Eastern folklore. Sun Wukong, Nezha, Buddha, Guanyin, and more.">
+  <meta name="twitter:title" content="Chinese Mythology — Gods, Creatures & Legends | Celestial Archive">
+  <meta name="twitter:description" content="Chinese mythology is a rich system of gods, creatures, and legends spanning 5,000 years. Explore Chinese gods, mythological creatures, Journey to the West, and the complete celestial hierarchy.">
   <meta name="twitter:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
   <meta name="twitter:image:alt" content="Sun Wukong — 工笔重彩风格">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -48,7 +48,7 @@
     }
     .landing-content {
       position: relative; z-index: 2;
-      max-width: 640px;
+      max-width: 680px;
     }
     .landing-kicker {
       font-family: var(--font-display);
@@ -60,17 +60,18 @@
     }
     .landing-title {
       font-family: var(--font-chinese-display);
-      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
       color: #fff;
       margin-bottom: var(--space-sm);
       text-shadow: 0 0 40px rgba(184,160,110,0.25);
     }
     .landing-subtitle {
       font-family: var(--font-display);
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: var(--text-on-dark);
       margin-bottom: var(--space-lg);
       font-style: italic;
+      line-height: 1.6;
     }
     .landing-divider {
       width: 60px; height: 2px;
@@ -78,18 +79,26 @@
       margin: 0 auto var(--space-lg);
     }
     .landing-desc {
+      font-family: var(--font-body);
       font-size: 1.05rem;
-      line-height: 1.9;
-      color: var(--text-on-dark);
-      margin-bottom: var(--space-xl);
+      color: rgba(232,220,200,0.85);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto var(--space-lg);
+    }
+    .landing-cta-wrap {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
     .landing-cta {
       display: inline-block;
       font-family: var(--font-display);
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--bg-dark);
       background: var(--accent-gold);
-      padding: 14px 40px;
+      padding: 14px 36px;
       border-radius: var(--radius-sm);
       text-decoration: none;
       letter-spacing: 2px;
@@ -100,563 +109,145 @@
       background: #c9b380;
       box-shadow: var(--shadow-glow);
     }
-  </style>
-
-  <!-- ===== DeepSeek Three Realms Hierarchy CSS (scoped) ===== -->
-  <style>
-    .hierarchy-section {
-      --bg: #1a0f08;
-      --bg-card: #1e1210;
-      --text: #e8d5b0;
-      --text-light: #c4a87c;
-      --gold: #c9a050;
-      --gold-bright: #e0c470;
-      --gold-dark: #8b6914;
-      --jade: #7a9a7e;
-      --jade-light: #a3c4a8;
-      --red: #a33a2e;
-      --red-bright: #c94a3a;
-      --purple: #6b4e71;
-      --purple-light: #8c6d94;
-      --amber: #b8753a;
-      --ink: #2a1a10;
-      --border-subtle: #3a2820;
-      --shadow-gold: 0 0 20px rgba(201, 160, 80, 0.25);
-      --shadow-strong: 0 0 40px rgba(201, 160, 80, 0.4);
-      --radius: 10px;
-      --radius-sm: 6px;
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .hierarchy-section {
-      background: var(--bg);
-      background-image:
-        radial-gradient(ellipse at 50% 0%, rgba(180, 130, 60, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 30%, rgba(160, 100, 50, 0.04) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 60%, rgba(140, 90, 40, 0.05) 0%, transparent 50%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 Q35 20 30 28 Q25 20 30 5Z' fill='none' stroke='rgba(180,140,100,0.03)' stroke-width='1'/%3E%3C/svg%3E");
-      color: var(--text);
-      font-family: "Noto Serif SC", "STSong", "SimSun", "KaiTi", "楷体", "华文楷体", "Songti SC", "宋体", "Cinzel", "Times New Roman", serif;
-      line-height: 1.7;
-      padding: 40px 0 60px;
-      overflow-x: hidden;
-    }
-
-    .hierarchy-section .header {
-      text-align: center;
-      padding: 40px 20px 20px;
-      position: relative;
-      background: linear-gradient(180deg, rgba(30, 16, 8, 0.95) 0%, rgba(26, 15, 8, 0.98) 60%, transparent 100%);
-      z-index: 10;
-    }
-    .hierarchy-section .header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-      height: 4px;
-      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-bright), var(--gold), transparent);
-      border-radius: 0 0 50% 50%;
-    }
-    .hierarchy-section .header .seal {
+    .landing-cta-alt {
       display: inline-block;
-      border: 3px solid var(--red-bright);
-      color: var(--red-bright);
-      padding: 8px 24px;
-      font-size: 1.2rem;
-      letter-spacing: 6px;
-      font-weight: bold;
-      transform: rotate(-2deg);
-      margin-bottom: 16px;
-      text-shadow: 0 0 20px rgba(200, 70, 50, 0.5);
-      background: rgba(160, 50, 40, 0.08);
-      border-radius: 3px;
-    }
-    .hierarchy-section .header h1 {
-      font-size: 2.6rem;
-      font-weight: 900;
-      letter-spacing: 8px;
-      background: linear-gradient(180deg, #f0d78c 0%, #c9a050 40%, #8b6914 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      filter: drop-shadow(0 2px 8px rgba(200, 150, 60, 0.5));
-      margin-bottom: 6px;
-    }
-    .hierarchy-section .header .subtitle {
-      font-size: 1rem;
-      color: var(--text-light);
-      letter-spacing: 4px;
-      opacity: 0.8;
-    }
-    .hierarchy-section .header .cloud-decor {
-      display: inline-block;
-      font-size: 2rem;
-      opacity: 0.5;
-      animation: hz-floatCloud 4s ease-in-out infinite;
-      pointer-events: none;
-    }
-    .hierarchy-section .header .cloud-decor:nth-child(1) { animation-delay: 0s; }
-    .hierarchy-section .header .cloud-decor:nth-child(3) { animation-delay: 2s; animation-duration: 5s; }
-    @keyframes hz-floatCloud {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .hierarchy-section .legend {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      padding: 10px 20px 20px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .hierarchy-section .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
-      color: var(--text-light);
-      background: rgba(30, 18, 10, 0.7);
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid var(--border-subtle);
-    }
-    .hierarchy-section .legend-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .hierarchy-section .legend-dot.tao { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
-    .hierarchy-section .legend-dot.buddha { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
-    .hierarchy-section .legend-dot.sanxian { background: var(--jade); box-shadow: 0 0 8px var(--jade-light); }
-    .hierarchy-section .legend-dot.yao { background: #6b3040; box-shadow: 0 0 8px #8b4050; }
-    .hierarchy-section .legend-dot.mortal { background: #7a6a5a; box-shadow: 0 0 8px #9a8a7a; }
-
-    .hierarchy-section .main-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 0 20px 60px;
-    }
-
-    .hierarchy-section .tier-section {
-      position: relative;
-      margin-bottom: 0;
-      padding: 20px 0;
-    }
-    .hierarchy-section .tier-section .tier-label {
-      text-align: center;
-      font-size: 0.8rem;
-      letter-spacing: 5px;
-      color: var(--text-light);
-      opacity: 0.7;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      position: relative;
-    }
-    .hierarchy-section .tier-section .tier-label::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 1px;
-      background: var(--gold-dark);
-      margin: 6px auto 0;
-      opacity: 0.5;
-    }
-    .hierarchy-section .tier-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: stretch;
-      gap: 14px;
-    }
-
-    .hierarchy-section .connector {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 30px;
-      position: relative;
-    }
-    .hierarchy-section .connector::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 1px; height: 100%;
-      background: linear-gradient(180deg, var(--gold-dark) 0%, transparent 100%);
-      opacity: 0.5;
-    }
-    .hierarchy-section .connector.broad::before {
-      width: 2px;
-      opacity: 0.7;
-    }
-    .hierarchy-section .connector .arrow-down {
-      position: absolute;
-      bottom: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 0; height: 0;
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-top: 10px solid var(--gold-dark);
-      opacity: 0.5;
-    }
-
-    .hierarchy-section .branch-connector {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 0;
-      position: relative;
-      min-height: 30px;
-      margin: 0 auto;
-    }
-    .hierarchy-section .branch-connector .vline {
-      width: 1px; height: 24px;
-      background: var(--gold-dark);
-      opacity: 0.4;
-      position: relative;
-    }
-    .hierarchy-section .branch-connector .hline {
-      height: 1px;
-      background: var(--gold-dark);
-      opacity: 0.4;
-      align-self: flex-start;
-      margin-top: 24px;
-    }
-
-    .hierarchy-section .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius);
-      padding: 14px 18px;
-      text-align: center;
-      transition: var(--transition);
-      cursor: default;
-      position: relative;
-      min-width: 100px;
-      max-width: 200px;
-      flex: 1 1 auto;
-    }
-    .hierarchy-section .card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-gold);
-      border-color: var(--gold-dark);
-      z-index: 5;
-    }
-    .hierarchy-section .card .card-name {
-      font-weight: bold;
-      font-size: 1.05rem;
-      letter-spacing: 2px;
-      margin-bottom: 2px;
-    }
-    .hierarchy-section .card .card-title {
-      font-size: 0.7rem;
-      color: var(--text-light);
-      letter-spacing: 1px;
-      opacity: 0.8;
-    }
-    .hierarchy-section .card .card-note {
-      font-size: 0.65rem;
-      color: var(--text-light);
-      opacity: 0.55;
-      margin-top: 3px;
-      font-style: italic;
-    }
-
-    .hierarchy-section .card.sanqing {
-      border-color: #5a3a6a;
-      background: linear-gradient(180deg, rgba(80, 40, 90, 0.25) 0%, rgba(30, 16, 10, 0.9) 100%);
-      box-shadow: 0 0 25px rgba(140, 100, 160, 0.2);
-      min-width: 130px;
-    }
-    .hierarchy-section .card.sanqing:hover { box-shadow: 0 0 35px rgba(180, 130, 200, 0.35); border-color: #8a5a9a; }
-    .hierarchy-section .card.sanqing .card-name { color: #d4b8e0; font-size: 1.2rem; }
-
-    .hierarchy-section .card.siyu {
-      border-color: #5a4520;
-      background: linear-gradient(180deg, rgba(90, 60, 20, 0.3) 0%, rgba(30, 16, 10, 0.9) 100%);
-      box-shadow: 0 0 20px rgba(200, 150, 60, 0.2);
-      min-width: 120px;
-    }
-    .hierarchy-section .card.siyu:hover { box-shadow: 0 0 30px rgba(220, 170, 70, 0.4); border-color: #8a6a30; }
-    .hierarchy-section .card.siyu .card-name { color: #e8d090; }
-    .hierarchy-section .card.siyu.yudi {
-      border-color: #8a6520;
-      background: linear-gradient(180deg, rgba(120, 80, 20, 0.4) 0%, rgba(30, 16, 10, 0.9) 100%);
-      box-shadow: 0 0 30px rgba(220, 160, 50, 0.35);
-      min-width: 150px;
-      animation: hz-glowPulse 3s ease-in-out infinite;
-    }
-    @keyframes hz-glowPulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(220, 160, 50, 0.35); }
-      50% { box-shadow: 0 0 50px rgba(240, 180, 60, 0.55); }
-    }
-    .hierarchy-section .card.siyu.yudi .card-name { color: #f0d870; font-size: 1.3rem; text-shadow: 0 0 15px rgba(240, 200, 80, 0.5); }
-
-    .hierarchy-section .card.sanxian {
-      border-color: #3a5a3a;
-      background: linear-gradient(180deg, rgba(40, 70, 40, 0.25) 0%, rgba(30, 16, 10, 0.9) 100%);
-      box-shadow: 0 0 20px rgba(120, 160, 120, 0.2);
-    }
-    .hierarchy-section .card.sanxian:hover { box-shadow: 0 0 30px rgba(150, 200, 150, 0.35); border-color: #5a8a5a; }
-    .hierarchy-section .card.sanxian .card-name { color: #b0d0b0; }
-    .hierarchy-section .card.sanxian.first { border-color: #5a8a5a; box-shadow: 0 0 25px rgba(130, 180, 130, 0.3); }
-    .hierarchy-section .card.sanxian.first:hover { box-shadow: 0 0 35px rgba(150, 210, 150, 0.45); }
-
-    .hierarchy-section .card.buddha {
-      border-color: #6a4020;
-      background: linear-gradient(180deg, rgba(100, 55, 20, 0.3) 0%, rgba(30, 16, 10, 0.9) 100%);
-      box-shadow: 0 0 18px rgba(200, 130, 60, 0.2);
-    }
-    .hierarchy-section .card.buddha:hover { box-shadow: 0 0 28px rgba(220, 150, 70, 0.35); border-color: #9a6028; }
-    .hierarchy-section .card.buddha .card-name { color: #e0b870; }
-    .hierarchy-section .card.buddha.rulai {
-      border-color: #8a5520;
-      box-shadow: 0 0 25px rgba(210, 140, 50, 0.3);
-      background: linear-gradient(180deg, rgba(110, 60, 20, 0.4) 0%, rgba(30, 16, 10, 0.9) 100%);
-    }
-    .hierarchy-section .card.buddha.rulai .card-name { color: #f0c870; text-shadow: 0 0 12px rgba(220, 160, 60, 0.4); }
-
-    .hierarchy-section .card.tao-func {
-      border-color: #4a3520;
-      background: linear-gradient(180deg, rgba(60, 40, 20, 0.2) 0%, rgba(30, 16, 10, 0.9) 100%);
-      box-shadow: 0 0 12px rgba(180, 130, 60, 0.1);
-    }
-    .hierarchy-section .card.tao-func:hover { box-shadow: 0 0 20px rgba(200, 150, 60, 0.3); border-color: #6a4a28; }
-    .hierarchy-section .card.tao-func .card-name { color: #d4b878; }
-
-    .hierarchy-section .card.yao {
-      border-color: #4a2030;
-      background: linear-gradient(180deg, rgba(60, 25, 35, 0.25) 0%, rgba(30, 16, 10, 0.9) 100%);
-      box-shadow: 0 0 12px rgba(160, 60, 80, 0.15);
-    }
-    .hierarchy-section .card.yao:hover { box-shadow: 0 0 22px rgba(180, 70, 90, 0.3); border-color: #6a3040; }
-    .hierarchy-section .card.yao .card-name { color: #d4a0a8; }
-
-    .hierarchy-section .card.mortal {
-      border-color: #3a3028;
-      background: linear-gradient(180deg, rgba(50, 40, 30, 0.2) 0%, rgba(30, 16, 10, 0.9) 100%);
-      box-shadow: 0 0 8px rgba(140, 120, 100, 0.08);
-    }
-    .hierarchy-section .card.mortal:hover { box-shadow: 0 0 16px rgba(160, 140, 120, 0.2); border-color: #5a4a38; }
-    .hierarchy-section .card.mortal .card-name { color: #c0b098; }
-
-    .hierarchy-section .card.qujing {
-      border-color: #5a4020;
-      background: linear-gradient(180deg, rgba(80, 50, 20, 0.35) 0%, rgba(30, 16, 10, 0.9) 100%);
-      box-shadow: 0 0 15px rgba(200, 140, 50, 0.2);
-    }
-    .hierarchy-section .card.qujing:hover { box-shadow: 0 0 25px rgba(220, 160, 60, 0.4); border-color: #8a6028; }
-    .hierarchy-section .card.qujing .card-name { color: #e8c878; }
-
-    /* Linked cards */
-    .hierarchy-section a.card {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: #e8dcc8;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(232,220,200,0.5);
+      padding: 14px 36px;
+      border-radius: var(--radius-sm);
       text-decoration: none;
-      color: inherit;
-      display: block;
-      cursor: pointer;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
     }
-    .hierarchy-section a.card:hover {
-      border-color: var(--gold-bright);
-      box-shadow: var(--shadow-strong);
+    .landing-cta-alt:hover {
+      background: rgba(0,0,0,0.4);
+      border-color: rgba(232,220,200,0.8);
+      color: #fff;
     }
 
-    .hierarchy-section .section-title {
+    /* ---- SEO Intro ---- */
+    .seo-intro {
+      background: var(--bg-dark);
+      padding: 60px 0;
+      border-top: 1px solid rgba(232,220,200,0.06);
+    }
+    .seo-intro-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .seo-intro-inner h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: #e0c878;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
       text-align: center;
-      font-size: 1.1rem;
-      letter-spacing: 6px;
-      color: var(--gold);
-      padding: 16px 0 8px;
-      position: relative;
-      font-weight: bold;
     }
-    .hierarchy-section .section-title span {
-      position: relative;
-      display: inline-block;
+    .seo-intro-inner p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--text-on-dark);
+      margin-bottom: 16px;
     }
-    .hierarchy-section .section-title span::before,
-    .hierarchy-section .section-title span::after {
-      content: '◆';
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.5rem;
-      color: var(--gold-dark);
-      opacity: 0.6;
+    .seo-intro-inner a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184,160,110,0.3);
     }
-    .hierarchy-section .section-title span::before { left: -24px; }
-    .hierarchy-section .section-title span::after { right: -24px; }
+    .seo-intro-inner a:hover { border-color: var(--accent-gold); }
 
-    .hierarchy-section .divider {
-      width: 80%;
-      max-width: 800px;
-      margin: 16px auto;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
-      opacity: 0.5;
-      position: relative;
+    /* ---- Category Entrances ---- */
+    .cat-section {
+      background: var(--bg-dark);
+      padding: 50px 0 60px;
+      background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(184,160,110,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(160,120,60,0.03) 0%, transparent 50%);
+      border-top: 1px solid rgba(232,220,200,0.05);
     }
-    .hierarchy-section .divider.double {
-      height: auto;
-      background: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .cat-section-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .cat-section-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: #e8d5b0;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+    .cat-section-header p {
+      font-size: 0.9rem;
+      color: rgba(200,180,140,0.55);
+    }
+    .cat-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
-    .hierarchy-section .divider.double::before,
-    .hierarchy-section .divider.double::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
-      opacity: 0.4;
+    .cat-card {
+      background: rgba(25, 16, 10, 0.7);
+      border: 1px solid rgba(184,160,110,0.12);
+      border-radius: 10px;
+      padding: 28px 22px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      display: block;
     }
-    .hierarchy-section .divider.double .diamond {
-      color: var(--gold);
-      font-size: 0.6rem;
-      opacity: 0.6;
-      flex-shrink: 0;
+    .cat-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(184,160,110,0.4);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.3);
     }
-
-    .hierarchy-section .buddha-section {
-      border: 1px dashed #5a4020;
-      border-radius: 16px;
-      padding: 20px;
-      margin: 16px 0;
-      background: rgba(40, 22, 10, 0.3);
-      position: relative;
+    .cat-card-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
     }
-    .hierarchy-section .buddha-section::before {
-      content: 'WESTERN BUDDHIST · ATTAINMENT SYSTEM';
-      position: absolute;
-      top: -11px; left: 50%;
-      transform: translateX(-50%);
-      background: #1a0f08;
-      padding: 0 16px;
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      color: var(--amber);
-      white-space: nowrap;
-      font-weight: bold;
+    .cat-card-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: #e0c878;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      display: block;
     }
-
-    .hierarchy-section .sanxian-section {
-      border: 1px dashed #3a5a3a;
-      border-radius: 16px;
-      padding: 20px;
-      margin: 16px 0;
-      background: rgba(20, 30, 20, 0.25);
-      position: relative;
+    .cat-card-desc {
+      font-size: 0.82rem;
+      color: rgba(200,180,140,0.55);
+      line-height: 1.5;
+      margin-bottom: 12px;
+      display: block;
     }
-    .hierarchy-section .sanxian-section::before {
-      content: 'TRANSCENDENT SAGES · OUTSIDE THE SYSTEM';
-      position: absolute;
-      top: -11px; left: 50%;
-      transform: translateX(-50%);
-      background: #1a0f08;
-      padding: 0 16px;
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      color: var(--jade-light);
-      white-space: nowrap;
-      font-weight: bold;
+    .cat-card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .cat-card-links a {
+      font-size: 0.76rem;
+      color: var(--accent-gold);
+      text-decoration: none;
+      padding: 4px 10px;
+      border: 1px solid rgba(184,160,110,0.18);
+      border-radius: 12px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .cat-card-links a:hover {
+      background: rgba(184,160,110,0.08);
+      border-color: rgba(184,160,110,0.4);
     }
 
-    .hierarchy-section .yao-section {
-      border: 1px dashed #4a2030;
-      border-radius: 16px;
-      padding: 20px;
-      margin: 16px 0;
-      background: rgba(35, 18, 22, 0.3);
-      position: relative;
-    }
-    .hierarchy-section .yao-section::before {
-      content: 'DEMON FORCES · UNRANKED';
-      position: absolute;
-      top: -11px; left: 50%;
-      transform: translateX(-50%);
-      background: #1a0f08;
-      padding: 0 16px;
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      color: #c08090;
-      white-space: nowrap;
-      font-weight: bold;
-    }
-
-    .hierarchy-section .footer {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--text-light);
-      opacity: 0.5;
-      font-size: 0.8rem;
-      letter-spacing: 3px;
-    }
-
-    @media (max-width: 768px) {
-      .hierarchy-section .header h1 { font-size: 1.6rem; letter-spacing: 4px; }
-      .hierarchy-section .header .seal { font-size: 0.9rem; letter-spacing: 3px; padding: 6px 16px; }
-      .hierarchy-section .tier-cards { gap: 8px; }
-      .hierarchy-section .card { padding: 10px 12px; min-width: 70px; max-width: 140px; flex: 1 1 45%; }
-      .hierarchy-section .card .card-name { font-size: 0.85rem; letter-spacing: 1px; }
-      .hierarchy-section .card .card-title { font-size: 0.65rem; }
-      .hierarchy-section .card .card-note { font-size: 0.6rem; }
-      .hierarchy-section .buddha-section,
-      .hierarchy-section .sanxian-section,
-      .hierarchy-section .yao-section { padding: 14px 8px; margin: 10px 0; border-radius: 10px; }
-      .hierarchy-section .buddha-section::before,
-      .hierarchy-section .sanxian-section::before,
-      .hierarchy-section .yao-section::before { font-size: 0.65rem; letter-spacing: 1px; padding: 0 10px; }
-      .hierarchy-section .section-title { font-size: 0.9rem; letter-spacing: 3px; }
-      .hierarchy-section .legend { gap: 8px; }
-      .hierarchy-section .legend-item { font-size: 0.7rem; padding: 4px 10px; gap: 4px; }
-    }
-    @media (max-width: 480px) {
-      .hierarchy-section .card { flex: 1 1 100%; max-width: 100%; min-width: 0; }
-      .hierarchy-section .tier-cards { gap: 6px; }
-      .hierarchy-section .header h1 { font-size: 1.3rem; letter-spacing: 2px; }
-    }
-  </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Celestial Archive","url":"https://celestial-archive.com","description":"Exploring the myths, legends, and divine beings of Eastern mythology. From the stone-born Monkey King to the lotus-reborn Nezha.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://celestial-archive.com/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Celestial Archive","url":"https://celestial-archive.com","description":"Exploring the myths, legends, and divine beings of Eastern mythology.","sameAs":["https://twitter.com/celestialarchive","https://youtube.com/@celestialarchive"],"logo":"https://celestial-archive.com/favicon.svg"}</script>
-</head>
-<body>
-
-  <main class="landing" aria-label="Celestial Archive — landing">
-    <div class="landing-bg"></div>
-    <div class="landing-content">
-<p class="landing-kicker">Celestial Archive</p>
-      <h1 class="landing-title">天宫档案</h1>
-      <p class="landing-subtitle">The Celestial Archive</p>
-      <div class="landing-divider"></div>
-      <p class="landing-desc">
-        Exploring the myths, legends, and divine beings of Eastern mythology —<br>
-        from the stone-born Monkey King to the lotus-reborn Nezha,<br>
-        from celestial marshals to the humblest pilgrims.
-      </p>
-      <a href="#browse" class="landing-cta">Enter the Archive</a>
-    </div>
-  </main>
-
-  <section class="pantheon section" id="browse" aria-label="Browse the Archive">
-    <div class="container">
-      <h2 class="section-title">
-        <span class="title-ornament"></span>
-        Browse the Archive
-      </h2>
-      <div class="pantheon-grid" id="pantheon-grid">
-        <!-- Populated by JS from CELESTIAL_DEITIES registry -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Featured Topics ===== -->
-  <style>
+    /* ---- Hot Articles (reuse topics grid) ---- */
     .topics-section {
       --tp-gold: #b8a06e;
       --tp-gold-bright: #d4b878;
@@ -667,7 +258,7 @@
       background-image:
         radial-gradient(ellipse at 50% 0%, rgba(180, 130, 60, 0.06) 0%, transparent 60%),
         radial-gradient(ellipse at 80% 100%, rgba(160, 100, 50, 0.04) 0%, transparent 50%);
-      padding: 70px 0 80px;
+      padding: 60px 0 70px;
       position: relative;
     }
     .topics-section::before {
@@ -681,7 +272,7 @@
     }
     .topics-header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
     .topics-kicker {
       font-family: var(--font-display);
@@ -693,7 +284,7 @@
     }
     .topics-title {
       font-family: var(--font-display);
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: #e8d5b0;
       letter-spacing: 3px;
       margin-bottom: 10px;
@@ -704,12 +295,12 @@
       font-style: italic;
     }
     .topics-grid {
-      max-width: 1100px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 0 20px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
     .topic-card {
       display: flex;
@@ -717,7 +308,7 @@
       background: var(--tp-card-bg);
       border: 1px solid var(--tp-border);
       border-radius: 10px;
-      padding: 28px 24px 24px;
+      padding: 24px 22px;
       text-decoration: none;
       color: inherit;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -738,17 +329,15 @@
       border-color: rgba(184, 160, 110, 0.4);
       box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(184, 160, 110, 0.1);
     }
-    .topic-card:hover::after {
-      opacity: 1;
-    }
+    .topic-card:hover::after { opacity: 1; }
     .topic-card-icon {
-      font-size: 1.6rem;
-      margin-bottom: 14px;
-      opacity: 0.8;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      opacity: 0.85;
     }
     .topic-card-title {
       font-family: var(--font-display);
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: #e0c878;
       letter-spacing: 1.5px;
       margin-bottom: 8px;
@@ -769,533 +358,359 @@
       opacity: 0.7;
       transition: opacity 0.3s;
     }
-    .topic-card:hover .topic-card-arrow {
-      opacity: 1;
+    .topic-card:hover .topic-card-arrow { opacity: 1; }
+
+    /* ---- Explore / Link Zone ---- */
+    .linkzone-section {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(232,220,200,0.06);
+      padding: 50px 0 60px;
+      text-align: center;
     }
+    .linkzone-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: #d4b878;
+      letter-spacing: 3px;
+      margin-bottom: 6px;
+    }
+    .linkzone-sub {
+      font-size: 0.85rem;
+      color: rgba(200,180,140,0.5);
+      margin-bottom: 30px;
+    }
+    .linkzone-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .linkzone-grid a {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: rgba(200, 180, 140, 0.75);
+      text-decoration: none;
+      padding: 9px 20px;
+      border: 1px solid rgba(184,160,110,0.2);
+      border-radius: 20px;
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .linkzone-grid a:hover {
+      color: #e0c878;
+      border-color: rgba(184,160,110,0.5);
+      background: rgba(184,160,110,0.07);
+    }
+
+    /* ---- FAQ ---- */
+    .faq-section {
+      background: #3b2f21;
+      padding: 50px 0 60px;
+      border-top: 1px solid rgba(232,220,200,0.05);
+    }
+    .faq-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .faq-inner h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: #e0c878;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .faq-item {
+      margin-bottom: 20px;
+    }
+    .faq-q {
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      color: #e8d5b0;
+      margin-bottom: 6px;
+      cursor: default;
+    }
+    .faq-a {
+      font-size: 0.95rem;
+      color: rgba(200,180,140,0.65);
+      line-height: 1.8;
+    }
+    .faq-a a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184,160,110,0.25);
+    }
+    .faq-a a:hover { border-color: var(--accent-gold); }
+
     @media (max-width: 768px) {
-      .topics-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-      }
-      .topics-title { font-size: 1.5rem; }
+      .cat-grid { grid-template-columns: 1fr; gap: 14px; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .seo-intro-inner h2 { font-size: 1.25rem; }
     }
-    @media (max-width: 480px) {
-      .topics-grid {
-        grid-template-columns: 1fr;
-      }
-      .topic-card { padding: 20px 18px; }
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Celestial Archive","url":"https://celestial-archive.com","description":"Chinese mythology is a rich system of gods, creatures, and legends spanning 5,000 years. Explore Chinese gods, mythological creatures, Journey to the West, dragons, and the complete celestial hierarchy.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://celestial-archive.com/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Celestial Archive","url":"https://celestial-archive.com","description":"Chinese mythology is a rich system of gods, creatures, and legends spanning 5,000 years. Explore Chinese gods, mythological creatures, Journey to the West, and the complete celestial hierarchy.","sameAs":["https://twitter.com/celestialarchive","https://youtube.com/@celestialarchive"],"logo":"https://celestial-archive.com/favicon.svg"}</script>
+</head>
+<body>
+
+  <!-- ===== 1. Hero (First Screen) ===== -->
+  <main class="landing" aria-label="Celestial Archive — landing">
+    <div class="landing-bg"></div>
+    <div class="landing-content">
+      <p class="landing-kicker">Celestial Archive</p>
+      <h1 class="landing-title">天宫档案</h1>
+      <p class="landing-subtitle">Chinese Mythology: Gods, Creatures &amp; Legendary Stories</p>
+      <div class="landing-divider"></div>
+      <p class="landing-desc">
+        Explore the world of Chinese mythology, including powerful gods like Nezha and Sun Wukong, legendary creatures, and ancient beliefs that shaped Chinese culture.
+      </p>
+      <div class="landing-cta-wrap">
+        <a href="#deities" class="landing-cta">Explore Gods</a>
+        <a href="topics/who-is-nezha.html" class="landing-cta-alt">Start with Nezha</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== 2. SEO Intro — What Is Chinese Mythology ===== -->
+  <section class="seo-intro" aria-label="Introduction to Chinese mythology">
+    <div class="seo-intro-inner">
+      <h2>What Is Chinese Mythology?</h2>
+      <p>Chinese mythology is a vast and ancient system of beliefs, stories, and deities that have influenced Chinese culture for thousands of years. It includes powerful <a href="topics/chinese-gods.html">Chinese gods</a>, legendary heroes, mythical creatures, and complex cosmology systems such as Heaven and the Underworld.</p>
+      <p>From famous figures like Nezha and <a href="topics/who-is-sun-wukong.html">Sun Wukong</a> to symbolic creatures like the <a href="topics/chinese-dragons.html">Chinese dragon</a> and phoenix, these stories continue to inspire modern art, literature, and media.</p>
+    </div>
+  </section>
+
+  <!-- ===== 3. Category Entrances ===== -->
+  <section class="cat-section" aria-label="Explore by category">
+    <div class="cat-section-header">
+      <h2>Explore Chinese Mythology</h2>
+      <p>Choose a path — gods, creatures, or the mythology system itself</p>
+    </div>
+    <div class="cat-grid">
+      <!-- Gods -->
+      <div class="cat-card">
+        <span class="cat-card-icon">&#x1f451;</span>
+        <span class="cat-card-name">Gods</span>
+        <span class="cat-card-desc">Discover powerful Chinese gods and legendary figures.</span>
+        <div class="cat-card-links">
+          <a href="topics/who-is-nezha.html">Nezha</a>
+          <a href="topics/who-is-sun-wukong.html">Sun Wukong</a>
+          <a href="topics/jade-emperor.html">Jade Emperor</a>
+        </div>
+      </div>
+      <!-- Creatures -->
+      <div class="cat-card">
+        <span class="cat-card-icon">&#x1f409;</span>
+        <span class="cat-card-name">Creatures</span>
+        <span class="cat-card-desc">Explore mythical creatures in Chinese mythology.</span>
+        <div class="cat-card-links">
+          <a href="topics/chinese-dragons.html">Chinese Dragon</a>
+          <a href="topics/chinese-mythology-creatures.html">Phoenix &amp; Qilin</a>
+          <a href="topics/chinese-mythology-creatures.html">Mythical Beasts</a>
+        </div>
+      </div>
+      <!-- Mythology System -->
+      <div class="cat-card">
+        <span class="cat-card-icon">&#x1f3db;</span>
+        <span class="cat-card-name">Mythology System</span>
+        <span class="cat-card-desc">Understand the structure of heaven, immortality, and the underworld.</span>
+        <div class="cat-card-links">
+          <a href="topics/chinese-mythology.html">Heaven System</a>
+          <a href="topics/chinese-mythology.html">Immortality</a>
+          <a href="topics/jade-emperor.html">Underworld</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Hierarchy Banner ===== -->
+  <style>
+    .hierarchy-banner-section {
+      background: var(--bg-dark);
+      padding: 20px 0 40px;
+      border-top: 1px solid rgba(232,220,200,0.05);
+    }
+    .hierarchy-banner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .hierarchy-banner-card {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: linear-gradient(135deg, rgba(30,16,10,0.95) 0%, rgba(20,12,8,0.95) 100%);
+      border: 1px solid rgba(184,160,110,0.3);
+      border-radius: 12px;
+      padding: 28px 32px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .hierarchy-banner-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(200,150,50,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hierarchy-banner-card:hover {
+      border-color: rgba(200,160,80,0.6);
+      box-shadow: 0 0 40px rgba(200,150,50,0.15), 0 8px 32px rgba(0,0,0,0.4);
+      transform: translateY(-2px);
+    }
+    .hierarchy-banner-badge {
+      flex-shrink: 0;
+      display: inline-block;
+      border: 2px solid #c94a3a;
+      color: #c94a3a;
+      padding: 6px 14px;
+      font-size: 0.72rem;
+      letter-spacing: 4px;
+      font-weight: bold;
+      border-radius: 3px;
+      text-shadow: 0 0 12px rgba(200,70,50,0.4);
+      background: rgba(160,50,40,0.08);
+    }
+    .hierarchy-banner-text { flex: 1; position: relative; z-index: 1; }
+    .hierarchy-banner-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: #f0d78c;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+    .hierarchy-banner-desc {
+      font-size: 0.85rem;
+      color: rgba(200,180,140,0.55);
+      line-height: 1.5;
+    }
+    .hierarchy-banner-arrow {
+      flex-shrink: 0;
+      font-size: 1.5rem;
+      color: var(--accent-gold);
+      opacity: 0.6;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .hierarchy-banner-card:hover .hierarchy-banner-arrow {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+    @media (max-width: 640px) {
+      .hierarchy-banner-card { flex-direction: column; text-align: center; padding: 24px 20px; }
     }
   </style>
 
-  <section class="topics-section" aria-label="Featured Articles">
+  <section class="hierarchy-banner-section" aria-label="Three Realms Hierarchy">
+    <div class="hierarchy-banner">
+      <a href="three-realms-hierarchy.html" class="hierarchy-banner-card">
+        <span class="hierarchy-banner-badge">THREE REALMS</span>
+        <span class="hierarchy-banner-text">
+          <span class="hierarchy-banner-title">Journey to the West — Complete Hierarchy of the Three Realms</span>
+          <span class="hierarchy-banner-desc">From the Three Pure Ones to the humblest earth god — every deity, every rank, every realm. The definitive celestial ranking.</span>
+        </span>
+        <span class="hierarchy-banner-arrow">&#x2192;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== 4. Hot SEO Articles (Traffic Hub) ===== -->
+  <section class="topics-section" id="start-here" aria-label="Start exploring Chinese mythology">
     <div class="topics-header">
-      <p class="topics-kicker">Featured Articles</p>
-      <h2 class="topics-title">Explore the Myths</h2>
-      <p class="topics-sub">Deep dives into the stories, gods, and legends of Chinese mythology</p>
+      <p class="topics-kicker">Start Here</p>
+      <h2 class="topics-title">Start Exploring Chinese Mythology</h2>
+      <p class="topics-sub">These beginner guides will help you quickly understand Chinese mythology.</p>
     </div>
     <div class="topics-grid">
-      <a href="topics/chinese-mythology.html" class="topic-card">
-        <div class="topic-card-icon">🏮</div>
-        <div class="topic-card-title">What Is Chinese Mythology?</div>
-        <div class="topic-card-desc">A beginner's guide to the three traditions — Taoism, Buddhism, and Folk Religion — that make up China's mythological universe.</div>
-        <span class="topic-card-arrow">Read →</span>
+      <a href="topics/who-is-nezha.html" class="topic-card">
+        <span class="topic-card-icon">&#x1f525;</span>
+        <span class="topic-card-title">Who is Nezha?</span>
+        <span class="topic-card-desc">A rebellious warrior god with immense power — his weapons, his battle with the Dragon Kings, and his rebirth from a lotus flower.</span>
+        <span class="topic-card-arrow">Read &#x2192;</span>
       </a>
-      <a href="topics/chinese-gods.html" class="topic-card">
-        <div class="topic-card-icon">👑</div>
-        <div class="topic-card-title">Chinese Gods & Deities</div>
-        <div class="topic-card-desc">Meet the 12 most important gods — from the Jade Emperor on the Dragon Throne to Guanyin, Goddess of Mercy.</div>
-        <span class="topic-card-arrow">Read →</span>
+      <a href="topics/who-is-sun-wukong.html" class="topic-card">
+        <span class="topic-card-icon">&#x1f412;</span>
+        <span class="topic-card-title">Who is Sun Wukong?</span>
+        <span class="topic-card-desc">The Monkey King known for his strength and immortality — 72 transformations, the Ruyi Jingu Bang, and his war against heaven.</span>
+        <span class="topic-card-arrow">Read &#x2192;</span>
       </a>
       <a href="topics/chinese-dragons.html" class="topic-card">
-        <div class="topic-card-icon">🐉</div>
-        <div class="topic-card-title">Chinese Dragons Explained</div>
-        <div class="topic-card-desc">They don't breathe fire. They control rain, wisdom, and the order of the cosmos — and they've ruled Chinese myth for 5,000 years.</div>
-        <span class="topic-card-arrow">Read →</span>
+        <span class="topic-card-icon">&#x1f409;</span>
+        <span class="topic-card-title">Chinese Dragon Meaning</span>
+        <span class="topic-card-desc">They don't breathe fire. They control rain and wisdom — symbolism, the five types, and the Dragon Kings of the Four Seas.</span>
+        <span class="topic-card-arrow">Read &#x2192;</span>
       </a>
-      <a href="topics/journey-to-the-west.html" class="topic-card">
-        <div class="topic-card-icon">📜</div>
-        <div class="topic-card-title">Journey to the West: Full Story</div>
-        <div class="topic-card-desc">The complete tale in 5 chapters — from the stone-born Monkey King to the 81 tribulations and the sacred scriptures.</div>
-        <span class="topic-card-arrow">Read →</span>
-      </a>
-      <a href="topics/journey-west-characters.html" class="topic-card">
-        <div class="topic-card-icon">🧑‍🤝‍🧑</div>
-        <div class="topic-card-title">Journey to the West Characters</div>
-        <div class="topic-card-desc">Every pilgrim explained — Tang Sanzang, Sun Wukong, Zhu Bajie, Sha Wujing, and the White Dragon Horse.</div>
-        <span class="topic-card-arrow">Read →</span>
-      </a>
-      <a href="topics/sun-wukong-vs-erlang-shen.html" class="topic-card">
-        <div class="topic-card-icon">⚔️</div>
-        <div class="topic-card-title">Sun Wukong vs Erlang Shen</div>
-        <div class="topic-card-desc">The greatest shapeshifting duel in mythology — 72 transformations, a third eye, and a battle that shook heaven.</div>
-        <span class="topic-card-arrow">Read →</span>
+      <a href="topics/chinese-gods.html" class="topic-card">
+        <span class="topic-card-icon">&#x1f451;</span>
+        <span class="topic-card-title">Top 12 Chinese Gods</span>
+        <span class="topic-card-desc">Meet the most powerful Chinese gods — from the Jade Emperor on the Dragon Throne to Guanyin, Goddess of Mercy.</span>
+        <span class="topic-card-arrow">Read &#x2192;</span>
       </a>
     </div>
   </section>
 
-  <!-- ===== Three Realms Hierarchy (exact DeepSeek content) ===== -->
-  <section class="hierarchy-section" aria-label="Three Realms Hierarchy">
-
-    <div class="header">
-      <span class="cloud-decor">☁️</span>
-      <span class="cloud-decor">☁️</span>
-      <span class="cloud-decor">☁️</span>
-      <div class="seal">THREE REALMS</div>
-      <h1>Journey to the West · Complete Hierarchy of the Three Realms</h1>
-      <p class="subtitle">—— Source of the Dao · Authority of the Four Sovereigns · Buddhist Fruition · Transcendent Sages ——</p>
-    </div>
-
-    <div class="legend">
-      <div class="legend-item"><span class="legend-dot tao"></span> Daoist Orthodox (Power Structure)</div>
-      <div class="legend-item"><span class="legend-dot buddha"></span> Western Buddhist (Attainment Hierarchy)</div>
-      <div class="legend-item"><span class="legend-dot sanxian"></span> Transcendent Sages (Outside the System)</div>
-      <div class="legend-item"><span class="legend-dot yao"></span> Demon Forces (Unranked)</div>
-      <div class="legend-item"><span class="legend-dot mortal"></span> Mortals / Grassroots</div>
-    </div>
-
-    <div class="main-container">
-
-      <!-- Tier 1: The Three Pure Ones -->
-      <div class="tier-section">
-        <div class="tier-label">☯ Source of the Great Dao · Supreme ☯</div>
-        <div class="tier-cards">
-          <div class="card sanqing">
-            <div class="card-name">Yuanshi Tianzun (元始天尊)</div>
-            <div class="card-title">Jade Purity · First of the Three Pure Ones</div>
-            <div class="card-note">Primordial Beginning · Chaos Dao</div>
-          </div>
-          <div class="card sanqing">
-            <div class="card-name">Lingbao Tianzun (灵宝天尊)</div>
-            <div class="card-title">Supreme Purity · Second of the Three Pure Ones</div>
-            <div class="card-note">Differentiation of Chaos · Evolution of Dao</div>
-          </div>
-          <div class="card sanqing">
-            <div class="card-name">Daode Tianzun (道德天尊)</div>
-            <div class="card-title">Grand Purity · Laozi (太上老君)</div>
-            <div class="card-note">Dao Embodied · Nurturing All Things</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="connector broad"><div class="arrow-down"></div></div>
-
-      <!-- Tier 2: The Four Sovereigns -->
-      <div class="tier-section">
-        <div class="tier-label">⚜ The Four Sovereigns · Apex of Power ⚜</div>
-        <div class="tier-cards">
-          <div class="card siyu yudi">
-            <div class="card-name">Jade Emperor (玉皇大帝)</div>
-            <div class="card-title">Supreme Lord of the Three Realms</div>
-            <div class="card-note">Chief Administrator of the Cosmos</div>
-          </div>
-          <div class="card siyu">
-            <div class="card-name">Ziwei Emperor (中天紫微北极大帝)</div>
-            <div class="card-title">Second of the Four Sovereigns</div>
-            <div class="card-note">Governs Stars & Celestial Order</div>
-          </div>
-          <div class="card siyu">
-            <div class="card-name">Gouchen Emperor (勾陈上宫天皇大帝)</div>
-            <div class="card-title">Third of the Four Sovereigns</div>
-            <div class="card-note">Oversees Polaris & Mortal Warfare</div>
-          </div>
-          <div class="card siyu">
-            <div class="card-name">Houtu Empress (后土皇地祇)</div>
-            <div class="card-title">Fourth Sovereign · Lady of the Earth</div>
-            <div class="card-note">Yin-Yang Fertility · Mountains & Rivers</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="connector broad"><div class="arrow-down"></div></div>
-
-      <!-- Tier 3: Core Power Echelon -->
-      <div class="tier-section">
-        <div class="tier-label">▼ Under the Jade Emperor · Core Power Echelon ▼</div>
-        <div class="tier-cards">
-          <div class="card tao-func">
-            <div class="card-name">Five Elders of the Five Directions (五方五老)</div>
-            <div class="card-title">Regional Sovereigns</div>
-            <div class="card-note">East: Chong'en · South: Guanyin</div>
-            <div class="card-note">West: Tathāgata · North: Xuanling · Center: Huangjiao</div>
-          </div>
-          <div class="card tao-func">
-            <div class="card-name">Four Heavenly Masters (四大天师)</div>
-            <div class="card-title">Imperial Counselors</div>
-            <div class="card-note">Zhang Daoling · Ge Xuan</div>
-            <div class="card-note">Xu Xun · Sa Shoujian</div>
-          </div>
-          <div class="card tao-func">
-            <div class="card-name">Four Saints of the North Pole (北极四圣)</div>
-            <div class="card-title">Military Core</div>
-            <div class="card-note">Marshal Tianpeng · Vice Marshal Tianyou</div>
-            <div class="card-note">Yizhen Shengjun · Zhenwu Dadi</div>
-          </div>
-          <div class="card tao-func">
-            <div class="card-name">Taiyi Jiuku Tianzun (太乙救苦天尊)</div>
-            <div class="card-title">Supreme Savior of the Underworld</div>
-            <div class="card-note">Master of the Nine-Headed Lion</div>
-          </div>
-          <div class="card tao-func">
-            <div class="card-name">Donghua Emperor (东华帝君)</div>
-            <div class="card-title">Patriarch of Quanzhen · Leader of Male Immortals</div>
-          </div>
-        </div>
-      </div>
-
-      <p style="text-align:center;color:var(--amber);opacity:0.7;font-size:0.75rem;margin:8px 0;letter-spacing:2px;">
-        ※ Tathāgata (如来) holds the rank of "Elder of the West" among the Five Elders, officially subordinate to the Four Sovereigns and answering to the Jade Emperor.<br>
-        However, within the Buddhist hierarchy, he remains the supreme attainment of "Buddha".
-      </p>
-
-      <div class="divider double"><span class="diamond">◆</span></div>
-
-      <!-- Heavenly Bureaucracy -->
-      <div class="section-title"><span>Heavenly Bureaucracy</span></div>
-
-      <div class="tier-section">
-        <div class="tier-label">✦ Star Ministry ✦</div>
-        <div class="tier-cards">
-          <div class="card tao-func"><div class="card-name">28 Lunar Mansions (二十八宿)</div><div class="card-title">Four Symbols Constellations</div><div class="card-note">Jiaomu Jiao · Kuimulang etc.</div></div>
-          <div class="card tao-func"><div class="card-name">11 Great Luminaries (十一大曜)</div><div class="card-title">Sun, Moon, Planets & more</div></div>
-          <div class="card tao-func"><div class="card-name">Southern Dipper Six (南斗六司)</div><div class="card-title">Life · Prosperity · Longevity</div></div>
-          <div class="card tao-func"><div class="card-name">Northern Dipper Seven (北斗七元)</div><div class="card-title">Tanlang · Jumen etc.</div></div>
-          <div class="card tao-func"><div class="card-name">Taibai Jinxing (太白金星)</div><div class="card-title">Celestial Envoy</div></div>
-          <div class="card tao-func"><div class="card-name">Wenqu & Wuqu Stars (文曲星·武曲星)</div><div class="card-title">Civil & Martial Virtues</div></div>
-        </div>
-      </div>
-
-      <div class="tier-section">
-        <div class="tier-label">⚡ Thunder Ministry ⚡</div>
-        <div class="tier-cards">
-          <div class="card tao-func"><div class="card-name">Nine Heavens Responding Thunder Universal Celestial Venerable (九天应元雷声普化天尊)</div><div class="card-title">Supreme Thunder God</div></div>
-          <div class="card tao-func"><div class="card-name">Duke of Thunder · Mother of Lightning (雷公·电母)</div><div class="card-title">Thunder & Lightning</div></div>
-          <div class="card tao-func"><div class="card-name">Earl of Wind · Master of Rain (风伯·雨师)</div><div class="card-title">Wind & Rain</div></div>
-        </div>
-      </div>
-
-      <div class="tier-section">
-        <div class="tier-label">🌊 Weather & Nature Ministry 🌊</div>
-        <div class="tier-cards">
-          <div class="card tao-func"><div class="card-name">Dragon Kings of the Four Seas (四海龙王)</div><div class="card-title">Ao Guang · Ao Qin · Ao Run · Ao Shun</div><div class="card-note">Rain-making Dragon Gods</div></div>
-          <div class="card tao-func"><div class="card-name">Emperors of the Five Sacred Mountains (五岳大帝)</div><div class="card-title">East · West · South · North · Center</div><div class="card-note">Guardians of the Five Peaks</div></div>
-        </div>
-      </div>
-
-      <div class="tier-section">
-        <div class="tier-label">🛡 Guard & Military 🛡</div>
-        <div class="tier-cards">
-          <div class="card tao-func"><div class="card-name">Four Heavenly Kings (四大天王)</div><div class="card-title">Virudhaka · Dhritarashtra · Virupaksha · Vaishravana</div><div class="card-note">Guardians of the South Gate</div></div>
-          <a href="deities/nezha/index.html" class="card tao-func"><div class="card-name">Nezha, the Third Prince (哪吒三太子)</div><div class="card-title">Marshal of the Central Altar</div></a>
-          <a href="deities/erlang-shen/index.html" class="card tao-func"><div class="card-name">Erlang Shen Yang Jian (二郎神杨戬)</div><div class="card-title">Illustrious Sage King</div><div class="card-note">Obeys orders, not summons</div></a>
-          <div class="card tao-func"><div class="card-name">Wang Lingguan (王灵官)</div><div class="card-title">Chief Divine Inspector</div><div class="card-note">Foremost Guardian of Heaven</div></div>
-          <div class="card tao-func"><div class="card-name">Juling Shen (巨灵神)</div><div class="card-title">Vanguard of Heavenly King Li</div></div>
-        </div>
-      </div>
-
-      <div class="tier-section">
-        <div class="tier-label">📜 Surveillance & Messengers 📜</div>
-        <div class="tier-cards">
-          <div class="card tao-func"><div class="card-name">Four Merit Officers (四值功曹)</div><div class="card-title">Year · Month · Day · Hour</div></div>
-          <div class="card tao-func"><div class="card-name">Five Direction Dharma Protectors (五方揭谛)</div><div class="card-title">Golden Head Deities</div><div class="card-note">Escort of the Pilgrimage</div></div>
-          <div class="card tao-func"><div class="card-name">Six Ding & Six Jia (六丁六甲)</div><div class="card-title">Guardian Spirits</div></div>
-          <div class="card tao-func"><div class="card-name">Day & Night Wardens (日游神·夜游神)</div><div class="card-title">Patrol Deities</div></div>
-          <div class="card tao-func"><div class="card-name">Clairvoyant & Clairhearing (千里眼·顺风耳)</div><div class="card-title">Surveillance System</div></div>
-          <div class="card tao-func"><div class="card-name">Discipline Inspectors (纠察灵官)</div><div class="card-title">Military Police</div></div>
-        </div>
-      </div>
-
-      <div class="tier-section">
-        <div class="tier-label">👻 Underworld Ministry 👻</div>
-        <div class="tier-cards">
-          <div class="card tao-func"><div class="card-name">Ten Kings of Hell (十殿阎王)</div><div class="card-title">King Qinguang · King Chujiang etc.</div><div class="card-note">Administrators of the Netherworld</div></div>
-          <div class="card tao-func"><div class="card-name">Judge Cui Jue (判官崔珏)</div><div class="card-title">Chief Magistrate of the Dead</div></div>
-          <div class="card tao-func"><div class="card-name">Heibai Wuchang (黑白无常)</div><div class="card-title">Soul-escorting Officers</div></div>
-          <div class="card tao-func"><div class="card-name">Ox-Head & Horse-Face (牛头马面)</div><div class="card-title">Executors of the Underworld</div></div>
-        </div>
-      </div>
-
-      <div class="divider double"><span class="diamond">◆</span></div>
-
-      <!-- Buddhist Attainment System -->
-      <div class="buddha-section">
-        <div class="section-title"><span>Buddhist Attainment Hierarchy (Spiritual Rank)</span></div>
-
-        <div class="tier-section">
-          <div class="tier-label">🔸 First Fruition: Buddha (Perfect Enlightenment) 🔸</div>
-          <div class="tier-cards">
-            <a href="deities/buddha/index.html" class="card buddha rulai">
-              <div class="card-name">Śākyamuni Buddha (如来佛祖)</div>
-              <div class="card-title">Tathāgata · Lord of the Sahā World</div>
-              <div class="card-note">Supreme Leader of Western Paradise</div>
-              <div class="card-note">Administratively Five Elders · Below the Four Sovereigns</div>
-            </a>
-            <div class="card buddha"><div class="card-name">Dīpaṃkara Buddha (燃灯上古佛)</div><div class="card-title">Buddha of the Past · Teacher of Śākyamuni</div></div>
-            <div class="card buddha"><div class="card-name">Bhaiṣajyaguru Buddha (药师佛)</div><div class="card-title">Lord of the Eastern Pure Land</div></div>
-            <div class="card buddha"><div class="card-name">Amitābha Buddha (阿弥陀佛)</div><div class="card-title">Lord of the Western Pure Land</div></div>
-            <div class="card buddha"><div class="card-name">Maitreya Buddha (弥勒佛)</div><div class="card-title">Buddha of the Future · Lord of Tusita</div></div>
-            <div class="card buddha"><div class="card-name">Guide Buddha (接引佛祖)</div><div class="card-title">Baochuang Guangwang Buddha</div></div>
-          </div>
-        </div>
-
-        <div class="tier-section">
-          <div class="tier-label">🔸 Second Fruition: Bodhisattva (Enlightened Being) 🔸</div>
-          <div class="tier-cards">
-            <a href="deities/guanyin/index.html" class="card buddha">
-              <div class="card-name">Guanyin Bodhisattva (观音菩萨)</div>
-              <div class="card-title">Teacher of Seven Buddhas · Compassion</div>
-              <div class="card-note">Also listed as Five Elder</div>
-            </a>
-            <div class="card buddha"><div class="card-name">Mañjuśrī Bodhisattva (文殊菩萨)</div><div class="card-title">Wisdom Supreme · Teacher of Seven Buddhas</div></div>
-            <div class="card buddha"><div class="card-name">Samantabhadra Bodhisattva (普贤菩萨)</div><div class="card-title">Great Practice & Vows</div></div>
-            <div class="card buddha"><div class="card-name">Kṣitigarbha Bodhisattva (地藏王菩萨)</div><div class="card-title">Lord of the Underworld</div><div class="card-note">Hell not empty, vow not to become Buddha</div></div>
-            <div class="card buddha"><div class="card-name">Mahāsthāmaprāpta Bodhisattva (大势至菩萨)</div><div class="card-title">Attendant of Amitābha</div></div>
-            <div class="card buddha"><div class="card-name">Lingji Bodhisattva (灵吉菩萨)</div><div class="card-title">Subduer of Wind Demons</div></div>
-            <div class="card buddha"><div class="card-name">Pilamra Bodhisattva (毗蓝婆菩萨)</div><div class="card-title">Reclusive · Insect Demon Tamer</div></div>
-            <div class="card buddha"><div class="card-name">Peacock Great Illustrious King (孔雀大明王)</div><div class="card-title">Buddha-Mother · Great Bodhisattva Rank</div></div>
-            <div class="card buddha"><div class="card-name">Sūryaprabha & Candraprabha (日光菩萨·月光菩萨)</div><div class="card-title">Attendants of Bhaiṣajyaguru</div></div>
-          </div>
-        </div>
-
-        <div class="tier-section">
-          <div class="tier-label">🔸 Third Fruition: Arhat (Worthy One) 🔸</div>
-          <div class="tier-cards">
-            <div class="card buddha"><div class="card-name">Five Hundred Arhats (五百罗汉)</div><div class="card-title">Assembly of Saints</div></div>
-            <div class="card buddha"><div class="card-name">Eighteen Arhats (十八罗汉)</div><div class="card-title">Dragon-subduing · Tiger-taming etc.</div><div class="card-note">Elite Dharma Protectors</div></div>
-          </div>
-        </div>
-
-        <div class="tier-section">
-          <div class="tier-label">🔸 Fourth Sequence: Dharma Protectors & Guardians 🔸</div>
-          <div class="tier-cards">
-            <div class="card buddha"><div class="card-name">Four Heavenly Kings (Buddhist Guardians)</div><div class="card-title">Dharma Protectors</div></div>
-            <div class="card buddha"><div class="card-name">Skanda Bodhisattva (韦驮菩萨)</div><div class="card-title">Chief Guardian Deity</div></div>
-            <div class="card buddha"><div class="card-name">Eight Legions (天龙八部)</div><div class="card-title">Devas · Nāgas · Yakṣas · Asuras etc.</div></div>
-            <div class="card buddha"><div class="card-name">Eighteen Saṃghārāmas (十八伽蓝)</div><div class="card-title">Monastery Guardians</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider double"><span class="diamond">◆</span></div>
-
-      <!-- Transcendent Sages -->
-      <div class="sanxian-section">
-        <div class="section-title"><span>Transcendent Sages · Outside the System</span></div>
-
-        <div class="tier-cards">
-          <div class="card sanxian first">
-            <div class="card-name">Patriarch Bodhi (菩提祖师)</div>
-            <div class="card-title">Transcendent Sage · First Rank</div>
-            <div class="card-note">Master of Three Teachings · Hidden from the World</div>
-            <div class="card-note">Status equal to the Three Pure Ones (三清)</div>
-          </div>
-          <div class="card sanxian first">
-            <div class="card-name">Great Immortal Zhenyuan (镇元大仙)</div>
-            <div class="card-title">Ancestor of Earth Immortals · First Rank</div>
-            <div class="card-note">Reveres only Heaven & Earth · Old friend of the Three Pure Ones</div>
-            <div class="card-note">Status equal to the Three Pure Ones (三清)</div>
-          </div>
-        </div>
-        <p style="text-align:center;color:var(--jade-light);opacity:0.8;font-size:0.75rem;margin:8px 0 20px;letter-spacing:2px;">
-          ※ These two exist outside the administrative hierarchy, peers of the Three Pure Ones.
-        </p>
-
-        <div class="tier-cards">
-          <div class="card sanxian">
-            <div class="card-name">Old Mother of Mount Li (黎山老母)</div>
-            <div class="card-title">Ancient Immortal Lady</div>
-            <div class="card-note">Disguised as Bodhisattvas' mother to test the pilgrims</div>
-          </div>
-          <div class="card sanxian">
-            <div class="card-name">Chan Master Wuchao (乌巢禅师)</div>
-            <div class="card-title">Hermit of Floating Mountain</div>
-            <div class="card-note">Taught Tang Sanzang the Heart Sutra</div>
-          </div>
-          <div class="card sanxian">
-            <div class="card-name">Nine Elders of Yingzhou (瀛洲九老)</div>
-            <div class="card-title">Recluses of the Ocean Immortal Isles</div>
-          </div>
-          <div class="card sanxian">
-            <div class="card-name">Barefoot Immortal (赤脚大仙)</div>
-            <div class="card-title">Wandering Immortal of the Heavenly Court</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider double"><span class="diamond">◆</span></div>
-
-      <!-- Pilgrimage Team -->
-      <div class="section-title"><span>The Pilgrimage Core Team</span></div>
-      <div class="tier-cards">
-        <a href="deities/tang-sanzang/index.html" class="card qujing">
-          <div class="card-name">Tang Sanzang (唐三藏)</div><div class="card-title">Golden Cicada Reincarnated → Candana Merit Buddha</div><div class="card-note">Scripture Seeker · Master</div>
-        </a>
-        <a href="deities/sun-wukong/index.html" class="card qujing">
-          <div class="card-name">Sun Wukong (孙悟空)</div><div class="card-title">Great Sage Equal to Heaven → Victorious Fighting Buddha</div><div class="card-note">Senior Disciple · Born from Stone</div>
-        </a>
-        <a href="deities/zhu-bajie/index.html" class="card qujing">
-          <div class="card-name">Zhu Bajie (猪八戒)</div><div class="card-title">Marshal Tianpeng → Cleaner of the Altars</div><div class="card-note">Second Disciple · Exiled to Earth</div>
-        </a>
-        <div class="card qujing">
-          <div class="card-name">Sha Wujing (沙悟净)</div><div class="card-title">Curtain-lifting General → Golden Body Arhat</div><div class="card-note">Third Disciple · Former Sand River Demon</div>
-        </div>
-        <div class="card qujing">
-          <div class="card-name">White Dragon Horse (白龙马·敖烈)</div><div class="card-title">Dragon Prince of the West Sea → Eight-section Heavenly Dragon</div><div class="card-note">Steed · Reformed into Buddhist Guardian</div>
-        </div>
-      </div>
-
-      <div class="divider double"><span class="diamond">◆</span></div>
-
-      <!-- Demon Forces -->
-      <div class="yao-section">
-        <div class="section-title"><span>Demon Forces · Unranked & Targets of Suppression</span></div>
-
-        <div class="tier-section">
-          <div class="tier-label">⚠ Demons with Backgrounds (Mounts/Servants/Relatives of Deities) ⚠</div>
-          <div class="tier-cards">
-            <div class="card yao"><div class="card-name">Green Bull Demon (青牛精)</div><div class="card-title">Laozi's Mount</div><div class="card-note">Wields the Diamond Snare</div></div>
-            <div class="card yao"><div class="card-name">Yellow Brow King (黄眉大王)</div><div class="card-title">Boy Servant of Maitreya</div><div class="card-note">Human Sack</div></div>
-            <div class="card yao"><div class="card-name">Golden-winged Great Peng (金翅大鹏雕)</div><div class="card-title">Tathāgata's Uncle</div><div class="card-note">Leader of the Lion-Camel Ridge trio</div></div>
-            <div class="card yao"><div class="card-name">Golden Horn & Silver Horn Kings (金角大王·银角大王)</div><div class="card-title">Laozi's Fire-tending Boys</div></div>
-            <div class="card yao"><div class="card-name">Sai Taisui (赛太岁)</div><div class="card-title">Guanyin's Mount Golden-haired Hou</div></div>
-            <div class="card yao"><div class="card-name">Yellow Robe Monster (黄袍怪)</div><div class="card-title">The Star Kui Wood Wolf Descends</div></div>
-            <div class="card yao"><div class="card-name">Nine-headed Lion Sage (九灵元圣)</div><div class="card-title">Mount of Taiyi Jiuku Tianzun</div></div>
-            <div class="card yao"><div class="card-name">White Deer Spirit (白鹿精)</div><div class="card-title">Mount of the South Pole Immortal</div></div>
-          </div>
-        </div>
-
-        <div class="tier-section">
-          <div class="tier-label">💀 Demons without Backgrounds (Self-cultivated Spirits) 💀</div>
-          <div class="tier-cards">
-            <div class="card yao"><div class="card-name">White Bone Spirit (白骨精)</div><div class="card-title">Corpse Demon · Master of Disguise</div></div>
-            <div class="card yao"><div class="card-name">Scorpion Demoness (蝎子精)</div><div class="card-title">Once Stung Tathāgata</div></div>
-            <div class="card yao"><div class="card-name">Seven Spider Sisters (蜘蛛精)</div><div class="card-title">Silk-Cave Web Queens</div></div>
-            <div class="card yao"><div class="card-name">Centipede Demon (蜈蚣精·百眼魔君)</div><div class="card-title">Thousand-eye Golden Light Array</div></div>
-            <div class="card yao"><div class="card-name">Red Boy (红孩儿)</div><div class="card-title">Son of Bull Demon King · Samadhi Fire</div><div class="card-note">Later adopted by Guanyin as Shancai</div></div>
-            <div class="card yao"><div class="card-name">Black Bear Demon (黑熊精)</div><div class="card-title">Fierce Lone Fighter</div></div>
-            <div class="card yao"><div class="card-name">Yellow Wind Demon (黄风怪)</div><div class="card-title">Samadhi Divine Wind</div></div>
-            <div class="card yao"><div class="card-name">Inspiration King (灵感大王·金鱼精)</div><div class="card-title">Subdues Zhu Bajie underwater</div></div>
-          </div>
-        </div>
-
-        <div class="tier-section">
-          <div class="tier-label">🐂 The Seven Great Sages · Brotherhood of Sun Wukong 🐂</div>
-          <div class="tier-cards">
-            <div class="card yao"><div class="card-name">Great Sage Equal to Heaven · Bull Demon King (牛魔王)</div><div class="card-title">Leader of the Seven Sages</div></div>
-            <div class="card yao"><div class="card-name">Great Sage Covering the Sea · Flood Dragon King (蛟魔王)</div></div>
-            <div class="card yao"><div class="card-name">Great Sage Confusing Heaven · Peng King (鹏魔王)</div></div>
-            <div class="card yao"><div class="card-name">Great Sage Moving Mountains · Lion King (狮驼王)</div></div>
-            <div class="card yao"><div class="card-name">Great Sage Ventilating Wind · Macaque King (猕猴王)</div></div>
-            <div class="card yao"><div class="card-name">Great Sage Driving Gods · Giant Ape King (禺狨王)</div></div>
-          </div>
-        </div>
-
-        <div class="tier-cards" style="margin-top:10px;">
-          <div class="card yao"><div class="card-name">Princess Iron Fan (铁扇公主)</div><div class="card-title">Rakshasi · Wife of Bull Demon King</div><div class="card-note">Banana-leaf Fan</div></div>
-          <div class="card yao"><div class="card-name">Ruyi Immortal (如意真仙)</div><div class="card-title">Brother of Bull Demon King</div></div>
-          <div class="card yao"><div class="card-name">Six-eared Macaque (六耳猕猴)</div><div class="card-title">Mirror Image of Sun Wukong</div></div>
-          <div class="card yao"><div class="card-name">Three Demons of Chechi (车迟国三妖)</div><div class="card-title">Tiger · Deer · Goat</div></div>
-        </div>
-      </div>
-
-      <div class="divider double"><span class="diamond">◆</span></div>
-
-      <!-- Mortal World & Grassroots -->
-      <div class="section-title"><span>Mortal World & Grassroots Deities</span></div>
-      <div class="tier-cards">
-        <div class="card mortal"><div class="card-name">Emperor Taizong of Tang (唐太宗·李世民)</div><div class="card-title">Mortal Ruler</div></div>
-        <div class="card mortal"><div class="card-name">Wei Zheng (魏征)</div><div class="card-title">Dream-beheaded the Dragon King</div></div>
-        <div class="card mortal"><div class="card-name">Yuan Shoucheng (袁守城)</div><div class="card-title">Divine Fortune-teller</div></div>
-        <div class="card mortal"><div class="card-name">Liu Boqin (刘伯钦)</div><div class="card-title">Hunter of Double Fork Ridge · Peak Mortal Warrior</div></div>
-        <div class="card mortal"><div class="card-name">Queen of the Women's Kingdom (女儿国国王)</div><div class="card-title">Mortal Kingdom</div></div>
-        <div class="card mortal"><div class="card-name">Kings of Various Nations (各国国王)</div><div class="card-title">Chechi · Bichu etc.</div></div>
-      </div>
-
-      <div class="tier-section" style="margin-top:10px;">
-        <div class="tier-label">🏘 Grassroots Deities 🏘</div>
-        <div class="tier-cards">
-          <div class="card mortal"><div class="card-name">City God (城隍)</div><div class="card-title">Protector of Cities</div></div>
-          <div class="card mortal"><div class="card-name">Earth God (土地)</div><div class="card-title">Local Guardian</div></div>
-          <div class="card mortal"><div class="card-name">Mountain God (山神)</div><div class="card-title">Guardian of Mountains</div></div>
-        </div>
-      </div>
-
-      <div class="tier-section">
-        <div class="tier-label">🐉 Dragon Clan Supplement 🐉</div>
-        <div class="tier-cards">
-          <div class="card mortal"><div class="card-name">Dragon King of the Jing River (泾河龙王)</div><div class="card-title">Beheaded for tampering with rain quotas</div><div class="card-note">Catalyst of the Pilgrimage</div></div>
-          <div class="card mortal"><div class="card-name">Tuo Long (鼍龙)</div><div class="card-title">Son of Jing River Dragon King</div><div class="card-note">Demon of the Black River</div></div>
-          <div class="card mortal"><div class="card-name">Prince Mo'ang (摩昂太子)</div><div class="card-title">Mightiest Warrior of the West Sea Dragons</div></div>
-        </div>
-      </div>
-
-      <div class="divider double"><span class="diamond">◆</span></div>
-      <div style="text-align:center;padding:30px 20px;background:rgba(30,16,8,0.5);border-radius:12px;border:1px solid var(--border-subtle);">
-        <p style="color:var(--gold-bright);font-size:1rem;letter-spacing:3px;font-weight:bold;">📜 Summary of the Three Realms Order 📜</p>
-        <p style="color:var(--text-light);font-size:0.8rem;line-height:2.2;letter-spacing:1px;margin-top:10px;">
-          <strong>Lowest Level</strong> → Earth Gods · Mountain Gods · City Gods · Underworld Messengers<br>
-          <strong>Above Them</strong> → Star Mansions · Dragon Kings · Thunder Ministry · Yama Kings<br>
-          <strong>Higher Still</strong> → Four Heavenly Kings · Nezha · Erlang Shen · Four Heavenly Masters · Four Saints · Five Elders<br>
-          <strong>Sovereign</strong> → <span style="color:#f0d870;">Jade Emperor (Chief of the Four Sovereigns)</span><br>
-          <strong>Apex of Power</strong> → <span style="color:#e8d090;">All Four Sovereigns</span><br>
-          <strong>Supreme Dao</strong> → <span style="color:#d4b8e0;">The Three Pure Ones (Embodiments of the Dao)</span><br>
-          <br>
-          <em style="color:var(--jade-light);">Parallel Path: Buddhist Attainment Line (Buddha → Bodhisattva → Arhat → Protector)</em><br>
-          <em style="color:var(--jade-light);">Parallel Path: Transcendent Sages (Patriarch Bodhi · Great Immortal Zhenyuan · Old Mother of Li Mountain — outside the system, peers of the Three Pure Ones & Four Sovereigns)</em><br>
-          <em style="color:#c08090;">Demons have no rank, only outcomes — absorbed into the system or annihilated.</em>
-        </p>
+  <!-- ===== 5. Featured Mythological Figures ===== -->
+  <section class="pantheon section" id="deities" aria-label="Featured mythological figures">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="title-ornament"></span>
+        Featured Mythological Figures
+      </h2>
+      <p style="text-align:center;color:var(--text-secondary);font-size:0.9rem;margin-bottom:var(--space-xl);max-width:620px;margin-left:auto;margin-right:auto;">Every deity has a story. Click to explore their origins, arsenal, battles, and legacy.</p>
+      <div class="pantheon-grid" id="pantheon-grid">
+        <!-- Populated by JS from CELESTIAL_DEITIES registry -->
       </div>
     </div>
-
-    <div class="footer">
-      <p>Journey to the West · Complete Hierarchy of the Three Realms</p>
-      <p style="font-size:0.7rem;margin-top:4px;">Daoist Orthodoxy · Buddhist Attainment · Transcendent Sages · Demons & Mortals</p>
-      <p style="font-size:0.65rem;margin-top:8px;opacity:0.4;">Ranking based on canonical ritual order and religious hierarchy, not combat power.</p>
-    </div>
-
   </section>
 
-  <!-- Card animation JS (DeepSeek original, scoped) -->
-  <script>
-    (function(){
-      var section = document.querySelector('.hierarchy-section');
-      if(!section) return;
-      var allCards = section.querySelectorAll('.card');
-      var observer = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry, index){
-          if(entry.isIntersecting){
-            setTimeout(function(){
-              entry.target.style.opacity = '1';
-              entry.target.style.transform = 'translateY(0)';
-            }, index * 30);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
+  <!-- ===== 6. Explore / Dive Deeper (Internal Link Zone) ===== -->
+  <section class="linkzone-section" aria-label="Dive deeper into Chinese mythology">
+    <p class="linkzone-title">Dive Deeper into Chinese Mythology</p>
+    <p class="linkzone-sub">Compare gods, discover creatures, and explore the meaning behind the legends</p>
+    <div class="linkzone-grid">
+      <a href="topics/nezha-vs-sun-wukong.html">Nezha vs Sun Wukong</a>
+      <a href="topics/chinese-mythology-creatures.html">Mythological Creatures</a>
+      <a href="topics/chinese-dragons.html">Chinese Dragon Meaning</a>
+      <a href="topics/chinese-mythology.html">What Is Chinese Mythology</a>
+      <a href="topics/chinese-gods.html">Chinese Gods &amp; Deities</a>
+      <a href="topics/journey-to-the-west.html">Journey to the West</a>
+      <a href="topics/is-nezha-god-or-demon.html">Is Nezha a God or Demon</a>
+      <a href="topics/chinese-mythology-vs-greek-mythology.html">Chinese vs Greek Mythology</a>
+      <a href="topics/jade-emperor.html">Jade Emperor</a>
+    </div>
+  </section>
 
-      allCards.forEach(function(card){
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(10px)';
-        card.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
-        observer.observe(card);
-      });
-
-      allCards.forEach(function(card){
-        card.addEventListener('click', function(e){
-          allCards.forEach(function(c){ c.style.outline = 'none'; });
-          this.style.outline = '2px solid var(--gold)';
-          this.style.outlineOffset = '3px';
-          setTimeout(function(){ this.style.outline = 'none'; }.bind(this), 2000);
-        });
-      });
-    })();
-  </script>
+  <!-- ===== 7. FAQ (Google Featured Snippet) ===== -->
+  <section class="faq-section" aria-label="Frequently asked questions">
+    <div class="faq-inner">
+      <h2>Frequently Asked Questions About Chinese Mythology</h2>
+      <div class="faq-item">
+        <p class="faq-q">Q: What is Chinese mythology?</p>
+        <p class="faq-a">Chinese mythology is a collection of stories, gods, and beliefs that explain the world and cultural traditions in ancient China. It spans over 5,000 years and blends Taoist, Buddhist, and folk religious traditions into a vast cosmos of deities, immortals, demons, and legendary heroes.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Q: Who is the most powerful Chinese god?</p>
+        <p class="faq-a">The <a href="topics/jade-emperor.html">Jade Emperor</a> is often considered the supreme ruler of heaven in Chinese mythology. He governs the celestial bureaucracy and all deities answer to him — though the Three Pure Ones of Taoism stand above him as embodiments of the Dao itself.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Q: Is Nezha a real god?</p>
+        <p class="faq-a"><a href="topics/who-is-nezha.html">Nezha</a> is a mythological deity widely worshipped in Chinese folk religion. While he originated in Buddhist scripture as a guardian deity, he became a major figure in Taoist worship and is still actively venerated in temples across China and Southeast Asia today.</p>
+      </div>
+    </div>
+  </section>
 
   <footer class="site-footer" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
           <div class="footer-brand">Celestial Archive</div>
-          <p class="footer-desc">Exploring the myths, legends, and divine beings of Eastern mythology — one story at a time.</p>
+          <p class="footer-desc">Exploring the myths, legends, and divine beings of Chinese mythology — one story at a time.</p>
         </div>
         <div class="footer-col">
           <div class="footer-heading">Explore</div>
@@ -1331,7 +746,7 @@
         "@type": "WebSite",
         "name": "Celestial Archive",
         "url": "https://celestial-archive.com",
-        "description": "Exploring the myths, legends, and divine beings of Eastern mythology.",
+        "description": "Chinese mythology is a rich system of gods, creatures, and legends spanning 5,000 years. Explore Chinese gods, mythological creatures, Journey to the West, and the complete celestial hierarchy.",
         "inLanguage": "en",
         "potentialAction": {
           "@type": "SearchAction",
@@ -1343,14 +758,23 @@
         "@type": "Organization",
         "name": "Celestial Archive",
         "url": "https://celestial-archive.com",
-        "description": "Exploring the myths, legends, and divine beings of Eastern mythology."
+        "description": "Chinese mythology is a rich system of gods, creatures, and legends spanning 5,000 years. Explore Chinese gods, mythological creatures, Journey to the West, and the complete celestial hierarchy."
       }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"What is Chinese mythology?","acceptedAnswer":{"@type":"Answer","text":"Chinese mythology is a collection of stories, gods, and beliefs that explain the world and cultural traditions in ancient China. It spans over 5,000 years and blends Taoist, Buddhist, and folk religious traditions into a vast cosmos of deities, immortals, demons, and legendary heroes."}},
+      {"@type":"Question","name":"Who is the most powerful Chinese god?","acceptedAnswer":{"@type":"Answer","text":"The Jade Emperor is often considered the supreme ruler of heaven in Chinese mythology. He governs the celestial bureaucracy and all deities answer to him — though the Three Pure Ones of Taoism stand above him as embodiments of the Dao itself."}},
+      {"@type":"Question","name":"Is Nezha a real god?","acceptedAnswer":{"@type":"Answer","text":"Nezha is a mythological deity widely worshipped in Chinese folk religion. He originated in Buddhist scripture as a guardian deity and became a major figure in Taoist worship, still actively venerated in temples across China and Southeast Asia today."}}
     ]
   }
   </script>
   <script src="js/deities.js"></script>
   <script src="js/main.js"></script>
-<script src="js/config.js"></script>
-<script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
+  <script src="js/config.js"></script>
+  <script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
 </body>
 </html>

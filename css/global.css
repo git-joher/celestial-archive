@@ -1023,24 +1023,34 @@ img.mural-filter,
 
 /* ============================================================
    Dive Deeper — topic cross-links on deity pages
-   Full-width warm parchment band bridges content and footer
+   Transparent link row with ornament separator.
+   No background band — sits on the page's natural background,
+   followed by the dark footer for a clean content→footer flow.
    ============================================================ */
 .dive-deeper {
   max-width: 100%;
   margin: 0;
-  padding: 40px var(--space-md);
+  padding: 32px var(--space-md) 44px;
   text-align: center;
-  background: linear-gradient(180deg, #e8dfcf 0%, #ddd2bd 100%);
-  border-top: 1px solid rgba(139, 105, 20, 0.12);
-  border-bottom: 1px solid rgba(139, 105, 20, 0.12);
+  background: transparent;
+  border: none;
+}
+.dive-deeper::before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 1px;
+  margin: 0 auto 22px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
 }
 .dive-deeper-label {
   font-family: var(--font-display);
-  font-size: 0.7rem;
-  letter-spacing: 5px;
+  font-size: 0.68rem;
+  letter-spacing: 6px;
   text-transform: uppercase;
-  color: #8b6914;
-  margin-bottom: 16px;
+  color: var(--accent-gold);
+  margin-bottom: 18px;
+  opacity: 0.8;
 }
 .dive-deeper-links {
   display: flex;
@@ -1051,17 +1061,17 @@ img.mural-filter,
 .dive-deeper-links a {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.84rem;
-  color: #5c4a1e;
+  font-size: 0.82rem;
+  color: var(--accent-gold);
   text-decoration: none;
-  padding: 9px 20px;
-  border: 1px solid rgba(139, 105, 20, 0.28);
+  padding: 8px 18px;
+  border: 1px solid rgba(184, 160, 110, 0.35);
   border-radius: 20px;
   transition: color 0.25s, border-color 0.25s, background 0.25s;
   white-space: nowrap;
 }
 .dive-deeper-links a:hover {
-  color: #8b6914;
-  border-color: rgba(139, 105, 20, 0.55);
-  background: rgba(139, 105, 20, 0.07);
+  color: #c9a845;
+  border-color: rgba(184, 160, 110, 0.65);
+  background: rgba(184, 160, 110, 0.08);
 }

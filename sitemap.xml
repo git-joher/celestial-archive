@@ -23,6 +23,12 @@
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
+  <!-- Three Realms Hierarchy -->
+  <url>
+    <loc>https://celestial-archive.com/three-realms-hierarchy.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <!-- Sun Wukong -->
   <url>
     <loc>https://celestial-archive.com/deities/sun-wukong/</loc>
