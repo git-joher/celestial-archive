@@ -1,0 +1,185 @@
+/* ================================================================
+   Jade Emperor Hub — "Dragon Throne" (龙廷)
+   Imperial gold, jade green, celestial majesty.
+   ================================================================ */
+
+:root {
+  --je-jade: #5a8a6a;
+  --je-gold: #c9a845;
+  --je-cloud: #f5f0e8;
+  --je-throne: #2d1414;
+  --je-mist: #889999;
+  --je-emerald: #3d6b4f;
+  --je-brass: #a88b3a;
+}
+
+/* ---- nav ---- */
+.je-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 28px; display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(180deg, rgba(45,20,20,0.95) 0%, rgba(45,20,20,0) 100%);
+  pointer-events: none;
+}
+.je-nav a {
+  pointer-events: auto; color: var(--je-mist); text-decoration: none;
+  font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+  transition: color 0.3s; font-family: 'Cinzel', serif;
+}
+.je-nav a:hover { color: var(--je-gold); }
+
+/* ---- hero: imperial throne room ---- */
+.je-hero {
+  position: relative; min-height: 100vh; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+  background: var(--je-throne); overflow: hidden;
+}
+.je-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(90,138,106,0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 70%, rgba(201,168,69,0.12) 0%, transparent 45%);
+}
+.je-hero-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+}
+.je-hero-bg-img img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 70%);
+}
+/* golden light rays */
+.je-rays {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+}
+.je-rays span {
+  position: absolute; top: 50%; left: 50%;
+  width: 1px; height: 300px;
+  background: linear-gradient(180deg, rgba(201,168,69,0.15) 0%, transparent 100%);
+  transform-origin: top center;
+  animation: je-ray-pulse 3s ease-in-out infinite;
+}
+@keyframes je-ray-pulse {
+  0%,100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.je-hero-content { position: relative; z-index: 2; max-width: 700px; padding: 0 24px; }
+.je-hero-kicker {
+  font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 6px;
+  color: var(--je-gold); text-transform: uppercase; margin-bottom: 10px;
+}
+.je-hero-title {
+  font-family: 'Cinzel', serif; font-size: clamp(2.8rem, 6.5vw, 5.5rem); font-weight: 700;
+  color: var(--je-cloud); line-height: 1.04;
+  text-shadow: 0 0 40px rgba(201,168,69,0.35), 0 0 80px rgba(90,138,106,0.15);
+  margin-bottom: 6px;
+}
+.je-hero-name-zh {
+  font-family: 'Ma Shan Zheng', cursive; font-size: 2.2rem; color: var(--je-gold);
+  margin-bottom: 12px;
+}
+.je-hero-divider {
+  width: 90px; height: 3px; margin: 0 auto 16px;
+  background: linear-gradient(90deg, var(--je-jade), var(--je-gold), var(--je-jade));
+}
+.je-hero-tagline {
+  font-size: 1.1rem; color: var(--je-mist); line-height: 1.8; max-width: 520px; margin: 0 auto;
+}
+.je-hero-tagline strong { color: var(--je-cloud); font-weight: 600; }
+
+.je-scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.je-scroll-hint span {
+  display: block; width: 22px; height: 36px; border: 2px solid var(--je-mist);
+  border-radius: 12px; position: relative;
+}
+.je-scroll-hint span::after {
+  content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 8px; background: var(--je-gold); border-radius: 2px;
+  animation: je-dot 2s ease-in-out infinite;
+}
+@keyframes je-dot { 0%,100% { top: 6px; opacity: 1; } 50% { top: 18px; opacity: 0.2; } }
+
+/* ---- identity cards ---- */
+.je-id-section { background: var(--je-throne); padding: 80px 0; }
+.je-id-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.je-id-card {
+  background: #1f0f0f; padding: 36px 28px; text-align: center;
+  border-radius: 4px; transition: transform 0.3s, box-shadow 0.3s;
+  position: relative; overflow: hidden;
+}
+.je-id-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+.je-id-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(201,168,69,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.je-id-emoji { font-size: 2.8rem; margin-bottom: 8px; }
+.je-id-label {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px;
+  color: var(--je-gold); margin-bottom: 8px;
+}
+.je-id-title {
+  font-family: 'Cinzel', serif; font-size: 1.15rem; color: var(--je-cloud);
+  margin-bottom: 8px; font-weight: 600;
+}
+.je-id-desc { font-size: 0.88rem; line-height: 1.7; color: var(--je-mist); }
+
+/* ---- story fragments ---- */
+.je-story-section { background: #1a0c0c; padding: 100px 0; }
+.je-story-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+}
+.je-story-card { text-align: center; padding: 0 16px; }
+.je-story-number {
+  font-family: 'Cinzel', serif; font-size: 4rem; color: var(--je-gold);
+  opacity: 0.15; line-height: 1; margin-bottom: 8px;
+}
+.je-story-card h3 {
+  font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--je-cloud); margin-bottom: 10px;
+}
+.je-story-card p {
+  font-size: 0.92rem; line-height: 1.75; color: var(--je-mist);
+}
+
+/* ---- hub cards ---- */
+.je-hub-section { background: var(--je-throne); padding: 100px 0; }
+.je-hub-grid {
+  max-width: 720px; margin: 0 auto; padding: 0 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.je-hub-card {
+  display: flex; align-items: center; gap: 20px; padding: 24px 28px;
+  background: #1f0f0f; border-radius: 3px; text-decoration: none; color: inherit;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.je-hub-card:nth-child(1) { --hc: var(--je-jade); }
+.je-hub-card:nth-child(2) { --hc: var(--je-gold); }
+.je-hub-card:nth-child(3) { --hc: var(--je-brass); }
+.je-hub-card:nth-child(4) { --hc: var(--je-emerald); }
+.je-hub-card:hover { border-bottom-color: var(--hc); background: #2a1515; transform: translateY(-3px); }
+.je-hub-card-icon { font-size: 2.5rem; min-width: 60px; text-align: center; }
+.je-hub-card-body { flex: 1; }
+.je-hub-card-body h3 {
+  font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--je-cloud); margin-bottom: 2px;
+}
+.je-hub-card-body p { font-size: 0.85rem; color: var(--je-mist); line-height: 1.5; }
+.je-hub-card-arrow { font-size: 1.5rem; color: var(--je-mist); }
+.je-hub-card:hover .je-hub-card-arrow { color: var(--hc); }
+
+/* ---- related ---- */
+.je-related-section { background: #1a0c0c; padding: 80px 0; }
+
+/* ---- inscriptions ---- */
+.je-inscriptions-section { background: var(--je-throne); padding: 80px 0; }
+
+/* ---- responsive ---- */
+@media (max-width: 1024px) { .je-id-grid { grid-template-columns: repeat(2, 1fr); } .je-story-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 767px) {
+  .je-id-grid, .je-story-grid { grid-template-columns: 1fr; }
+  .je-hub-card { flex-direction: column; text-align: center; }
+  .je-hub-card-arrow { display: none; }
+}

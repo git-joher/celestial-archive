@@ -73,5 +73,35 @@ var CELESTIAL_DEITIES = [
     status: 'live',
     avatarBg: '#5a7a8c',
     avatarInitial: 'E'
+  },
+  {
+    slug: 'sha-wujing',
+    name: 'Sha Wujing',
+    nameZh: '沙悟净',
+    title: 'The Sand Monk',
+    description: 'Former Curtain-Raising General, banished to the Flowing Sands River, redeemed as the third disciple of Tang Sanzang.',
+    status: 'live',
+    avatarBg: '#2d6d6d',
+    avatarInitial: 'S'
+  },
+  {
+    slug: 'jade-emperor',
+    name: 'Jade Emperor',
+    nameZh: '玉皇大帝',
+    title: 'Supreme Ruler of Heaven',
+    description: 'The highest sovereign of the celestial realm, who governs the universe through a divine bureaucracy.',
+    status: 'live',
+    avatarBg: '#5a8a6a',
+    avatarInitial: 'J'
+  },
+  {
+    slug: 'white-dragon-horse',
+    name: 'White Dragon Horse',
+    nameZh: '白龙马',
+    title: 'The Dragon Prince Steed',
+    description: 'Ao Lie, dragon prince of the Western Sea, transformed into Tang Sanzang\'s loyal mount for the pilgrimage.',
+    status: 'live',
+    avatarBg: '#4a8aa8',
+    avatarInitial: 'W'
   }
 ];

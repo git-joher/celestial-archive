@@ -1,0 +1,185 @@
+/* ================================================================
+   Sha Wujing Hub — "Flowing Sands" (流沙)
+   Deep river teals, flowing sand gold, silent and stoic.
+   ================================================================ */
+
+:root {
+  --sj-teal: #2d6d6d;
+  --sj-sand: #c4a56e;
+  --sj-abyss: #1a2525;
+  --sj-pearl: #e0d8c8;
+  --sj-mist: #889999;
+  --sj-rust: #8b3a3a;
+}
+
+/* ---- nav ---- */
+.sj-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 28px; display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(180deg, rgba(26,37,37,0.95) 0%, rgba(26,37,37,0) 100%);
+  pointer-events: none;
+}
+.sj-nav a {
+  pointer-events: auto; color: var(--sj-mist); text-decoration: none;
+  font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+  transition: color 0.3s; font-family: 'Cinzel', serif;
+}
+.sj-nav a:hover { color: var(--sj-pearl); }
+
+/* ---- hero: flowing river ---- */
+.sj-hero {
+  position: relative; min-height: 100vh; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+  background: var(--sj-abyss); overflow: hidden;
+}
+/* water surface overlay */
+.sj-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 70%, rgba(45,109,109,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 50%, rgba(196,165,110,0.08) 0%, transparent 50%);
+}
+.sj-hero-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+}
+.sj-hero-bg-img img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 35%;
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse at 50% 45%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 30%, transparent 70%);
+}
+/* flowing sand particles */
+.sj-sand {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+}
+.sj-sand span {
+  position: absolute; width: 3px; height: 3px;
+  background: rgba(196,165,110,0.2); border-radius: 50%;
+  animation: sj-sandfall var(--dur) var(--delay) infinite linear;
+}
+@keyframes sj-sandfall {
+  0% { transform: translateY(-10px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.sj-hero-content { position: relative; z-index: 2; max-width: 700px; padding: 0 24px; }
+.sj-hero-kicker {
+  font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 6px;
+  color: var(--sj-sand); text-transform: uppercase; margin-bottom: 10px;
+}
+.sj-hero-title {
+  font-family: 'Cinzel', serif; font-size: clamp(3rem, 7vw, 6rem); font-weight: 700;
+  color: var(--sj-pearl); line-height: 1.04;
+  text-shadow: 0 0 40px rgba(45,109,109,0.4), 0 0 80px rgba(139,58,58,0.1);
+  margin-bottom: 6px;
+}
+.sj-hero-name-zh {
+  font-family: 'Ma Shan Zheng', cursive; font-size: 2.2rem; color: var(--sj-sand);
+  margin-bottom: 12px;
+}
+.sj-hero-divider {
+  width: 70px; height: 3px; margin: 0 auto 16px;
+  background: linear-gradient(90deg, var(--sj-teal), var(--sj-sand), var(--sj-teal));
+}
+.sj-hero-tagline {
+  font-size: 1.1rem; color: var(--sj-mist); line-height: 1.8; max-width: 500px; margin: 0 auto;
+}
+.sj-hero-tagline strong { color: var(--sj-pearl); font-weight: 600; }
+
+.sj-scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.sj-scroll-hint span {
+  display: block; width: 22px; height: 36px; border: 2px solid var(--sj-mist);
+  border-radius: 12px; position: relative;
+}
+.sj-scroll-hint span::after {
+  content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 8px; background: var(--sj-sand); border-radius: 2px;
+  animation: sj-dot 2s ease-in-out infinite;
+}
+@keyframes sj-dot { 0%,100% { top: 6px; opacity: 1; } 50% { top: 18px; opacity: 0.2; } }
+
+/* ---- identity cards ---- */
+.sj-id-section { background: var(--sj-abyss); padding: 80px 0; }
+.sj-id-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.sj-id-card {
+  background: #1e2e2e; padding: 36px 28px; text-align: center;
+  border-radius: 4px; transition: transform 0.3s, box-shadow 0.3s;
+  position: relative; overflow: hidden;
+}
+.sj-id-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+.sj-id-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(45,109,109,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.sj-id-emoji { font-size: 2.8rem; margin-bottom: 8px; }
+.sj-id-label {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px;
+  color: var(--sj-teal); margin-bottom: 8px;
+}
+.sj-id-title {
+  font-family: 'Cinzel', serif; font-size: 1.15rem; color: var(--sj-pearl);
+  margin-bottom: 8px; font-weight: 600;
+}
+.sj-id-desc { font-size: 0.88rem; line-height: 1.7; color: var(--sj-mist); }
+
+/* ---- story fragments ---- */
+.sj-story-section { background: #152020; padding: 100px 0; }
+.sj-story-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+}
+.sj-story-card { text-align: center; padding: 0 16px; }
+.sj-story-number {
+  font-family: 'Cinzel', serif; font-size: 4rem; color: var(--sj-teal);
+  opacity: 0.2; line-height: 1; margin-bottom: 8px;
+}
+.sj-story-card h3 {
+  font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--sj-pearl); margin-bottom: 10px;
+}
+.sj-story-card p {
+  font-size: 0.92rem; line-height: 1.75; color: var(--sj-mist);
+}
+
+/* ---- hub cards ---- */
+.sj-hub-section { background: var(--sj-abyss); padding: 100px 0; }
+.sj-hub-grid {
+  max-width: 720px; margin: 0 auto; padding: 0 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.sj-hub-card {
+  display: flex; align-items: center; gap: 20px; padding: 24px 28px;
+  background: #1e2e2e; border-radius: 3px; text-decoration: none; color: inherit;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.sj-hub-card:nth-child(1) { --hc: var(--sj-teal); }
+.sj-hub-card:nth-child(2) { --hc: var(--sj-sand); }
+.sj-hub-card:nth-child(3) { --hc: var(--sj-rust); }
+.sj-hub-card:nth-child(4) { --hc: var(--sj-pearl); }
+.sj-hub-card:hover { border-bottom-color: var(--hc); background: #243535; transform: translateY(-3px); }
+.sj-hub-card-icon { font-size: 2.5rem; min-width: 60px; text-align: center; }
+.sj-hub-card-body { flex: 1; }
+.sj-hub-card-body h3 {
+  font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--sj-pearl); margin-bottom: 2px;
+}
+.sj-hub-card-body p { font-size: 0.85rem; color: var(--sj-mist); line-height: 1.5; }
+.sj-hub-card-arrow { font-size: 1.5rem; color: var(--sj-mist); }
+.sj-hub-card:hover .sj-hub-card-arrow { color: var(--hc); }
+
+/* ---- related ---- */
+.sj-related-section { background: #152020; padding: 80px 0; }
+
+/* ---- inscriptions ---- */
+.sj-inscriptions-section { background: var(--sj-abyss); padding: 80px 0; }
+
+/* ---- responsive ---- */
+@media (max-width: 1024px) { .sj-id-grid { grid-template-columns: repeat(2, 1fr); } .sj-story-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 767px) {
+  .sj-id-grid, .sj-story-grid { grid-template-columns: 1fr; }
+  .sj-hub-card { flex-direction: column; text-align: center; }
+  .sj-hub-card-arrow { display: none; }
+}

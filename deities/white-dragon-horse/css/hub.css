@@ -1,0 +1,187 @@
+/* ================================================================
+   White Dragon Horse Hub — "Dragon Pearl" (龙珠)
+   Deep ocean blues, pearl whites, dragon prince in humble form.
+   ================================================================ */
+
+:root {
+  --wl-abyss: #0f2847;
+  --wl-pearl: #e8e0d0;
+  --wl-scale: #4a8aa8;
+  --wl-steed: #d4c8b0;
+  --wl-gold: #b0a060;
+  --wl-deep: #0a1c2e;
+  --wl-mist: #7a8a9a;
+}
+
+/* ---- nav ---- */
+.wl-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 28px; display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(180deg, rgba(10,28,46,0.95) 0%, rgba(10,28,46,0) 100%);
+  pointer-events: none;
+}
+.wl-nav a {
+  pointer-events: auto; color: var(--wl-mist); text-decoration: none;
+  font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+  transition: color 0.3s; font-family: 'Cinzel', serif;
+}
+.wl-nav a:hover { color: var(--wl-pearl); }
+
+/* ---- hero: deep ocean, pearl light ---- */
+.wl-hero {
+  position: relative; min-height: 100vh; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+  background: var(--wl-abyss); overflow: hidden;
+}
+.wl-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(74,138,168,0.2) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 80%, rgba(176,160,96,0.08) 0%, transparent 50%);
+}
+.wl-hero-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+}
+.wl-hero-bg-img img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 35%;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse at 50% 45%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, black 30%, transparent 70%);
+}
+/* floating bubbles */
+.wl-bubbles {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+}
+.wl-bubbles span {
+  position: absolute; width: 4px; height: 4px;
+  background: rgba(232,224,208,0.15); border-radius: 50%;
+  animation: wl-rise var(--dur) var(--delay) infinite ease-in;
+}
+@keyframes wl-rise {
+  0% { transform: translateY(100vh); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(-20px); opacity: 0; }
+}
+
+.wl-hero-content { position: relative; z-index: 2; max-width: 700px; padding: 0 24px; }
+.wl-hero-kicker {
+  font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 6px;
+  color: var(--wl-gold); text-transform: uppercase; margin-bottom: 10px;
+}
+.wl-hero-title {
+  font-family: 'Cinzel', serif; font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 700;
+  color: var(--wl-pearl); line-height: 1.04;
+  text-shadow: 0 0 40px rgba(74,138,168,0.4), 0 0 80px rgba(176,160,96,0.1);
+  margin-bottom: 6px;
+}
+.wl-hero-name-zh {
+  font-family: 'Ma Shan Zheng', cursive; font-size: 2.2rem; color: var(--wl-gold);
+  margin-bottom: 12px;
+}
+.wl-hero-divider {
+  width: 70px; height: 3px; margin: 0 auto 16px;
+  background: linear-gradient(90deg, var(--wl-scale), var(--wl-gold), var(--wl-scale));
+}
+.wl-hero-tagline {
+  font-size: 1.1rem; color: var(--wl-mist); line-height: 1.8; max-width: 500px; margin: 0 auto;
+}
+.wl-hero-tagline strong { color: var(--wl-pearl); font-weight: 600; }
+
+.wl-scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.wl-scroll-hint span {
+  display: block; width: 22px; height: 36px; border: 2px solid var(--wl-mist);
+  border-radius: 12px; position: relative;
+}
+.wl-scroll-hint span::after {
+  content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 8px; background: var(--wl-gold); border-radius: 2px;
+  animation: wl-dot 2s ease-in-out infinite;
+}
+@keyframes wl-dot { 0%,100% { top: 6px; opacity: 1; } 50% { top: 18px; opacity: 0.2; } }
+
+/* ---- identity cards ---- */
+.wl-id-section { background: var(--wl-abyss); padding: 80px 0; }
+.wl-id-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.wl-id-card {
+  background: #0a1c2e; padding: 36px 28px; text-align: center;
+  border-radius: 4px; transition: transform 0.3s, box-shadow 0.3s;
+  position: relative; overflow: hidden;
+}
+.wl-id-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+.wl-id-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(74,138,168,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.wl-id-emoji { font-size: 2.8rem; margin-bottom: 8px; }
+.wl-id-label {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px;
+  color: var(--wl-scale); margin-bottom: 8px;
+}
+.wl-id-title {
+  font-family: 'Cinzel', serif; font-size: 1.15rem; color: var(--wl-pearl);
+  margin-bottom: 8px; font-weight: 600;
+}
+.wl-id-desc { font-size: 0.88rem; line-height: 1.7; color: var(--wl-mist); }
+
+/* ---- story fragments ---- */
+.wl-story-section { background: #0a1c2e; padding: 100px 0; }
+.wl-story-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+}
+.wl-story-card { text-align: center; padding: 0 16px; }
+.wl-story-number {
+  font-family: 'Cinzel', serif; font-size: 4rem; color: var(--wl-scale);
+  opacity: 0.2; line-height: 1; margin-bottom: 8px;
+}
+.wl-story-card h3 {
+  font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--wl-pearl); margin-bottom: 10px;
+}
+.wl-story-card p {
+  font-size: 0.92rem; line-height: 1.75; color: var(--wl-mist);
+}
+
+/* ---- hub cards ---- */
+.wl-hub-section { background: var(--wl-abyss); padding: 100px 0; }
+.wl-hub-grid {
+  max-width: 720px; margin: 0 auto; padding: 0 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.wl-hub-card {
+  display: flex; align-items: center; gap: 20px; padding: 24px 28px;
+  background: #0a1c2e; border-radius: 3px; text-decoration: none; color: inherit;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.wl-hub-card:nth-child(1) { --hc: var(--wl-scale); }
+.wl-hub-card:nth-child(2) { --hc: var(--wl-gold); }
+.wl-hub-card:nth-child(3) { --hc: var(--wl-pearl); }
+.wl-hub-card:nth-child(4) { --hc: #c97a5a; }
+.wl-hub-card:nth-child(5) { --hc: var(--wl-scale); }
+.wl-hub-card:nth-child(6) { --hc: var(--wl-steed); }
+.wl-hub-card:hover { border-bottom-color: var(--hc); background: #0f2847; transform: translateY(-3px); }
+.wl-hub-card-icon { font-size: 2.5rem; min-width: 60px; text-align: center; }
+.wl-hub-card-body { flex: 1; }
+.wl-hub-card-body h3 {
+  font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--wl-pearl); margin-bottom: 2px;
+}
+.wl-hub-card-body p { font-size: 0.85rem; color: var(--wl-mist); line-height: 1.5; }
+.wl-hub-card-arrow { font-size: 1.5rem; color: var(--wl-mist); }
+.wl-hub-card:hover .wl-hub-card-arrow { color: var(--hc); }
+
+/* ---- related ---- */
+.wl-related-section { background: #0a1c2e; padding: 80px 0; }
+
+/* ---- inscriptions ---- */
+.wl-inscriptions-section { background: var(--wl-abyss); padding: 80px 0; }
+
+/* ---- responsive ---- */
+@media (max-width: 1024px) { .wl-id-grid { grid-template-columns: repeat(2, 1fr); } .wl-story-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 767px) {
+  .wl-id-grid, .wl-story-grid { grid-template-columns: 1fr; }
+  .wl-hub-card { flex-direction: column; text-align: center; }
+  .wl-hub-card-arrow { display: none; }
+}
