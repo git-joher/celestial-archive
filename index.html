@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chinese Mythology Explained: Gods, Characters & Stories | Celestial Archive</title>
-  <meta name="description" content="Explore Chinese mythology including Nezha, Sun Wukong, and the Jade Emperor. Learn about gods, legendary stories, and characters from ancient China.">
+  <title>Chinese Mythology Explained: Gods, Legends & Characters | Celestial Archive</title>
+  <meta name="description" content="Explore Chinese mythology gods, legends, and characters — from Sun Wukong and Nezha to the Jade Emperor. Discover ancient Chinese myths, legendary stories, and divine beings from 5,000 years of Chinese culture.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://celestial-archive.com/">
   <!-- Open Graph -->
-  <meta property="og:title" content="Chinese Mythology Explained: Gods, Characters & Stories | Celestial Archive">
-  <meta property="og:description" content="Explore Chinese mythology including Nezha, Sun Wukong, and the Jade Emperor. Learn about gods, legendary stories, and characters from ancient China.">
+  <meta property="og:title" content="Chinese Mythology Explained: Gods, Legends & Characters | Celestial Archive">
+  <meta property="og:description" content="Explore Chinese mythology gods, legends, and characters — from Sun Wukong and Nezha to the Jade Emperor. Discover ancient Chinese myths, legendary stories, and divine beings from 5,000 years of Chinese culture.">
   <meta property="og:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -20,15 +20,15 @@
   <meta property="og:site_name" content="Celestial Archive">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Chinese Mythology Explained: Gods, Characters & Stories | Celestial Archive">
-  <meta name="twitter:description" content="Explore Chinese mythology including Nezha, Sun Wukong, and the Jade Emperor. Learn about gods, legendary stories, and characters from ancient China.">
+  <meta name="twitter:title" content="Chinese Mythology Explained: Gods, Legends & Characters | Celestial Archive">
+  <meta name="twitter:description" content="Explore Chinese mythology gods, legends, and characters — from Sun Wukong and Nezha to the Jade Emperor. Discover ancient Chinese myths, legendary stories, and divine beings from 5,000 years of Chinese culture.">
   <meta name="twitter:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
   <meta name="twitter:image:alt" content="Sun Wukong — 工笔重彩风格">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/global.css">
   <style>
     .landing {
-      min-height: 100vh;
+      min-height: calc(100vh - 52px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -447,13 +447,14 @@
     .faq-a a:hover { border-color: var(--accent-gold); }
 
     @media (max-width: 768px) {
+      .landing { min-height: calc(100vh - 48px); }
       .cat-grid { grid-template-columns: 1fr; gap: 14px; }
       .topics-grid { grid-template-columns: 1fr; }
       .seo-intro-inner h2 { font-size: 1.25rem; }
     }
   </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Celestial Archive","url":"https://celestial-archive.com","description":"Explore Chinese mythology including Nezha, Sun Wukong, and the Jade Emperor. Learn about gods, legendary stories, and characters from ancient China.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://celestial-archive.com/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Celestial Archive","url":"https://celestial-archive.com","description":"Explore Chinese mythology including Nezha, Sun Wukong, and the Jade Emperor. Learn about gods, legendary stories, and characters from ancient China.","sameAs":["https://twitter.com/celestialarchive","https://youtube.com/@celestialarchive"],"logo":"https://celestial-archive.com/favicon.svg"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Celestial Archive","url":"https://celestial-archive.com","description":"Explore Chinese mythology gods, legends, and characters — from Sun Wukong and Nezha to the Jade Emperor. Discover ancient Chinese myths, legendary stories, and divine beings from 5,000 years of Chinese culture.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://celestial-archive.com/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Celestial Archive","url":"https://celestial-archive.com","description":"Explore Chinese mythology gods, legends, and characters — from Sun Wukong and Nezha to the Jade Emperor. Discover ancient Chinese myths, legendary stories, and divine beings from 5,000 years of Chinese culture.","sameAs":["https://twitter.com/celestialarchive","https://youtube.com/@celestialarchive"],"logo":"https://celestial-archive.com/favicon.svg"}</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRWRSLPKTM"></script>
 <script>
@@ -466,14 +467,32 @@
 </head>
 <body>
 
+  <nav class="global-nav" id="global-nav" aria-label="Site navigation">
+    <div class="global-nav-inner">
+      <a href="index.html" class="global-nav-brand">Celestial Archive</a>
+      <div class="global-nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="gods.html">Gods</a>
+        <a href="characters.html">Characters</a>
+        <a href="stories.html">Stories</a>
+        <a href="top-lists.html">Top Lists</a>
+      </div>
+    </div>
+  </nav>
+  <nav class="breadcrumb" id="site-breadcrumb" aria-label="Breadcrumb">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><span class="breadcrumb-current">Home</span></li>
+    </ol>
+  </nav>
+
   <!-- ===== 1. Hero (First Screen) ===== -->
   <main class="landing" aria-label="Celestial Archive — landing">
     <div class="landing-bg"></div>
     <div class="landing-content">
       <p class="landing-kicker">Celestial Archive</p>
-      <h1 class="landing-title">Chinese Mythology Explained</h1>
+      <h1 class="landing-title">Chinese Mythology Explained: Gods, Legends &amp; Characters</h1>
       <p style="font-family:var(--font-chinese-display);font-size:1.8rem;color:rgba(232,220,200,0.55);margin-top:-8px;margin-bottom:var(--space-sm);">天宫档案</p>
-      <p class="landing-subtitle">Gods, Legends &amp; Characters from 5,000 Years of Chinese Culture</p>
+      <p class="landing-subtitle">Discover Ancient Myths, Legendary Heroes &amp; Epic Stories from 5,000 Years of Chinese Culture</p>
       <div class="landing-divider"></div>
       <p class="landing-desc">
         Explore the world of Chinese mythology — from the Monkey King Sun Wukong to the warrior god Nezha, from the heavenly Jade Emperor to the serpent-tailed creator Nüwa. Discover their stories, their powers, and their meaning.
@@ -582,8 +601,69 @@
   <section class="seo-intro" aria-label="Introduction to Chinese mythology">
     <div class="seo-intro-inner">
       <h2>What Is Chinese Mythology?</h2>
-      <p>Chinese mythology is a vast and ancient system of beliefs, stories, and deities that have influenced Chinese culture for thousands of years. It includes powerful <a href="topics/chinese-gods.html">Chinese gods</a>, legendary heroes, mythical creatures, and complex cosmology systems such as Heaven and the Underworld.</p>
-      <p>From famous figures like Nezha and <a href="topics/who-is-sun-wukong.html">Sun Wukong</a> to symbolic creatures like the <a href="topics/chinese-dragons.html">Chinese dragon</a> and phoenix, these stories continue to inspire modern art, literature, and media.</p>
+      <p>Chinese mythology is a vast and ancient system of beliefs, stories, and deities that have shaped Chinese culture for over 5,000 years. It blends Taoist, Buddhist, and folk traditions into a rich tapestry of <a href="topics/chinese-gods.html">Chinese gods</a>, legendary heroes, mythical creatures, and complex cosmology — from the celestial bureaucracy of Heaven to the ten courts of the Underworld.</p>
+      <p>From iconic <strong>Chinese myth characters</strong> like the warrior god Nezha and the Monkey King <a href="topics/who-is-sun-wukong.html">Sun Wukong</a>, to symbolic creatures like the <a href="topics/chinese-dragons.html">Chinese dragon</a> and phoenix, to epic <strong>Chinese legends</strong> such as the <a href="topics/journey-to-the-west.html">Journey to the West</a> and the creation myth of Nüwa repairing the sky — these stories continue to inspire modern movies, games, and literature worldwide.</p>
+      <p>Whether you are new to <strong>Chinese mythology gods</strong> or looking to deepen your knowledge of ancient <strong>Chinese myths</strong>, this guide will help you explore the most important deities, legendary battles, and timeless stories that define one of the world's oldest living mythological traditions.</p>
+    </div>
+  </section>
+
+  <!-- ===== Top Chinese Mythology Guides ===== -->
+  <style>
+    .guides-section {
+      background: var(--bg-dark);
+      padding: 56px 0 48px;
+      border-top: 1px solid rgba(232,220,200,0.04);
+    }
+    .guides-inner {
+      max-width: 800px; margin: 0 auto; padding: 0 20px;
+    }
+    .guides-title {
+      font-family: var(--font-display); font-size: 1.5rem;
+      color: #e8dcc8; text-align: center; margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .guides-sub {
+      text-align: center; color: rgba(232,220,200,0.55);
+      font-size: 0.88rem; margin-bottom: 28px;
+    }
+    .guides-list {
+      list-style: none; padding: 0;
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .guides-list li { min-width: 0; }
+    .guides-list a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px;
+      background: rgba(232,220,200,0.04);
+      border: 1px solid rgba(232,220,200,0.08);
+      border-radius: 6px;
+      color: #e0c878; text-decoration: none;
+      font-family: var(--font-body); font-size: 0.92rem;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .guides-list a:hover {
+      background: rgba(232,220,200,0.08);
+      border-color: rgba(184,160,110,0.3);
+      color: #f0d890;
+    }
+    .guides-list .g-icon { font-size: 1.1rem; flex-shrink: 0; }
+    @media (max-width: 640px) {
+      .guides-list { grid-template-columns: 1fr; }
+    }
+  </style>
+  <section class="guides-section" aria-label="Top Chinese mythology guides">
+    <div class="guides-inner">
+      <h2 class="guides-title">Top Chinese Mythology Guides</h2>
+      <p class="guides-sub">Start here — the most popular guides to Chinese gods, legendary stories, and mythological creatures</p>
+      <ul class="guides-list">
+        <li><a href="topics/chinese-gods.html"><span class="g-icon">&#x1f451;</span> Top 12 Most Powerful Chinese Gods</a></li>
+        <li><a href="topics/journey-to-the-west.html"><span class="g-icon">&#x1f4dc;</span> Journey to the West — Complete Story Guide</a></li>
+        <li><a href="topics/chinese-dragons.html"><span class="g-icon">&#x1f409;</span> Chinese Dragons Explained — Types &amp; Powers</a></li>
+        <li><a href="topics/journey-west-characters.html"><span class="g-icon">&#x1f38d;</span> Journey to the West Characters Guide</a></li>
+        <li><a href="topics/chinese-mythology-creatures.html"><span class="g-icon">&#x1f9ed;</span> Chinese Mythological Creatures A–Z</a></li>
+        <li><a href="topics/chinese-mythology.html"><span class="g-icon">&#x1f3db;</span> Chinese Mythology 101 — Heaven &amp; the Afterlife</a></li>
+      </ul>
     </div>
   </section>
 
