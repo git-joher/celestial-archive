@@ -1,0 +1,203 @@
+/* ============================================================
+   Bull Demon King — Hub Styles
+   牛魔王 · The Great Bull King
+   Palette: Bronze, ember, iron, dark leather, gold
+   ============================================================ */
+
+:root {
+  --bdk-bronze: #b87333;
+  --bdk-ember: #d4783a;
+  --bdk-iron: #3d2b1f;
+  --bdk-leather: #5c3a21;
+  --bdk-gold: #c9a84c;
+  --bdk-char: #1a1410;
+  --bdk-cream: #f5f0e8;
+  --bdk-smoke: #8a7a6a;
+  --bdk-flame: #e8893a;
+  --bdk-ash: #6b5e4e;
+}
+
+body { background: var(--bdk-char); }
+
+/* Nav */
+.bdk-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: var(--space-sm) var(--space-lg);
+  background: rgba(26,20,16,0.94); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,115,51,0.12);
+}
+.bdk-nav a {
+  font-family: var(--font-display); font-size: 0.8rem;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--bdk-smoke); text-decoration: none;
+}
+.bdk-nav a:hover { color: var(--bdk-bronze); }
+
+/* Hero */
+.bdk-hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bdk-char); overflow: hidden;
+}
+.bdk-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(184,115,51,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 60%, rgba(212,120,58,0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+.bdk-hero-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+}
+.bdk-hero-bg-img img {
+  width: 100%; height: 100%; object-fit: cover; opacity: 0.55;
+}
+.bdk-hero-content {
+  position: relative; z-index: 2; text-align: center;
+  max-width: 720px; padding: var(--space-lg);
+}
+.bdk-hero-kicker {
+  font-family: var(--font-display); font-size: 0.78rem;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--bdk-ember); margin-bottom: var(--space-xs);
+}
+.bdk-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  color: var(--bdk-bronze);
+  text-shadow: 0 0 40px rgba(184,115,51,0.2);
+  margin-bottom: var(--space-xs);
+}
+.bdk-hero-name-zh {
+  font-family: 'Ma Shan Zheng', 'Noto Serif SC', serif;
+  font-size: 2.8rem; color: var(--bdk-ember);
+  margin-bottom: var(--space-sm); opacity: 0.85;
+}
+.bdk-hero-divider {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--bdk-bronze), transparent);
+  margin: 0 auto var(--space-md);
+}
+.bdk-hero-tagline {
+  font-family: var(--font-body); font-size: 1.05rem;
+  color: var(--bdk-smoke); line-height: 1.8; font-style: italic;
+}
+.bdk-hero-tagline strong { color: var(--bdk-ember); font-style: normal; }
+
+.bdk-scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.bdk-scroll-hint span {
+  display: block; width: 20px; height: 20px;
+  border-right: 1px solid var(--bdk-bronze); border-bottom: 1px solid var(--bdk-bronze);
+  transform: rotate(45deg); animation: bdk-scroll-bob 2s ease-in-out infinite;
+}
+@keyframes bdk-scroll-bob {
+  0%, 100% { opacity: 0.3; transform: rotate(45deg) translateY(0); }
+  50% { opacity: 1; transform: rotate(45deg) translateY(6px); }
+}
+
+/* Stats Grid */
+.bdk-stats-section {
+  background: linear-gradient(180deg, var(--bdk-char) 0%, #241a12 50%, var(--bdk-char) 100%);
+  padding: var(--space-lg) 0;
+}
+.bdk-stats-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-sm); max-width: 900px; margin: 0 auto;
+}
+.bdk-stat {
+  text-align: center; padding: var(--space-md) var(--space-xs);
+  background: rgba(184,115,51,0.04); border: 1px solid rgba(184,115,51,0.08);
+  border-radius: 6px; transition: border-color 0.3s;
+}
+.bdk-stat:hover { border-color: rgba(184,115,51,0.25); }
+.bdk-stat-icon { font-size: 1.6rem; margin-bottom: 6px; }
+.bdk-stat-label {
+  font-family: var(--font-display); font-size: 0.65rem;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--bdk-smoke); margin-bottom: 4px;
+}
+.bdk-stat-value {
+  font-family: var(--font-body); font-size: 0.85rem;
+  color: var(--bdk-bronze); font-weight: 600;
+}
+
+/* Timeline */
+.bdk-timeline-section {
+  background: var(--bdk-cream);
+  padding: var(--space-xxl) 0;
+}
+.bdk-timeline { max-width: 680px; margin: 0 auto; padding: 0 var(--space-md); }
+.bdk-tl-node {
+  position: relative; padding-left: 52px; padding-bottom: var(--space-xl);
+  border-left: 1px dashed rgba(184,115,51,0.2);
+}
+.bdk-tl-node:last-child { border-left-color: transparent; padding-bottom: 0; }
+.bdk-tl-dot {
+  position: absolute; left: -6px; top: 6px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--bdk-bronze); border: 2px solid var(--bdk-ember);
+}
+.bdk-tl-emoji { font-size: 1.4rem; margin-bottom: 4px; }
+.bdk-tl-node h3 {
+  font-family: var(--font-display); font-size: 1.05rem;
+  color: var(--bdk-iron); margin-bottom: 4px;
+}
+.bdk-tl-node p {
+  font-family: var(--font-body); font-size: 0.9rem;
+  color: var(--bdk-ash); line-height: 1.7; margin: 0;
+}
+
+/* Hub Cards */
+.bdk-hub-section {
+  background: linear-gradient(180deg, var(--bdk-cream) 0%, #ede5d8 100%);
+  padding: var(--space-xxl) 0;
+}
+.bdk-hub-stack {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; max-width: 960px; margin: var(--space-lg) auto 0;
+  padding: 0 var(--space-md);
+}
+.bdk-hub-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: var(--space-lg) var(--space-md);
+  background: #faf7f2; border: 1px solid rgba(184,115,51,0.1);
+  border-radius: 8px; text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.bdk-hub-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(61,43,31,0.1);
+  border-color: rgba(184,115,51,0.25);
+}
+.bdk-hub-card-icon { font-size: 2.4rem; margin-bottom: var(--space-sm); }
+.bdk-hub-card-body h3 {
+  font-family: var(--font-display); font-size: 1rem;
+  color: var(--bdk-iron); margin-bottom: 6px;
+}
+.bdk-hub-card-body p {
+  font-family: var(--font-body); font-size: 0.85rem;
+  color: var(--bdk-ash); line-height: 1.5; margin: 0;
+}
+.bdk-hub-card-arrow { color: var(--bdk-bronze); font-size: 1.1rem; margin-top: var(--space-sm); }
+
+/* Related Deities */
+.bdk-related-section {
+  background: var(--bdk-cream); padding: var(--space-xl) 0 var(--space-xxl);
+}
+
+/* Dive Deeper */
+.dive-deeper { background: var(--bdk-cream); }
+
+/* Mobile */
+@media (max-width: 767px) {
+  .bdk-stats-grid { grid-template-columns: repeat(3, 1fr); }
+  .bdk-hub-stack { grid-template-columns: 1fr 1fr; }
+  .bdk-timeline { padding: 0 var(--space-sm); }
+  .bdk-tl-node { padding-left: 36px; }
+}
+@media (max-width: 480px) {
+  .bdk-stats-grid { grid-template-columns: 1fr 1fr; }
+  .bdk-hub-stack { grid-template-columns: 1fr; }
+  .bdk-hero-name-zh { font-size: 2rem; }
+}

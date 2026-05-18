@@ -103,5 +103,35 @@ var CELESTIAL_DEITIES = [
     status: 'live',
     avatarBg: '#4a8aa8',
     avatarInitial: 'W'
+  },
+  {
+    slug: 'taishang-laojun',
+    name: 'Taishang Laojun',
+    nameZh: '太上老君',
+    title: 'The Supreme Lord',
+    description: 'Daoism\'s highest deity. Keeper of the Eight Trigrams Furnace, master of alchemy — the being whose elixir gave Sun Wukong his indestructible body.',
+    status: 'live',
+    avatarBg: '#7b4fbf',
+    avatarInitial: 'T'
+  },
+  {
+    slug: 'nuwa',
+    name: 'Nüwa',
+    nameZh: '女娲',
+    title: 'The Creator Goddess',
+    description: 'She who molded humanity from yellow clay and repaired the broken sky with five-colored stones. The mother of all people, the mender of the world.',
+    status: 'live',
+    avatarBg: '#5a9a8a',
+    avatarInitial: 'N'
+  },
+  {
+    slug: 'bull-demon-king',
+    name: 'Bull Demon King',
+    nameZh: '牛魔王',
+    title: 'The Great Bull King',
+    description: 'Sworn brother of Sun Wukong, sovereign of Flaming Mountain. The demon king who wielded brute force and primal rage against the armies of heaven itself.',
+    status: 'live',
+    avatarBg: '#8b4513',
+    avatarInitial: 'B'
   }
 ];
