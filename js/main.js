@@ -192,7 +192,8 @@
     var crumbs = [{ name: 'Home', url: rootPrefix + 'index.html' }];
 
     if (segments.length === 0 || (segments.length === 1 && segments[0] === 'index.html')) {
-      crumbs[0].url = '';
+      // Homepage — no breadcrumb needed
+      return;
     } else if (segments[0] === 'deities' && segments.length >= 2) {
       crumbs.push({ name: 'Gods', url: rootPrefix + 'gods.html' });
       var deitySlug = segments[1];
