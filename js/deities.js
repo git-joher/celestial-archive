@@ -115,6 +115,16 @@ var CELESTIAL_DEITIES = [
     avatarInitial: 'T'
   },
   {
+    slug: 'pangu',
+    name: 'Pangu',
+    nameZh: '盘古',
+    title: 'The First Living Being',
+    description: 'Born from the cosmic egg, he split heaven from earth with his axe. His body became the world — mountains, rivers, wind, and stars.',
+    status: 'live',
+    avatarBg: '#c45440',
+    avatarInitial: 'P'
+  },
+  {
     slug: 'nuwa',
     name: 'Nüwa',
     nameZh: '女娲',

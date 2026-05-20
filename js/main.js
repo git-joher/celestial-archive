@@ -145,7 +145,7 @@
 	      + sub(p + 'three-realms-hierarchy.html', 'Three Realms Hierarchy')
 	      + subMenu(p + 'pantheon/index.html#primordial', 'Primordial Creators',
 	          sub(d + 'nuwa/index.html', 'Nüwa 女娲')
-	          + sp('Pangu 盘古') + sp('Fuxi 伏羲') + sp('Shennong 神农') + sp('Yellow Emperor 黄帝'))
+	          + sub(d + 'pangu/index.html', 'Pangu 盘古') + sp('Fuxi 伏羲') + sp('Shennong 神农') + sp('Yellow Emperor 黄帝'))
 	      + subMenu(p + 'pantheon/index.html#sanqing', 'Three Pure Ones',
 	          sub(d + 'taishang-laojun/index.html', 'Taishang Laojun 太上老君')
 	          + sp('Yuanshi Tianzun 元始天尊') + sp('Lingbao Tianzun 灵宝天尊'))
