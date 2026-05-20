@@ -10,7 +10,22 @@
       "Bash(curl -s --max-time 10 \"https://celestial-archive.com/sitemap.xml\")",
       "Bash(curl -s --max-time 10 \"https://celestial-archive.com/privacy-policy.html\")",
       "Bash(curl -s --max-time 10 \"https://celestial-archive.com/about.html\")",
-      "Bash(curl -s --max-time 10 \"https://celestial-archive.com/contact.html\")"
+      "Bash(curl -s --max-time 10 \"https://celestial-archive.com/contact.html\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(cd /d D:\\\\project\\\\celestial-archive)",
+      "Bash(python -m http.server 8000)",
+      "Bash(curl -s -o NUL -w \"%{http_code}\" https://celestial-archive.com/index.html)",
+      "Bash(curl -s -o NUL -w \"%{http_code}\" https://celestial-archive.com/gods.html)",
+      "Bash(curl -s -o NUL -w \"%{http_code}\" https://celestial-archive.com/characters.html)",
+      "Bash(curl -s -o NUL -w \"%{http_code}\" https://celestial-archive.com/stories.html)",
+      "Bash(curl -s -o NUL -w \"%{http_code}\" https://celestial-archive.com/top-lists.html)",
+      "Bash(where python *)",
+      "Bash(python3 -m http.server 8000)",
+      "Bash(amp)",
+      "Bash(curl -s -o NUL -w \"%{http_code}\" https://celestial-archive.com/deities/sun-wukong/index.html)",
+      "Bash(curl -s -o NUL -w \"%{http_code}\" https://celestial-archive.com/deities/nezha/origins.html)",
+      "Bash(curl -s -o NUL -w \"%{http_code}\" https://celestial-archive.com/topics/chinese-dragons.html)"
     ]
   }
 }

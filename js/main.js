@@ -1,6 +1,7 @@
 /**
  * Celestial Archive — Main JavaScript
- * Handles scroll-triggered animations and footer deity links.
+ * Handles scroll-triggered animations, footer deity links,
+ * site-wide navigation, and breadcrumb generation.
  */
 
 (function () {
@@ -58,42 +59,6 @@
   }
 
   /* ============================================================
-     Site structure config for nav + breadcrumbs
-     ============================================================ */
-  var SITE_STRUCTURE = {
-    nav: [
-      { name: 'Home',       href: 'index.html' },
-      { name: 'Gods',       href: 'gods.html' },
-      { name: 'Characters', href: 'characters.html' },
-      { name: 'Stories',    href: 'stories.html' },
-      { name: 'Top Lists',  href: 'top-lists.html' }
-    ],
-    categoryForTopic: {
-      'chinese-gods': 'gods',
-      'jade-emperor': 'gods',
-      'journey-west-characters': 'characters',
-      'nezha-vs-sun-wukong': 'top-lists',
-      'sun-wukong-vs-erlang-shen': 'top-lists',
-      'chinese-mythology-vs-greek-mythology': 'top-lists'
-    },
-    pageName: {
-      'origins':'Origins','battle':'Battles','arsenal':'Arsenal','legacy':'Legacy',
-      'journey':'The Journey','legend':'Legend','folk':'Folk Lore',
-      'mercy':'Acts of Mercy','teachings':'Teachings','court':'Celestial Court',
-      'worship':'Worship','creation':'Creation','sky-repair':'The Sky Repair',
-      'stones':'Five-Colored Stones','flame-mountain':'Flaming Mountain',
-      'family':'The Demon Family','elixir':'Elixir of Immortality',
-      'furnace':'Eight Trigrams Furnace','redemption':'Redemption',
-      'symbolism':'Symbolism'
-    },
-    rootPageName: {
-      'about':'About Us','contact':'Contact Us','privacy-policy':'Privacy Policy',
-      'three-realms-hierarchy':'Three Realms Hierarchy',
-      'gods':'Gods','characters':'Characters','stories':'Stories','top-lists':'Top Lists'
-    }
-  };
-
-  /* ============================================================
      Footer — populate deity links from registry
      ============================================================ */
   var deityNavs = document.querySelectorAll('[data-footer="deities"]');
@@ -117,8 +82,6 @@
     var cardsHtml = '';
     CELESTIAL_DEITIES.forEach(function (d) {
       var href = d.status === 'live' ? rootPrefix + 'deities/' + d.slug + '/index.html' : '#';
-      var statusClass = d.status === 'live' ? 'live' : '';
-      var statusLabel = d.status === 'live' ? 'Explore the Archive' : 'Coming Soon';
       cardsHtml +=
         '<a href="' + href + '" class="pantheon-card' + (d.status !== 'live' ? '" aria-disabled="true"' : '"') + '>'
         + '<div class="pantheon-card-art" style="background:' + d.avatarBg + ';">'
@@ -129,7 +92,7 @@
         + '<div class="pantheon-card-name-zh">' + d.nameZh + '</div>'
         + '<div class="pantheon-card-title">' + d.title + '</div>'
         + '<p class="pantheon-card-desc">' + d.description + '</p>'
-        + '<span class="pantheon-card-status ' + statusClass + '">' + statusLabel + '</span>'
+        + '<span class="pantheon-card-status ' + (d.status === 'live' ? 'live' : '') + '">' + (d.status === 'live' ? 'Explore the Archive' : 'Coming Soon') + '</span>'
         + '</div>'
         + '</a>';
     });
@@ -137,40 +100,54 @@
   }
 
   /* ============================================================
-     Global Nav injection
+     Site Navigation — injected once, shared across all pages
      ============================================================ */
-  function injectGlobalNav() {
-    if (document.getElementById('global-nav')) return;
+  function injectSiteNav() {
+    if (document.getElementById('site-nav')) return;
 
-    // Remove old body-level navs (custom per-deity navs, old nav-bar, tp-nav)
+
+    var path = window.location.pathname;
+
+	// Remove old body-level navs (custom per-deity navs)
     var oldNavs = document.querySelectorAll('body > nav:not(.breadcrumb)');
     for (var i = 0; i < oldNavs.length; i++) { oldNavs[i].remove(); }
 
-    // Detect current path category for active state
-    var path = window.location.pathname;
+    // Determine active link
     var pathLower = path.toLowerCase();
-    var activeHref = '';
-
-    if (pathLower.indexOf('/deities/') !== -1) activeHref = 'gods.html';
+    var active = '';
+    if (pathLower.indexOf('/deities/') !== -1 || pathLower.indexOf('/pantheon/') !== -1) active = 'gods.html';
     else if (pathLower.indexOf('/topics/') !== -1) {
-      var topicFile = pathLower.split('/').pop().replace('.html','');
-      var cat = SITE_STRUCTURE.categoryForTopic[topicFile] || 'stories';
-      activeHref = cat + '.html';
+      var topicFile = pathLower.split('/').pop().replace('.html', '');
+      var topicMap = {
+        'chinese-gods': 'gods.html',
+        'jade-emperor': 'gods.html',
+        'journey-west-characters': 'characters.html',
+        'nezha-vs-sun-wukong': 'top-lists.html',
+        'sun-wukong-vs-erlang-shen': 'top-lists.html',
+        'chinese-mythology-vs-greek-mythology': 'top-lists.html'
+      };
+      active = topicMap[topicFile] || 'stories.html';
     }
-    var activeFile = activeHref.split('/').pop();
+
+    var navItems = [
+      { name: 'Home', href: 'index.html' },
+      { name: 'Gods', href: 'gods.html' },
+      { name: 'Characters', href: 'characters.html' },
+      { name: 'Stories', href: 'stories.html' },
+      { name: 'Top Lists', href: 'top-lists.html' }
+    ];
 
     var linksHtml = '';
-    SITE_STRUCTURE.nav.forEach(function(item) {
-      var itemFile = item.href.split('/').pop();
-      var cls = itemFile === activeFile ? ' class="active"' : '';
+    navItems.forEach(function (item) {
+      var cls = item.href === active ? ' class="active"' : '';
       linksHtml += '<a href="' + rootPrefix + item.href + '"' + cls + '>' + item.name + '</a>';
     });
 
     var html =
-      '<nav class="global-nav" id="global-nav" aria-label="Site navigation">'
-      + '<div class="global-nav-inner">'
-      + '<a href="' + rootPrefix + 'index.html" class="global-nav-brand">Celestial Archive</a>'
-      + '<div class="global-nav-links">' + linksHtml + '</div>'
+      '<nav class="site-nav" id="site-nav" aria-label="Site navigation">'
+      + '<div class="site-nav-inner">'
+      + '<a href="' + rootPrefix + 'index.html" class="site-nav-brand">Celestial Archive</a>'
+      + '<div class="site-nav-links">' + linksHtml + '</div>'
       + '</div>'
       + '</nav>';
 
@@ -180,51 +157,74 @@
   }
 
   /* ============================================================
-     Breadcrumb generation from URL path
+     Breadcrumb — generated from URL path
      ============================================================ */
-  function generateBreadcrumbs() {
+  function injectBreadcrumb() {
     if (document.getElementById('site-breadcrumb')) return;
 
     var path = window.location.pathname;
+    var pathLower = path.toLowerCase();
     var relPath = path.replace(/^\//, '').replace(/\/+$/, '') || 'index.html';
-
     var segments = relPath.split('/').filter(Boolean);
     var crumbs = [{ name: 'Home', url: rootPrefix + 'index.html' }];
 
-    if (segments.length === 0 || (segments.length === 1 && segments[0] === 'index.html')) {
-      // Homepage — no breadcrumb needed
-      return;
-    } else if (segments[0] === 'deities' && segments.length >= 2) {
-      crumbs.push({ name: 'Gods', url: rootPrefix + 'gods.html' });
-      var deitySlug = segments[1];
-      var deity = (typeof CELESTIAL_DEITIES !== 'undefined') ?
-        CELESTIAL_DEITIES.find(function(d) { return d.slug === deitySlug; }) : null;
-      var deityName = deity ? deity.name : deitySlug.replace(/-/g, ' ').replace(/\b\w/g, function(l){ return l.toUpperCase(); });
-      crumbs.push({ name: deityName, url: rootPrefix + 'deities/' + deitySlug + '/index.html' });
+    var isDeities = pathLower.indexOf('/deities/') !== -1;
+    var isTopics = pathLower.indexOf('/topics/') !== -1;
+    var isPantheon = pathLower.indexOf('/pantheon/') !== -1;
 
-      if (segments.length >= 3) {
-        var subFile = segments[2].replace(/\.html$/, '');
-        if (subFile !== 'index') {
-          var pageName = SITE_STRUCTURE.pageName[subFile] || subFile.charAt(0).toUpperCase() + subFile.slice(1);
-          crumbs.push({ name: pageName, url: '' });
-        }
+    // Homepage — no breadcrumb
+    var lastSeg = segments[segments.length - 1];
+    if (lastSeg === 'index.html' && !isDeities && !isTopics && !isPantheon) return;
+
+    if (isDeities && segments.length >= 2) {
+      var deityIdx = -1;
+      for (var d = 0; d < segments.length; d++) {
+        if (segments[d].toLowerCase() === 'deities') { deityIdx = d; break; }
       }
-    } else if (segments[0] === 'topics') {
-      var topicFile = segments[segments.length - 1].replace(/\.html$/, '');
-      var catKey = SITE_STRUCTURE.categoryForTopic[topicFile] || 'stories';
-      var catNames = { 'gods': 'Gods', 'characters': 'Characters', 'top-lists': 'Top Lists', 'stories': 'Stories' };
-      crumbs.push({ name: catNames[catKey] || 'Stories', url: rootPrefix + catKey + '.html' });
+      var deitySlug = segments[deityIdx + 1];
+      var deity = (typeof CELESTIAL_DEITIES !== 'undefined') ?
+        CELESTIAL_DEITIES.find(function (d) { return d.slug === deitySlug; }) : null;
+      var deityName = deity ? deity.name : deitySlug.replace(/-/g, ' ').replace(/\b\w/g, function (l) { return l.toUpperCase(); });
+
+      var remaining = segments.slice(deityIdx + 2).filter(function (s) { return s !== 'index.html'; });
+      if (remaining.length === 0) {
+        crumbs.push({ name: deityName, url: '' });
+      } else {
+        crumbs.push({ name: deityName, url: rootPrefix + 'deities/' + deitySlug + '/index.html' });
+        var subFile = remaining[0].replace(/\.html$/, '');
+        var pageNames = {
+          'origins': 'Origins', 'battle': 'Battles', 'arsenal': 'Arsenal', 'legacy': 'Legacy',
+          'journey': 'The Journey', 'legend': 'Legend', 'folk': 'Folk Lore',
+          'mercy': 'Acts of Mercy', 'teachings': 'Teachings', 'court': 'Celestial Court',
+          'worship': 'Worship', 'creation': 'Creation', 'sky-repair': 'The Sky Repair',
+          'stones': 'Five-Colored Stones', 'flame-mountain': 'Flaming Mountain',
+          'family': 'The Demon Family', 'elixir': 'Elixir of Immortality',
+          'furnace': 'Eight Trigrams Furnace', 'redemption': 'Redemption', 'symbolism': 'Symbolism'
+        };
+        var pageName = pageNames[subFile] || subFile.charAt(0).toUpperCase() + subFile.slice(1);
+        crumbs.push({ name: pageName, url: '' });
+      }
+    } else if (isTopics) {
       var title = document.title.replace(/\s*\|\s*Celestial Archive\s*$/i, '').trim();
       crumbs.push({ name: title, url: '' });
     } else {
       var rootFile = segments[segments.length - 1].replace(/\.html$/, '');
-      var name = SITE_STRUCTURE.rootPageName[rootFile] || rootFile.charAt(0).toUpperCase() + rootFile.slice(1);
+      if (rootFile === 'index' && segments.length >= 2) {
+        rootFile = segments[segments.length - 2];
+      }
+      var rootNames = {
+        'about': 'About Us', 'contact': 'Contact Us', 'privacy-policy': 'Privacy Policy',
+        'three-realms-hierarchy': 'Three Realms Hierarchy',
+        'gods': 'Gods', 'characters': 'Characters', 'stories': 'Stories',
+        'top-lists': 'Top Lists', 'pantheon': 'Pantheon'
+      };
+      var name = rootNames[rootFile] || rootFile.charAt(0).toUpperCase() + rootFile.slice(1);
       crumbs.push({ name: name, url: '' });
     }
 
-    // Build HTML
+    // Build breadcrumb HTML
     var html = '<nav class="breadcrumb" id="site-breadcrumb" aria-label="Breadcrumb"><ol class="breadcrumb-list">';
-    crumbs.forEach(function(crumb, i) {
+    crumbs.forEach(function (crumb) {
       html += '<li class="breadcrumb-item">';
       if (crumb.url) {
         html += '<a href="' + crumb.url + '">' + crumb.name + '</a>';
@@ -237,14 +237,41 @@
 
     var wrapper = document.createElement('div');
     wrapper.innerHTML = html;
-    var target = document.getElementById('global-nav') || document.body.firstChild;
+    var target = document.getElementById('site-nav') || document.body.firstChild;
     if (target.nextSibling) {
       document.body.insertBefore(wrapper.firstElementChild, target.nextSibling);
     } else {
       document.body.appendChild(wrapper.firstElementChild);
     }
+
+    // Inject JSON-LD BreadcrumbList
+    var origin = window.location.origin;
+    var items = crumbs.map(function (crumb, i) {
+      var name = i === 0 ? 'Celestial Archive' : crumb.name;
+      var itemUrl;
+      if (i === 0) {
+        itemUrl = origin + '/';
+      } else if (crumb.url) {
+        itemUrl = new URL(crumb.url, origin + window.location.pathname).href;
+      } else {
+        itemUrl = window.location.href;
+      }
+      return { '@type': 'ListItem', position: i + 1, name: name, item: itemUrl };
+    });
+
+    var ldJson = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: items
+    };
+
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'jsonld-breadcrumb';
+    script.textContent = JSON.stringify(ldJson);
+    document.head.appendChild(script);
   }
 
-  injectGlobalNav();
-  generateBreadcrumbs();
+  injectSiteNav();
+  injectBreadcrumb();
 })();
