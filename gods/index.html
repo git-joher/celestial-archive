@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chinese Gods & Deities — Complete List | Celestial Archive</title>
+  <meta name="description" content="Browse the complete list of Chinese gods and deities — from the Jade Emperor and Guanyin to Sun Wukong and Nezha. Explore every major god, demon, and immortal in Chinese mythology.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://celestial-archive.com/gods/">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Chinese Gods & Deities — Complete List | Celestial Archive">
+  <meta property="og:description" content="Browse the complete list of Chinese gods and deities — from the Jade Emperor and Guanyin to Sun Wukong and Nezha. Explore every major god, demon, and immortal in Chinese mythology.">
+  <meta property="og:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Chinese Gods and Deities — Celestial Archive">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://celestial-archive.com/gods/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chinese Gods & Deities — Complete List | Celestial Archive">
+  <meta name="twitter:description" content="Browse the complete list of Chinese gods and deities — from the Jade Emperor and Guanyin to Sun Wukong and Nezha.">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta name="twitter:image:alt" content="Chinese Gods and Deities — Celestial Archive">
+  <link rel="stylesheet" href="../css/global.css">
+  <style>
+    .gods-hero {
+      background: var(--bg-dark);
+      text-align: center;
+      padding: 60px 20px 50px;
+      border-bottom: 1px solid rgba(232,220,200,0.06);
+      background-image: radial-gradient(ellipse at 50% 0%, rgba(184,160,110,0.08) 0%, transparent 60%);
+    }
+    .gods-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--text-on-dark);
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+    .gods-hero p {
+      color: rgba(232,220,200,0.6);
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .gods-intro {
+      background: var(--bg-dark);
+      padding: 0 20px 40px;
+    }
+    .gods-intro-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      color: rgba(232,220,200,0.7);
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+    .gods-intro-inner a { color: var(--accent-gold); text-decoration: none; border-bottom: 1px solid rgba(184,160,110,0.25); }
+    .gods-intro-inner a:hover { border-color: var(--accent-gold); }
+    .gods-grid-section {
+      background: var(--bg-dark);
+      padding: 0 0 60px;
+    }
+    .gods-section-title {
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: #e8d5b0;
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+    }
+    .gods-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .god-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 24px 18px;
+      background: rgba(25,16,10,0.7);
+      border: 1px solid rgba(184,160,110,0.12);
+      border-radius: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .god-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(184,160,110,0.4);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+    }
+    .god-card-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+    .god-card-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: #e0c878;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+    .god-card-name-zh {
+      font-family: var(--font-chinese-display);
+      font-size: 0.9rem;
+      color: rgba(184,160,110,0.5);
+      margin-bottom: 4px;
+    }
+    .god-card-title {
+      font-size: 0.75rem;
+      color: var(--accent-vermillion);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .god-card-desc {
+      font-size: 0.78rem;
+      color: rgba(200,180,140,0.55);
+      line-height: 1.5;
+    }
+
+    /* ---- Dive Deeper ---- */
+    .dive-deeper-section {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(232,220,200,0.05);
+      padding: 40px 20px 50px;
+      text-align: center;
+    }
+    .dive-deeper-section p {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 18px;
+      opacity: 0.8;
+    }
+    .dive-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .dive-links a {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: var(--accent-gold);
+      text-decoration: none;
+      padding: 8px 18px;
+      border: 1px solid rgba(184,160,110,0.35);
+      border-radius: 20px;
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .dive-links a:hover {
+      color: #c9a845;
+      border-color: rgba(184,160,110,0.65);
+      background: rgba(184,160,110,0.08);
+    }
+
+    /* ---- FAQ ---- */
+    .faq-section {
+      background: #3b2f21;
+      padding: 50px 0 60px;
+      border-top: 1px solid rgba(232,220,200,0.05);
+    }
+    .faq-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .faq-inner h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: #e0c878;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .faq-item {
+      margin-bottom: 20px;
+    }
+    .faq-q {
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      color: #e8d5b0;
+      margin-bottom: 6px;
+      cursor: default;
+    }
+    .faq-a {
+      font-size: 0.95rem;
+      color: rgba(200,180,140,0.65);
+      line-height: 1.8;
+    }
+    .faq-a a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184,160,110,0.25);
+    }
+    .faq-a a:hover { border-color: var(--accent-gold); }
+
+    @media (max-width: 900px) { .gods-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px) { .gods-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 420px) { .gods-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 767px) {
+      .gods-hero { padding: 40px 16px 32px; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRWRSLPKTM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XRWRSLPKTM');
+  </script>
+</head>
+<body>
+
+  <section class="gods-hero" aria-label="Chinese gods introduction">
+    <h1>Chinese Gods &amp; Deities</h1>
+    <p>The complete pantheon — from celestial emperors and compassionate bodhisattvas to demon kings and dragon princes</p>
+  </section>
+
+  <section class="gods-intro" aria-label="About Chinese gods and deities">
+    <div class="gods-intro-inner">
+      <p>The pantheon of <strong>Chinese gods and deities</strong> is one of the most extensive and layered in all of world mythology. Spanning over 5,000 years of continuous religious and folk tradition, the Chinese divine realm is not a simple hierarchy but a living, bureaucratic cosmos where gods hold titles, file reports, and serve under celestial emperors. At its apex sit primordial creators like <a href="../deities/pangu/index.html">Pangu</a>, who split heaven from earth, and <a href="../deities/nuwa/index.html">Nüwa</a>, who molded humanity from clay. Above all presides the <a href="../deities/jade-emperor/index.html">Jade Emperor</a>, supreme ruler of the celestial court, while figures like <a href="../deities/guanyin/index.html">Guanyin</a>, the Goddess of Mercy, extend compassion across all realms. Warrior deities such as <a href="../deities/nezha/index.html">Nezha</a> and <a href="../deities/erlang-shen/index.html">Erlang Shen</a> defend cosmic order, while boundary-crossers like <a href="../deities/sun-wukong/index.html">Sun Wukong</a>, the Monkey King, defy every category and every heaven. This page catalogues every major <strong>Chinese god</strong>, demon, and immortal in the Celestial Archive — their Chinese names, their titles, their domains, and links to their full stories.</p>
+    </div>
+  </section>
+
+  <section class="gods-grid-section" aria-label="Complete list of Chinese gods and deities">
+    <h2 class="gods-section-title">All Gods &amp; Deities</h2>
+    <div class="gods-grid">
+
+      <!-- Jade Emperor -->
+      <a href="../deities/jade-emperor/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#5a8a6a;">J</span>
+        <span class="god-card-name">Jade Emperor</span>
+        <span class="god-card-name-zh">玉皇大帝</span>
+        <span class="god-card-title">Supreme Ruler of Heaven</span>
+        <span class="god-card-desc">The highest sovereign of the celestial realm, who governs the universe through a divine bureaucracy.</span>
+      </a>
+
+      <!-- The Buddha -->
+      <a href="../deities/buddha/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#daa520;">B</span>
+        <span class="god-card-name">The Buddha</span>
+        <span class="god-card-name-zh">如来佛</span>
+        <span class="god-card-title">The Enlightened One</span>
+        <span class="god-card-desc">Lord of the Western Paradise who tamed the Monkey King with a demonstration of infinity.</span>
+      </a>
+
+      <!-- Taishang Laojun -->
+      <a href="../deities/taishang-laojun/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#7b4fbf;">T</span>
+        <span class="god-card-name">Taishang Laojun</span>
+        <span class="god-card-name-zh">太上老君</span>
+        <span class="god-card-title">The Supreme Lord</span>
+        <span class="god-card-desc">Daoism's highest deity. Keeper of the Eight Trigrams Furnace, master of alchemy and immortality elixirs.</span>
+      </a>
+
+      <!-- Guanyin -->
+      <a href="../deities/guanyin/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#7ec8a0;">G</span>
+        <span class="god-card-name">Guanyin</span>
+        <span class="god-card-name-zh">观音</span>
+        <span class="god-card-title">Goddess of Mercy</span>
+        <span class="god-card-desc">She who hears the cries of the world. The pilgrimage's invisible architect and tireless rescuer.</span>
+      </a>
+
+      <!-- Pangu -->
+      <a href="../deities/pangu/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#c45440;">P</span>
+        <span class="god-card-name">Pangu</span>
+        <span class="god-card-name-zh">盘古</span>
+        <span class="god-card-title">The First Living Being</span>
+        <span class="god-card-desc">Born from the cosmic egg, he split heaven from earth. His body became the mountains, rivers, wind, and stars.</span>
+      </a>
+
+      <!-- Nüwa -->
+      <a href="../deities/nuwa/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#5a9a8a;">N</span>
+        <span class="god-card-name">Nüwa</span>
+        <span class="god-card-name-zh">女娲</span>
+        <span class="god-card-title">The Creator Goddess</span>
+        <span class="god-card-desc">She who molded humanity from yellow clay and repaired the broken sky with five-colored stones.</span>
+      </a>
+
+      <!-- Queen Mother of the West -->
+      <a href="../deities/xiwangmu/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#6aaa8a;">X</span>
+        <span class="god-card-name">Queen Mother of the West</span>
+        <span class="god-card-name-zh">西王母</span>
+        <span class="god-card-title">Empress of Immortality</span>
+        <span class="god-card-desc">Supreme goddess of the celestial west, keeper of the Peaches of Immortality, co-ruler of heaven.</span>
+      </a>
+
+      <!-- Sun Wukong -->
+      <a href="../deities/sun-wukong/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#c44d34;">S</span>
+        <span class="god-card-name">Sun Wukong</span>
+        <span class="god-card-name-zh">孙悟空</span>
+        <span class="god-card-title">The Monkey King</span>
+        <span class="god-card-desc">From stone-born rebel who stormed heaven to the Victorious Fighting Buddha — the most famous figure in Chinese mythology.</span>
+      </a>
+
+      <!-- Erlang Shen -->
+      <a href="../deities/erlang-shen/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#5a7a8c;">E</span>
+        <span class="god-card-name">Erlang Shen</span>
+        <span class="god-card-name-zh">二郎神</span>
+        <span class="god-card-title">The Equal Rival</span>
+        <span class="god-card-desc">Heaven's greatest warrior. The only being who ever fought the Monkey King to a standstill.</span>
+      </a>
+
+      <!-- Nezha -->
+      <a href="../deities/nezha/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#d4687c;">N</span>
+        <span class="god-card-name">Nezha</span>
+        <span class="god-card-name-zh">哪吒</span>
+        <span class="god-card-title">The Third Prince</span>
+        <span class="god-card-desc">Lotus-born warrior god. Patron of children, marshal of the celestial armies, dragon-slayer.</span>
+      </a>
+
+      <!-- Zhu Bajie -->
+      <a href="../deities/zhu-bajie/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#b8860b;">Z</span>
+        <span class="god-card-name">Zhu Bajie</span>
+        <span class="god-card-name-zh">猪八戒</span>
+        <span class="god-card-title">The Fallen Marshal</span>
+        <span class="god-card-desc">Once commander of 80,000 celestial sailors. Now a pilgrim of appetite, lust, and surprising heart.</span>
+      </a>
+
+      <!-- Tang Sanzang -->
+      <a href="../deities/tang-sanzang/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#4a6fa5;">T</span>
+        <span class="god-card-name">Tang Sanzang</span>
+        <span class="god-card-name-zh">唐三藏</span>
+        <span class="god-card-title">The Pilgrim Monk</span>
+        <span class="god-card-desc">The heart of the journey. A mortal monk carrying heaven's mandate through a world of demons.</span>
+      </a>
+
+      <!-- Sha Wujing -->
+      <a href="../deities/sha-wujing/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#2d6d6d;">S</span>
+        <span class="god-card-name">Sha Wujing</span>
+        <span class="god-card-name-zh">沙悟净</span>
+        <span class="god-card-title">The Sand Monk</span>
+        <span class="god-card-desc">Former Curtain-Raising General, banished to the Flowing Sands River, redeemed as the third disciple.</span>
+      </a>
+
+      <!-- White Dragon Horse -->
+      <a href="../deities/white-dragon-horse/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#4a8aa8;">W</span>
+        <span class="god-card-name">White Dragon Horse</span>
+        <span class="god-card-name-zh">白龙马</span>
+        <span class="god-card-title">The Dragon Prince Steed</span>
+        <span class="god-card-desc">Ao Lie, dragon prince of the Western Sea, transformed into Tang Sanzang's loyal mount for the pilgrimage.</span>
+      </a>
+
+      <!-- Bull Demon King -->
+      <a href="../deities/bull-demon-king/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#8b4513;">B</span>
+        <span class="god-card-name">Bull Demon King</span>
+        <span class="god-card-name-zh">牛魔王</span>
+        <span class="god-card-title">The Great Bull King</span>
+        <span class="god-card-desc">Sworn brother of Sun Wukong, sovereign of Flaming Mountain, demon king of primal rage and brute force.</span>
+      </a>
+
+      <!-- Princess Iron Fan -->
+      <a href="../deities/princess-iron-fan/index.html" class="god-card">
+        <span class="god-card-avatar" style="background:#b8453a;">P</span>
+        <span class="god-card-name">Princess Iron Fan</span>
+        <span class="god-card-name-zh">铁扇公主</span>
+        <span class="god-card-title">Keeper of the Banana Leaf Fan</span>
+        <span class="god-card-desc">Demon queen of Flaming Mountain, wife of the Bull Demon King, wielder of the legendary Banana Leaf Fan.</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Dive Deeper -->
+  <section class="dive-deeper-section" aria-label="Dive deeper into Chinese mythology">
+    <p>Dive Deeper</p>
+    <div class="dive-links">
+      <a href="../topics/chinese-gods.html">Top 12 Chinese Gods</a>
+      <a href="../topics/jade-emperor.html">Jade Emperor Guide</a>
+      <a href="../topics/who-is-sun-wukong.html">Who Is Sun Wukong?</a>
+      <a href="../topics/who-is-nezha.html">Who Is Nezha?</a>
+      <a href="../topics/is-nezha-god-or-demon.html">Is Nezha a God or Demon?</a>
+      <a href="../topics/chinese-mythology.html">Chinese Mythology 101</a>
+      <a href="../topics/nezha-vs-sun-wukong.html">Nezha vs Sun Wukong</a>
+      <a href="../topics/sun-wukong-vs-erlang-shen.html">Sun Wukong vs Erlang Shen</a>
+      <a href="../topics/journey-to-the-west.html">Journey to the West</a>
+      <a href="../three-realms-hierarchy.html">Three Realms Hierarchy</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" aria-label="Frequently asked questions about Chinese gods">
+    <div class="faq-inner">
+      <h2>Frequently Asked Questions About Chinese Gods</h2>
+      <div class="faq-item">
+        <p class="faq-q">Q: Who is the most powerful Chinese god?</p>
+        <p class="faq-a">The <a href="../topics/jade-emperor.html">Jade Emperor</a> is widely regarded as the supreme ruler of heaven in Chinese mythology, presiding over the celestial bureaucracy from the Dragon Throne. However, the Three Pure Ones of Taoism — Yuanshi Tianzun, Lingbao Tianzun, and Taishang Laojun — are considered metaphysically higher as embodiments of the Dao itself. In Buddhist-influenced contexts, the Buddha of the Western Paradise holds supreme authority. Power in Chinese mythology is rarely absolute; it is distributed across a complex hierarchy of <strong>Chinese gods and deities</strong> where each being has their domain, their mandate, and their limitations.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Q: How many Chinese gods are there?</p>
+        <p class="faq-a">Chinese mythology and folk religion include thousands of gods, immortals, and divine beings. The celestial bureaucracy includes major deities like the Jade Emperor, Guanyin, and the Three Pure Ones, but also countless local gods, city gods, earth gods, stove gods, door gods, and deified historical figures. The classic novel <em>Journey to the West</em> alone features hundreds of named deities, demons, and immortals. This page catalogues the 16 most prominent <strong>Chinese gods</strong> featured in the Celestial Archive, with many more to come as the archive grows.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Q: What's the difference between a Chinese god and a demon?</p>
+        <p class="faq-a">In Chinese mythology, the line between gods and demons is often blurred. Many demons (y&#x101;o gu&#x00E0;i) are former gods who fell from grace, or beings who achieved power through improper means. Figures like the <a href="../deities/bull-demon-king/index.html">Bull Demon King</a> and <a href="../deities/princess-iron-fan/index.html">Princess Iron Fan</a> are called "demon kings" but command vast territories and armies. Conversely, gods can behave destructively, and demons can perform good deeds and earn redemption. The key distinction is alignment with celestial order: gods serve heaven's mandate, while demons defy it — but as <a href="../deities/sun-wukong/index.html">Sun Wukong</a> proved, today's rebel can become tomorrow's Buddha.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">Celestial Archive</div>
+          <p class="footer-desc">Exploring the myths, legends, and divine beings of Chinese mythology — one story at a time.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Navigate</div>
+          <nav class="footer-nav">
+            <a href="../index.html">Home</a>
+            <a href="../gods/index.html">Gods</a>
+            <a href="../characters.html">Characters</a>
+            <a href="../stories/index.html">Stories</a>
+            <a href="../guides/index.html">Top Lists</a>
+          </nav>
+          <div class="footer-heading" style="margin-top:var(--space-md)">More Deities</div>
+          <nav class="footer-nav" data-footer="deities"></nav>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Follow</div>
+          <div class="social-icons">
+            <span class="social-icon" aria-label="Twitter">T</span>
+            <span class="social-icon" aria-label="YouTube">Y</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <nav class="footer-nav">
+            <a href="../about.html">About Us</a>
+            <a href="../contact.html">Contact Us</a>
+            <a href="../privacy-policy.html">Privacy Policy</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "headline": "Chinese Gods & Deities — Complete List",
+    "description": "Browse the complete list of Chinese gods and deities — from the Jade Emperor and Guanyin to Sun Wukong and Nezha. Explore every major god, demon, and immortal in Chinese mythology.",
+    "url": "https://celestial-archive.com/gods/",
+    "author": { "@type": "Organization", "name": "Celestial Archive" },
+    "publisher": { "@type": "Organization", "name": "Celestial Archive", "url": "https://celestial-archive.com" },
+    "datePublished": "2026-05-20",
+    "inLanguage": "en",
+    "mainEntityOfPage": "https://celestial-archive.com/gods/",
+    "about": {
+      "@type": "Thing",
+      "name": "Chinese gods and deities",
+      "description": "The pantheon of Chinese gods, deities, demons, and immortals from Chinese mythology."
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Who is the most powerful Chinese god?","acceptedAnswer":{"@type":"Answer","text":"The Jade Emperor is widely regarded as the supreme ruler of heaven in Chinese mythology, presiding over the celestial bureaucracy. However, the Three Pure Ones of Taoism are considered metaphysically higher as embodiments of the Dao itself."}},
+      {"@type":"Question","name":"How many Chinese gods are there?","acceptedAnswer":{"@type":"Answer","text":"Chinese mythology and folk religion include thousands of gods, immortals, and divine beings. The celestial bureaucracy includes major deities and countless local gods, city gods, and deified historical figures."}},
+      {"@type":"Question","name":"What is the difference between a Chinese god and a demon?","acceptedAnswer":{"@type":"Answer","text":"In Chinese mythology, the line between gods and demons is often blurred. Many demons are former gods who fell from grace. The key distinction is alignment with celestial order: gods serve heaven's mandate, while demons defy it."}}
+    ]
+  }
+  </script>
+  <script src="../js/deities.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/config.js"></script>
+  <script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
+</body>
+</html>

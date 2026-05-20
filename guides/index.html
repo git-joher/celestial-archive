@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chinese Mythology Guides — Beginner to Expert | Celestial Archive</title>
+  <meta name="description" content="Complete guides to Chinese mythology — from beginner introductions to deep dives on specific gods, creatures, and legends. Start your journey into Chinese myth here.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://celestial-archive.com/guides/">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Chinese Mythology Guides — Beginner to Expert | Celestial Archive">
+  <meta property="og:description" content="Complete guides to Chinese mythology — from beginner introductions to deep dives on specific gods, creatures, and legends. Start your journey into Chinese myth here.">
+  <meta property="og:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Chinese Mythology Guides — Celestial Archive">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://celestial-archive.com/guides/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chinese Mythology Guides — Beginner to Expert | Celestial Archive">
+  <meta name="twitter:description" content="Complete guides to Chinese mythology — from beginner introductions to deep dives on specific gods, creatures, and legends.">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta name="twitter:image:alt" content="Chinese Mythology Guides — Celestial Archive">
+  <link rel="stylesheet" href="../css/global.css">
+  <style>
+    .guides-hero {
+      background: var(--bg-dark);
+      text-align: center;
+      padding: 60px 20px 50px;
+      border-bottom: 1px solid rgba(232,220,200,0.06);
+      background-image: radial-gradient(ellipse at 50% 0%, rgba(184,160,110,0.08) 0%, transparent 60%);
+    }
+    .guides-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--text-on-dark);
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+    .guides-hero p {
+      color: rgba(232,220,200,0.6);
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .guides-intro {
+      background: var(--bg-dark);
+      padding: 0 20px 40px;
+    }
+    .guides-intro-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      color: rgba(232,220,200,0.7);
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+    .guides-intro-inner a { color: var(--accent-gold); text-decoration: none; border-bottom: 1px solid rgba(184,160,110,0.25); }
+    .guides-intro-inner a:hover { border-color: var(--accent-gold); }
+    .guides-body {
+      background: var(--bg-dark);
+      padding: 0 0 50px;
+    }
+    .guides-body-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+    .guide-category {
+      margin-bottom: 44px;
+    }
+    .guide-category:last-child { margin-bottom: 0; }
+    .guide-cat-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: #e0c878;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .guide-cat-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 1px;
+      background: var(--accent-gold);
+      margin-top: 10px;
+      opacity: 0.5;
+    }
+    .guide-cat-desc {
+      font-size: 0.85rem;
+      color: rgba(200,180,140,0.5);
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .guide-card {
+      display: flex;
+      flex-direction: column;
+      background: rgba(25,16,10,0.7);
+      border: 1px solid rgba(184,160,110,0.12);
+      border-radius: 10px;
+      padding: 22px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .guide-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(184,160,110,0.4);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+    }
+    .guide-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .guide-card-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: #e0c878;
+      letter-spacing: 1px;
+    }
+    .guide-card-diff {
+      flex-shrink: 0;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 10px;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+    .diff-beginner {
+      color: #7ec8a0;
+      border-color: rgba(126,200,160,0.35);
+    }
+    .diff-intermediate {
+      color: #d4b878;
+      border-color: rgba(212,184,120,0.35);
+    }
+    .diff-advanced {
+      color: #c44d34;
+      border-color: rgba(196,77,52,0.35);
+    }
+    .guide-card-desc {
+      font-size: 0.82rem;
+      color: rgba(200,180,140,0.55);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+    .guide-card-link {
+      font-size: 0.75rem;
+      color: var(--accent-gold);
+      text-decoration: none;
+      padding: 4px 14px;
+      border: 1px solid rgba(184,160,110,0.25);
+      border-radius: 12px;
+      align-self: flex-start;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .guide-card:hover .guide-card-link {
+      background: rgba(184,160,110,0.08);
+      border-color: rgba(184,160,110,0.5);
+    }
+
+    /* Dive Deeper */
+    .dive-deeper-section {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(232,220,200,0.05);
+      padding: 40px 20px 50px;
+      text-align: center;
+    }
+    .dive-deeper-section p {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 18px;
+      opacity: 0.8;
+    }
+    .dive-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .dive-links a {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: var(--accent-gold);
+      text-decoration: none;
+      padding: 8px 18px;
+      border: 1px solid rgba(184,160,110,0.35);
+      border-radius: 20px;
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .dive-links a:hover {
+      color: #c9a845;
+      border-color: rgba(184,160,110,0.65);
+      background: rgba(184,160,110,0.08);
+    }
+
+    /* FAQ */
+    .faq-section {
+      background: #3b2f21;
+      padding: 50px 0 60px;
+      border-top: 1px solid rgba(232,220,200,0.05);
+    }
+    .faq-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .faq-inner h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: #e0c878;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .faq-item {
+      margin-bottom: 20px;
+    }
+    .faq-q {
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      color: #e8d5b0;
+      margin-bottom: 6px;
+      cursor: default;
+    }
+    .faq-a {
+      font-size: 0.95rem;
+      color: rgba(200,180,140,0.65);
+      line-height: 1.8;
+    }
+    .faq-a a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184,160,110,0.25);
+    }
+    .faq-a a:hover { border-color: var(--accent-gold); }
+
+    @media (max-width: 640px) {
+      .guide-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 767px) {
+      .guides-hero { padding: 40px 16px 32px; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRWRSLPKTM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XRWRSLPKTM');
+  </script>
+</head>
+<body>
+
+  <section class="guides-hero" aria-label="Chinese mythology guides introduction">
+    <h1>Chinese Mythology Guides</h1>
+    <p>From beginner introductions to expert deep dives — your starting point for understanding Chinese myth, gods, and legends</p>
+  </section>
+
+  <section class="guides-intro" aria-label="About Chinese mythology guides">
+    <div class="guides-intro-inner">
+      <p>Chinese mythology can feel overwhelming at first. With thousands of years of history, a pantheon of hundreds of <strong>Chinese gods</strong>, and a sprawling epic like <a href="../topics/journey-to-the-west.html">Journey to the West</a> weaving through it all, knowing where to start is half the battle. That is why we created these <strong>Chinese mythology guides</strong> — curated pathways through the tradition, organized by difficulty and topic. For absolute beginners, our introductory guides explain the basic cosmology: the structure of heaven, the role of the <a href="../topics/jade-emperor.html">Jade Emperor</a>, and the founding myths of Pangu and Nüwa. For those who want character deep dives, we have dedicated guides to the most popular figures: <a href="../topics/who-is-sun-wukong.html">Sun Wukong</a>, <a href="../topics/who-is-nezha.html">Nezha</a>, <a href="../topics/is-nezha-god-or-demon.html">the nature of Nezha's divinity</a>, and the <a href="../topics/journey-west-characters.html">complete cast of Journey to the West</a>. And for enthusiasts ready for comparisons and deep dives, we offer side-by-side analyses like <a href="../topics/nezha-vs-sun-wukong.html">Nezha vs Sun Wukong</a>, <a href="../topics/sun-wukong-vs-erlang-shen.html">Sun Wukong vs Erlang Shen</a>, and <a href="../topics/chinese-mythology-vs-greek-mythology.html">Chinese vs Greek Mythology</a>. Every guide is written for the curious reader — rigorous but accessible, detailed but inviting.</p>
+    </div>
+  </section>
+
+  <section class="guides-body" aria-label="Chinese mythology guides by category">
+    <div class="guides-body-inner">
+
+      <!-- Beginner Guides -->
+      <div class="guide-category">
+        <h2 class="guide-cat-title">Beginner Guides</h2>
+        <p class="guide-cat-desc">New to Chinese mythology? Start here — these guides assume no prior knowledge</p>
+        <div class="guide-grid">
+          <a href="../chinese-mythology-explained.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Chinese Mythology Explained</span>
+              <span class="guide-card-diff diff-beginner">Beginner</span>
+            </div>
+            <span class="guide-card-desc">A complete overview of Chinese mythology — the gods, the cosmology, the key stories, and how they all fit together. This is the single best starting point for anyone new to the tradition.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/chinese-mythology.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">What Is Chinese Mythology?</span>
+              <span class="guide-card-diff diff-beginner">Beginner</span>
+            </div>
+            <span class="guide-card-desc">An accessible introduction to the scope and nature of Chinese mythology — covering its Taoist, Buddhist, and folk roots, the structure of the cosmos, and the major divine beings.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/chinese-mythology.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Chinese Mythology 101</span>
+              <span class="guide-card-diff diff-beginner">Beginner</span>
+            </div>
+            <span class="guide-card-desc">Heaven, the underworld, immortality, and the celestial bureaucracy — the essential concepts you need to understand before diving deeper into Chinese myth and legend.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- God & Character Guides -->
+      <div class="guide-category">
+        <h2 class="guide-cat-title">God &amp; Character Guides</h2>
+        <p class="guide-cat-desc">Deep dives on the most important Chinese gods, deities, and legendary characters</p>
+        <div class="guide-grid">
+          <a href="../top-10-chinese-gods.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Top 10 Most Powerful Chinese Gods</span>
+              <span class="guide-card-diff diff-intermediate">Intermediate</span>
+            </div>
+            <span class="guide-card-desc">From the Three Pure Ones to the Dragon Kings — ranked and explained. Discover which deities hold the most power in the Chinese celestial hierarchy.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/chinese-gods.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Top 12 Chinese Gods</span>
+              <span class="guide-card-diff diff-intermediate">Intermediate</span>
+            </div>
+            <span class="guide-card-desc">An expanded look at the 12 most important Chinese gods — their domains, their stories, their symbols, and their places in the heavenly court and folk worship.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/who-is-sun-wukong.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Who Is Sun Wukong?</span>
+              <span class="guide-card-diff diff-intermediate">Intermediate</span>
+            </div>
+            <span class="guide-card-desc">Everything you need to know about the Monkey King — his birth from stone, his 72 transformations, his rebellion against heaven, and his journey to Buddhahood.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/who-is-nezha.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Who Is Nezha?</span>
+              <span class="guide-card-diff diff-intermediate">Intermediate</span>
+            </div>
+            <span class="guide-card-desc">The full story of the lotus-born warrior god — his battle with the Dragon Kings, his dramatic self-sacrifice, and his rebirth as a divine marshal of heaven.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/is-nezha-god-or-demon.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Is Nezha a God or Demon?</span>
+              <span class="guide-card-diff diff-intermediate">Intermediate</span>
+            </div>
+            <span class="guide-card-desc">A fascinating exploration of Nezha's ambiguous divine status — why some traditions call him a demon, others a god, and what his story says about Chinese ideas of divinity and rebellion.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/jade-emperor.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Jade Emperor Guide</span>
+              <span class="guide-card-diff diff-intermediate">Intermediate</span>
+            </div>
+            <span class="guide-card-desc">The supreme ruler of heaven — his origins, his role in the celestial bureaucracy, the myths surrounding his rise to power, and his position in Taoist and folk religion.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Story & Novel Guides -->
+      <div class="guide-category">
+        <h2 class="guide-cat-title">Story &amp; Novel Guides</h2>
+        <p class="guide-cat-desc">Guides to the great narratives of Chinese mythology, from the epic to the intimate</p>
+        <div class="guide-grid">
+          <a href="../journey-to-the-west-summary.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Journey to the West Summary</span>
+              <span class="guide-card-diff diff-beginner">Beginner</span>
+            </div>
+            <span class="guide-card-desc">A concise summary of the entire Journey to the West novel — 100 chapters distilled into a readable overview of the pilgrimage, the demons, and the divine interventions.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/journey-to-the-west.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Journey to the West — Complete Guide</span>
+              <span class="guide-card-diff diff-intermediate">Intermediate</span>
+            </div>
+            <span class="guide-card-desc">A comprehensive guide to the Journey to the West — its historical basis, its major episodes, its characters, its symbolism, and its enduring influence on Chinese culture and global media.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/journey-west-characters.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Journey to the West Characters</span>
+              <span class="guide-card-diff diff-intermediate">Intermediate</span>
+            </div>
+            <span class="guide-card-desc">Meet every major character in the Journey to the West — the pilgrims, the gods who help them, the demons who oppose them, and the celestial figures who shape their destiny.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Comparisons & Deep Dives -->
+      <div class="guide-category">
+        <h2 class="guide-cat-title">Comparisons &amp; Deep Dives</h2>
+        <p class="guide-cat-desc">Side-by-side analyses, creature guides, and expert-level explorations</p>
+        <div class="guide-grid">
+          <a href="../topics/nezha-vs-sun-wukong.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Nezha vs Sun Wukong</span>
+              <span class="guide-card-diff diff-advanced">Advanced</span>
+            </div>
+            <span class="guide-card-desc">A detailed comparison of two of Chinese mythology's most beloved warrior figures — their powers, their personalities, their roles in the celestial order, and who would win in a fight.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/sun-wukong-vs-erlang-shen.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Sun Wukong vs Erlang Shen</span>
+              <span class="guide-card-diff diff-advanced">Advanced</span>
+            </div>
+            <span class="guide-card-desc">The legendary duel between the Monkey King and heaven's greatest warrior — a battle of 72 transformations that decided the fate of the celestial rebellion.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/chinese-mythology-vs-greek-mythology.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Chinese vs Greek Mythology</span>
+              <span class="guide-card-diff diff-advanced">Advanced</span>
+            </div>
+            <span class="guide-card-desc">A comparative analysis of the two great mythological traditions — their gods, their creation stories, their heroic ideals, and what each reveals about the cultures that created them.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/chinese-dragons.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Chinese Dragons Explained</span>
+              <span class="guide-card-diff diff-intermediate">Intermediate</span>
+            </div>
+            <span class="guide-card-desc">Unlike their fire-breathing Western cousins, Chinese dragons are wise, benevolent, and elemental — masters of water, rain, and transformation. Learn the nine types, the Dragon Kings, and the symbolism.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+          <a href="../topics/chinese-mythology-creatures.html" class="guide-card">
+            <div class="guide-card-top">
+              <span class="guide-card-title">Chinese Mythological Creatures</span>
+              <span class="guide-card-diff diff-intermediate">Intermediate</span>
+            </div>
+            <span class="guide-card-desc">An A-to-Z guide to the creatures of Chinese mythology — from the dragon (long) and phoenix (fenghuang) to the qilin, the bixie, the nian monster, and the hundred-plus beings of the Shan Hai Jing.</span>
+            <span class="guide-card-link">Read Guide &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Dive Deeper -->
+  <section class="dive-deeper-section" aria-label="Dive deeper into Chinese mythology">
+    <p>Dive Deeper</p>
+    <div class="dive-links">
+      <a href="../topics/chinese-gods.html">Top Chinese Gods</a>
+      <a href="../topics/journey-to-the-west.html">Journey to the West</a>
+      <a href="../topics/chinese-dragons.html">Chinese Dragons</a>
+      <a href="../topics/chinese-mythology.html">Chinese Mythology 101</a>
+      <a href="../topics/is-nezha-god-or-demon.html">Is Nezha a God or Demon?</a>
+      <a href="../topics/nezha-vs-sun-wukong.html">Nezha vs Sun Wukong</a>
+      <a href="../topics/sun-wukong-vs-erlang-shen.html">Sun Wukong vs Erlang Shen</a>
+      <a href="../topics/chinese-mythology-vs-greek-mythology.html">Chinese vs Greek</a>
+      <a href="../topics/who-is-sun-wukong.html">Who Is Sun Wukong?</a>
+      <a href="../topics/who-is-nezha.html">Who Is Nezha?</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" aria-label="Frequently asked questions about Chinese mythology guides">
+    <div class="faq-inner">
+      <h2>Frequently Asked Questions About Chinese Mythology Guides</h2>
+      <div class="faq-item">
+        <p class="faq-q">Q: Where should a beginner start with Chinese mythology?</p>
+        <p class="faq-a">Start with the creation myths — <strong>Pangu Creates the World</strong> and <strong>Nüwa Repairs the Sky</strong> — which establish the Chinese cosmological framework in just a few paragraphs. Then read our <a href="../topics/chinese-mythology.html">Chinese Mythology 101</a> guide for an overview of heaven, the underworld, and the celestial bureaucracy. From there, dive into character stories: <a href="../topics/who-is-nezha.html">Nezha</a> is a great second stop because his story is self-contained and dramatic. Finally, begin the <a href="../topics/journey-to-the-west.html">Journey to the West</a> cycle, which ties everything together. This path takes you from zero knowledge to a solid understanding of Chinese mythology in the most natural progression.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Q: What is the best book to start learning Chinese mythology?</p>
+        <p class="faq-a">For English readers, the best starting point is <em>Journey to the West</em> translated by W.J.F. Jenner or Anthony Yu — the novel is the single richest source of Chinese mythological characters and stories. For a reference guide, <em>The Handbook of Chinese Mythology</em> by Lihui Yang and Deming An is the standard academic introduction. For a more narrative approach, <em>Chinese Myths and Legends</em> by Lianshan Chen covers the major myths in an accessible style. All of these complement the free <strong>Chinese mythology guides</strong> available here on Celestial Archive.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Q: Are Chinese mythology guides available for free?</p>
+        <p class="faq-a">Yes — absolutely. Celestial Archive offers all of its <strong>Chinese mythology guides</strong> completely free. Every guide on this page — from beginner introductions to advanced comparisons — is available without registration, paywalls, or ads that block content. We believe that the rich tradition of Chinese myth should be accessible to everyone, and our guides are written and maintained as a free educational resource. Bookmark this page and return whenever you want to learn more about Chinese gods, legends, and stories.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">Celestial Archive</div>
+          <p class="footer-desc">Exploring the myths, legends, and divine beings of Chinese mythology — one story at a time.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Navigate</div>
+          <nav class="footer-nav">
+            <a href="../index.html">Home</a>
+            <a href="../gods/index.html">Gods</a>
+            <a href="../characters.html">Characters</a>
+            <a href="../stories/index.html">Stories</a>
+            <a href="../guides/index.html">Top Lists</a>
+          </nav>
+          <div class="footer-heading" style="margin-top:var(--space-md)">More Deities</div>
+          <nav class="footer-nav" data-footer="deities"></nav>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Follow</div>
+          <div class="social-icons">
+            <span class="social-icon" aria-label="Twitter">T</span>
+            <span class="social-icon" aria-label="YouTube">Y</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <nav class="footer-nav">
+            <a href="../about.html">About Us</a>
+            <a href="../contact.html">Contact Us</a>
+            <a href="../privacy-policy.html">Privacy Policy</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "headline": "Chinese Mythology Guides — Beginner to Expert",
+    "description": "Complete guides to Chinese mythology — from beginner introductions to deep dives on specific gods, creatures, and legends. Start your journey into Chinese myth here.",
+    "url": "https://celestial-archive.com/guides/",
+    "author": { "@type": "Organization", "name": "Celestial Archive" },
+    "publisher": { "@type": "Organization", "name": "Celestial Archive", "url": "https://celestial-archive.com" },
+    "datePublished": "2026-05-20",
+    "inLanguage": "en",
+    "mainEntityOfPage": "https://celestial-archive.com/guides/",
+    "about": {
+      "@type": "Thing",
+      "name": "Chinese mythology guides",
+      "description": "Curated guides to Chinese mythology organized by difficulty level — from beginner introductions to expert comparisons and deep dives."
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Where should a beginner start with Chinese mythology?","acceptedAnswer":{"@type":"Answer","text":"Start with creation myths — Pangu Creates the World and Nüwa Repairs the Sky — then read Chinese Mythology 101 for an overview. Then dive into character stories like Nezha, and finally begin the Journey to the West cycle."}},
+      {"@type":"Question","name":"What is the best book to start learning Chinese mythology?","acceptedAnswer":{"@type":"Answer","text":"Journey to the West translated by W.J.F. Jenner or Anthony Yu is the best starting point. For reference, The Handbook of Chinese Mythology by Lihui Yang and Deming An is the standard academic introduction."}},
+      {"@type":"Question","name":"Are Chinese mythology guides available for free?","acceptedAnswer":{"@type":"Answer","text":"Yes — Celestial Archive offers all of its Chinese mythology guides completely free, without registration, paywalls, or ads that block content."}}
+    ]
+  }
+  </script>
+  <script src="../js/deities.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/config.js"></script>
+  <script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
+</body>
+</html>

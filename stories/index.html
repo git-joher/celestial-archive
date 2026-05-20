@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chinese Mythology Stories & Legends | Celestial Archive</title>
+  <meta name="description" content="Explore the greatest stories in Chinese mythology — from the creation of the world by Pangu to the epic Journey to the West. Read about legendary battles, divine romances, and the myths that shaped China.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://celestial-archive.com/stories/">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Chinese Mythology Stories & Legends | Celestial Archive">
+  <meta property="og:description" content="Explore the greatest stories in Chinese mythology — from the creation of the world by Pangu to the epic Journey to the West. Read about legendary battles, divine romances, and the myths that shaped China.">
+  <meta property="og:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Chinese Mythology Stories and Legends — Celestial Archive">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://celestial-archive.com/stories/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chinese Mythology Stories & Legends | Celestial Archive">
+  <meta name="twitter:description" content="Explore the greatest stories in Chinese mythology — creation myths, legendary battles, and epic journeys.">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta name="twitter:image:alt" content="Chinese Mythology Stories and Legends — Celestial Archive">
+  <link rel="stylesheet" href="../css/global.css">
+  <style>
+    .stories-hero {
+      background: var(--bg-dark);
+      text-align: center;
+      padding: 60px 20px 50px;
+      border-bottom: 1px solid rgba(232,220,200,0.06);
+      background-image: radial-gradient(ellipse at 50% 0%, rgba(184,160,110,0.08) 0%, transparent 60%);
+    }
+    .stories-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--text-on-dark);
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+    .stories-hero p {
+      color: rgba(232,220,200,0.6);
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .stories-intro {
+      background: var(--bg-dark);
+      padding: 0 20px 40px;
+    }
+    .stories-intro-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      color: rgba(232,220,200,0.7);
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+    .stories-intro-inner a { color: var(--accent-gold); text-decoration: none; border-bottom: 1px solid rgba(184,160,110,0.25); }
+    .stories-intro-inner a:hover { border-color: var(--accent-gold); }
+    .stories-body {
+      background: var(--bg-dark);
+      padding: 0 0 50px;
+    }
+    .stories-body-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+    .story-category {
+      margin-bottom: 44px;
+    }
+    .story-category:last-child {
+      margin-bottom: 0;
+    }
+    .story-cat-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: #e0c878;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .story-cat-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 1px;
+      background: var(--accent-gold);
+      margin-top: 10px;
+      opacity: 0.5;
+    }
+    .story-cat-desc {
+      font-size: 0.85rem;
+      color: rgba(200,180,140,0.5);
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .story-card {
+      display: flex;
+      flex-direction: column;
+      background: rgba(25,16,10,0.7);
+      border: 1px solid rgba(184,160,110,0.12);
+      border-radius: 10px;
+      padding: 22px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .story-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(184,160,110,0.4);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+    }
+    .story-card-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: #e0c878;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .story-card-desc {
+      font-size: 0.82rem;
+      color: rgba(200,180,140,0.55);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+    .story-card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .story-card-links a {
+      font-size: 0.75rem;
+      color: var(--accent-gold);
+      text-decoration: none;
+      padding: 4px 12px;
+      border: 1px solid rgba(184,160,110,0.2);
+      border-radius: 12px;
+      transition: background 0.25s, border-color 0.25s;
+      white-space: nowrap;
+    }
+    .story-card-links a:hover {
+      background: rgba(184,160,110,0.08);
+      border-color: rgba(184,160,110,0.4);
+    }
+
+    /* Dive Deeper */
+    .dive-deeper-section {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(232,220,200,0.05);
+      padding: 40px 20px 50px;
+      text-align: center;
+    }
+    .dive-deeper-section p {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 18px;
+      opacity: 0.8;
+    }
+    .dive-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .dive-links a {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: var(--accent-gold);
+      text-decoration: none;
+      padding: 8px 18px;
+      border: 1px solid rgba(184,160,110,0.35);
+      border-radius: 20px;
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .dive-links a:hover {
+      color: #c9a845;
+      border-color: rgba(184,160,110,0.65);
+      background: rgba(184,160,110,0.08);
+    }
+
+    /* FAQ */
+    .faq-section {
+      background: #3b2f21;
+      padding: 50px 0 60px;
+      border-top: 1px solid rgba(232,220,200,0.05);
+    }
+    .faq-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .faq-inner h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: #e0c878;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .faq-item {
+      margin-bottom: 20px;
+    }
+    .faq-q {
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      color: #e8d5b0;
+      margin-bottom: 6px;
+      cursor: default;
+    }
+    .faq-a {
+      font-size: 0.95rem;
+      color: rgba(200,180,140,0.65);
+      line-height: 1.8;
+    }
+    .faq-a a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184,160,110,0.25);
+    }
+    .faq-a a:hover { border-color: var(--accent-gold); }
+
+    @media (max-width: 640px) {
+      .story-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 767px) {
+      .stories-hero { padding: 40px 16px 32px; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRWRSLPKTM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XRWRSLPKTM');
+  </script>
+</head>
+<body>
+
+  <section class="stories-hero" aria-label="Chinese mythology stories introduction">
+    <h1>Chinese Mythology Stories &amp; Legends</h1>
+    <p>From the birth of the cosmos to the epic Journey to the West — the stories that shaped Chinese civilization</p>
+  </section>
+
+  <section class="stories-intro" aria-label="About Chinese mythology stories">
+    <div class="stories-intro-inner">
+      <p>Chinese mythology is built on stories — grand, sweeping narratives that explain the origin of the world, the nature of divinity, and the meaning of heroism. Unlike the fixed canon of Western mythology, Chinese myths evolved over thousands of years through Taoist, Buddhist, and folk traditions, creating a living story cycle that continues to inspire modern film, literature, and art. At the foundation lie creation myths: <a href="../deities/pangu/creation.html">Pangu Creating the World</a> and <a href="../deities/nuwa/sky-repair.html">Nüwa Repairs the Sky</a>. At the heart sits the epic <a href="../topics/journey-to-the-west.html">Journey to the West</a>, the great Chinese novel that brought together gods, demons, monks, and immortals in a single quest for truth. Between them lie legendary battles like <a href="../deities/sun-wukong/battle.html">Sun Wukong's Havoc in Heaven</a> and divine origin tales such as <a href="../deities/nezha/origins.html">Nezha's Lotus Rebirth</a>. These are the <strong>Chinese myths</strong> and <strong>Chinese legends</strong> that define the tradition — each one a doorway into a rich and wondrous world.</p>
+    </div>
+  </section>
+
+  <section class="stories-body" aria-label="Chinese mythology stories by category">
+    <div class="stories-body-inner">
+
+      <!-- Creation Myths -->
+      <div class="story-category">
+        <h2 class="story-cat-title">Creation Myths</h2>
+        <p class="story-cat-desc">The beginning of all things — how the cosmos, humanity, and the natural world came into being</p>
+        <div class="story-grid">
+          <div class="story-card">
+            <span class="story-card-title">Pangu Creates the World</span>
+            <span class="story-card-desc">From a cosmic egg in the primordial void, Pangu was born. For 18,000 years he grew, pushing heaven and earth apart with his immense body. When he died, his eyes became the sun and moon, his blood the rivers, his breath the wind — his entire being transformed into the world we know. This is the oldest and most foundational of all Chinese creation myths.</span>
+            <div class="story-card-links">
+              <a href="../deities/pangu/origins.html">Origins</a>
+              <a href="../deities/pangu/creation.html">Creation Story</a>
+            </div>
+          </div>
+          <div class="story-card">
+            <span class="story-card-title">Nüwa Repairs the Sky</span>
+            <span class="story-card-desc">When the sky collapsed and fire rained upon the earth, the goddess Nüwa melted five-colored stones to patch the heavens. She cut off the legs of a giant turtle to prop up the four corners of the world, and the cosmos was restored. This myth explains both the origin of the stars and the Chinese reverence for colored jade.</span>
+            <div class="story-card-links">
+              <a href="../deities/nuwa/sky-repair.html">The Sky Repair</a>
+              <a href="../deities/nuwa/index.html">Nüwa Home</a>
+            </div>
+          </div>
+          <div class="story-card">
+            <span class="story-card-title">Nüwa Creates Humanity</span>
+            <span class="story-card-desc">In the beginning, the earth was beautiful but empty. Nüwa took yellow clay and molded human figures, breathing life into them. When she grew tired, she dipped a rope in mud and flicked it — each droplet becoming another human. The handcrafted ones became nobles; the rope-droplets became commoners. This is the Chinese origin story of humanity.</span>
+            <div class="story-card-links">
+              <a href="../deities/nuwa/creation.html">Creation</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journey to the West Episodes -->
+      <div class="story-category">
+        <h2 class="story-cat-title">Journey to the West Episodes</h2>
+        <p class="story-cat-desc">Iconic episodes from China's greatest mythological novel — a pilgrimage filled with battles, demons, and divine intervention</p>
+        <div class="story-grid">
+          <div class="story-card">
+            <span class="story-card-title">Havoc in Heaven</span>
+            <span class="story-card-desc">Sun Wukong, having mastered the 72 Earthly Transformations and acquired the Ruyi Jingu Bang, rebels against the celestial court. He defeats the Four Heavenly Kings, battles Nezha and Erlang Shen, and declares himself "Great Sage, Equal of Heaven." It takes the combined armies of heaven, the cunning of Erlang Shen, and finally the Buddha himself to subdue him.</span>
+            <div class="story-card-links">
+              <a href="../deities/sun-wukong/battle.html">Battles</a>
+              <a href="../deities/sun-wukong/index.html">Sun Wukong</a>
+              <a href="../topics/sun-wukong-vs-erlang-shen.html">vs Erlang Shen</a>
+            </div>
+          </div>
+          <div class="story-card">
+            <span class="story-card-title">The Three Borrowings of the Banana Leaf Fan</span>
+            <span class="story-card-desc">To cross Flaming Mountain, the pilgrims need the Banana Leaf Fan that can extinguish its fires. But Princess Iron Fan refuses to lend it — Sun Wukong once fought her son Red Boy, and she has not forgiven him. What follows is a comedic and desperate game of deception, transformation, and negotiation that tests the Monkey King's cunning to its limits.</span>
+            <div class="story-card-links">
+              <a href="../deities/princess-iron-fan/battle.html">Battle</a>
+              <a href="../deities/princess-iron-fan/index.html">Princess Iron Fan</a>
+            </div>
+          </div>
+          <div class="story-card">
+            <span class="story-card-title">Battle at Flaming Mountain</span>
+            <span class="story-card-desc">Flaming Mountain blocks the pilgrims' path — a infernal peak that burns with unquenchable fire. Sun Wukong confronts the Bull Demon King, his former sworn brother turned bitter enemy. The battle shakes the earth as old friendship and new hatred collide in one of the novel's most powerful encounters.</span>
+            <div class="story-card-links">
+              <a href="../deities/bull-demon-king/battle.html">Battle</a>
+              <a href="../deities/bull-demon-king/flame-mountain.html">Flaming Mountain</a>
+              <a href="../deities/bull-demon-king/index.html">Bull Demon King</a>
+            </div>
+          </div>
+          <div class="story-card">
+            <span class="story-card-title">The Buddha's Palm</span>
+            <span class="story-card-desc">Sun Wukong, believing he has reached the edge of the universe, finds five pillars and marks them. When he returns, he discovers the pillars were the Buddha's fingers — and the mark he left is on the Buddha's own hand. The Buddha then turns his hand into a mountain of five elements, trapping the Monkey King for 500 years. It is the ultimate lesson in humility.</span>
+            <div class="story-card-links">
+              <a href="../deities/buddha/battle.html">Buddha's Conquest</a>
+              <a href="../deities/sun-wukong/origins.html">Sun Wukong Origins</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legendary Battles -->
+      <div class="story-category">
+        <h2 class="story-cat-title">Legendary Battles</h2>
+        <p class="story-cat-desc">Clashes between gods, demons, and heroes that shook the foundations of heaven and earth</p>
+        <div class="story-grid">
+          <div class="story-card">
+            <span class="story-card-title">Sun Wukong vs Erlang Shen</span>
+            <span class="story-card-desc">The duel that defined the celestial rebellion. Erlang Shen, heaven's most powerful warrior with his third eye and faithful hound, meets Sun Wukong in a battle of 72 transformations. Each matches the other's every move — fish against crane, snake against stork, temple against giant. Neither can defeat the other until Laozi's golden bracelet tips the scales.</span>
+            <div class="story-card-links">
+              <a href="../topics/sun-wukong-vs-erlang-shen.html">Full Comparison</a>
+              <a href="../deities/erlang-shen/battle.html">Erlang's Battles</a>
+            </div>
+          </div>
+          <div class="story-card">
+            <span class="story-card-title">Nezha vs the Dragon Kings</span>
+            <span class="story-card-desc">Young Nezha, bathing in the Eastern Sea, accidentally kills the third dragon prince. The Dragon Kings demand his life in return. Nezha, in an act of shocking filial piety, slices his own flesh and returns his body to his parents. This self-sacrifice leads to his rebirth from a lotus flower — and his transformation into a divine marshal of heaven.</span>
+            <div class="story-card-links">
+              <a href="../deities/nezha/battle.html">Battles</a>
+              <a href="../deities/nezha/origins.html">Origins</a>
+              <a href="../topics/who-is-nezha.html">Who Is Nezha?</a>
+            </div>
+          </div>
+          <div class="story-card">
+            <span class="story-card-title">The Peach Garden Crisis</span>
+            <span class="story-card-desc">The Queen Mother of the West's Peaches of Immortality ripen once every 3,000 years, and their feast is the grandest event in heaven. But when Sun Wukong is not invited — considered too lowly — he infiltrates the garden, consumes the peaches, steals Laozi's elixir, and triggers the chain of events that leads to open war between heaven and the Monkey King.</span>
+            <div class="story-card-links">
+              <a href="../deities/xiwangmu/battle.html">The Crisis</a>
+              <a href="../deities/xiwangmu/peach-garden.html">Peach Garden</a>
+              <a href="../deities/xiwangmu/index.html">Queen Mother</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divine Origins -->
+      <div class="story-category">
+        <h2 class="story-cat-title">Divine Origins</h2>
+        <p class="story-cat-desc">How the gods became gods — origin stories of ascension, cultivation, and divine birth</p>
+        <div class="story-grid">
+          <div class="story-card">
+            <span class="story-card-title">The Jade Emperor's Cultivation</span>
+            <span class="story-card-desc">Before he sat on the Dragon Throne, the Jade Emperor was a mortal prince who devoted himself to cultivation and charity. Through countless kalpas of selfless deeds over hundreds of millions of years, he earned his place as the supreme sovereign of heaven. His story embodies the Confucian ideal that virtue and perseverance lead to the highest station.</span>
+            <div class="story-card-links">
+              <a href="../deities/jade-emperor/origins.html">Origins</a>
+              <a href="../deities/jade-emperor/index.html">Jade Emperor</a>
+              <a href="../topics/jade-emperor.html">Jade Emperor Guide</a>
+            </div>
+          </div>
+          <div class="story-card">
+            <span class="story-card-title">Nezha's Lotus Rebirth</span>
+            <span class="story-card-desc">After Nezha's dramatic self-destruction, his soul wanders without a body. His teacher, the immortal Taiyi Zhenren, fashions him a new body from the sacred lotus of the Jade Pool. Nezha emerges reborn — more powerful than before, with the Wind Fire Wheels, the Cosmic Ring, and the Fire-tipped Spear. This rebirth transforms him from a troubled child into a warrior god.</span>
+            <div class="story-card-links">
+              <a href="../deities/nezha/origins.html">Origins</a>
+              <a href="../deities/nezha/arsenal.html">Arsenal</a>
+              <a href="../topics/who-is-nezha.html">Full Story</a>
+            </div>
+          </div>
+          <div class="story-card">
+            <span class="story-card-title">Guanyin's Path to Mercy</span>
+            <span class="story-card-desc">Guanyin, once a devoted prince named Avalokiteshvara in Buddhist tradition, attained enlightenment but chose to remain in the mortal world rather than enter nirvana. In Chinese folk tradition, she is also venerated as Princess Miaoshan, who endured immense suffering with unwavering compassion. Her thousand arms and thousand eyes symbolize her ability to see and rescue all who suffer.</span>
+            <div class="story-card-links">
+              <a href="../deities/guanyin/origins.html">Origins</a>
+              <a href="../deities/guanyin/mercy.html">Acts of Mercy</a>
+              <a href="../deities/guanyin/folk.html">Folk Lore</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Dive Deeper -->
+  <section class="dive-deeper-section" aria-label="Dive deeper into Chinese mythology">
+    <p>Dive Deeper</p>
+    <div class="dive-links">
+      <a href="../topics/journey-to-the-west.html">Journey to the West Guide</a>
+      <a href="../topics/journey-west-characters.html">Journey West Characters</a>
+      <a href="../topics/chinese-mythology.html">Chinese Mythology 101</a>
+      <a href="../topics/nezha-vs-sun-wukong.html">Nezha vs Sun Wukong</a>
+      <a href="../topics/sun-wukong-vs-erlang-shen.html">Sun Wukong vs Erlang Shen</a>
+      <a href="../topics/chinese-dragons.html">Chinese Dragons</a>
+      <a href="../topics/chinese-mythology-creatures.html">Mythological Creatures</a>
+      <a href="../topics/chinese-mythology-vs-greek-mythology.html">Chinese vs Greek</a>
+      <a href="../deities/sun-wukong/index.html">Sun Wukong</a>
+      <a href="../deities/nezha/index.html">Nezha</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" aria-label="Frequently asked questions about Chinese myths and stories">
+    <div class="faq-inner">
+      <h2>Frequently Asked Questions About Chinese Myths &amp; Stories</h2>
+      <div class="faq-item">
+        <p class="faq-q">Q: What is the most famous Chinese myth?</p>
+        <p class="faq-a">The most famous Chinese myth is undoubtedly the <a href="../topics/journey-to-the-west.html">Journey to the West</a>, a 16th-century novel by Wu Cheng'en that blends history, mythology, and folklore into an epic adventure. It tells the story of the monk Tang Sanzang's pilgrimage to India with his three disciples — Sun Wukong, Zhu Bajie, and Sha Wujing — to retrieve Buddhist scriptures. The novel is so deeply embedded in Chinese culture that its characters are recognized by virtually every Chinese person, and it has inspired countless films, TV series, and adaptations worldwide.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Q: Is Journey to the West a real story?</p>
+        <p class="faq-a">Journey to the West is a fictional novel inspired by a real historical event. The monk Xuanzang (602-664 CE) did travel from China to India and back to retrieve Buddhist scriptures — a 17-year journey of over 10,000 miles. However, the novel's supernatural elements — the Monkey King, the demon battles, the heavenly bureaucracy — are fictional additions. The real Xuanzang traveled alone; the fictional Tang Sanzang travels with three supernatural disciples. The blending of real history with <strong>Chinese myths</strong> is what gives the story its enduring power.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Q: What Chinese myths are good for beginners?</p>
+        <p class="faq-a">For newcomers to Chinese mythology, the best starting points are the foundational creation myths. <a href="../deities/pangu/creation.html">Pangu Creates the World</a> is the most accessible origin story — short, vivid, and cosmically grand. <a href="../deities/nuwa/sky-repair.html">Nüwa Repairs the Sky</a> and <a href="../deities/nuwa/creation.html">Nüwa Creates Humanity</a> are equally approachable. For character-driven stories, start with <a href="../topics/who-is-nezha.html">Who Is Nezha?</a> — a tale of rebellion, sacrifice, and rebirth that reads like a modern superhero origin. For an epic adventure, dive into <a href="../deities/sun-wukong/battle.html">Sun Wukong's Havoc in Heaven</a> and work your way through the <a href="../topics/journey-to-the-west.html">Journey to the West</a> cycle.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">Celestial Archive</div>
+          <p class="footer-desc">Exploring the myths, legends, and divine beings of Chinese mythology — one story at a time.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Navigate</div>
+          <nav class="footer-nav">
+            <a href="../index.html">Home</a>
+            <a href="../gods/index.html">Gods</a>
+            <a href="../characters.html">Characters</a>
+            <a href="../stories/index.html">Stories</a>
+            <a href="../guides/index.html">Top Lists</a>
+          </nav>
+          <div class="footer-heading" style="margin-top:var(--space-md)">More Deities</div>
+          <nav class="footer-nav" data-footer="deities"></nav>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Follow</div>
+          <div class="social-icons">
+            <span class="social-icon" aria-label="Twitter">T</span>
+            <span class="social-icon" aria-label="YouTube">Y</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <nav class="footer-nav">
+            <a href="../about.html">About Us</a>
+            <a href="../contact.html">Contact Us</a>
+            <a href="../privacy-policy.html">Privacy Policy</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "headline": "Chinese Mythology Stories & Legends",
+    "description": "Explore the greatest stories in Chinese mythology — from the creation of the world by Pangu to the epic Journey to the West. Read about legendary battles, divine romances, and the myths that shaped China.",
+    "url": "https://celestial-archive.com/stories/",
+    "author": { "@type": "Organization", "name": "Celestial Archive" },
+    "publisher": { "@type": "Organization", "name": "Celestial Archive", "url": "https://celestial-archive.com" },
+    "datePublished": "2026-05-20",
+    "inLanguage": "en",
+    "mainEntityOfPage": "https://celestial-archive.com/stories/",
+    "about": {
+      "@type": "Thing",
+      "name": "Chinese mythology stories and legends",
+      "description": "A curated collection of the greatest stories from Chinese mythology — creation myths, legendary battles, Journey to the West episodes, and divine origin tales."
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"What is the most famous Chinese myth?","acceptedAnswer":{"@type":"Answer","text":"The most famous Chinese myth is Journey to the West, a 16th-century novel by Wu Cheng'en that blends history, mythology, and folklore into an epic adventure about the monk Tang Sanzang's pilgrimage to India."}},
+      {"@type":"Question","name":"Is Journey to the West a real story?","acceptedAnswer":{"@type":"Answer","text":"Journey to the West is a fictional novel inspired by the real historical journey of the monk Xuanzang, who traveled from China to India in the 7th century to retrieve Buddhist scriptures."}},
+      {"@type":"Question","name":"What Chinese myths are good for beginners?","acceptedAnswer":{"@type":"Answer","text":"For beginners, start with creation myths like Pangu Creates the World and Nüwa Repairs the Sky. For character-driven stories, begin with Nezha's tale of rebellion and rebirth. For an epic adventure, read Sun Wukong's Havoc in Heaven."}}
+    ]
+  }
+  </script>
+  <script src="../js/deities.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/config.js"></script>
+  <script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
+</body>
+</html>

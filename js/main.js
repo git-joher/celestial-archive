@@ -115,18 +115,18 @@
     // Determine active link
     var pathLower = path.toLowerCase();
     var active = '';
-    if (pathLower.indexOf('/deities/') !== -1 || pathLower.indexOf('/pantheon/') !== -1) active = 'gods.html';
+    if (pathLower.indexOf('/deities/') !== -1 || pathLower.indexOf('/pantheon/') !== -1) active = 'gods/index.html';
     else if (pathLower.indexOf('/topics/') !== -1) {
       var topicFile = pathLower.split('/').pop().replace('.html', '');
       var topicMap = {
-        'chinese-gods': 'gods.html',
-        'jade-emperor': 'gods.html',
+        'chinese-gods': 'gods/index.html',
+        'jade-emperor': 'gods/index.html',
         'journey-west-characters': 'characters.html',
-        'nezha-vs-sun-wukong': 'top-lists.html',
-        'sun-wukong-vs-erlang-shen': 'top-lists.html',
-        'chinese-mythology-vs-greek-mythology': 'top-lists.html'
+        'nezha-vs-sun-wukong': 'guides/index.html',
+        'sun-wukong-vs-erlang-shen': 'guides/index.html',
+        'chinese-mythology-vs-greek-mythology': 'guides/index.html'
       };
-      active = topicMap[topicFile] || 'stories.html';
+      active = topicMap[topicFile] || 'stories/index.html';
     }
 
     	    var p = rootPrefix;
@@ -139,7 +139,7 @@
 
 	    var pantheonDropdown =
 	      '<div class="site-nav-dropdown">'
-	      + '<a href="' + p + 'pantheon/index.html"' + (active === 'gods.html' ? ' class="active"' : '') + '>Pantheon</a>'
+	      + '<a href="' + p + 'pantheon/index.html"' + (active === 'gods/index.html' ? ' class="active"' : '') + '>Pantheon</a>'
 	      + '<div class="site-nav-dropdown-menu">'
 	      + sub(p + 'pantheon/index.html', 'Full Pantheon Hierarchy')
 	      + sub(p + 'three-realms-hierarchy.html', 'Three Realms Hierarchy')
@@ -178,11 +178,11 @@
 
 	    var linksHtml = '';
 	    linksHtml += '<a href="' + p + 'index.html"' + ('index.html' === active ? ' class="active"' : '') + '>Home</a>';
-	    linksHtml += '<a href="' + p + 'gods.html"' + ('gods.html' === active ? ' class="active"' : '') + '>Gods</a>';
+	    linksHtml += '<a href="' + p + 'gods/index.html"' + ('gods/index.html' === active ? ' class="active"' : '') + '>Gods</a>';
 	    linksHtml += pantheonDropdown;
 	    linksHtml += '<a href="' + p + 'characters.html"' + ('characters.html' === active ? ' class="active"' : '') + '>Characters</a>';
-	    linksHtml += '<a href="' + p + 'stories.html"' + ('stories.html' === active ? ' class="active"' : '') + '>Stories</a>';
-	    linksHtml += '<a href="' + p + 'top-lists.html"' + ('top-lists.html' === active ? ' class="active"' : '') + '>Top Lists</a>';
+	    linksHtml += '<a href="' + p + 'stories/index.html"' + ('stories/index.html' === active ? ' class="active"' : '') + '>Stories</a>';
+	    linksHtml += '<a href="' + p + 'guides/index.html"' + ('guides/index.html' === active ? ' class="active"' : '') + '>Top Lists</a>';
     var html =
       '<nav class="site-nav" id="site-nav" aria-label="Site navigation">'
       + '<div class="site-nav-inner">'
