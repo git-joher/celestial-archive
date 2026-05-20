@@ -129,20 +129,60 @@
       active = topicMap[topicFile] || 'stories.html';
     }
 
-    var navItems = [
-      { name: 'Home', href: 'index.html' },
-      { name: 'Gods', href: 'gods.html' },
-      { name: 'Characters', href: 'characters.html' },
-      { name: 'Stories', href: 'stories.html' },
-      { name: 'Top Lists', href: 'top-lists.html' }
-    ];
+    	    var p = rootPrefix;
+	    var d = p + 'deities/';
+	    var sub = function(href, label) { return '<a href="' + href + '">' + label + '</a>'; };
+	    var sp = function(label) { return '<span class="site-nav-sub-item">' + label + '</span>'; };
+	    var subMenu = function(href, label, children) {
+	      return '<div class="site-nav-sub"><a href="' + href + '">' + label + '</a><div class="site-nav-sub-menu">' + children + '</div></div>';
+	    };
 
-    var linksHtml = '';
-    navItems.forEach(function (item) {
-      var cls = item.href === active ? ' class="active"' : '';
-      linksHtml += '<a href="' + rootPrefix + item.href + '"' + cls + '>' + item.name + '</a>';
-    });
+	    var pantheonDropdown =
+	      '<div class="site-nav-dropdown">'
+	      + '<a href="' + p + 'pantheon/index.html"' + (active === 'gods.html' ? ' class="active"' : '') + '>Pantheon</a>'
+	      + '<div class="site-nav-dropdown-menu">'
+	      + sub(p + 'pantheon/index.html', 'Full Pantheon Hierarchy')
+	      + sub(p + 'three-realms-hierarchy.html', 'Three Realms Hierarchy')
+	      + subMenu(p + 'pantheon/index.html#primordial', 'Primordial Creators',
+	          sub(d + 'nuwa/index.html', 'Nüwa 女娲')
+	          + sp('Pangu 盘古') + sp('Fuxi 伏羲') + sp('Shennong 神农') + sp('Yellow Emperor 黄帝'))
+	      + subMenu(p + 'pantheon/index.html#sanqing', 'Three Pure Ones',
+	          sub(d + 'taishang-laojun/index.html', 'Taishang Laojun 太上老君')
+	          + sp('Yuanshi Tianzun 元始天尊') + sp('Lingbao Tianzun 灵宝天尊'))
+	      + subMenu(p + 'pantheon/index.html#rulers', 'Heavenly Court',
+	          sub(d + 'jade-emperor/index.html', 'Jade Emperor 玉皇大帝')
+	          + sp('Queen Mother of the West 西王母') + sp('Dongwanggong 东王公'))
+	      + subMenu(p + 'pantheon/index.html#bureaucracy', 'Heavenly Bureaucracy',
+	          sub(d + 'nezha/index.html', 'Nezha 哪吒')
+	          + sub(d + 'erlang-shen/index.html', 'Erlang Shen 二郎神')
+	          + sp('Four Heavenly Kings 四大天王') + sp('Taibai Jinxing 太白金星'))
+	      + subMenu(p + 'pantheon/index.html#buddhist', 'Buddhist Hierarchy',
+	          sub(d + 'buddha/index.html', 'The Buddha 如来佛')
+	          + sub(d + 'guanyin/index.html', 'Guanyin 观音')
+	          + sp('Kṣitigarbha 地藏王'))
+	      + subMenu(p + 'pantheon/index.html#sages', 'Transcendent Sages',
+	          sp('Patriarch Bodhi 菩提祖师') + sp('Zhenyuan Daxian 镇元大仙'))
+	      + subMenu(p + 'pantheon/index.html#pilgrimage', 'Pilgrimage Team',
+	          sub(d + 'sun-wukong/index.html', 'Sun Wukong 孙悟空')
+	          + sub(d + 'tang-sanzang/index.html', 'Tang Sanzang 唐三藏')
+	          + sub(d + 'zhu-bajie/index.html', 'Zhu Bajie 猪八戒')
+	          + sub(d + 'sha-wujing/index.html', 'Sha Wujing 沙悟净')
+	          + sub(d + 'white-dragon-horse/index.html', 'White Dragon Horse 白龙马'))
+	      + subMenu(p + 'pantheon/index.html#demons', 'Demon Forces',
+	          sub(d + 'bull-demon-king/index.html', 'Bull Demon King 牛魔王')
+	          + sp('White Bone Spirit 白骨精') + sp('Six-eared Macaque 六耳猕猴') + sp('Princess Iron Fan 铁扇公主'))
+	      + subMenu(p + 'pantheon/index.html#mortals', 'Mortal World',
+	          sp('Tang Taizong 唐太宗') + sp('City God 城隍') + sp('Earth God 土地'))
+	      + '</div>'
+	      + '</div>';
 
+	    var linksHtml = '';
+	    linksHtml += '<a href="' + p + 'index.html"' + ('index.html' === active ? ' class="active"' : '') + '>Home</a>';
+	    linksHtml += '<a href="' + p + 'gods.html"' + ('gods.html' === active ? ' class="active"' : '') + '>Gods</a>';
+	    linksHtml += pantheonDropdown;
+	    linksHtml += '<a href="' + p + 'characters.html"' + ('characters.html' === active ? ' class="active"' : '') + '>Characters</a>';
+	    linksHtml += '<a href="' + p + 'stories.html"' + ('stories.html' === active ? ' class="active"' : '') + '>Stories</a>';
+	    linksHtml += '<a href="' + p + 'top-lists.html"' + ('top-lists.html' === active ? ' class="active"' : '') + '>Top Lists</a>';
     var html =
       '<nav class="site-nav" id="site-nav" aria-label="Site navigation">'
       + '<div class="site-nav-inner">'

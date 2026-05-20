@@ -244,6 +244,93 @@ img.mural-filter,
   background: rgba(184,160,110,0.15);
 }
 
+/* Site Nav Dropdown */
+.site-nav-links .site-nav-dropdown { position: relative; }
+.site-nav-links .site-nav-dropdown > a { cursor: default; }
+.site-nav-links .site-nav-dropdown > a::after {
+  content: '\25BC';
+  font-size: 0.5rem;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.site-nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: #2d2418;
+  border: 1px solid rgba(232,220,200,0.15);
+  border-radius: 4px;
+  padding: 6px 0;
+  z-index: 501;
+}
+.site-nav-dropdown:hover .site-nav-dropdown-menu { display: block; }
+.site-nav-dropdown-menu a {
+  display: block;
+  padding: 6px 16px;
+  font-size: 0.7rem;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  color: rgba(232,220,200,0.72) !important;
+  border-radius: 0;
+  white-space: nowrap;
+}
+.site-nav-dropdown-menu a:hover {
+  color: #f0e0c0 !important;
+  background: rgba(184,160,110,0.12) !important;
+}
+
+/* Nested submenus */
+.site-nav-sub {
+  position: relative;
+  padding: 6px 16px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  color: rgba(232,220,200,0.72);
+  cursor: default;
+  white-space: nowrap;
+}
+.site-nav-sub > a {
+  display: inline;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+.site-nav-sub > a:hover {
+  color: #f0e0c0;
+  background: transparent !important;
+}
+.site-nav-sub-menu {
+  display: none;
+  position: absolute;
+  top: -6px;
+  left: 100%;
+  min-width: 200px;
+  background: #2d2418;
+  border: 1px solid rgba(232,220,200,0.15);
+  border-radius: 4px;
+  padding: 6px 0;
+}
+.site-nav-sub:hover .site-nav-sub-menu { display: block; }
+
+.site-nav-sub-item {
+  display: block;
+  padding: 4px 16px;
+  font-size: 0.68rem;
+  color: rgba(232,220,200,0.35);
+  white-space: nowrap;
+  font-family: var(--font-display);
+}
+
+/* Mobile dropdown adjustments */
+@media (max-width: 767px) {
+  .site-nav-dropdown-menu { left: auto; right: 0; }
+  .site-nav-sub-menu { left: auto; right: 100%; }
+}
+
 /* ============================================================
    Breadcrumb Navigation
    ============================================================ */
