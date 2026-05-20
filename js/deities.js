@@ -153,5 +153,15 @@ var CELESTIAL_DEITIES = [
     status: 'live',
     avatarBg: '#6aaa8a',
     avatarInitial: 'X'
+  },
+  {
+    slug: 'princess-iron-fan',
+    name: 'Princess Iron Fan',
+    nameZh: '铁扇公主',
+    title: 'Keeper of the Banana Leaf Fan',
+    description: 'The demon queen of Flaming Mountain. Wife of the Bull Demon King, mother of Red Boy — wielder of the Banana Leaf Fan that commands wind, fire, and the very elements.',
+    status: 'live',
+    avatarBg: '#b8453a',
+    avatarInitial: 'P'
   }
 ];

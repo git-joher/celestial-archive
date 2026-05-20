@@ -1,0 +1,202 @@
+/* ============================================================
+   Princess Iron Fan Hub — "Keeper of the Banana Leaf Fan"
+   Iron-rust / jade-green / flame-gold / mountain-earth palette.
+   Elegant demon queen aesthetic — fierce yet regal.
+   ============================================================ */
+
+:root {
+  --pif-iron: #3a2520;
+  --pif-iron-dark: #1e1410;
+  --pif-rust: #b8453a;
+  --pif-rust-bright: #d45848;
+  --pif-flame: #e87830;
+  --pif-flame-gold: #f0b050;
+  --pif-jade: #5a9a6a;
+  --pif-jade-dark: #3a6a4a;
+  --pif-leaf: #6a8a4a;
+  --pif-mountain: #6a5040;
+  --pif-cream: #f0ebe0;
+  --pif-parchment: #e8dfcd;
+  --pif-mist: #989088;
+  --pif-silver: #c0b8b0;
+  --pif-ash: #787068;
+}
+
+/* ---- Hero ---- */
+.pif-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(170deg, #1a0e0a 0%, #3a2520 30%, #1e1410 60%, #0a0806 100%);
+  overflow: hidden;
+}
+.pif-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(232,120,48,0.08) 0%, transparent 55%),
+              radial-gradient(ellipse at 50% 70%, rgba(90,154,106,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+.pif-hero-bg-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.pif-hero-bg-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  filter: brightness(0.5) saturate(0.7);
+}
+.pif-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 20%, rgba(10,8,6,0.8) 100%);
+  pointer-events: none;
+}
+.pif-hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 720px;
+  padding: var(--space-lg);
+}
+.pif-hero-sigil {
+  font-size: 3.6rem;
+  margin-bottom: var(--space-sm);
+  filter: drop-shadow(0 0 30px rgba(232,120,48,0.25));
+}
+.pif-hero-kicker {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--pif-flame-gold);
+  margin-bottom: var(--space-xs);
+}
+.pif-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  color: var(--pif-silver);
+  text-shadow: 0 0 50px rgba(232,120,48,0.15);
+  margin-bottom: var(--space-xs);
+}
+.pif-hero-chinese {
+  font-family: var(--font-chinese-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: rgba(192,184,176,0.18);
+  margin-bottom: var(--space-sm);
+}
+.pif-hero-divider {
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pif-rust-bright), transparent);
+  margin: var(--space-md) auto;
+  opacity: 0.5;
+}
+.pif-hero-sub {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--pif-mist);
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 540px;
+  margin: 0 auto;
+}
+.pif-hero-stat {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--pif-flame-gold);
+  border: 1px solid rgba(232,120,48,0.25);
+  padding: 12px 24px;
+  margin-top: var(--space-md);
+}
+
+/* ---- Scroll ---- */
+.pif-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.pif-scroll-arrow { display: block; width: 20px; height: 20px; border-right: 1px solid rgba(192,184,176,0.3); border-bottom: 1px solid rgba(192,184,176,0.3); transform: rotate(45deg); animation: pif-scroll-bob 2s ease-in-out infinite; }
+@keyframes pif-scroll-bob { 0%, 100% { transform: rotate(45deg) translate(0,0); opacity: 0.3; } 50% { transform: rotate(45deg) translate(5px,5px); opacity: 0.7; } }
+
+/* ---- Identity Cards ---- */
+.pif-id-section {
+  padding: var(--space-xxl) 0;
+  background: var(--pif-cream);
+}
+.pif-id-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  max-width: 960px; margin: 0 auto;
+}
+.pif-id-card {
+  text-align: center;
+  padding: var(--space-md);
+  background: #fff;
+  border: 1px solid rgba(90,154,106,0.08);
+  border-radius: var(--radius-sm);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.pif-id-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(30,20,16,0.06); }
+.pif-id-emoji { font-size: 2rem; margin-bottom: var(--space-xs); }
+.pif-id-label { font-family: var(--font-display); font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--pif-mist); display: block; margin-bottom: 4px; }
+.pif-id-title { font-family: var(--font-chinese-display); font-size: 1rem; color: var(--pif-rust); }
+
+/* ---- Story Cards ---- */
+.pif-story-section {
+  padding: var(--space-xxl) 0;
+  background: #f5f3f0;
+}
+.pif-story-card {
+  max-width: 680px;
+  margin: 0 auto var(--space-xl);
+  padding: var(--space-lg);
+  background: #fff;
+  border-left: 3px solid var(--pif-flame);
+}
+.pif-story-card:last-child { margin-bottom: 0; }
+.pif-story-number { font-family: var(--font-display); font-size: 2.5rem; color: rgba(232,120,48,0.1); float: left; line-height: 1; margin-right: var(--space-md); }
+.pif-story-label { font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--pif-flame); margin-bottom: 4px; }
+.pif-story-title { font-family: var(--font-display); font-size: 1.2rem; color: var(--pif-iron-dark); margin-bottom: var(--space-sm); }
+.pif-story-body { font-family: var(--font-body); font-size: 1rem; color: var(--text-secondary); line-height: 1.8; }
+.pif-story-body strong { color: var(--pif-rust); }
+
+/* ---- Hub Grid ---- */
+.pif-hub {
+  padding: var(--space-xxl) 0;
+  background: var(--pif-cream);
+}
+.pif-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  max-width: 960px; margin: 0 auto;
+}
+.pif-hub-card {
+  display: block; text-decoration: none;
+  background: #fff;
+  border: 1px solid rgba(90,154,106,0.08);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.pif-hub-card:hover { border-color: var(--pif-flame); box-shadow: 0 4px 20px rgba(30,20,16,0.05); }
+.pif-hub-card-icon { font-size: 2.4rem; margin-bottom: var(--space-sm); }
+.pif-hub-card-title { font-family: var(--font-display); font-size: 1.05rem; color: var(--pif-iron-dark); margin-bottom: var(--space-xs); }
+.pif-hub-card-desc { font-family: var(--font-body); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* ---- Mobile ---- */
+@media (max-width: 767px) {
+  .pif-id-grid { grid-template-columns: repeat(2, 1fr); }
+  .pif-hub-grid { grid-template-columns: 1fr; }
+  .pif-story-number { float: none; display: block; margin-bottom: var(--space-sm); }
+}

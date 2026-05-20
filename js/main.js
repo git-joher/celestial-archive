@@ -170,7 +170,7 @@
 	          + sub(d + 'white-dragon-horse/index.html', 'White Dragon Horse 白龙马'))
 	      + subMenu(p + 'pantheon/index.html#demons', 'Demon Forces',
 	          sub(d + 'bull-demon-king/index.html', 'Bull Demon King 牛魔王')
-	          + sp('White Bone Spirit 白骨精') + sp('Six-eared Macaque 六耳猕猴') + sp('Princess Iron Fan 铁扇公主'))
+	          + sp('White Bone Spirit 白骨精') + sp('Six-eared Macaque 六耳猕猴') + sub(d + 'princess-iron-fan/index.html', 'Princess Iron Fan 铁扇公主'))
 	      + subMenu(p + 'pantheon/index.html#mortals', 'Mortal World',
 	          sp('Tang Taizong 唐太宗') + sp('City God 城隍') + sp('Earth God 土地'))
 	      + '</div>'
