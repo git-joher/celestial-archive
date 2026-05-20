@@ -133,5 +133,15 @@ var CELESTIAL_DEITIES = [
     status: 'live',
     avatarBg: '#8b4513',
     avatarInitial: 'B'
+  },
+  {
+    slug: 'xiwangmu',
+    name: 'Queen Mother of the West',
+    nameZh: '西王母',
+    title: 'Empress of Immortality',
+    description: 'Supreme goddess of the celestial west. Keeper of the Peaches of Immortality, co-ruler of heaven with the Jade Emperor.',
+    status: 'live',
+    avatarBg: '#6aaa8a',
+    avatarInitial: 'X'
   }
 ];
