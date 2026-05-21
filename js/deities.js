@@ -173,5 +173,15 @@ var CELESTIAL_DEITIES = [
     status: 'live',
     avatarBg: '#bcc6d4',
     avatarInitial: 'C'
+  },
+  {
+    slug: 'guanyu',
+    name: 'Guan Yu',
+    nameZh: '关羽',
+    title: 'The God of War',
+    description: 'From mortal warrior to divine emperor. The red-faced hero of the Three Kingdoms who became China\'s most widely worshipped martial deity.',
+    status: 'live',
+    avatarBg: '#1a4a2a',
+    avatarInitial: 'G'
   }
 ];

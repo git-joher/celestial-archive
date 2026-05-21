@@ -623,6 +623,44 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Guan Yu -->
+  <url>
+    <loc>https://celestial-archive.com/deities/guanyu/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/guanyu/origins.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/guanyu/arsenal.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/guanyu/battle.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/guanyu/legacy.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/guanyu/worship.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Chang'e -->
   <url>
     <loc>https://celestial-archive.com/deities/chang'e/</loc>

@@ -150,10 +150,12 @@
 	          + sp('Yuanshi Tianzun 元始天尊') + sp('Lingbao Tianzun 灵宝天尊'))
 	      + subMenu(p + 'pantheon/index.html#rulers', 'Heavenly Court',
 	          sub(d + 'jade-emperor/index.html', 'Jade Emperor 玉皇大帝')
-	          + sub(d + 'xiwangmu/index.html', 'Queen Mother of the West 西王母') + sp('Dongwanggong 东王公'))
+	          + sub(d + 'xiwangmu/index.html', 'Queen Mother of the West 西王母')
+	          + sub(d + 'chang\'e/index.html', 'Chang\'e 嫦娥') + sp('Dongwanggong 东王公'))
 	      + subMenu(p + 'pantheon/index.html#bureaucracy', 'Heavenly Bureaucracy',
 	          sub(d + 'nezha/index.html', 'Nezha 哪吒')
 	          + sub(d + 'erlang-shen/index.html', 'Erlang Shen 二郎神')
+	          + sub(d + 'guanyu/index.html', 'Guan Yu 关羽')
 	          + sp('Four Heavenly Kings 四大天王') + sp('Taibai Jinxing 太白金星'))
 	      + subMenu(p + 'pantheon/index.html#buddhist', 'Buddhist Hierarchy',
 	          sub(d + 'buddha/index.html', 'The Buddha 如来佛')

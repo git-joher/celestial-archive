@@ -1,0 +1,227 @@
+/* ============================================================
+   Guan Yu — Hub Page Styles
+   关羽专属：青龙 Hero、忠义卡片、三国导航
+   Palette: pine green / vermillion red / imperial gold / bronze
+   ============================================================ */
+
+:root {
+  --gy-green-dark: #0d2814;
+  --gy-green: #1a4a2a;
+  --gy-jade: #3d8b6a;
+  --gy-gold: #c9a84e;
+  --gy-gold-bright: #e0c878;
+  --gy-red: #b83a2a;
+  --gy-amber: #d4904a;
+  --gy-bronze: #8b6914;
+  --gy-parchment: #e8dcc0;
+}
+
+/* ============================================================
+   Hero — Full-viewport warrior theme
+   ============================================================ */
+.gy-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--gy-green-dark);
+}
+.gy-hero-bg {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: url("../../../images/guanyu/gy-hero.jpg");
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.75;
+}
+.gy-hero-gradient {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, var(--gy-green-dark) 0%, transparent 55%, rgba(13,40,20,0.3) 100%);
+  pointer-events: none;
+}
+.gy-hero-inner {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: var(--space-xl) var(--space-lg) 100px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+.gy-hero-sigil {
+  font-size: 2.8rem; margin-bottom: var(--space-sm);
+  filter: drop-shadow(0 0 20px rgba(200,160,60,0.4));
+}
+.gy-hero-kicker {
+  font-family: var(--font-display);
+  font-size: 0.82rem; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--gy-gold); margin-bottom: var(--space-sm);
+}
+.gy-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 700;
+  color: #fff; margin-bottom: var(--space-sm);
+  text-shadow: 0 0 60px rgba(180,160,80,0.3), 0 2px 4px rgba(0,0,0,0.4);
+}
+.gy-hero-divider {
+  width: 80px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gy-gold), var(--gy-gold-bright), var(--gy-gold), transparent);
+  margin: 0 auto var(--space-sm);
+}
+.gy-hero-chinese {
+  font-family: var(--font-chinese-display); font-size: 2.2rem;
+  color: var(--gy-parchment); margin-bottom: var(--space-sm);
+  letter-spacing: 8px;
+}
+.gy-hero-sub {
+  font-family: var(--font-body); font-size: 1.1rem; font-style: italic;
+  color: rgba(220,215,200,0.8); max-width: 600px; line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+.gy-hero-stat {
+  display: inline-block;
+  font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gy-gold-bright);
+  border: 1px solid rgba(200,160,60,0.25);
+  padding: 8px 24px; border-radius: 20px;
+}
+.gy-scroll {
+  position: absolute; bottom: 40px; left: 50%;
+  transform: translateX(-50%); z-index: 3;
+}
+.gy-scroll-arrow {
+  display: block; width: 24px; height: 24px;
+  border-right: 2px solid var(--gy-parchment);
+  border-bottom: 2px solid var(--gy-parchment);
+  transform: rotate(45deg);
+  animation: scroll-bob 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   Dark Quick Answer (matching site pattern)
+   ============================================================ */
+.dark-quick-answer {
+  background: var(--gy-green);
+  padding: var(--space-lg) 0;
+  max-width: none;
+  border: none;
+  border-top: 1px solid rgba(200,160,60,0.08);
+  border-bottom: 1px solid rgba(200,160,60,0.08);
+  border-radius: 0;
+  margin-bottom: 0;
+}
+.dark-quick-answer h2 {
+  font-family: var(--font-display); font-size: 0.85rem;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gy-gold); text-align: center; margin-bottom: var(--space-sm);
+}
+.dark-quick-answer p {
+  color: rgba(215,210,195,0.8); font-size: 1.05rem; line-height: 1.85;
+  text-align: center; max-width: 760px; margin: 0 auto;
+}
+.dark-quick-answer a { color: var(--gy-gold-bright); text-decoration: none; border-bottom: 1px solid rgba(200,160,60,0.3); }
+.dark-quick-answer a:hover { border-color: var(--gy-gold-bright); }
+
+/* ============================================================
+   Identity Cards — 4-column
+   ============================================================ */
+.gy-id-section {
+  background: var(--gy-green-dark);
+  padding: var(--space-xl) 0 var(--space-xxl);
+}
+.gy-id-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md);
+}
+.gy-id-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,160,60,0.1);
+  border-radius: var(--radius-md); padding: var(--space-md);
+  display: flex; flex-direction: column; gap: var(--space-xs);
+  text-align: center; transition: border-color 0.3s, transform 0.3s;
+}
+.gy-id-card:hover {
+  border-color: rgba(200,160,60,0.35);
+  transform: translateY(-2px);
+}
+.gy-id-emoji { font-size: 1.8rem; margin-bottom: 4px; }
+.gy-id-label {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 2px;
+  color: rgba(200,160,60,0.5);
+}
+.gy-id-value {
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+  color: var(--gy-parchment);
+}
+
+/* ============================================================
+   Narrative Snippets — Oath & battle themed story fragments
+   ============================================================ */
+.gy-snippets {
+  background: linear-gradient(180deg, var(--gy-green-dark), var(--gy-green));
+  padding: var(--space-xxl) 0; text-align: center;
+  border-top: 1px solid rgba(200,160,60,0.05);
+}
+.gy-snippet {
+  max-width: 600px; margin: 0 auto;
+}
+.gy-snippet-title {
+  font-family: var(--font-display); font-size: 1.3rem; font-weight: 700;
+  color: var(--gy-gold-bright); margin-bottom: var(--space-xs);
+}
+.gy-snippet-text {
+  font-size: 1.05rem; line-height: 1.8;
+  color: rgba(215,210,195,0.75);
+}
+.gy-snippet-divider {
+  padding: var(--space-md) 0;
+  font-size: 1.2rem; color: rgba(200,160,60,0.2);
+}
+
+/* ============================================================
+   Nav Hub — Sub-page cards
+   ============================================================ */
+.gy-nav-hub {
+  background: var(--gy-green-dark);
+  padding: var(--space-xxl) 0;
+  border-top: 1px solid rgba(200,160,60,0.05);
+}
+
+/* ============================================================
+   Related Deities — Warrior-themed override
+   ============================================================ */
+.gy-related {
+  background: var(--gy-green);
+  padding: var(--space-xl) 0 var(--space-xxl);
+  border-top: 1px solid rgba(200,160,60,0.08);
+}
+
+/* ============================================================
+   Inscription Section — Warrior theme override
+   ============================================================ */
+.inscription-section {
+  background: var(--gy-green-dark);
+  border-top: 1px solid rgba(200,160,60,0.08);
+  padding-top: var(--space-xl);
+}
+.inscription-title { color: #fff; }
+
+/* Dive Deeper overrides */
+.dive-deeper {
+  background: var(--gy-green-dark);
+  border-top: 1px solid rgba(200,160,60,0.08);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 767px) {
+  .gy-hero { min-height: 100vh; }
+  .gy-hero-inner { padding: var(--space-lg) var(--space-md) 80px; }
+  .gy-hero-title { font-size: 2rem; }
+  .gy-hero-chinese { font-size: 1.6rem; }
+  .gy-hero-sub { font-size: 0.95rem; }
+  .gy-id-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+  .gy-id-grid { grid-template-columns: 1fr; }
+}
