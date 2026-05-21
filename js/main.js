@@ -142,7 +142,6 @@
 	      + '<a href="' + p + 'pantheon/index.html"' + (active === 'gods/index.html' ? ' class="active"' : '') + '>Pantheon</a>'
 	      + '<div class="site-nav-dropdown-menu">'
 	      + sub(p + 'pantheon/index.html', 'Full Pantheon Hierarchy')
-	      + sub(p + 'three-realms-hierarchy.html', 'Three Realms Hierarchy')
 	      + subMenu(p + 'pantheon/index.html#primordial', 'Primordial Creators',
 	          sub(d + 'nuwa/index.html', 'Nüwa 女娲')
 	          + sub(d + 'pangu/index.html', 'Pangu 盘古') + sp('Fuxi 伏羲') + sp('Shennong 神农') + sp('Yellow Emperor 黄帝'))
@@ -254,7 +253,6 @@
       }
       var rootNames = {
         'about': 'About Us', 'contact': 'Contact Us', 'privacy-policy': 'Privacy Policy',
-        'three-realms-hierarchy': 'Three Realms Hierarchy',
         'gods': 'Gods', 'characters': 'Characters', 'stories': 'Stories',
         'top-lists': 'Top Lists', 'pantheon': 'Pantheon'
       };

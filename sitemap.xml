@@ -27,13 +27,6 @@
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
-  <!-- Three Realms Hierarchy -->
-  <url>
-    <loc>https://celestial-archive.com/three-realms-hierarchy.html</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
   <!-- Pantheon Hierarchy -->
   <url>
     <loc>https://celestial-archive.com/pantheon/index.html</loc>
@@ -626,6 +619,50 @@
   <url>
     <loc>https://celestial-archive.com/deities/princess-iron-fan/legacy.html</loc>
     <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chang'e -->
+  <url>
+    <loc>https://celestial-archive.com/deities/chang'e/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/chang'e/origins.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/chang'e/elixir.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/chang'e/moon-palace.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/chang'e/mid-autumn.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/chang'e/battle.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://celestial-archive.com/deities/chang'e/legacy.html</loc>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

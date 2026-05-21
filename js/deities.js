@@ -163,5 +163,15 @@ var CELESTIAL_DEITIES = [
     status: 'live',
     avatarBg: '#b8453a',
     avatarInitial: 'P'
+  },
+  {
+    slug: 'chang\'e',
+    name: 'Chang\'e',
+    nameZh: '嫦娥',
+    title: 'The Moon Goddess',
+    description: 'The mortal who drank the Elixir of Immortality and ascended to the moon. Goddess of the Mid-Autumn Festival, keeper of Guanghan Palace.',
+    status: 'live',
+    avatarBg: '#bcc6d4',
+    avatarInitial: 'C'
   }
 ];

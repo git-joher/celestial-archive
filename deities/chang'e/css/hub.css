@@ -1,0 +1,228 @@
+/* ============================================================
+   Chang'e — Hub Page Styles
+   嫦娥专属：月光 Hero、仙药卡片、月宫导航
+   Palette: midnight navy / moon silver / ice blue
+   ============================================================ */
+
+:root {
+  --ce-night: #0a1628;
+  --ce-night-light: #152238;
+  --ce-moon: #e8e4f0;
+  --ce-silver: #bcc6d4;
+  --ce-ice: #d4e4f0;
+  --ce-gold: #c9a96e;
+  --ce-gold-bright: #e0c878;
+  --ce-jade: #8aa898;
+  --ce-elixir: #d4a574;
+  --ce-palace: #f0ebe8;
+}
+
+/* ============================================================
+   Hero — Full-viewport moon theme
+   ============================================================ */
+.ce-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--ce-night);
+}
+.ce-hero-bg {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: url("../../../images/chang'e/ce-hero.jpg");
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.75;
+}
+.ce-hero-gradient {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, var(--ce-night) 0%, transparent 55%, rgba(10,22,40,0.3) 100%);
+  pointer-events: none;
+}
+.ce-hero-inner {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: var(--space-xl) var(--space-lg) 100px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+.ce-hero-sigil {
+  font-size: 2.8rem; margin-bottom: var(--space-sm);
+  filter: drop-shadow(0 0 20px rgba(200,180,140,0.4));
+}
+.ce-hero-kicker {
+  font-family: var(--font-display);
+  font-size: 0.82rem; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--ce-gold); margin-bottom: var(--space-sm);
+}
+.ce-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 700;
+  color: #fff; margin-bottom: var(--space-sm);
+  text-shadow: 0 0 60px rgba(180,200,220,0.3), 0 2px 4px rgba(0,0,0,0.4);
+}
+.ce-hero-divider {
+  width: 80px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ce-gold), var(--ce-gold-bright), var(--ce-gold), transparent);
+  margin: 0 auto var(--space-sm);
+}
+.ce-hero-chinese {
+  font-family: var(--font-chinese-display); font-size: 2.2rem;
+  color: var(--ce-silver); margin-bottom: var(--space-sm);
+  letter-spacing: 8px;
+}
+.ce-hero-sub {
+  font-family: var(--font-body); font-size: 1.1rem; font-style: italic;
+  color: rgba(220,215,230,0.8); max-width: 600px; line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+.ce-hero-stat {
+  display: inline-block;
+  font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--ce-gold-bright);
+  border: 1px solid rgba(200,180,140,0.25);
+  padding: 8px 24px; border-radius: 20px;
+}
+.ce-scroll {
+  position: absolute; bottom: 40px; left: 50%;
+  transform: translateX(-50%); z-index: 3;
+}
+.ce-scroll-arrow {
+  display: block; width: 24px; height: 24px;
+  border-right: 2px solid var(--ce-silver);
+  border-bottom: 2px solid var(--ce-silver);
+  transform: rotate(45deg);
+  animation: scroll-bob 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   Dark Quick Answer (matching site pattern)
+   ============================================================ */
+.dark-quick-answer {
+  background: var(--ce-night-light);
+  padding: var(--space-lg) 0;
+  max-width: none;
+  border: none;
+  border-top: 1px solid rgba(180,200,220,0.06);
+  border-bottom: 1px solid rgba(180,200,220,0.06);
+  border-radius: 0;
+  margin-bottom: 0;
+}
+.dark-quick-answer h2 {
+  font-family: var(--font-display); font-size: 0.85rem;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ce-gold); text-align: center; margin-bottom: var(--space-sm);
+}
+.dark-quick-answer p {
+  color: rgba(210,210,225,0.8); font-size: 1.05rem; line-height: 1.85;
+  text-align: center; max-width: 760px; margin: 0 auto;
+}
+.dark-quick-answer a { color: var(--ce-gold-bright); text-decoration: none; border-bottom: 1px solid rgba(200,180,140,0.3); }
+.dark-quick-answer a:hover { border-color: var(--ce-gold-bright); }
+
+/* ============================================================
+   Identity Cards — 4-column
+   ============================================================ */
+.ce-id-section {
+  background: var(--ce-night);
+  padding: var(--space-xl) 0 var(--space-xxl);
+}
+.ce-id-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md);
+}
+.ce-id-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(180,200,220,0.08);
+  border-radius: var(--radius-md); padding: var(--space-md);
+  display: flex; flex-direction: column; gap: var(--space-xs);
+  text-align: center; transition: border-color 0.3s, transform 0.3s;
+}
+.ce-id-card:hover {
+  border-color: rgba(200,180,140,0.3);
+  transform: translateY(-2px);
+}
+.ce-id-emoji { font-size: 1.8rem; margin-bottom: 4px; }
+.ce-id-label {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 2px;
+  color: rgba(200,180,140,0.5);
+}
+.ce-id-value {
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+  color: var(--ce-silver);
+}
+
+/* ============================================================
+   Narrative Snippets — Moon-themed story fragments
+   ============================================================ */
+.ce-snippets {
+  background: linear-gradient(180deg, var(--ce-night), var(--ce-night-light));
+  padding: var(--space-xxl) 0; text-align: center;
+  border-top: 1px solid rgba(180,200,220,0.04);
+}
+.ce-snippet {
+  max-width: 600px; margin: 0 auto;
+}
+.ce-snippet-title {
+  font-family: var(--font-display); font-size: 1.3rem; font-weight: 700;
+  color: var(--ce-gold-bright); margin-bottom: var(--space-xs);
+}
+.ce-snippet-text {
+  font-size: 1.05rem; line-height: 1.8;
+  color: rgba(210,210,225,0.75);
+}
+.ce-snippet-divider {
+  padding: var(--space-md) 0;
+  font-size: 1.2rem; color: rgba(180,200,220,0.2);
+}
+
+/* ============================================================
+   Nav Hub — Sub-page cards
+   ============================================================ */
+.ce-nav-hub {
+  background: var(--ce-night);
+  padding: var(--space-xxl) 0;
+  border-top: 1px solid rgba(180,200,220,0.04);
+}
+
+/* ============================================================
+   Related Deities — Moon-themed override
+   ============================================================ */
+.ce-related {
+  background: var(--ce-night-light);
+  padding: var(--space-xl) 0 var(--space-xxl);
+  border-top: 1px solid rgba(180,200,220,0.06);
+}
+
+/* ============================================================
+   Inscription Section — Moon theme override
+   ============================================================ */
+.inscription-section {
+  background: var(--ce-night);
+  border-top: 1px solid rgba(180,200,220,0.06);
+  padding-top: var(--space-xl);
+}
+.inscription-title { color: #fff; }
+
+/* Dive Deeper overrides */
+.dive-deeper {
+  background: var(--ce-night);
+  border-top: 1px solid rgba(180,200,220,0.06);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 767px) {
+  .ce-hero { min-height: 100vh; }
+  .ce-hero-inner { padding: var(--space-lg) var(--space-md) 80px; }
+  .ce-hero-title { font-size: 2rem; }
+  .ce-hero-chinese { font-size: 1.6rem; }
+  .ce-hero-sub { font-size: 0.95rem; }
+  .ce-id-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+  .ce-id-grid { grid-template-columns: 1fr; }
+}
