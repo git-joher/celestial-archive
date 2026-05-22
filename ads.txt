@@ -1,3 +1,4 @@
 # Celestial Archive — Authorized Digital Sellers
-# AdSense
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# Ezoic Growth Mode (JavaScript Standalone — no AdSense required)
+# Get your exact seller lines from: Ezoic Dashboard → Settings → ads.txt
+# Or manage via Ezoic ads.txt manager: https://srv.adstxtmanager.com/
