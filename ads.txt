@@ -1,4 +1,12 @@
 # Celestial Archive — Authorized Digital Sellers
-# Ezoic Growth Mode (JavaScript Standalone — no AdSense required)
-# Get your exact seller lines from: Ezoic Dashboard → Settings → ads.txt
-# Or manage via Ezoic ads.txt manager: https://srv.adstxtmanager.com/
+# Ezoic Growth Mode (JavaScript Standalone)
+#
+# === HOW TO FILL THIS FILE ===
+# 1. Go to your Ezoic Dashboard → Ad Transparency → Ads.txt Status
+# 2. Select "JavaScript" as integration method
+# 3. Copy ALL seller lines shown there — paste them below
+#
+# Or use the Ezoic ads.txt manager (then sync periodically):
+#   https://srv.adstxtmanager.com/19390/celestial-archive.com
+#
+# Replace the placeholder below with your actual entries:
