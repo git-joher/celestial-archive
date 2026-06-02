@@ -1,0 +1,229 @@
+/* ============================================================
+   Zhong Kui — Hub Page Styles
+   钟馗专属：朱砂赤 Hero、墨玉黑背景、金纹黄点缀
+   Palette: vermillion / ink-black / talisman-gold / jade-green
+   ============================================================ */
+
+:root {
+  --zk-vermillion: #b8302c;
+  --zk-vermillion-deep: #8a1a18;
+  --zk-ink: #14100a;
+  --zk-ink-light: #1e1a14;
+  --zk-gold: #c9a85c;
+  --zk-gold-bright: #e0c878;
+  --zk-jade: #3d6b5a;
+  --zk-parchment: #e8dcc0;
+  --zk-ghost: #4a6080;
+}
+
+/* ============================================================
+   Hero — Full-viewport demon-queller theme
+   ============================================================ */
+.zk-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--zk-ink);
+}
+.zk-hero-bg {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: url("../../../images/zhong-kui/zk1.jpg");
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.7;
+}
+.zk-hero-gradient {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, var(--zk-ink) 0%, transparent 55%, rgba(20,16,10,0.4) 100%);
+  pointer-events: none;
+}
+.zk-hero-inner {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: var(--space-xl) var(--space-lg) 100px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+.zk-hero-sigil {
+  font-size: 2.8rem; margin-bottom: var(--space-sm);
+  filter: drop-shadow(0 0 20px rgba(200,160,60,0.5));
+}
+.zk-hero-kicker {
+  font-family: var(--font-display);
+  font-size: 0.82rem; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--zk-gold); margin-bottom: var(--space-sm);
+}
+.zk-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 700;
+  color: #fff; margin-bottom: var(--space-sm);
+  text-shadow: 0 0 60px rgba(200,160,60,0.3), 0 2px 4px rgba(0,0,0,0.5);
+}
+.zk-hero-divider {
+  width: 80px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--zk-gold), var(--zk-gold-bright), var(--zk-gold), transparent);
+  margin: 0 auto var(--space-sm);
+}
+.zk-hero-chinese {
+  font-family: var(--font-chinese-display); font-size: 2.2rem;
+  color: var(--zk-parchment); margin-bottom: var(--space-sm);
+  letter-spacing: 8px;
+}
+.zk-hero-sub {
+  font-family: var(--font-body); font-size: 1.1rem; font-style: italic;
+  color: rgba(220,215,200,0.8); max-width: 600px; line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+.zk-hero-stat {
+  display: flex; gap: var(--space-xl); justify-content: center;
+  font-family: var(--font-display); font-size: 0.78rem;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--zk-gold);
+}
+.zk-hero-stat span { color: rgba(255,255,255,0.5); }
+
+/* ============================================================
+   Identity Cards — 8-panel grid
+   ============================================================ */
+.zk-id-section {
+  background: var(--bg-primary);
+  padding: var(--space-xxl) 0 var(--space-xl);
+}
+.zk-id-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+  max-width: 960px;
+  margin: 0 auto;
+}
+.zk-id-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 8px;
+  padding: var(--space-md) var(--space-sm);
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.zk-id-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.zk-id-icon { font-size: 1.8rem; margin-bottom: var(--space-xs); }
+.zk-id-label {
+  font-family: var(--font-display);
+  font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-secondary); margin-bottom: 4px;
+}
+.zk-id-value {
+  font-family: var(--font-body);
+  font-size: 0.95rem; color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ============================================================
+   Narrative Snippets
+   ============================================================ */
+.zk-narr-section {
+  background: var(--bg-dark);
+  padding: var(--space-xxl) 0;
+}
+.zk-snippet {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(232,220,200,0.08);
+  border-left: 4px solid var(--zk-gold);
+  border-radius: 0 8px 8px 0;
+  padding: var(--space-lg);
+  max-width: 760px;
+  margin: 0 auto var(--space-lg);
+  position: relative;
+}
+.zk-snippet-num {
+  position: absolute; top: -14px; left: -14px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--zk-vermillion);
+  color: #fff;
+  font-family: var(--font-display); font-size: 0.9rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.zk-snippet h3 {
+  font-family: var(--font-display);
+  color: var(--zk-gold);
+  font-size: 1.15rem;
+  margin-bottom: var(--space-sm);
+}
+.zk-snippet p {
+  color: var(--text-on-dark);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+/* ============================================================
+   Quick Answer block
+   ============================================================ */
+.zk-qa {
+  background: rgba(20,16,10,0.97);
+  border-left: 4px solid var(--zk-gold);
+  padding: var(--space-lg);
+  max-width: 760px;
+  margin: var(--space-md) auto;
+  border-radius: 0 8px 8px 0;
+}
+.zk-qa h2 {
+  font-family: var(--font-display);
+  color: var(--zk-gold);
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+.zk-qa p {
+  color: var(--text-on-dark);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+/* ============================================================
+   FAQ Section
+   ============================================================ */
+.zk-faq-section {
+  background: var(--bg-primary);
+  padding: var(--space-xxl) 0;
+}
+.zk-faq-list {
+  max-width: 760px;
+  margin: var(--space-lg) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.zk-faq-item {
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 8px;
+  padding: var(--space-md) var(--space-lg);
+  cursor: default;
+}
+.zk-faq-item h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--zk-vermillion);
+  margin-bottom: var(--space-xs);
+}
+.zk-faq-item p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .zk-id-grid { grid-template-columns: repeat(2, 1fr); }
+  .zk-hero-stat { flex-wrap: wrap; gap: var(--space-md); }
+}
+@media (max-width: 640px) {
+  .zk-id-grid { grid-template-columns: 1fr; }
+  .zk-hero-title { font-size: 2rem; }
+}

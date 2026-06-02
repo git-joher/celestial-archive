@@ -183,5 +183,25 @@ var CELESTIAL_DEITIES = [
     status: 'live',
     avatarBg: '#1a4a2a',
     avatarInitial: 'G'
+  },
+  {
+    slug: 'zhong-kui',
+    name: 'Zhong Kui',
+    nameZh: '钟馗',
+    title: 'The Demon Queller',
+    description: 'The fierce ghost-hunting deity who vanquishes evil spirits with his sword and talismans — China\'s divine protector against the supernatural.',
+    status: 'live',
+    avatarBg: '#b8302c',
+    avatarInitial: 'Z'
+  },
+  {
+    slug: 'puti-zushi',
+    name: 'Patriarch Subodhi',
+    nameZh: '菩提祖师',
+    title: 'The Hidden Sage',
+    description: 'The master behind the Monkey King\'s every battle. He taught Sun Wukong the 72 transformations, the cloud somersault, and the art of immortality — then vanished without a trace.',
+    status: 'live',
+    avatarBg: '#5a7a6e',
+    avatarInitial: 'P'
   }
 ];
