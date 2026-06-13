@@ -155,6 +155,22 @@
     return Math.max(-1, Math.min(1, y));
   }
 
+  // Double-tap jump detection
+  var jumpTriggered = false;
+  var forwardPressed = keys['w'] || keys['arrowup'];
+
+  if (forwardPressed) {
+    var now = performance.now() / 1000;
+    if (player._lastForwardPress > 0 && (now - player._lastForwardPress) < 0.3 && player.jumpCooldown <= 0 && player.jumpAirTimer <= 0) {
+      jumpTriggered = true;
+      player._lastForwardPress = 0;
+    } else if (player._lastForwardPress <= 0) {
+      player._lastForwardPress = now;
+    }
+  } else {
+    player._lastForwardPress = 0;
+  }
+
   /* ============================================================
      Pause
      ============================================================ */
@@ -201,6 +217,12 @@
       _burnTick: 0,
       _slowed: false,
       _slowTimer: 0,
+      jumpCooldown: 0,
+      jumpAirTimer: 0,
+      jumpVx: 0,
+      jumpVy: 0,
+      _lastForwardPress: 0,
+      _isJumping: false,
       _damageFlash: 0
     };
     enemies = [];
@@ -413,7 +435,6 @@
   function updatePlayer(dt) {
     var ix = getInputX();
     var iy = getInputY();
-    var mag = Math.sqrt(ix * ix + iy * iy);
 
     // Burn DOT from fire enemies
     if (player._burnTimer > 0) {
@@ -438,14 +459,60 @@
       }
     }
 
-    if (mag > 1) { ix /= mag; iy /= mag; }
+    // Jump state handling
+    if (player.jumpAirTimer > 0) {
+      // In air — apply jump velocity
+      player.x += player.jumpVx * dt;
+      player.y += player.jumpVy * dt;
+      player.jumpAirTimer -= dt;
 
-    player.x += ix * player.speed * dt;
-    player.y += iy * player.speed * dt;
+      // Jump trail particles
+      if (Math.random() < 0.7) {
+        particles.push({
+          x: player.x + rand(-4, 4), y: player.y + rand(-4, 4),
+          vx: rand(-15, 15), vy: rand(-10, 5),
+          life: 0.3, maxLife: 0.3,
+          color: 'rgba(184,160,110,0.6)', radius: rand(2, 4)
+        });
+      }
 
-    // Bounds
-    player.x = Math.max(20, Math.min(W - 20, player.x));
-    player.y = Math.max(20, Math.min(H - 20, player.y));
+      // Bounds during jump
+      player.x = Math.max(20, Math.min(W - 20, player.x));
+      player.y = Math.max(20, Math.min(H - 20, player.y));
+
+      if (player.jumpAirTimer <= 0) {
+        player._isJumping = false;
+      }
+    } else {
+      // Normal movement
+      var mag = Math.sqrt(ix * ix + iy * iy);
+      if (mag > 1) { ix /= mag; iy /= mag; }
+      player.x += ix * player.speed * dt;
+      player.y += iy * player.speed * dt;
+
+      // Bounds
+      player.x = Math.max(20, Math.min(W - 20, player.x));
+      player.y = Math.max(20, Math.min(H - 20, player.y));
+    }
+
+    // Jump trigger
+    if (jumpTriggered && player.jumpCooldown <= 0 && player.jumpAirTimer <= 0) {
+      player._isJumping = true;
+      player.jumpAirTimer = 0.15;
+      player.jumpCooldown = 0.6;
+      var jumpDir = { x: ix, y: iy };
+      var jmag = Math.sqrt(jumpDir.x * jumpDir.x + jumpDir.y * jumpDir.y);
+      if (jmag < 0.1) { jumpDir.x = 0; jumpDir.y = -1; jmag = 1; }
+      player.jumpVx = (jumpDir.x / jmag) * 80 / 0.15;
+      player.jumpVy = (jumpDir.y / jmag) * 80 / 0.15;
+      spawnParticles(player.x, player.y, 6, 'rgba(184,160,110,0.8)', 0.2);
+      // AudioEngine.playSfx('jump'); -- will be added in Task 8
+    }
+
+    // Jump cooldown tick
+    if (player.jumpCooldown > 0) {
+      player.jumpCooldown -= dt;
+    }
 
     // Fire trail
     if (player.fireTrail && mag > 0.1) {
@@ -1245,6 +1312,45 @@
       ctx.textAlign = 'center';
       ctx.fillText(dnn.value, dnn.x, dnn.y);
     }
+
+    // Jump cooldown indicator
+    var jumpReady = player.jumpCooldown <= 0;
+    var jumpAlpha = jumpReady ? 0.8 : 0.4;
+    var jx = W - 50, jy = H - 50;
+    ctx.fillStyle = 'rgba(10,6,4,' + (jumpReady ? 0.6 : 0.3) + ')';
+    ctx.beginPath();
+    ctx.arc(jx, jy, 20, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(184,160,110,' + jumpAlpha + ')';
+    ctx.lineWidth = 2;
+    if (jumpReady) {
+      ctx.setLineDash([]);
+      ctx.shadowColor = 'rgba(184,160,110,0.4)';
+      ctx.shadowBlur = 8;
+    }
+    ctx.beginPath();
+    ctx.arc(jx, jy, 20, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Cooldown fill
+    if (!jumpReady) {
+      var cdRatio = player.jumpCooldown / 0.6;
+      ctx.fillStyle = 'rgba(184,160,110,0.3)';
+      ctx.beginPath();
+      ctx.moveTo(jx, jy);
+      ctx.arc(jx, jy, 18, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (1 - cdRatio));
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Jump icon
+    ctx.fillStyle = 'rgba(184,160,110,' + jumpAlpha + ')';
+    ctx.font = 'bold 14px Cinzel, serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('跳', jx, jy);
+    ctx.setLineDash([]);
 
     ctx.globalAlpha = 1;
 
