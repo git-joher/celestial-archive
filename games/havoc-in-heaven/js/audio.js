@@ -309,139 +309,165 @@ var AudioEngine = (function () {
     playToneSweep(200, 60, 0.6, 'triangle', 0.2);
   }
 
-  // Death: tragic + defiant two-phase music
+  // Death: tragic + defiant two-phase music — LOUD and EMOTIONAL
   function playDeath() {
     var now = ctx.currentTime;
 
-    // ═══════ Phase 1: 悲壮 (Tragic & Heroic) 0–3s ═══════
+    // ═══════ Phase 1: 悲壮 TRAGIC (0–4s) — Heavy, mournful, cinematic ═══════
 
-    // Deep war drum — three heavy strikes
-    for (var d = 0; d < 3; d++) {
-      var drumTime = now + d * 0.9;
+    // HUGE opening gong — the weight of fate
+    playToneSweepAt(60, 20, 1.5, 'triangle', 0.55, now);
+    playNoiseHitAt(1.2, 60, 15, 0.45, now);
+
+    // Deep war drum pattern — slow, heavy, funeral march
+    for (var d = 0; d < 5; d++) {
+      var drumTime = now + 0.5 + d * 0.75;
+      // Main drum hit — deep and powerful
       var drumOsc = ctx.createOscillator();
       drumOsc.type = 'sine';
-      drumOsc.frequency.setValueAtTime(80, drumTime);
-      drumOsc.frequency.exponentialRampToValueAtTime(30, drumTime + 0.4);
+      drumOsc.frequency.setValueAtTime(65, drumTime);
+      drumOsc.frequency.exponentialRampToValueAtTime(20, drumTime + 0.5);
       var drumGain = ctx.createGain();
-      drumGain.gain.setValueAtTime(0.35, drumTime);
-      drumGain.gain.exponentialRampToValueAtTime(0.001, drumTime + 0.5);
+      drumGain.gain.setValueAtTime(0.55, drumTime);
+      drumGain.gain.exponentialRampToValueAtTime(0.001, drumTime + 0.55);
       drumOsc.connect(drumGain);
       drumGain.connect(sfxGain);
       drumOsc.start(drumTime);
-      drumOsc.stop(drumTime + 0.5);
-
-      // Drum rumble layer
-      playNoiseHitAt(0.35, 80, 25, 0.2, drumTime);
+      drumOsc.stop(drumTime + 0.55);
+      // Rumble
+      playNoiseHitAt(0.5, 60, 15, 0.35, drumTime);
     }
 
-    // Minor pentatonic lament — descending melody (D minor: D C A F D)
-    var lamentNotes = [587, 523, 440, 349, 294]; // D5 C5 A4 F4 D4
+    // Tragic melody — descending D minor lament (D→C→Bb→A→F→D)
+    // Played loud with rich sawtooth + sine layers
+    var lamentNotes = [587, 523, 466, 440, 349, 294]; // D5 C5 Bb4 A4 F4 D4
     for (var ln = 0; ln < lamentNotes.length; ln++) {
       (function(idx) {
-        var lamentTime = now + 0.3 + idx * 0.55;
-        var lamentOsc = ctx.createOscillator();
-        lamentOsc.type = 'sine';
-        lamentOsc.frequency.value = lamentNotes[idx];
-        var lamentGain = ctx.createGain();
-        lamentGain.gain.setValueAtTime(0, lamentTime);
-        lamentGain.gain.linearRampToValueAtTime(0.1, lamentTime + 0.05);
-        lamentGain.gain.exponentialRampToValueAtTime(0.001, lamentTime + 0.5);
-        lamentOsc.connect(lamentGain);
-        lamentGain.connect(sfxGain);
-        lamentOsc.start(lamentTime);
-        lamentOsc.stop(lamentTime + 0.5);
+        var lamentTime = now + 0.8 + idx * 0.6;
+        var duration = idx === lamentNotes.length - 1 ? 1.2 : 0.55; // last note rings longer
 
-        // Low string drone beneath each note
+        // Main melody voice — rich sawtooth
+        var melOsc = ctx.createOscillator();
+        melOsc.type = 'sawtooth';
+        melOsc.frequency.value = lamentNotes[idx];
+        var melGain = ctx.createGain();
+        melGain.gain.setValueAtTime(0, lamentTime);
+        melGain.gain.linearRampToValueAtTime(0.3, lamentTime + 0.04);
+        melGain.gain.setValueAtTime(0.3, lamentTime + 0.15);
+        melGain.gain.exponentialRampToValueAtTime(0.001, lamentTime + duration);
+        melOsc.connect(melGain);
+        melGain.connect(sfxGain);
+        melOsc.start(lamentTime);
+        melOsc.stop(lamentTime + duration);
+
+        // Octave below — weight and depth
         var lowOsc = ctx.createOscillator();
         lowOsc.type = 'triangle';
         lowOsc.frequency.value = lamentNotes[idx] / 2;
         var lowGain = ctx.createGain();
         lowGain.gain.setValueAtTime(0, lamentTime);
-        lowGain.gain.linearRampToValueAtTime(0.06, lamentTime + 0.05);
-        lowGain.gain.exponentialRampToValueAtTime(0.001, lamentTime + 0.45);
+        lowGain.gain.linearRampToValueAtTime(0.2, lamentTime + 0.04);
+        lowGain.gain.exponentialRampToValueAtTime(0.001, lamentTime + duration * 0.8);
         lowOsc.connect(lowGain);
         lowGain.connect(sfxGain);
         lowOsc.start(lamentTime);
-        lowOsc.stop(lamentTime + 0.5);
+        lowOsc.stop(lamentTime + duration);
+
+        // Soft overtone for emotional shimmer
+        var softOsc = ctx.createOscillator();
+        softOsc.type = 'sine';
+        softOsc.frequency.value = lamentNotes[idx] * 1.5;
+        var softGain = ctx.createGain();
+        softGain.gain.setValueAtTime(0, lamentTime);
+        softGain.gain.linearRampToValueAtTime(0.08, lamentTime + 0.06);
+        softGain.gain.exponentialRampToValueAtTime(0.001, lamentTime + duration * 0.6);
+        softOsc.connect(softGain);
+        softGain.connect(sfxGain);
+        softOsc.start(lamentTime);
+        softOsc.stop(lamentTime + duration);
       })(ln);
     }
 
-    // Wind / distant horn — tragic atmosphere
-    playNoiseHitAt(2.5, 400, 150, 0.12, now + 0.2);
+    // Mournful wind / distant horn
+    playNoiseHitAt(3.5, 500, 100, 0.2, now + 0.5);
 
-    // Gong crash at the climax of tragedy
-    playToneSweepAt(150, 40, 0.8, 'triangle', 0.18, now + 2.5);
+    // ═══════ Phase 2: 不服输 DEFIANT (3.8–6s) — Rising, powerful, determined ═══════
 
-    // ═══════ Phase 2: 不服输 (Defiant) 2.8–5s ═══════
-
-    // Rising arpeggio — "I will rise again" (Dm → power: D F A D)
-    var riseNotes = [294, 349, 440, 587]; // D4 F4 A4 D5 — ascending
+    // Rising power arpeggio — "I REFUSE to fall!" — aggressive sawtooth
+    var riseNotes = [294, 370, 440, 554, 659, 784]; // D4 F#4 A4 C#5 E5 G5
     for (var rn = 0; rn < riseNotes.length; rn++) {
       (function(idx) {
-        var riseTime = now + 2.8 + idx * 0.2;
-        var riseOsc = ctx.createOscillator();
-        riseOsc.type = 'sawtooth';
-        riseOsc.frequency.value = riseNotes[idx];
-        var riseGain = ctx.createGain();
-        riseGain.gain.setValueAtTime(0, riseTime);
-        riseGain.gain.linearRampToValueAtTime(0.12, riseTime + 0.02);
-        riseGain.gain.exponentialRampToValueAtTime(0.001, riseTime + 0.18);
+        var riseTime = now + 3.8 + idx * 0.18;
 
-        // Bright overtone for defiance
-        var brightOsc = ctx.createOscillator();
-        brightOsc.type = 'sine';
-        brightOsc.frequency.value = riseNotes[idx] * 2;
-        var brightGain = ctx.createGain();
-        brightGain.gain.setValueAtTime(0, riseTime);
-        brightGain.gain.linearRampToValueAtTime(0.05, riseTime + 0.02);
-        brightGain.gain.exponentialRampToValueAtTime(0.001, riseTime + 0.15);
+        // Aggressive main voice
+        var rOsc = ctx.createOscillator();
+        rOsc.type = 'sawtooth';
+        rOsc.frequency.value = riseNotes[idx];
+        var rGain = ctx.createGain();
+        rGain.gain.setValueAtTime(0, riseTime);
+        rGain.gain.linearRampToValueAtTime(0.35, riseTime + 0.02);
+        rGain.gain.exponentialRampToValueAtTime(0.001, riseTime + 0.2);
 
-        riseOsc.connect(riseGain);
-        brightOsc.connect(brightGain);
-        riseGain.connect(sfxGain);
-        brightGain.connect(sfxGain);
-        riseOsc.start(riseTime);
-        brightOsc.start(riseTime);
-        riseOsc.stop(riseTime + 0.2);
-        brightOsc.stop(riseTime + 0.2);
+        // Bright power overtone
+        var bOsc = ctx.createOscillator();
+        bOsc.type = 'square';
+        bOsc.frequency.value = riseNotes[idx] * 2;
+        var bGain = ctx.createGain();
+        bGain.gain.setValueAtTime(0, riseTime);
+        bGain.gain.linearRampToValueAtTime(0.12, riseTime + 0.02);
+        bGain.gain.exponentialRampToValueAtTime(0.001, riseTime + 0.15);
+
+        rOsc.connect(rGain);
+        bOsc.connect(bGain);
+        rGain.connect(sfxGain);
+        bGain.connect(sfxGain);
+        rOsc.start(riseTime);
+        bOsc.start(riseTime);
+        rOsc.stop(riseTime + 0.2);
+        bOsc.stop(riseTime + 0.2);
       })(rn);
     }
 
-    // Defiant war drums — faster, stronger
-    for (var dd = 0; dd < 5; dd++) {
-      var dTime = now + 3.0 + dd * 0.35;
+    // Battle drums — fast, furious, defiant
+    for (var dd = 0; dd < 8; dd++) {
+      var dTime = now + 4.0 + dd * 0.22;
       var dOsc = ctx.createOscillator();
       dOsc.type = 'triangle';
-      dOsc.frequency.setValueAtTime(100, dTime);
-      dOsc.frequency.exponentialRampToValueAtTime(40, dTime + 0.2);
+      dOsc.frequency.setValueAtTime(90, dTime);
+      dOsc.frequency.exponentialRampToValueAtTime(30, dTime + 0.15);
       var dGain = ctx.createGain();
-      dGain.gain.setValueAtTime(0.2, dTime);
-      dGain.gain.exponentialRampToValueAtTime(0.001, dTime + 0.25);
+      dGain.gain.setValueAtTime(0.35, dTime);
+      dGain.gain.exponentialRampToValueAtTime(0.001, dTime + 0.2);
       dOsc.connect(dGain);
       dGain.connect(sfxGain);
       dOsc.start(dTime);
-      dOsc.stop(dTime + 0.25);
-      playNoiseHitAt(0.15, 60, 20, 0.12, dTime);
+      dOsc.stop(dTime + 0.2);
+      playNoiseHitAt(0.12, 50, 15, 0.2, dTime);
     }
 
-    // Final defiant chord — "I WILL fight again!" (D power chord: D A D)
-    var finalTime = now + 4.2;
-    [294, 440, 587].forEach(function(freq) {
-      var fOsc = ctx.createOscillator();
-      fOsc.type = freq === 440 ? 'sawtooth' : 'sine';
-      fOsc.frequency.value = freq;
-      var fGain = ctx.createGain();
-      fGain.gain.setValueAtTime(0, finalTime);
-      fGain.gain.linearRampToValueAtTime(freq === 440 ? 0.14 : 0.08, finalTime + 0.03);
-      fGain.gain.exponentialRampToValueAtTime(0.001, finalTime + 0.8);
-      fOsc.connect(fGain);
-      fGain.connect(sfxGain);
-      fOsc.start(finalTime);
-      fOsc.stop(finalTime + 0.8);
-    });
+    // CLIMAX: "I WILL FIGHT AGAIN!" — massive power chord (D5 power chord)
+    var finalTime = now + 5.0;
+    var powerChord = [294, 440, 587, 784]; // D4 A4 D5 G5
+    for (var f = 0; f < powerChord.length; f++) {
+      (function(idx) {
+        var fOsc = ctx.createOscillator();
+        fOsc.type = 'sawtooth';
+        fOsc.frequency.value = powerChord[idx];
+        var fGain = ctx.createGain();
+        fGain.gain.setValueAtTime(0, finalTime);
+        fGain.gain.linearRampToValueAtTime(idx === 1 ? 0.4 : 0.25, finalTime + 0.03);
+        fGain.gain.setValueAtTime(idx === 1 ? 0.35 : 0.2, finalTime + 0.3);
+        fGain.gain.exponentialRampToValueAtTime(0.001, finalTime + 1.2);
+        fOsc.connect(fGain);
+        fGain.connect(sfxGain);
+        fOsc.start(finalTime);
+        fOsc.stop(finalTime + 1.2);
+      })(f);
+    }
 
-    // Final gong
-    playToneSweepAt(100, 25, 1.0, 'triangle', 0.15, finalTime);
+    // Final triumphant gong — ring out
+    playToneSweepAt(80, 20, 1.5, 'triangle', 0.4, finalTime);
+    playNoiseHitAt(1.0, 30, 10, 0.3, finalTime);
   }
 
   // Helper: noise hit at specific time
@@ -600,18 +626,19 @@ var AudioEngine = (function () {
 
   function muteMusic() {
     if (!ctx) return;
-    // Fade out background music
-    if (musicGain) musicGain.gain.setTargetAtTime(0, ctx.currentTime, 0.15);
-    // Boost SFX so death music is prominent
-    if (sfxGain) sfxGain.gain.setTargetAtTime(1.2, ctx.currentTime, 0.15);
+    // Fade out background music quickly
+    if (musicGain) musicGain.gain.setTargetAtTime(0, ctx.currentTime, 0.1);
+    // BOOST everything for epic death music
+    if (sfxGain) sfxGain.gain.setTargetAtTime(1.5, ctx.currentTime, 0.1);
+    if (masterGain) masterGain.gain.setTargetAtTime(0.7, ctx.currentTime, 0.1);
   }
 
   function unmuteMusic() {
     if (!ctx) return;
-    // Fade background music back in
-    if (musicGain) musicGain.gain.setTargetAtTime(1, ctx.currentTime, 0.3);
-    // Restore SFX to normal level
+    // Restore normal levels
+    if (masterGain) masterGain.gain.setTargetAtTime(0.35, ctx.currentTime, 0.3);
     if (sfxGain) sfxGain.gain.setTargetAtTime(0.7, ctx.currentTime, 0.3);
+    if (musicGain) musicGain.gain.setTargetAtTime(1, ctx.currentTime, 0.3);
   }
 
   // ── Public API ───────────────────────────────────────
