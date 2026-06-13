@@ -443,6 +443,16 @@
     updateXpOrbs(dtClamped);
     updateToast(dtClamped);
     checkWave();
+    // Re-check music intensity based on HP
+    if (player.hp / player.maxHp <= 0.4) {
+      if (wave % 5 === 0 && wave > 0) {
+        AudioEngine.setIntensity('boss');
+      } else {
+        AudioEngine.setIntensity('tense');
+      }
+    } else if (wave < 8 && wave % 5 !== 0) {
+      AudioEngine.setIntensity('calm');
+    }
     updateHUD();
   }
 
@@ -521,7 +531,7 @@
       player.jumpVx = (jumpDir.x / jmag) * 80 / 0.15;
       player.jumpVy = (jumpDir.y / jmag) * 80 / 0.15;
       spawnParticles(player.x, player.y, 6, 'rgba(184,160,110,0.8)', 0.2);
-      // AudioEngine.playSfx('jump'); -- will be added in Task 8
+      AudioEngine.playSfx('jump');
     }
 
     // Jump cooldown tick
@@ -612,6 +622,7 @@
     if (target) {
       var dmg = player.attackDamage;
       target.hp -= dmg;
+      AudioEngine.playSfx('attack');
       spawnDmgNumber(target.x, target.y, dmg, '#ffd700');
       spawnParticles(target.x, target.y, 5, '#d4b878', 0.4);
       if (target.hp <= 0) {
@@ -637,6 +648,7 @@
   }
 
   function fieryEyesBurst() {
+    AudioEngine.playSfx('fiery');
     // Damage all enemies in a cone in front of the player
     var mx = getInputX() || 0;
     var my = getInputY() || 0;
@@ -658,6 +670,7 @@
   }
 
   function stunAll() {
+    AudioEngine.playSfx('stun');
     for (var i = 0; i < enemies.length; i++) {
       enemies[i].stunned = 1.5;
     }
@@ -665,6 +678,7 @@
   }
 
   function shockwave() {
+    AudioEngine.playSfx('shockwave');
     for (var i = enemies.length - 1; i >= 0; i--) {
       var shockDmg = player.attackDamage * 4;
       enemies[i].hp -= shockDmg;
@@ -684,6 +698,12 @@
     if (enemy.isBoss) {
       for (var i = 0; i < 3; i++) spawnXpOrb(enemy.x + rand(-30, 30), enemy.y + rand(-30, 30));
     }
+    // Element-specific kill SFX
+    var elementSfx = {
+      metal: 'kill_metal', wood: 'kill_wood', water: 'kill_water',
+      fire: 'kill_fire', earth: 'kill_earth', all: 'kill_metal'
+    };
+    AudioEngine.playSfx(elementSfx[enemy.element] || 'kill_metal');
     enemies.splice(idx, 1);
   }
 
@@ -702,6 +722,7 @@
     var actualDmg = Math.max(1, Math.floor(dmg * (1 - player.damageReduction)));
     player.hp -= actualDmg;
     spawnParticles(player.x, player.y, 4, '#ff4040', 0.3);
+    AudioEngine.playSfx('hurt');
     player._damageFlash = 0.2;
     if (player.hp <= 0) {
       if (player.revive && !player.reviveUsed) {
@@ -856,6 +877,7 @@
       waveTimer = 0;
       wave++;
       spawnWave(wave);
+      updateMusicIntensity();
     }
     // Continuous trickle spawn (every 1.2 seconds if below cap)
     trickleTimer -= 0.016;
@@ -877,6 +899,17 @@
     }
   }
 
+  function updateMusicIntensity() {
+    // Boss every 5 waves
+    if (wave % 5 === 0 && wave > 0) {
+      AudioEngine.setIntensity('boss');
+    } else if (wave >= 8 || (player.hp / player.maxHp) <= 0.4) {
+      AudioEngine.setIntensity('tense');
+    } else {
+      AudioEngine.setIntensity('calm');
+    }
+  }
+
   /* ---- Level Up ---- */
   var celebrateTimer = 0;
 
@@ -890,6 +923,7 @@
   }
 
   function triggerCelebrate() {
+    AudioEngine.playSfx('levelup');
     celebrateTimer = 1.5;
     setPaused(true);
 
@@ -968,6 +1002,8 @@
      ============================================================ */
   function playerDied() {
     gameOver = true;
+    AudioEngine.playSfx('death');
+    AudioEngine.setIntensity('calm');
     deathData = { time: gameTime, wave: wave, kills: kills };
 
     var overlay = document.getElementById('death-overlay');
@@ -1447,6 +1483,7 @@
     var dt = lastTime ? (timestamp - lastTime) / 1000 : 0.016;
     lastTime = timestamp;
     update(dt);
+    AudioEngine.update(dt);
     render();
     requestAnimationFrame(loop);
   }
@@ -1455,6 +1492,10 @@
      Init & Restart
      ============================================================ */
   function startGame() {
+    // Initialize audio
+    AudioEngine.init();
+    AudioEngine.start();
+    AudioEngine.setIntensity('calm');
     initState();
     celebrateTimer = 0;
     var celOverlay = document.getElementById('celebrate-overlay');
