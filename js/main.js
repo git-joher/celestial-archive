@@ -100,6 +100,35 @@
   }
 
   /* ============================================================
+     Game grid — populate game hub homepage cards
+     ============================================================ */
+  var gameGrid = document.getElementById('game-grid');
+  if (gameGrid && typeof CELESTIAL_GAMES !== 'undefined') {
+    var gameCardsHtml = '';
+    CELESTIAL_GAMES.forEach(function (g) {
+      var isLive = g.status === 'live';
+      var tag = isLive ? 'a' : 'div';
+      var attrs = isLive
+        ? ' href="' + rootPrefix + 'games/' + g.slug + '/index.html"'
+        : '';
+      gameCardsHtml +=
+        '<' + tag + attrs + ' class="game-card" data-status="' + g.status + '">'
+        + '<div class="game-card-bg" style="background-image:url(' + rootPrefix + g.image + ')"></div>'
+        + '<div class="game-card-overlay"></div>'
+        + '<div class="game-card-content">'
+        + '<span class="game-card-title-zh">' + g.nameZh + '</span>'
+        + '<span class="game-card-title-en">' + g.nameEn + '</span>'
+        + '<p class="game-card-desc">' + g.description + '</p>'
+        + '<span class="game-card-badge ' + g.status + '">'
+        + (isLive ? 'Play Now' : 'Coming Soon')
+        + '</span>'
+        + '</div>'
+        + '</' + tag + '>';
+    });
+    gameGrid.innerHTML = gameCardsHtml;
+  }
+
+  /* ============================================================
      Site Navigation — injected once, shared across all pages
      ============================================================ */
   function injectSiteNav() {
@@ -256,7 +285,7 @@
       var rootNames = {
         'about': 'About Us', 'contact': 'Contact Us', 'privacy-policy': 'Privacy Policy',
         'gods': 'Gods', 'characters': 'Characters', 'stories': 'Stories',
-        'top-lists': 'Top Lists', 'pantheon': 'Pantheon'
+        'top-lists': 'Top Lists', 'pantheon': 'Pantheon', 'library': 'Knowledge Base'
       };
       var name = rootNames[rootFile] || rootFile.charAt(0).toUpperCase() + rootFile.slice(1);
       crumbs.push({ name: name, url: '' });

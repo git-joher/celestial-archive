@@ -1237,3 +1237,384 @@ img.mural-filter,
   border-color: rgba(184, 160, 110, 0.65);
   background: rgba(184, 160, 110, 0.08);
 }
+
+/* ============================================================
+   游戏中心首页 — Game Hub Homepage
+   用于新版首页的游戏卡片网格、英雄区和传送门
+   ============================================================ */
+
+/* ---- 游戏中心 Hero ---- */
+.game-hero {
+  min-height: calc(100vh - 52px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+  background: var(--bg-dark);
+  position: relative;
+  overflow: hidden;
+}
+.game-hero-bg {
+  position: absolute; inset: 0;
+  background-image: url("../images/celestial.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.45;
+}
+.game-hero-content {
+  position: relative; z-index: 2;
+  max-width: 720px;
+}
+.game-hero-kicker {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: var(--space-md);
+}
+.game-hero-title {
+  font-family: var(--font-chinese-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  color: #e8d5b0;
+  margin-bottom: var(--space-sm);
+  text-shadow: 0 0 40px rgba(184,160,110,0.2);
+  line-height: 1.3;
+}
+.game-hero-zh {
+  font-family: var(--font-chinese-display);
+  font-size: 1.6rem;
+  color: rgba(232,220,200,0.5);
+  margin-bottom: var(--space-sm);
+}
+.game-hero-divider {
+  width: 60px; height: 2px;
+  background: var(--accent-gold);
+  margin: 0 auto var(--space-lg);
+}
+.game-hero-sub {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: rgba(232,220,200,0.8);
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto var(--space-lg);
+}
+.game-hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.game-hero-scroll-arrow {
+  display: block;
+  width: 24px; height: 24px;
+  border-right: 2px solid var(--accent-gold);
+  border-bottom: 2px solid var(--accent-gold);
+  transform: rotate(45deg);
+  opacity: 0.6;
+  animation: scroll-bob 2s ease-in-out infinite;
+}
+@keyframes scroll-bob {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(8px); }
+}
+
+/* ---- 游戏卡片区块 ---- */
+.game-section {
+  background: var(--bg-dark);
+  padding: 70px 0 80px;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(184,160,110,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 100%, rgba(160,120,60,0.04) 0%, transparent 50%);
+  border-top: 1px solid rgba(232,220,200,0.05);
+}
+.game-section-header {
+  text-align: center;
+  margin-bottom: 44px;
+}
+.game-section-kicker {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+}
+.game-section-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: #e8d5b0;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+.game-section-sub {
+  font-size: 0.9rem;
+  color: rgba(200,180,140,0.5);
+  font-style: italic;
+}
+
+/* ---- 游戏卡片网格 ---- */
+.game-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ---- 单张游戏卡片 ---- */
+.game-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  min-height: 360px;
+  background: #1a120a;
+  border: 1px solid rgba(184,160,110,0.1);
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.game-card[data-status="live"] {
+  cursor: pointer;
+}
+.game-card[data-status="coming"] {
+  cursor: default;
+  opacity: 0.75;
+}
+.game-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(184,160,110,0.4);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 24px rgba(184,160,110,0.08);
+}
+.game-card[data-status="coming"]:hover {
+  transform: translateY(-4px);
+  border-color: rgba(184,160,110,0.2);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+}
+
+/* 卡片背景图 */
+.game-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+.game-card:hover .game-card-bg {
+  transform: scale(1.06);
+}
+
+/* 卡片渐变遮罩 */
+.game-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(26,18,10,0.96) 0%,
+    rgba(26,18,10,0.7) 35%,
+    rgba(0,0,0,0.25) 70%,
+    rgba(0,0,0,0.15) 100%
+  );
+  transition: background 0.4s ease;
+}
+.game-card:hover .game-card-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(26,18,10,0.92) 0%,
+    rgba(26,18,10,0.6) 35%,
+    rgba(0,0,0,0.2) 70%,
+    rgba(0,0,0,0.1) 100%
+  );
+}
+
+/* 卡片文字内容 */
+.game-card-content {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.game-card-title-zh {
+  font-family: var(--font-chinese-display);
+  font-size: 1.8rem;
+  color: #e8d5b0;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.game-card-title-en {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.game-card-desc {
+  font-size: 0.82rem;
+  color: rgba(200,180,140,0.6);
+  line-height: 1.6;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 状态标签 */
+.game-card-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  margin-top: 16px;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+.game-card-badge.live {
+  color: var(--bg-dark);
+  background: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+}
+.game-card:hover .game-card-badge.live {
+  background: #c9b380;
+  border-color: #c9b380;
+}
+.game-card-badge.coming {
+  color: rgba(200,180,140,0.5);
+  background: transparent;
+  border: 1px solid rgba(184,160,110,0.25);
+}
+
+/* ---- 传送门区块：进入天宫档案 ---- */
+.archive-portal {
+  background: #2a1f14;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(184,160,110,0.08) 0%, transparent 60%);
+  padding: 64px 0 72px;
+  text-align: center;
+  border-top: 1px solid rgba(184,160,110,0.15);
+  border-bottom: 1px solid rgba(232,220,200,0.04);
+}
+.archive-portal-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.portal-icon {
+  font-size: 2.6rem;
+  margin-bottom: 16px;
+  display: block;
+  opacity: 0.8;
+}
+.portal-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: #e8d5b0;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+.portal-desc {
+  font-size: 0.95rem;
+  color: rgba(200,180,140,0.6);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.portal-cta {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--bg-dark);
+  background: var(--accent-gold);
+  padding: 16px 42px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.portal-cta:hover {
+  background: #c9b380;
+  box-shadow: 0 0 30px rgba(184,160,110,0.3);
+  transform: translateY(-2px);
+}
+
+/* ---- SEO 简介区（紧凑版）---- */
+.game-seo {
+  background: #3b2f21;
+  padding: 44px 0 48px;
+  border-top: 1px solid rgba(232,220,200,0.04);
+}
+.game-seo-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.game-seo-inner h2 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: #e0c878;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.game-seo-inner p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(200,180,140,0.65);
+  margin-bottom: 12px;
+  text-align: center;
+}
+.game-seo-inner a {
+  color: var(--accent-gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(184,160,110,0.25);
+  transition: border-color 0.25s;
+}
+.game-seo-inner a:hover {
+  border-color: var(--accent-gold);
+  color: #d4b878;
+}
+
+/* ---- 响应式：游戏中心 ---- */
+@media (max-width: 1024px) {
+  .game-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .game-hero {
+    min-height: calc(100vh - 48px);
+  }
+  .game-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .game-card {
+    min-height: 280px;
+  }
+  .game-card-title-zh {
+    font-size: 1.5rem;
+  }
+  .game-section {
+    padding: 48px 0 56px;
+  }
+  .archive-portal {
+    padding: 48px 0 52px;
+  }
+  .portal-title {
+    font-size: 1.25rem;
+  }
+}

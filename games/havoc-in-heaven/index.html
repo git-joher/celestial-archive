@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Ezoic disabled for game page
+<script>var CELESTIAL_EZOIC_ENABLED=1;</script>
+<script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
+<script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
+<script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
+<script>window.ezstandalone=window.ezstandalone||{};ezstandalone.cmd=ezstandalone.cmd||[];</script>
+-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>大闹天宫 — Havoc in Heaven | Celestial Archive</title>
+  <meta name="description" content="Survive the celestial onslaught as Sun Wukong. A top-down roguelike where you battle waves of heavenly soldiers with the Ruyi Jingu Bang.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://celestial-archive.com/games/havoc-in-heaven/">
+  <meta property="og:title" content="大闹天宫 — Havoc in Heaven | Celestial Archive">
+  <meta property="og:description" content="Survive the celestial onslaught as Sun Wukong. A top-down roguelike survival game.">
+  <meta property="og:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="大闹天宫 — Havoc in Heaven">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://celestial-archive.com/games/havoc-in-heaven/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="大闹天宫 — Havoc in Heaven | Celestial Archive">
+  <meta name="twitter:description" content="Survive the celestial onslaught as Sun Wukong.">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/sun-wukong/sun-wukong-hero.jpg">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="css/game.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XRWRSLPKTM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XRWRSLPKTM');
+</script>
+</head>
+<body>
+
+<!-- Canvas -->
+<div id="game-wrapper">
+  <canvas id="game-canvas"></canvas>
+</div>
+
+<!-- HUD -->
+<div id="game-hud">
+  <div class="hud-top">
+    <div class="hud-left">
+      <div class="hp-bar-wrap">
+        <span class="hp-label-text">Wukong</span>
+        <div class="hp-outer"><div class="hp-inner" id="hp-inner" style="width:100%;"></div></div>
+        <span class="hp-num" id="hp-num">100/100</span>
+      </div>
+      <div class="xp-outer"><div class="xp-inner" id="xp-inner" style="width:0%;"></div></div>
+      <div class="hud-stat">LV <span id="hud-lv">1</span></div>
+    </div>
+    <div class="hud-right">
+      <div class="hud-stat">波 <span id="hud-wave">1</span> · <span id="hud-time">0:00</span></div>
+      <div class="hud-stat">击杀 <span id="hud-kills">0</span></div>
+      <div class="upgrade-icons" id="upgrade-icons"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Upgrade Selection -->
+<div id="upgrade-overlay">
+  <div class="upgrade-title">选择升级</div>
+  <div class="upgrade-sub">Choose Your Power</div>
+  <div class="upgrade-cards" id="upgrade-cards"></div>
+</div>
+
+<!-- Death Screen -->
+<div id="death-overlay">
+  <div class="death-title">大闹天宫</div>
+  <div class="death-stats">
+    <div class="death-stat"><div class="death-stat-val" id="death-time">0:00</div><div class="death-stat-label">Survival Time</div></div>
+    <div class="death-stat"><div class="death-stat-val" id="death-wave">1</div><div class="death-stat-label">Highest Wave</div></div>
+    <div class="death-stat"><div class="death-stat-val" id="death-kills">0</div><div class="death-stat-label">Kills</div></div>
+    <div class="death-stat"><div class="death-stat-val" id="death-score">0</div><div class="death-stat-label">Score</div></div>
+  </div>
+  <button class="btn-start" id="btn-restart" style="font-size:1rem;padding:14px 40px;">Play Again</button>
+</div>
+
+<!-- Mobile Controls -->
+<div id="mobile-controls">
+  <div class="mobile-joystick" id="mobile-joystick">
+    <div class="mobile-joystick-knob" id="mobile-joystick-knob"></div>
+  </div>
+  <div class="mobile-skill-btn" id="mobile-skill-btn">爆发</div>
+</div>
+
+<p class="pause-hint">WASD 移动 · 自动攻击 · 空格暂停</p>
+
+<script src="../../js/deities.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/config.js"></script>
+<script src="js/game.js"></script>
+<script>if(typeof CELESTIAL_ADS_ENABLED!=='undefined'&&CELESTIAL_ADS_ENABLED===1){var infolinks_pid=3445396;var infolinks_wsid=0;var s=document.createElement('script');s.src='//resources.infolinks.com/js/infolinks_main.js';s.type='text/javascript';document.body.appendChild(s);}</script>
+</body>
+</html>

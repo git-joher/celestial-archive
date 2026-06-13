@@ -205,3 +205,54 @@ var CELESTIAL_DEITIES = [
     avatarInitial: 'P'
   }
 ];
+
+var CELESTIAL_GAMES = [
+  {
+    slug: 'havoc-in-heaven',
+    nameZh: '大闹天宫',
+    nameEn: 'Havoc in Heaven',
+    description: 'Relive Sun Wukong\'s legendary rebellion against the celestial court. Battle through 100,000 heavenly soldiers and challenge the might of heaven itself.',
+    status: 'live',
+    image: 'images/sun-wukong/sun-wukong-hero.jpg'
+  },
+  {
+    slug: 'celestial-divination',
+    nameZh: '天庭求签',
+    nameEn: 'Celestial Divination',
+    description: 'Seek guidance from the celestial court. Draw sacred lots before the Jade Emperor\'s throne and uncover your fate written in the stars.',
+    status: 'coming',
+    image: 'images/jade-emperor/je-court.jpg'
+  },
+  {
+    slug: 'dragon-palace-treasure',
+    nameZh: '龙宫探宝',
+    nameEn: 'Dragon Palace Treasure',
+    description: 'Dive into the Dragon King\'s underwater palace. Navigate coral labyrinths and claim treasures from the depths of the Eastern Sea.',
+    status: 'coming',
+    image: 'images/white-dragon-horse/wlh-hero.jpg'
+  },
+  {
+    slug: 'mythical-beast-collection',
+    nameZh: '神兽收集',
+    nameEn: 'Mythical Beast Collection',
+    description: 'Track and befriend the mythical beasts of Chinese legend. From Qilin to the Nine-tailed Fox, build your own menagerie of magical creatures.',
+    status: 'coming',
+    image: 'images/bull-demon-king/bdk-hero.jpg'
+  },
+  {
+    slug: 'peach-banquet-heist',
+    nameZh: '蟠桃盛会',
+    nameEn: 'Peach Banquet Heist',
+    description: 'Infiltrate the Queen Mother\'s Peach Banquet and devour the fruits of immortality. Avoid celestial guards and become the greatest thief in heaven.',
+    status: 'coming',
+    image: 'images/xiwangmu/xmw-peach-garden.jpg'
+  },
+  {
+    slug: 'eight-trigrams-furnace',
+    nameZh: '八卦炉',
+    nameEn: 'Eight Trigrams Furnace',
+    description: 'Master the alchemical arts inside Taishang Laojun\'s cosmic furnace. Refine elixirs, concoct potions, and unlock the secrets of immortality.',
+    status: 'coming',
+    image: 'images/taishang-laojun/tl-furnace.jpg'
+  }
+];
