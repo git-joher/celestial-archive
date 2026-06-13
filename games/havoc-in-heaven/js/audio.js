@@ -112,7 +112,7 @@ var AudioEngine = (function () {
   // ── SFX ────────────────────────────────────────────
 
   function playSfx(name) {
-    if (!started || muted) return;
+    if (!started || muted || !ctx) return;
     resume();
 
     switch (name) {
@@ -188,7 +188,7 @@ var AudioEngine = (function () {
 
     // Frequency sweep
     bandpass.frequency.setValueAtTime(freqHi, ctx.currentTime);
-    bandpass.frequency.exponentialRampToValueAtTime(freqLo, ctx.currentTime + duration);
+    bandpass.frequency.exponentialRampToValueAtTime(Math.max(freqLo, 20), ctx.currentTime + duration);
 
     source.connect(bandpass);
     bandpass.connect(gain);
@@ -325,24 +325,22 @@ var AudioEngine = (function () {
     osc.start(now);
     osc.stop(now + 0.5);
 
-    // Rumble
+    // Rumble (scheduled for now, no setTimeout)
     playNoiseHit(0.4, 100, 30, 0.25);
 
-    // Descending tone — "fate"
-    setTimeout(function () {
-      if (!ctx || ctx.state === 'closed') return;
-      var osc2 = ctx.createOscillator();
-      osc2.type = 'sawtooth';
-      osc2.frequency.setValueAtTime(440, ctx.currentTime);
-      osc2.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.8);
-      var gain2 = ctx.createGain();
-      gain2.gain.setValueAtTime(0.1, ctx.currentTime);
-      gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
-      osc2.connect(gain2);
-      gain2.connect(sfxGain);
-      osc2.start(ctx.currentTime);
-      osc2.stop(ctx.currentTime + 0.8);
-    }, 300);
+    // Descending tone — "fate" — scheduled at now+0.3 via oscillator timing
+    var osc2 = ctx.createOscillator();
+    osc2.type = 'sawtooth';
+    osc2.frequency.setValueAtTime(440, now + 0.3);
+    osc2.frequency.exponentialRampToValueAtTime(110, now + 0.3 + 0.8);
+    var gain2 = ctx.createGain();
+    gain2.gain.setValueAtTime(0, now);
+    gain2.gain.setValueAtTime(0.1, now + 0.3);
+    gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.3 + 0.8);
+    osc2.connect(gain2);
+    gain2.connect(sfxGain);
+    osc2.start(now + 0.3);
+    osc2.stop(now + 0.3 + 0.8);
   }
 
   // ── Background Music Update (called every frame) ──────
@@ -464,7 +462,7 @@ var AudioEngine = (function () {
     playSfx: playSfx,
     update: update,
     setMuted: setMuted,
-    start: function () { started = true; },
+    start: function () { if (!ctx) init(); started = true; },
     stop: stop,
     resume: resume,
     isStarted: function () { return started; }
