@@ -30,10 +30,8 @@
 
   // Touch joystick
   var touchMove = { active: false, dx: 0, dy: 0 };
-  var touchSkill = false;
   var joystickEl = document.getElementById('mobile-joystick');
   var knobEl = document.getElementById('mobile-joystick-knob');
-  var skillBtn = document.getElementById('mobile-skill-btn');
 
   if (joystickEl) {
     var jRect, jCx, jCy, jR;
@@ -58,11 +56,6 @@
       knobEl.style.transform = 'translate(-50%, -50%)';
     });
   }
-  if (skillBtn) {
-    skillBtn.addEventListener('touchstart', function (e) { e.preventDefault(); touchSkill = true; });
-    skillBtn.addEventListener('touchend', function (e) { e.preventDefault(); touchSkill = false; });
-  }
-
   function updateJoystick(touch) {
     var dx = touch.clientX - jCx;
     var dy = touch.clientY - jCy;
@@ -226,15 +219,15 @@
   function getWaveConfig(w) {
     var configs = {
       // Wave 1-4
-      soldier: { hp: 20, speed: 80, damage: 10, radius: 10, color: '#d4b878', name: '天兵', isRanged: false },
-      general: { hp: 50, speed: 100, damage: 15, radius: 14, color: '#e07050', name: '天将', isRanged: false },
-      cavalry: { hp: 30, speed: 160, damage: 12, radius: 11, color: '#e8dcc8', name: '天马骑兵', isRanged: false },
-      archer: { hp: 25, speed: 60, damage: 20, radius: 11, color: '#5a9ac4', name: '神射手', isRanged: true, shootCooldown: 2.5 },
-      king: { hp: 200, speed: 60, damage: 25, radius: 28, color: '#c44d34', name: '四大天王', isBoss: true, spawnTimer: 4 },
-      giant: { hp: 150, speed: 90, damage: 30, radius: 24, color: '#8a4aaa', name: '巨灵神', isBoss: false },
-      hound: { hp: 60, speed: 200, damage: 18, radius: 12, color: '#a0a0a0', name: '哮天犬', isBoss: false },
-      nezha: { hp: 300, speed: 110, damage: 30, radius: 30, color: '#ff4040', name: '哪吒', isBoss: true, isRanged: true, shootCooldown: 1.8 },
-      erlang: { hp: 500, speed: 100, damage: 35, radius: 34, color: '#ffd700', name: '二郎神', isBoss: true, isRanged: true, shootCooldown: 1.2 }
+      soldier: { hp: 20, speed: 80, damage: 10, radius: 10, color: '#d4b878', name: 'Soldier', isRanged: false },
+      general: { hp: 50, speed: 100, damage: 15, radius: 14, color: '#e07050', name: 'General', isRanged: false },
+      cavalry: { hp: 30, speed: 160, damage: 12, radius: 11, color: '#e8dcc8', name: 'Cavalry', isRanged: false },
+      archer: { hp: 25, speed: 60, damage: 20, radius: 11, color: '#5a9ac4', name: 'Archer', isRanged: true, shootCooldown: 2.5 },
+      king: { hp: 200, speed: 60, damage: 25, radius: 28, color: '#c44d34', name: 'Four Kings', isBoss: true, spawnTimer: 4 },
+      giant: { hp: 150, speed: 90, damage: 30, radius: 24, color: '#8a4aaa', name: 'Giant Spirit', isBoss: false },
+      hound: { hp: 60, speed: 200, damage: 18, radius: 12, color: '#a0a0a0', name: 'Howling Hound', isBoss: false },
+      nezha: { hp: 300, speed: 110, damage: 30, radius: 30, color: '#ff4040', name: 'Nezha', isBoss: true, isRanged: true, shootCooldown: 1.8 },
+      erlang: { hp: 500, speed: 100, damage: 35, radius: 34, color: '#ffd700', name: 'Erlang Shen', isBoss: true, isRanged: true, shootCooldown: 1.2 }
     };
     return configs;
   }
@@ -653,8 +646,8 @@
         var card = document.createElement('div');
         card.className = 'upgrade-card';
         card.innerHTML = '<div class="uc-rarity ' + upgrade.rarity + '">' + upgrade.rarity.toUpperCase() + '</div>'
-          + '<div class="uc-name">' + upgrade.nameZh + '</div>'
-          + '<div class="uc-en">' + upgrade.nameEn + '</div>'
+          + '<div class="uc-name">' + upgrade.nameEn + '</div>'
+          + '<div class="uc-sub">' + upgrade.nameZh + '</div>'
           + '<div class="uc-desc">' + upgrade.desc + '</div>';
         card.addEventListener('click', function () {
           upgrade.apply();
