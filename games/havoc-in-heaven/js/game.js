@@ -197,6 +197,10 @@
       stunTimer: 0, // 定身术 cooldown
       shockwaveTimer: 0, // 大圣归来 cooldown
       clones: [], // 分身术
+      _burnTimer: 0,
+      _burnTick: 0,
+      _slowed: false,
+      _slowTimer: 0,
       _damageFlash: 0
     };
     enemies = [];
@@ -281,28 +285,29 @@
       damage: type.damage,
       radius: type.radius,
       color: type.color,
+      element: type.element || 'metal',
       name: type.name,
       isBoss: type.isBoss || false,
       isRanged: type.isRanged || false,
       shootTimer: type.shootTimer || 0,
       shootCooldown: type.shootCooldown || 2,
-      spawnTimer: type.spawnTimer || 0
+      spawnTimer: type.spawnTimer || 0,
+      burnTimer: 0
     };
     enemies.push(e);
   }
 
   function getWaveConfig(w) {
     var configs = {
-      // Wave 1-4
-      soldier: { hp: 20, speed: 80, damage: 10, radius: 10, color: '#d4b878', name: 'Soldier', isRanged: false },
-      general: { hp: 50, speed: 100, damage: 15, radius: 14, color: '#e07050', name: 'General', isRanged: false },
-      cavalry: { hp: 30, speed: 160, damage: 12, radius: 11, color: '#e8dcc8', name: 'Cavalry', isRanged: false },
-      archer: { hp: 25, speed: 60, damage: 20, radius: 11, color: '#5a9ac4', name: 'Archer', isRanged: true, shootCooldown: 2.5 },
-      king: { hp: 200, speed: 60, damage: 25, radius: 28, color: '#c44d34', name: 'Four Kings', isBoss: true, spawnTimer: 4 },
-      giant: { hp: 150, speed: 90, damage: 30, radius: 24, color: '#8a4aaa', name: 'Giant Spirit', isBoss: false },
-      hound: { hp: 60, speed: 200, damage: 18, radius: 12, color: '#a0a0a0', name: 'Howling Hound', isBoss: false },
-      nezha: { hp: 300, speed: 110, damage: 30, radius: 30, color: '#ff4040', name: 'Nezha', isBoss: true, isRanged: true, shootCooldown: 1.8 },
-      erlang: { hp: 500, speed: 100, damage: 35, radius: 34, color: '#ffd700', name: 'Erlang Shen', isBoss: true, isRanged: true, shootCooldown: 1.2 }
+      soldier: { hp: 20, speed: 80, damage: 10, radius: 10, color: '#d4b878', element: 'metal', name: '天兵', isRanged: false },
+      general: { hp: 50, speed: 100, damage: 15, radius: 14, color: '#e8c860', element: 'metal', name: '天将', isRanged: false },
+      cavalry: { hp: 30, speed: 170, damage: 12, radius: 11, color: '#ff6040', element: 'fire', name: '火骑兵', isRanged: false },
+      archer: { hp: 25, speed: 55, damage: 18, radius: 11, color: '#5ab8e0', element: 'water', name: '冰弓手', isRanged: true, shootCooldown: 2.5 },
+      giant: { hp: 180, speed: 80, damage: 28, radius: 25, color: '#c8a850', element: 'earth', name: '巨灵神', isBoss: false },
+      hound: { hp: 60, speed: 210, damage: 16, radius: 12, color: '#5a9a4a', element: 'wood', name: '藤甲兽', isBoss: false },
+      king: { hp: 250, speed: 55, damage: 25, radius: 28, color: '#e0c040', element: 'metal', name: '四大天王', isBoss: true, spawnTimer: 4 },
+      nezha: { hp: 350, speed: 110, damage: 30, radius: 30, color: '#ff4040', element: 'fire', name: '哪吒', isBoss: true, isRanged: true, shootCooldown: 1.8 },
+      erlang: { hp: 550, speed: 100, damage: 38, radius: 34, color: '#ffd700', element: 'all', name: '二郎神', isBoss: true, isRanged: true, shootCooldown: 1.2 }
     };
     return configs;
   }
@@ -409,6 +414,30 @@
     var ix = getInputX();
     var iy = getInputY();
     var mag = Math.sqrt(ix * ix + iy * iy);
+
+    // Burn DOT from fire enemies
+    if (player._burnTimer > 0) {
+      player._burnTimer -= dt;
+      if (!player._burnTick || player._burnTick <= 0) {
+        player._burnTick = 0.3;
+        player.hp -= 3;
+        spawnDmgNumber(player.x, player.y - 16, 3, '#ff6040');
+        spawnParticles(player.x, player.y, 2, '#ff6040', 0.3);
+        if (player.hp <= 0) playerDied();
+      }
+      player._burnTick -= dt;
+    }
+
+    // Slow recovery from water/ice
+    if (player._slowed) {
+      player._slowTimer -= dt;
+      if (player._slowTimer <= 0) {
+        player._slowed = false;
+        player.speed = 200;
+        if (activeUpgrades.indexOf('speed') !== -1) player.speed *= 1.3;
+      }
+    }
+
     if (mag > 1) { ix /= mag; iy /= mag; }
 
     player.x += ix * player.speed * dt;
@@ -576,7 +605,14 @@
     enemies.splice(idx, 1);
   }
 
-  function damagePlayer(dmg) {
+  function damagePlayer(dmg, element) {
+    // Water element slow
+    if (element === 'water' && !player._slowed) {
+      player._slowed = true;
+      player._slowTimer = 2;
+      player.speed *= 0.7;
+    }
+
     if (player.dodgeChance > 0 && Math.random() < player.dodgeChance) {
       spawnParticles(player.x, player.y, 5, '#a0d8ff', 0.4);
       return; // Dodged
@@ -609,11 +645,16 @@
 
       // Collision with player
       if (dist(e, player) < (e.radius + 12)) {
-        damagePlayer(e.damage);
-        // Push enemy away slightly
+        damagePlayer(e.damage, e.element);
         var pushAngle = angle(player, e);
         e.x += Math.cos(pushAngle) * 30;
         e.y += Math.sin(pushAngle) * 30;
+      }
+
+      // Fire element: apply burn DOT on contact
+      if (e.element === 'fire' && dist(e, player) < (e.radius + 16)) {
+        if (!player._burnTimer) player._burnTimer = 0;
+        player._burnTimer = 2;
       }
 
       // Clone collision
@@ -626,6 +667,16 @@
           var ca = angle(cl, e);
           e.x -= Math.cos(ca) * 20;
           e.y -= Math.sin(ca) * 20;
+        }
+      }
+
+      // Wood element: regenerate HP over time
+      if (e.element === 'wood' && e.hp < e.maxHp) {
+        if (!e._regenTimer) e._regenTimer = 0;
+        e._regenTimer -= dt;
+        if (e._regenTimer <= 0) {
+          e._regenTimer = 0.5;
+          e.hp = Math.min(e.maxHp, e.hp + e.maxHp * 0.02);
         }
       }
 
@@ -662,7 +713,7 @@
       if (p.life <= 0) { projectiles.splice(i, 1); continue; }
       // Hit player
       if (dist(p, player) < (p.radius + 12)) {
-        damagePlayer(p.damage);
+        damagePlayer(p.damage, 'water');
         projectiles.splice(i, 1);
         continue;
       }
@@ -736,7 +787,8 @@
       // Clone to avoid mutating config reference
       spawnEnemy({
         hp: t.hp, speed: t.speed, damage: t.damage,
-        radius: t.radius, color: t.color, name: t.name,
+        radius: t.radius, color: t.color, element: t.element,
+        name: t.name,
         isBoss: t.isBoss || false, isRanged: t.isRanged || false,
         shootCooldown: t.shootCooldown, spawnTimer: t.spawnTimer
       });
@@ -832,6 +884,160 @@
   }
 
   /* ============================================================
+     Enemy Drawing Functions
+     ============================================================ */
+
+  function drawElementParticles(e) {
+    var t = gameTime;
+    if (e.element === 'fire') {
+      for (var fi = 0; fi < 2; fi++) {
+        var fx = e.x + rand(-e.radius, e.radius);
+        var fy = e.y + rand(-e.radius, e.radius) - 4;
+        ctx.fillStyle = 'rgba(255,140,20,' + (0.4 + Math.sin(t * 10 + fi) * 0.3) + ')';
+        ctx.beginPath();
+        ctx.arc(fx, fy, rand(1, 3), 0, Math.PI * 2);
+        ctx.fill();
+      }
+    } else if (e.element === 'water') {
+      ctx.strokeStyle = 'rgba(150,210,255,0.3)';
+      ctx.lineWidth = 1;
+      var iceAngle = t * 2;
+      for (var wi = 0; wi < 3; wi++) {
+        var wx = e.x + Math.cos(iceAngle + wi * 2.1) * e.radius * 0.8;
+        var wy = e.y + Math.sin(iceAngle + wi * 2.1) * e.radius * 0.8;
+        ctx.beginPath();
+        ctx.moveTo(wx - 3, wy);
+        ctx.lineTo(wx + 3, wy);
+        ctx.moveTo(wx, wy - 3);
+        ctx.lineTo(wx, wy + 3);
+        ctx.stroke();
+      }
+    } else if (e.element === 'wood') {
+      if (e.hp < e.maxHp && Math.random() < 0.5) {
+        ctx.fillStyle = 'rgba(120,220,80,0.5)';
+        ctx.beginPath();
+        ctx.arc(e.x + rand(-e.radius, e.radius), e.y - e.radius + rand(-4, 2), 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    } else if (e.element === 'earth') {
+      ctx.fillStyle = 'rgba(200,170,100,0.3)';
+      var dustOff = Math.sin(t * 3 + e.x * 0.1) * 3;
+      ctx.beginPath();
+      ctx.arc(e.x + dustOff, e.y - e.radius + dustOff, 3, 0, Math.PI * 2);
+      ctx.fill();
+    } else if (e.element === 'all') {
+      var cycle = Math.floor(t * 2) % 5;
+      var colors = ['rgba(212,184,120,0.5)', 'rgba(120,220,80,0.5)', 'rgba(100,180,240,0.5)', 'rgba(255,100,30,0.5)', 'rgba(200,170,80,0.5)'];
+      ctx.fillStyle = colors[cycle];
+      ctx.beginPath();
+      ctx.arc(e.x, e.y, e.radius + 6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function drawEnemyShape(e) {
+    var r = e.radius;
+    var x = e.x, y = e.y;
+
+    if (e.element === 'metal') {
+      ctx.fillStyle = e.color;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(gameTime * 0.5 + (e.x * 0.01));
+      ctx.fillRect(-r * 0.8, -r * 0.8, r * 1.6, r * 1.6);
+      ctx.fillStyle = 'rgba(255,240,200,0.4)';
+      ctx.fillRect(-r * 0.4, -r * 0.7, r * 0.8, r * 0.5);
+      ctx.restore();
+      ctx.fillStyle = '#c44d34';
+      ctx.beginPath();
+      ctx.moveTo(x, y - r);
+      ctx.lineTo(x + r * 0.5, y - r * 1.6);
+      ctx.lineTo(x - r * 0.5, y - r * 1.6);
+      ctx.closePath();
+      ctx.fill();
+    } else if (e.element === 'fire') {
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.moveTo(x, y - r * 1.2);
+      ctx.lineTo(x + r * 0.9, y + r * 0.6);
+      ctx.lineTo(x - r * 0.9, y + r * 0.6);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,200,100,0.5)';
+      ctx.beginPath();
+      ctx.moveTo(x, y - r * 0.7);
+      ctx.lineTo(x + r * 0.5, y + r * 0.3);
+      ctx.lineTo(x - r * 0.5, y + r * 0.3);
+      ctx.closePath();
+      ctx.fill();
+    } else if (e.element === 'water') {
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.moveTo(x, y - r * 1.1);
+      ctx.lineTo(x + r * 0.9, y);
+      ctx.lineTo(x, y + r * 1.1);
+      ctx.lineTo(x - r * 0.9, y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = 'rgba(200,230,255,0.4)';
+      ctx.beginPath();
+      ctx.moveTo(x, y - r * 0.5);
+      ctx.lineTo(x + r * 0.4, y);
+      ctx.lineTo(x, y + r * 0.5);
+      ctx.lineTo(x - r * 0.4, y);
+      ctx.closePath();
+      ctx.fill();
+    } else if (e.element === 'wood') {
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      for (var h = 0; h < 6; h++) {
+        var hx = x + Math.cos(h * Math.PI / 3 - Math.PI / 6) * r;
+        var hy = y + Math.sin(h * Math.PI / 3 - Math.PI / 6) * r;
+        if (h === 0) ctx.moveTo(hx, hy); else ctx.lineTo(hx, hy);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(40,100,20,0.4)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (var v = 0; v < 3; v++) {
+        ctx.moveTo(x, y);
+        var vx = x + Math.cos(v * 2.1) * r * 0.7;
+        var vy = y + Math.sin(v * 2.1) * r * 0.7;
+        ctx.lineTo(vx, vy);
+      }
+      ctx.stroke();
+    } else if (e.element === 'earth') {
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(100,70,20,0.4)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(x - r * 0.4, y - r * 0.3);
+      ctx.lineTo(x + r * 0.1, y + r * 0.1);
+      ctx.lineTo(x + r * 0.5, y - r * 0.5);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x + r * 0.2, y + r * 0.4);
+      ctx.lineTo(x - r * 0.3, y - r * 0.1);
+      ctx.stroke();
+    } else {
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Common: bright center dot
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.beginPath();
+    ctx.arc(x, y, r * 0.25, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  /* ============================================================
      Rendering
      ============================================================ */
   function render() {
@@ -898,28 +1104,38 @@
     // Enemies
     for (var ei = 0; ei < enemies.length; ei++) {
       var e = enemies[ei];
-      ctx.fillStyle = e.stunned > 0 ? '#ffffff' : e.color;
+      ctx.save();
       ctx.globalAlpha = e.stunned > 0 ? 0.5 + 0.5 * Math.sin(gameTime * 20) : 1;
-      ctx.beginPath();
-      ctx.arc(e.x, e.y, e.radius, 0, Math.PI * 2);
-      ctx.fill();
+
+      drawEnemyShape(e);
+      drawElementParticles(e);
+
+      // Burn effect visual
+      if (e.burnTimer > 0) {
+        ctx.fillStyle = 'rgba(255,100,20,0.4)';
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, e.radius * 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
       // HP bar for bosses
       if (e.isBoss) {
         var barW = e.radius * 2;
-        var barH = 5;
-        var barY = e.y - e.radius - 10;
-        ctx.fillStyle = 'rgba(0,0,0,0.6)';
+        var barH = 6;
+        var barY = e.y - e.radius - 12;
+        ctx.fillStyle = 'rgba(0,0,0,0.7)';
         ctx.fillRect(e.x - barW / 2, barY, barW, barH);
         ctx.fillStyle = '#c44d34';
         ctx.fillRect(e.x - barW / 2, barY, barW * (e.hp / e.maxHp), barH);
-        // Name
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(e.x - barW / 2, barY, barW, barH);
         ctx.fillStyle = '#e8dcc8';
-        ctx.font = '10px Cinzel, serif';
+        ctx.font = 'bold 11px Cinzel, "Noto Serif SC", serif';
         ctx.textAlign = 'center';
-        ctx.fillText(e.name, e.x, barY - 4);
+        ctx.fillText(e.name, e.x, barY - 5);
       }
-      ctx.globalAlpha = 1;
+      ctx.restore();
     }
 
     // Player
