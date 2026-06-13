@@ -413,10 +413,25 @@
      Update
      ============================================================ */
   function update(dt) {
-    if (gameOver || paused) return;
-
-    // Clamp dt to avoid huge jumps
     var dtClamped = Math.min(dt, 0.1);
+
+    // Celebration handling
+    if (celebrateTimer > 0) {
+      celebrateTimer -= dtClamped;
+      if (celebrateTimer <= 0) {
+        var celOverlay = document.getElementById('celebrate-overlay');
+        if (celOverlay) celOverlay.classList.remove('active');
+        setPaused(false);
+        autoUpgrade();
+      }
+      // Still update visuals during celebration
+      updateParticles(dtClamped);
+      updateXpOrbs(dtClamped);
+      updateHUD();
+      return;
+    }
+
+    if (gameOver || paused) return;
     gameTime += dtClamped;
     waveTimer += dtClamped;
 
@@ -863,12 +878,43 @@
   }
 
   /* ---- Level Up ---- */
+  var celebrateTimer = 0;
+
   function checkLevelUp() {
     if (xp >= xpToNext) {
       xp -= xpToNext;
       level++;
       xpToNext = Math.floor(xpToNext * 1.4);
-      autoUpgrade();
+      triggerCelebrate();
+    }
+  }
+
+  function triggerCelebrate() {
+    celebrateTimer = 1.5;
+    setPaused(true);
+
+    // Show celebrate overlay
+    var celOverlay = document.getElementById('celebrate-overlay');
+    if (celOverlay) celOverlay.classList.add('active');
+
+    // Set celebrate image
+    var celImg = document.getElementById('celebrate-img');
+    if (celImg && IMG.celebrate && IMG.celebrate.complete && IMG.celebrate.naturalWidth > 0) {
+      celImg.src = IMG.celebrate.src;
+    }
+
+    // Celebration sparkles via Canvas particles
+    for (var i = 0; i < 40; i++) {
+      var angle = rand(0, Math.PI * 2);
+      var dist2 = rand(100, Math.max(W, H) * 0.6);
+      particles.push({
+        x: W / 2 + Math.cos(angle) * dist2,
+        y: H / 2 + Math.sin(angle) * dist2,
+        vx: -Math.cos(angle) * rand(80, 200),
+        vy: -Math.sin(angle) * rand(80, 200),
+        life: 1.5, maxLife: 1.5,
+        color: '#ffd700', radius: rand(2, 5)
+      });
     }
   }
 
@@ -923,7 +969,18 @@
   function playerDied() {
     gameOver = true;
     deathData = { time: gameTime, wave: wave, kills: kills };
+
     var overlay = document.getElementById('death-overlay');
+
+    // Set death image
+    var deathImg = document.getElementById('death-img');
+    if (deathImg && IMG.death && IMG.death.complete && IMG.death.naturalWidth > 0) {
+      deathImg.src = IMG.death.src;
+      deathImg.style.display = 'block';
+    } else if (deathImg) {
+      deathImg.style.display = 'none';
+    }
+
     document.getElementById('death-time').textContent = formatTime(gameTime);
     document.getElementById('death-wave').textContent = wave;
     document.getElementById('death-kills').textContent = kills;
@@ -1399,6 +1456,9 @@
      ============================================================ */
   function startGame() {
     initState();
+    celebrateTimer = 0;
+    var celOverlay = document.getElementById('celebrate-overlay');
+    if (celOverlay) celOverlay.classList.remove('active');
     document.getElementById('death-overlay').classList.remove('active');
     document.getElementById('upgrade-overlay').classList.remove('active');
     document.getElementById('upgrade-icons').innerHTML = '';
