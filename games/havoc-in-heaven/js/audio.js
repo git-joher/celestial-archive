@@ -309,38 +309,180 @@ var AudioEngine = (function () {
     playToneSweep(200, 60, 0.6, 'triangle', 0.2);
   }
 
-  // Death: heavy drum hit + descending tone
+  // Death: tragic + defiant two-phase music
   function playDeath() {
     var now = ctx.currentTime;
-    // Heavy thump
-    var osc = ctx.createOscillator();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(150, now);
-    osc.frequency.exponentialRampToValueAtTime(40, now + 0.5);
+
+    // ═══════ Phase 1: 悲壮 (Tragic & Heroic) 0–3s ═══════
+
+    // Deep war drum — three heavy strikes
+    for (var d = 0; d < 3; d++) {
+      var drumTime = now + d * 0.9;
+      var drumOsc = ctx.createOscillator();
+      drumOsc.type = 'sine';
+      drumOsc.frequency.setValueAtTime(80, drumTime);
+      drumOsc.frequency.exponentialRampToValueAtTime(30, drumTime + 0.4);
+      var drumGain = ctx.createGain();
+      drumGain.gain.setValueAtTime(0.35, drumTime);
+      drumGain.gain.exponentialRampToValueAtTime(0.001, drumTime + 0.5);
+      drumOsc.connect(drumGain);
+      drumGain.connect(sfxGain);
+      drumOsc.start(drumTime);
+      drumOsc.stop(drumTime + 0.5);
+
+      // Drum rumble layer
+      playNoiseHitAt(0.35, 80, 25, 0.2, drumTime);
+    }
+
+    // Minor pentatonic lament — descending melody (D minor: D C A F D)
+    var lamentNotes = [587, 523, 440, 349, 294]; // D5 C5 A4 F4 D4
+    for (var ln = 0; ln < lamentNotes.length; ln++) {
+      (function(idx) {
+        var lamentTime = now + 0.3 + idx * 0.55;
+        var lamentOsc = ctx.createOscillator();
+        lamentOsc.type = 'sine';
+        lamentOsc.frequency.value = lamentNotes[idx];
+        var lamentGain = ctx.createGain();
+        lamentGain.gain.setValueAtTime(0, lamentTime);
+        lamentGain.gain.linearRampToValueAtTime(0.1, lamentTime + 0.05);
+        lamentGain.gain.exponentialRampToValueAtTime(0.001, lamentTime + 0.5);
+        lamentOsc.connect(lamentGain);
+        lamentGain.connect(sfxGain);
+        lamentOsc.start(lamentTime);
+        lamentOsc.stop(lamentTime + 0.5);
+
+        // Low string drone beneath each note
+        var lowOsc = ctx.createOscillator();
+        lowOsc.type = 'triangle';
+        lowOsc.frequency.value = lamentNotes[idx] / 2;
+        var lowGain = ctx.createGain();
+        lowGain.gain.setValueAtTime(0, lamentTime);
+        lowGain.gain.linearRampToValueAtTime(0.06, lamentTime + 0.05);
+        lowGain.gain.exponentialRampToValueAtTime(0.001, lamentTime + 0.45);
+        lowOsc.connect(lowGain);
+        lowGain.connect(sfxGain);
+        lowOsc.start(lamentTime);
+        lowOsc.stop(lamentTime + 0.5);
+      })(ln);
+    }
+
+    // Wind / distant horn — tragic atmosphere
+    playNoiseHitAt(2.5, 400, 150, 0.12, now + 0.2);
+
+    // Gong crash at the climax of tragedy
+    playToneSweepAt(150, 40, 0.8, 'triangle', 0.18, now + 2.5);
+
+    // ═══════ Phase 2: 不服输 (Defiant) 2.8–5s ═══════
+
+    // Rising arpeggio — "I will rise again" (Dm → power: D F A D)
+    var riseNotes = [294, 349, 440, 587]; // D4 F4 A4 D5 — ascending
+    for (var rn = 0; rn < riseNotes.length; rn++) {
+      (function(idx) {
+        var riseTime = now + 2.8 + idx * 0.2;
+        var riseOsc = ctx.createOscillator();
+        riseOsc.type = 'sawtooth';
+        riseOsc.frequency.value = riseNotes[idx];
+        var riseGain = ctx.createGain();
+        riseGain.gain.setValueAtTime(0, riseTime);
+        riseGain.gain.linearRampToValueAtTime(0.12, riseTime + 0.02);
+        riseGain.gain.exponentialRampToValueAtTime(0.001, riseTime + 0.18);
+
+        // Bright overtone for defiance
+        var brightOsc = ctx.createOscillator();
+        brightOsc.type = 'sine';
+        brightOsc.frequency.value = riseNotes[idx] * 2;
+        var brightGain = ctx.createGain();
+        brightGain.gain.setValueAtTime(0, riseTime);
+        brightGain.gain.linearRampToValueAtTime(0.05, riseTime + 0.02);
+        brightGain.gain.exponentialRampToValueAtTime(0.001, riseTime + 0.15);
+
+        riseOsc.connect(riseGain);
+        brightOsc.connect(brightGain);
+        riseGain.connect(sfxGain);
+        brightGain.connect(sfxGain);
+        riseOsc.start(riseTime);
+        brightOsc.start(riseTime);
+        riseOsc.stop(riseTime + 0.2);
+        brightOsc.stop(riseTime + 0.2);
+      })(rn);
+    }
+
+    // Defiant war drums — faster, stronger
+    for (var dd = 0; dd < 5; dd++) {
+      var dTime = now + 3.0 + dd * 0.35;
+      var dOsc = ctx.createOscillator();
+      dOsc.type = 'triangle';
+      dOsc.frequency.setValueAtTime(100, dTime);
+      dOsc.frequency.exponentialRampToValueAtTime(40, dTime + 0.2);
+      var dGain = ctx.createGain();
+      dGain.gain.setValueAtTime(0.2, dTime);
+      dGain.gain.exponentialRampToValueAtTime(0.001, dTime + 0.25);
+      dOsc.connect(dGain);
+      dGain.connect(sfxGain);
+      dOsc.start(dTime);
+      dOsc.stop(dTime + 0.25);
+      playNoiseHitAt(0.15, 60, 20, 0.12, dTime);
+    }
+
+    // Final defiant chord — "I WILL fight again!" (D power chord: D A D)
+    var finalTime = now + 4.2;
+    [294, 440, 587].forEach(function(freq) {
+      var fOsc = ctx.createOscillator();
+      fOsc.type = freq === 440 ? 'sawtooth' : 'sine';
+      fOsc.frequency.value = freq;
+      var fGain = ctx.createGain();
+      fGain.gain.setValueAtTime(0, finalTime);
+      fGain.gain.linearRampToValueAtTime(freq === 440 ? 0.14 : 0.08, finalTime + 0.03);
+      fGain.gain.exponentialRampToValueAtTime(0.001, finalTime + 0.8);
+      fOsc.connect(fGain);
+      fGain.connect(sfxGain);
+      fOsc.start(finalTime);
+      fOsc.stop(finalTime + 0.8);
+    });
+
+    // Final gong
+    playToneSweepAt(100, 25, 1.0, 'triangle', 0.15, finalTime);
+  }
+
+  // Helper: noise hit at specific time
+  function playNoiseHitAt(duration, freqHi, freqLo, vol, startTime) {
+    var bufferSize = Math.floor(ctx.sampleRate * duration);
+    var buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    var data = buffer.getChannelData(0);
+    for (var i = 0; i < bufferSize; i++) {
+      var t = i / bufferSize;
+      data[i] = (Math.random() * 2 - 1) * (1 - t) * (1 - t);
+    }
+    var source = ctx.createBufferSource();
+    source.buffer = buffer;
+    var bandpass = ctx.createBiquadFilter();
+    bandpass.type = 'bandpass';
+    bandpass.frequency.setValueAtTime(freqHi, startTime);
+    bandpass.frequency.exponentialRampToValueAtTime(Math.max(freqLo, 20), startTime + duration);
+    bandpass.Q.value = 1;
     var gain = ctx.createGain();
-    gain.gain.setValueAtTime(0.4, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+    gain.gain.setValueAtTime(vol, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+    source.connect(bandpass);
+    bandpass.connect(gain);
+    gain.connect(sfxGain);
+    source.start(startTime);
+    source.stop(startTime + duration);
+  }
+
+  // Helper: tone sweep at specific time
+  function playToneSweepAt(freqStart, freqEnd, duration, waveType, vol, startTime) {
+    var osc = ctx.createOscillator();
+    osc.type = waveType;
+    osc.frequency.setValueAtTime(freqStart, startTime);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(freqEnd, 20), startTime + duration);
+    var gain = ctx.createGain();
+    gain.gain.setValueAtTime(vol, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
     osc.connect(gain);
     gain.connect(sfxGain);
-    osc.start(now);
-    osc.stop(now + 0.5);
-
-    // Rumble (scheduled for now, no setTimeout)
-    playNoiseHit(0.4, 100, 30, 0.25);
-
-    // Descending tone — "fate" — scheduled at now+0.3 via oscillator timing
-    var osc2 = ctx.createOscillator();
-    osc2.type = 'sawtooth';
-    osc2.frequency.setValueAtTime(440, now + 0.3);
-    osc2.frequency.exponentialRampToValueAtTime(110, now + 0.3 + 0.8);
-    var gain2 = ctx.createGain();
-    gain2.gain.setValueAtTime(0, now);
-    gain2.gain.setValueAtTime(0.1, now + 0.3);
-    gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.3 + 0.8);
-    osc2.connect(gain2);
-    gain2.connect(sfxGain);
-    osc2.start(now + 0.3);
-    osc2.stop(now + 0.3 + 0.8);
+    osc.start(startTime);
+    osc.stop(startTime + duration);
   }
 
   // ── Background Music Update (called every frame) ──────
