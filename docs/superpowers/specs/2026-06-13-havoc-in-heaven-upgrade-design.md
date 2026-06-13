@@ -23,7 +23,7 @@ games/havoc-in-heaven/
 **当前**: 玩家是金色圆形 (`ctx.arc()` 绘制)
 **目标**: 用孙悟空头像图片替换
 
-- 预加载 `images/sun-wukong/sun-wukong-hero.jpg` 为 Image 对象
+- 预加载 `images/sun-wukong/sun-wukong-ice.jpg` 为 Image 对象
 - 用 `ctx.drawImage()` + `ctx.clip()` 圆形裁剪绘制头像
 - 保留金色光晕 `glowGrad` 叠加在头像下方
 - 移动时头像微微朝向移动方向旋转（±15°）

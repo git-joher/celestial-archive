@@ -235,21 +235,21 @@
      ============================================================ */
   function initUpgradePool() {
     upgradePool = [
-      { id: 'range', nameZh: '金箍棒加长', nameEn: 'Extended Staff', desc: 'Attack range +40%', rarity: 'common', apply: function () { player.attackRange *= 1.4; } },
-      { id: 'speed', nameZh: '筋斗云', nameEn: 'Somersault Cloud', desc: 'Move speed +30%', rarity: 'common', apply: function () { player.speed *= 1.3; } },
-      { id: 'maxhp', nameZh: '仙桃续命', nameEn: 'Peach of Immortality', desc: 'Max HP +20, fully heal', rarity: 'common', apply: function () { player.maxHp += 20; player.hp = player.maxHp; } },
-      { id: 'armor', nameZh: '金刚不坏', nameEn: 'Diamond Body', desc: 'Damage taken -15%', rarity: 'common', apply: function () { player.damageReduction += 0.15; } },
-      { id: 'xpboost', nameZh: '蟠桃盛宴', nameEn: 'Peach Feast', desc: 'XP orb value +50%', rarity: 'common', apply: function () { } },
-      { id: 'dmgup', nameZh: '八卦炉淬炼', nameEn: 'Furnace Tempered', desc: 'All damage +30%', rarity: 'uncommon', apply: function () { player.attackDamage = Math.floor(player.attackDamage * 1.3); } },
-      { id: 'clone', nameZh: '分身术', nameEn: 'Clone Jutsu', desc: 'Summon a decoy clone', rarity: 'uncommon', apply: function () { player.clones.push({ x: player.x + rand(-60, 60), y: player.y + rand(-60, 60), hp: 40 }); } },
-      { id: 'fiery', nameZh: '火眼金睛', nameEn: 'Fiery Golden Eyes', desc: 'Every 8s: flame cone forward', rarity: 'uncommon', apply: function () { player.fieryEyesTimer = 1; } },
-      { id: 'stun', nameZh: '定身术', nameEn: 'Paralysis Spell', desc: 'Every 10s: freeze all enemies 1.5s', rarity: 'uncommon', apply: function () { player.stunTimer = 1.5; } },
-      { id: 'dodge', nameZh: '七十二变', nameEn: '72 Transformations', desc: '20% chance to dodge any hit', rarity: 'uncommon', apply: function () { player.dodgeChance = Math.min(0.6, player.dodgeChance + 0.2); } },
-      { id: 'firetrail', nameZh: '筋斗云进阶', nameEn: 'Cloud Trail', desc: 'Leave a flame trail when moving', rarity: 'rare', apply: function () { player.fireTrail = true; } },
-      { id: 'triple', nameZh: '三头六臂', nameEn: 'Three Heads Six Arms', desc: 'Attack speed doubled', rarity: 'rare', apply: function () { player.tripleHead = true; } },
-      { id: 'fullcircle', nameZh: '如意金箍棒', nameEn: 'Ruyi Jingu Bang', desc: 'Attack becomes 360° full circle', rarity: 'rare', apply: function () { player.fullCircle = true; } },
-      { id: 'revive', nameZh: '不死之身', nameEn: 'Undying Body', desc: 'Revive once at 50% HP on death', rarity: 'rare', apply: function () { player.revive = true; } },
-      { id: 'shockwave', nameZh: '大圣归来', nameEn: 'Great Sage Returns', desc: 'Every 20s: screen-clearing shockwave', rarity: 'legendary', apply: function () { player.shockwaveTimer = 2; } }
+      { id: 'range', nameZh: 'Extended Staff', nameEn: 'Extended Staff', desc: 'Attack range +40%', rarity: 'common', apply: function () { player.attackRange *= 1.4; } },
+      { id: 'speed', nameZh: 'Somersault Cloud', nameEn: 'Somersault Cloud', desc: 'Move speed +30%', rarity: 'common', apply: function () { player.speed *= 1.3; } },
+      { id: 'maxhp', nameZh: 'Peach of Immortality', nameEn: 'Peach of Immortality', desc: 'Max HP +20, fully heal', rarity: 'common', apply: function () { player.maxHp += 20; player.hp = player.maxHp; } },
+      { id: 'armor', nameZh: 'Diamond Body', nameEn: 'Diamond Body', desc: 'Damage taken -15%', rarity: 'common', apply: function () { player.damageReduction += 0.15; } },
+      { id: 'xpboost', nameZh: 'Peach Feast', nameEn: 'Peach Feast', desc: 'XP orb value +50%', rarity: 'common', apply: function () { } },
+      { id: 'dmgup', nameZh: 'Furnace Tempered', nameEn: 'Furnace Tempered', desc: 'All damage +30%', rarity: 'uncommon', apply: function () { player.attackDamage = Math.floor(player.attackDamage * 1.3); } },
+      { id: 'clone', nameZh: 'Clone Jutsu', nameEn: 'Clone Jutsu', desc: 'Summon a decoy clone', rarity: 'uncommon', apply: function () { player.clones.push({ x: player.x + rand(-60, 60), y: player.y + rand(-60, 60), hp: 40 }); } },
+      { id: 'fiery', nameZh: 'Fiery Golden Eyes', nameEn: 'Fiery Golden Eyes', desc: 'Every 8s: flame cone forward', rarity: 'uncommon', apply: function () { player.fieryEyesTimer = 1; } },
+      { id: 'stun', nameZh: 'Paralysis Spell', nameEn: 'Paralysis Spell', desc: 'Every 10s: freeze all enemies 1.5s', rarity: 'uncommon', apply: function () { player.stunTimer = 1.5; } },
+      { id: 'dodge', nameZh: '72 Transformations', nameEn: '72 Transformations', desc: '20% chance to dodge any hit', rarity: 'uncommon', apply: function () { player.dodgeChance = Math.min(0.6, player.dodgeChance + 0.2); } },
+      { id: 'firetrail', nameZh: 'Cloud Trail', nameEn: 'Cloud Trail', desc: 'Leave a flame trail when moving', rarity: 'rare', apply: function () { player.fireTrail = true; } },
+      { id: 'triple', nameZh: 'Three Heads Six Arms', nameEn: 'Three Heads Six Arms', desc: 'Attack speed doubled', rarity: 'rare', apply: function () { player.tripleHead = true; } },
+      { id: 'fullcircle', nameZh: 'Ruyi Jingu Bang', nameEn: 'Ruyi Jingu Bang', desc: 'Attack becomes 360° full circle', rarity: 'rare', apply: function () { player.fullCircle = true; } },
+      { id: 'revive', nameZh: 'Undying Body', nameEn: 'Undying Body', desc: 'Revive once at 50% HP on death', rarity: 'rare', apply: function () { player.revive = true; } },
+      { id: 'shockwave', nameZh: 'Great Sage Returns', nameEn: 'Great Sage Returns', desc: 'Every 20s: screen-clearing shockwave', rarity: 'legendary', apply: function () { player.shockwaveTimer = 2; } }
     ];
   }
 
@@ -308,15 +308,15 @@
 
   function getWaveConfig(w) {
     var configs = {
-      soldier: { hp: 20, speed: 80, damage: 10, radius: 10, color: '#d4b878', element: 'metal', name: '天兵', isRanged: false },
-      general: { hp: 50, speed: 100, damage: 15, radius: 14, color: '#e8c860', element: 'metal', name: '天将', isRanged: false },
-      cavalry: { hp: 30, speed: 170, damage: 12, radius: 11, color: '#ff6040', element: 'fire', name: '火骑兵', isRanged: false },
-      archer: { hp: 25, speed: 55, damage: 18, radius: 11, color: '#5ab8e0', element: 'water', name: '冰弓手', isRanged: true, shootCooldown: 2.5 },
-      giant: { hp: 180, speed: 80, damage: 28, radius: 25, color: '#c8a850', element: 'earth', name: '巨灵神', isBoss: false },
-      hound: { hp: 60, speed: 210, damage: 16, radius: 12, color: '#5a9a4a', element: 'wood', name: '藤甲兽', isBoss: false },
-      king: { hp: 250, speed: 55, damage: 25, radius: 28, color: '#e0c040', element: 'metal', name: '四大天王', isBoss: true, spawnTimer: 4 },
-      nezha: { hp: 350, speed: 110, damage: 30, radius: 30, color: '#ff4040', element: 'fire', name: '哪吒', isBoss: true, isRanged: true, shootCooldown: 1.8 },
-      erlang: { hp: 550, speed: 100, damage: 38, radius: 34, color: '#ffd700', element: 'all', name: '二郎神', isBoss: true, isRanged: true, shootCooldown: 1.2 }
+      soldier: { hp: 20, speed: 80, damage: 10, radius: 10, color: '#d4b878', element: 'metal', name: 'Celestial Soldier', isRanged: false },
+      general: { hp: 50, speed: 100, damage: 15, radius: 14, color: '#e8c860', element: 'metal', name: 'Celestial General', isRanged: false },
+      cavalry: { hp: 30, speed: 170, damage: 12, radius: 11, color: '#ff6040', element: 'fire', name: 'Flame Cavalry', isRanged: false },
+      archer: { hp: 25, speed: 55, damage: 18, radius: 11, color: '#5ab8e0', element: 'water', name: 'Frost Archer', isRanged: true, shootCooldown: 2.5 },
+      giant: { hp: 180, speed: 80, damage: 28, radius: 25, color: '#c8a850', element: 'earth', name: 'Giant Spirit', isBoss: false },
+      hound: { hp: 60, speed: 210, damage: 16, radius: 12, color: '#5a9a4a', element: 'wood', name: 'Thorn Beast', isBoss: false },
+      king: { hp: 250, speed: 55, damage: 25, radius: 28, color: '#e0c040', element: 'metal', name: 'Four Heavenly Kings', isBoss: true, spawnTimer: 4 },
+      nezha: { hp: 350, speed: 110, damage: 30, radius: 30, color: '#ff4040', element: 'fire', name: 'Nezha', isBoss: true, isRanged: true, shootCooldown: 1.8 },
+      erlang: { hp: 550, speed: 100, damage: 38, radius: 34, color: '#ffd700', element: 'all', name: 'Erlang Shen', isBoss: true, isRanged: true, shootCooldown: 1.2 }
     };
     return configs;
   }
@@ -1444,7 +1444,7 @@
     ctx.font = 'bold 14px Cinzel, serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('跳', jx, jy);
+    ctx.fillText('JUMP', jx, jy);
     ctx.setLineDash([]);
 
     ctx.globalAlpha = 1;
