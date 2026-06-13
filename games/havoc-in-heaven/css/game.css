@@ -273,18 +273,18 @@ body.game-active { background: #0a0604; overflow: hidden; margin: 0; padding: 0;
   bottom: 36px;
   left: 50%;
   transform: translateX(-50%);
-  width: 130px;
-  height: 130px;
-  background: rgba(184,160,110,0.12);
-  border: 2px solid rgba(184,160,110,0.45);
+  width: 260px;
+  height: 260px;
+  background: rgba(184,160,110,0.1);
+  border: 2px solid rgba(184,160,110,0.4);
   border-radius: 50%;
   pointer-events: auto;
-  box-shadow: 0 0 20px rgba(184,160,110,0.1);
+  box-shadow: 0 0 30px rgba(184,160,110,0.08);
 }
 .mobile-joystick-knob {
   position: absolute;
-  width: 52px;
-  height: 52px;
+  width: 72px;
+  height: 72px;
   background: rgba(184,160,110,0.4);
   border: 2px solid rgba(184,160,110,0.7);
   border-radius: 50%;

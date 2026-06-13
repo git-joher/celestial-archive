@@ -67,19 +67,75 @@
     touchMove.dy = dist > 8 ? dy / maxDist : 0;
   }
 
+  // Gyroscope / tilt control (mobile)
+  var gyro = { active: false, dx: 0, dy: 0, calibrated: false, baseBeta: 0, baseGamma: 0, indicatorTimer: 0 };
+
+  function startGyro() {
+    // Try both event types for max compatibility
+    window.addEventListener('deviceorientation', handleOrientation);
+    window.addEventListener('deviceorientationabsolute', handleOrientation);
+
+    // iOS 13+ explicit permission
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then(function (state) {
+          if (state === 'granted') {
+            gyro.indicatorTimer = 3; // show "GYRO ON" briefly
+          }
+        })
+        .catch(function () {});
+    }
+  }
+
+  function handleOrientation(e) {
+    if (e.beta === null || e.gamma === null) return;
+
+    // Calibrate neutral on first valid reading
+    if (!gyro.calibrated) {
+      gyro.baseBeta = e.beta;
+      gyro.baseGamma = e.gamma;
+      gyro.calibrated = true;
+      gyro.active = true;
+      gyro.indicatorTimer = 2;
+      return;
+    }
+
+    // beta: front-to-back tilt (-180..180). Positive = forward
+    // gamma: left-to-right tilt (-90..90). Positive = right
+    var rawDY = (e.beta - gyro.baseBeta);
+    var rawDX = (e.gamma - gyro.baseGamma);
+
+    // 1 degree tilt = 10% input. Deadzone at <1.5 degrees.
+    var sens = 0.1;
+    gyro.dy = Math.abs(rawDY) < 1.5 ? 0 : Math.max(-1, Math.min(1, rawDY * sens));
+    gyro.dx = Math.abs(rawDX) < 1.5 ? 0 : Math.max(-1, Math.min(1, rawDX * sens));
+  }
+
+  // Re-calibrate on screen tap
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('#mobile-joystick') && !e.target.closest('#upgrade-overlay') && !e.target.closest('#death-overlay') && !e.target.closest('#btn-restart')) {
+      if (gyro.active) { gyro.calibrated = false; gyro.indicatorTimer = 1.5; }
+    }
+  });
+
+  // Start gyro immediately (don't wait for touch)
+  startGyro();
+
   function getInputX() {
     var x = 0;
     if (keys['a'] || keys['arrowleft']) x -= 1;
     if (keys['d'] || keys['arrowright']) x += 1;
-    if (touchMove.active) x = touchMove.dx;
-    return x;
+    if (touchMove.active) { x += touchMove.dx; }
+    if (gyro.active && !(keys['a'] || keys['d'] || keys['arrowleft'] || keys['arrowright'])) { x += gyro.dx; }
+    return Math.max(-1, Math.min(1, x));
   }
   function getInputY() {
     var y = 0;
     if (keys['w'] || keys['arrowup']) y -= 1;
     if (keys['s'] || keys['arrowdown']) y += 1;
-    if (touchMove.active) y = touchMove.dy;
-    return y;
+    if (touchMove.active) { y += touchMove.dy; }
+    if (gyro.active && !(keys['w'] || keys['s'] || keys['arrowup'] || keys['arrowdown'])) { y += gyro.dy; }
+    return Math.max(-1, Math.min(1, y));
   }
 
   /* ============================================================
@@ -100,7 +156,7 @@
   /* ============================================================
      Game State
      ============================================================ */
-  var player, enemies, particles, xpOrbs, projectiles;
+  var player, enemies, particles, xpOrbs, projectiles, dmgNumbers;
   var wave, waveTimer, gameTime, kills, xp, level, xpToNext;
   var upgradePool, activeUpgrades;
   var gameOver, deathData;
@@ -129,6 +185,7 @@
     particles = [];
     xpOrbs = [];
     projectiles = [];
+    dmgNumbers = [];
     wave = 1;
     waveTimer = 0;
     gameTime = 0;
@@ -147,21 +204,21 @@
      ============================================================ */
   function initUpgradePool() {
     upgradePool = [
-      { id: 'range', nameZh: '金箍棒加长', nameEn: 'Extended Staff', desc: 'Attack range +25%', rarity: 'common', apply: function () { player.attackRange *= 1.25; } },
-      { id: 'speed', nameZh: '筋斗云', nameEn: 'Somersault Cloud', desc: 'Move speed +20%', rarity: 'common', apply: function () { player.speed *= 1.2; } },
+      { id: 'range', nameZh: '金箍棒加长', nameEn: 'Extended Staff', desc: 'Attack range +40%', rarity: 'common', apply: function () { player.attackRange *= 1.4; } },
+      { id: 'speed', nameZh: '筋斗云', nameEn: 'Somersault Cloud', desc: 'Move speed +30%', rarity: 'common', apply: function () { player.speed *= 1.3; } },
       { id: 'maxhp', nameZh: '仙桃续命', nameEn: 'Peach of Immortality', desc: 'Max HP +20, fully heal', rarity: 'common', apply: function () { player.maxHp += 20; player.hp = player.maxHp; } },
       { id: 'armor', nameZh: '金刚不坏', nameEn: 'Diamond Body', desc: 'Damage taken -15%', rarity: 'common', apply: function () { player.damageReduction += 0.15; } },
       { id: 'xpboost', nameZh: '蟠桃盛宴', nameEn: 'Peach Feast', desc: 'XP orb value +50%', rarity: 'common', apply: function () { } },
       { id: 'dmgup', nameZh: '八卦炉淬炼', nameEn: 'Furnace Tempered', desc: 'All damage +30%', rarity: 'uncommon', apply: function () { player.attackDamage = Math.floor(player.attackDamage * 1.3); } },
       { id: 'clone', nameZh: '分身术', nameEn: 'Clone Jutsu', desc: 'Summon a decoy clone', rarity: 'uncommon', apply: function () { player.clones.push({ x: player.x + rand(-60, 60), y: player.y + rand(-60, 60), hp: 40 }); } },
-      { id: 'fiery', nameZh: '火眼金睛', nameEn: 'Fiery Golden Eyes', desc: 'Every 8s: flame cone forward', rarity: 'uncommon', apply: function () { player.fieryEyesTimer = 4; } },
-      { id: 'stun', nameZh: '定身术', nameEn: 'Paralysis Spell', desc: 'Every 10s: freeze all enemies 1.5s', rarity: 'uncommon', apply: function () { player.stunTimer = 5; } },
+      { id: 'fiery', nameZh: '火眼金睛', nameEn: 'Fiery Golden Eyes', desc: 'Every 8s: flame cone forward', rarity: 'uncommon', apply: function () { player.fieryEyesTimer = 1; } },
+      { id: 'stun', nameZh: '定身术', nameEn: 'Paralysis Spell', desc: 'Every 10s: freeze all enemies 1.5s', rarity: 'uncommon', apply: function () { player.stunTimer = 1.5; } },
       { id: 'dodge', nameZh: '七十二变', nameEn: '72 Transformations', desc: '20% chance to dodge any hit', rarity: 'uncommon', apply: function () { player.dodgeChance = Math.min(0.6, player.dodgeChance + 0.2); } },
       { id: 'firetrail', nameZh: '筋斗云进阶', nameEn: 'Cloud Trail', desc: 'Leave a flame trail when moving', rarity: 'rare', apply: function () { player.fireTrail = true; } },
       { id: 'triple', nameZh: '三头六臂', nameEn: 'Three Heads Six Arms', desc: 'Attack speed doubled', rarity: 'rare', apply: function () { player.tripleHead = true; } },
       { id: 'fullcircle', nameZh: '如意金箍棒', nameEn: 'Ruyi Jingu Bang', desc: 'Attack becomes 360° full circle', rarity: 'rare', apply: function () { player.fullCircle = true; } },
       { id: 'revive', nameZh: '不死之身', nameEn: 'Undying Body', desc: 'Revive once at 50% HP on death', rarity: 'rare', apply: function () { player.revive = true; } },
-      { id: 'shockwave', nameZh: '大圣归来', nameEn: 'Great Sage Returns', desc: 'Every 20s: screen-clearing shockwave', rarity: 'legendary', apply: function () { player.shockwaveTimer = 10; } }
+      { id: 'shockwave', nameZh: '大圣归来', nameEn: 'Great Sage Returns', desc: 'Every 20s: screen-clearing shockwave', rarity: 'legendary', apply: function () { player.shockwaveTimer = 2; } }
     ];
   }
 
@@ -285,6 +342,15 @@
     });
   }
 
+  function spawnDmgNumber(x, y, val, clr) {
+    dmgNumbers.push({
+      x: x + rand(-12, 12), y: y,
+      value: Math.floor(val),
+      life: 0.8, maxLife: 0.8,
+      color: clr || '#ffd700'
+    });
+  }
+
   function spawnProjectile(fromX, fromY, toX, toY, color) {
     var a = Math.atan2(toY - fromY, toX - fromX);
     projectiles.push({
@@ -302,7 +368,7 @@
      Update
      ============================================================ */
   function update(dt) {
-    if (gameOver || paused || document.getElementById('upgrade-overlay').classList.contains('active')) return;
+    if (gameOver || paused) return;
 
     // Clamp dt to avoid huge jumps
     var dtClamped = Math.min(dt, 0.1);
@@ -313,7 +379,9 @@
     updateEnemies(dtClamped);
     updateProjectiles(dtClamped);
     updateParticles(dtClamped);
+    updateDmgNumbers(dtClamped);
     updateXpOrbs(dtClamped);
+    updateToast(dtClamped);
     checkWave();
     updateHUD();
   }
@@ -335,15 +403,35 @@
     // Fire trail
     if (player.fireTrail && mag > 0.1) {
       if (!player._trailTimer || player._trailTimer <= 0) {
-        player._trailTimer = 0.08;
+        player._trailTimer = 0.06;
         particles.push({
-          x: player.x + rand(-8, 8), y: player.y + rand(-8, 8),
-          vx: rand(-30, 30), vy: rand(-30, 30),
-          life: 0.5, maxLife: 0.5,
-          color: '#ff8c42', radius: rand(3, 6)
+          x: player.x + rand(-6, 6), y: player.y + rand(-6, 6),
+          vx: rand(-20, 20), vy: rand(-20, 20),
+          life: 0.6, maxLife: 0.6,
+          color: '#ff6a20', radius: rand(4, 8)
         });
+        // Damage enemies near the trail
+        for (var fi = enemies.length - 1; fi >= 0; fi--) {
+          if (dist(player, enemies[fi]) < 40) {
+            var trailDmg = Math.floor(player.attackDamage * 0.3);
+            enemies[fi].hp -= trailDmg;
+            spawnDmgNumber(enemies[fi].x, enemies[fi].y, trailDmg, '#ff6a20');
+            if (enemies[fi].hp <= 0) killEnemy(enemies[fi]);
+          }
+        }
       }
       player._trailTimer -= dt;
+    }
+
+    // Clone follow
+    for (var ci = 0; ci < player.clones.length; ci++) {
+      var clone = player.clones[ci];
+      if (clone.hp <= 0) continue;
+      // Follow player with delay — orbit at distance 60
+      var targetX = player.x + Math.cos(gameTime * 1.5 + ci * 2) * 60;
+      var targetY = player.y + Math.sin(gameTime * 1.5 + ci * 2) * 60;
+      clone.x += (targetX - clone.x) * 3 * dt;
+      clone.y += (targetY - clone.y) * 3 * dt;
     }
 
     // Attack
@@ -395,6 +483,7 @@
     if (target) {
       var dmg = player.attackDamage;
       target.hp -= dmg;
+      spawnDmgNumber(target.x, target.y, dmg, '#ffd700');
       spawnParticles(target.x, target.y, 5, '#d4b878', 0.4);
       if (target.hp <= 0) {
         killEnemy(target);
@@ -407,6 +496,7 @@
         if (enemies[j] === target) continue;
         if (dist(player, enemies[j]) < range) {
           enemies[j].hp -= player.attackDamage;
+          spawnDmgNumber(enemies[j].x, enemies[j].y, player.attackDamage, '#ffd700');
           spawnParticles(enemies[j].x, enemies[j].y, 3, '#d4b878', 0.3);
           if (enemies[j].hp <= 0) killEnemy(enemies[j]);
         }
@@ -428,7 +518,9 @@
       while (diff > Math.PI) diff -= Math.PI * 2;
       while (diff < -Math.PI) diff += Math.PI * 2;
       if (Math.abs(diff) < Math.PI / 3 && dist(player, enemies[i]) < player.attackRange * 2.5) {
-        enemies[i].hp -= player.attackDamage * 2;
+        var fieryDmg = player.attackDamage * 2;
+        enemies[i].hp -= fieryDmg;
+        spawnDmgNumber(enemies[i].x, enemies[i].y, fieryDmg, '#ff8c42');
         spawnParticles(enemies[i].x, enemies[i].y, 10, '#ff8c42', 0.6);
         if (enemies[i].hp <= 0) killEnemy(enemies[i]);
       }
@@ -445,7 +537,9 @@
 
   function shockwave() {
     for (var i = enemies.length - 1; i >= 0; i--) {
-      enemies[i].hp -= player.attackDamage * 4;
+      var shockDmg = player.attackDamage * 4;
+      enemies[i].hp -= shockDmg;
+      spawnDmgNumber(enemies[i].x, enemies[i].y, shockDmg, '#ffe040');
       spawnParticles(enemies[i].x, enemies[i].y, 15, '#ffd700', 0.8);
       if (enemies[i].hp <= 0) killEnemy(enemies[i]);
     }
@@ -571,6 +665,15 @@
     }
   }
 
+  function updateDmgNumbers(dt) {
+    for (var i = dmgNumbers.length - 1; i >= 0; i--) {
+      var dn = dmgNumbers[i];
+      dn.y -= 50 * dt;
+      dn.life -= dt;
+      if (dn.life <= 0) dmgNumbers.splice(i, 1);
+    }
+  }
+
   /* ---- XP Orbs ---- */
   function updateXpOrbs(dt) {
     for (var i = xpOrbs.length - 1; i >= 0; i--) {
@@ -627,42 +730,29 @@
       xp -= xpToNext;
       level++;
       xpToNext = Math.floor(xpToNext * 1.4);
-      showUpgradeSelection();
+      autoUpgrade();
     }
   }
 
   /* ============================================================
-     Upgrade Selection UI
+     Auto Upgrade + Toast + Update
      ============================================================ */
-  function showUpgradeSelection() {
-    setPaused(true);
-    var overlay = document.getElementById('upgrade-overlay');
-    var cardsEl = document.getElementById('upgrade-cards');
-    overlay.classList.add('active');
+  var toastMsg = '';
+  var toastTimer = 0;
+
+  function autoUpgrade() {
     var picks = pickUpgrades(3);
-    cardsEl.innerHTML = '';
-    for (var i = 0; i < picks.length; i++) {
-      (function (upgrade) {
-        var card = document.createElement('div');
-        card.className = 'upgrade-card';
-        card.innerHTML = '<div class="uc-rarity ' + upgrade.rarity + '">' + upgrade.rarity.toUpperCase() + '</div>'
-          + '<div class="uc-name">' + upgrade.nameEn + '</div>'
-          + '<div class="uc-sub">' + upgrade.nameZh + '</div>'
-          + '<div class="uc-desc">' + upgrade.desc + '</div>';
-        card.addEventListener('click', function () {
-          upgrade.apply();
-          activeUpgrades.push(upgrade.id);
-          overlay.classList.remove('active');
-          setPaused(false);
-          updateUpgradeIcons();
-        });
-        cardsEl.appendChild(card);
-      })(picks[i]);
-    }
+    var chosen = picks[randInt(0, picks.length - 1)];
+    chosen.apply();
+    activeUpgrades.push(chosen.id);
+    updateUpgradeIcons();
+    toastMsg = chosen.nameEn + ' — ' + chosen.desc;
+    toastTimer = 2.5;
   }
 
   function updateUpgradeIcons() {
     var iconsEl = document.getElementById('upgrade-icons');
+    if (!iconsEl) return;
     iconsEl.innerHTML = '';
     for (var i = 0; i < activeUpgrades.length; i++) {
       var up = null;
@@ -672,10 +762,20 @@
       if (up) {
         var icon = document.createElement('span');
         icon.className = 'upgrade-icon';
-        icon.title = up.nameZh + ' / ' + up.nameEn;
+        icon.title = up.nameEn + ' — ' + up.desc;
         icon.textContent = up.nameZh.charAt(0);
         iconsEl.appendChild(icon);
       }
+    }
+  }
+
+  function updateToast(dt) {
+    if (toastTimer > 0) {
+      toastTimer -= dt;
+      if (toastTimer <= 0) toastMsg = '';
+    }
+    if (gyro.indicatorTimer > 0) {
+      gyro.indicatorTimer -= dt;
     }
   }
 
@@ -866,6 +966,45 @@
       ctx.arc(pp.x, pp.y, pp.radius * alpha, 0, Math.PI * 2);
       ctx.fill();
     }
+
+    // Damage numbers
+    for (var dn = 0; dn < dmgNumbers.length; dn++) {
+      var dnn = dmgNumbers[dn];
+      var dAlpha = dnn.life / dnn.maxLife;
+      ctx.globalAlpha = dAlpha;
+      ctx.fillStyle = dnn.color;
+      ctx.font = 'bold ' + (14 + (1 - dAlpha) * 6) + 'px Cinzel, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(dnn.value, dnn.x, dnn.y);
+    }
+
+    ctx.globalAlpha = 1;
+
+    // Toast notification (upgrade / gyro indicator)
+    if (toastMsg && toastTimer > 0) {
+      var toastAlpha = Math.min(1, toastTimer / 0.5);
+      ctx.globalAlpha = toastAlpha;
+      ctx.fillStyle = '#1a1209';
+      var tw = ctx.measureText(toastMsg).width + 40;
+      ctx.fillRect(W / 2 - tw / 2, 52, tw, 32);
+      ctx.strokeStyle = 'rgba(184,160,110,0.6)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(W / 2 - tw / 2, 52, tw, 32);
+      ctx.fillStyle = '#d4b878';
+      ctx.font = '13px "Source Serif 4", serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(toastMsg, W / 2, 73);
+    }
+
+    // Gyro indicator
+    if (gyro.active && gyro.indicatorTimer > 0 && !(keys['a'] || keys['d'] || keys['w'] || keys['s'] || keys['arrowleft'] || keys['arrowright'] || keys['arrowup'] || keys['arrowdown'] || touchMove.active)) {
+      ctx.globalAlpha = Math.min(1, gyro.indicatorTimer / 0.5);
+      ctx.fillStyle = 'rgba(160,220,140,0.8)';
+      ctx.font = '11px Cinzel, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('GYRO ON • TILT TO MOVE', W / 2, H - 80);
+    }
+
     ctx.globalAlpha = 1;
   }
 
