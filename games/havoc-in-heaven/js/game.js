@@ -1004,8 +1004,8 @@
      ============================================================ */
   function playerDied() {
     gameOver = true;
+    AudioEngine.muteMusic();
     AudioEngine.playSfx('death');
-    AudioEngine.setIntensity('calm');
     deathData = { time: gameTime, wave: wave, kills: kills };
 
     var overlay = document.getElementById('death-overlay');
@@ -1498,6 +1498,7 @@
     AudioEngine.init();
     AudioEngine.start();
     AudioEngine.setIntensity('calm');
+    AudioEngine.unmuteMusic();
     initState();
     celebrateTimer = 0;
     var celOverlay = document.getElementById('celebrate-overlay');

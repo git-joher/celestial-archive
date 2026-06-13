@@ -596,6 +596,24 @@ var AudioEngine = (function () {
     }, 500);
   }
 
+  // ── Music mute control for death screen ──────────────
+
+  function muteMusic() {
+    if (!ctx) return;
+    // Fade out background music
+    if (musicGain) musicGain.gain.setTargetAtTime(0, ctx.currentTime, 0.15);
+    // Boost SFX so death music is prominent
+    if (sfxGain) sfxGain.gain.setTargetAtTime(1.2, ctx.currentTime, 0.15);
+  }
+
+  function unmuteMusic() {
+    if (!ctx) return;
+    // Fade background music back in
+    if (musicGain) musicGain.gain.setTargetAtTime(1, ctx.currentTime, 0.3);
+    // Restore SFX to normal level
+    if (sfxGain) sfxGain.gain.setTargetAtTime(0.7, ctx.currentTime, 0.3);
+  }
+
   // ── Public API ───────────────────────────────────────
 
   return {
@@ -607,6 +625,8 @@ var AudioEngine = (function () {
     start: function () { if (!ctx) init(); started = true; },
     stop: stop,
     resume: resume,
-    isStarted: function () { return started; }
+    isStarted: function () { return started; },
+    muteMusic: muteMusic,
+    unmuteMusic: unmuteMusic
   };
 })();
