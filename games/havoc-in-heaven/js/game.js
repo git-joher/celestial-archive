@@ -276,7 +276,8 @@
   /* ============================================================
      Spawning
      ============================================================ */
-  function spawnEnemy(type) {
+  function spawnEnemy(type, opts) {
+    opts = opts || {};
     // Spawn from a random edge
     var side = randInt(0, 3);
     var x, y;
@@ -286,22 +287,33 @@
     else if (side === 2) { x = rand(margin, W - margin); y = H + margin; }
     else { x = -margin; y = rand(margin, H - margin); }
 
+    // Elite multiplier — 8% chance of a champion with boosted stats
+    var isElite = opts.forceElite || (!type.isBoss && Math.random() < 0.08);
+    var eliteMult = isElite ? 2.0 : 1.0;
+
+    // Randomize speed more widely (±30%), damage slightly (±15%)
+    var speedVar = rand(type.speed * 0.7, type.speed * 1.3);
+    var dmgVar = Math.floor(type.damage * rand(0.85, 1.15));
+    var radiusVar = type.radius * rand(0.85, 1.15);
+
     var e = {
       x: x, y: y,
       type: type,
-      hp: type.hp, maxHp: type.hp,
-      speed: rand(type.speed * 0.85, type.speed * 1.15),
-      damage: type.damage,
-      radius: type.radius,
+      hp: Math.floor(type.hp * eliteMult),
+      maxHp: Math.floor(type.hp * eliteMult),
+      speed: speedVar,
+      damage: dmgVar,
+      radius: radiusVar,
       color: type.color,
       element: type.element || 'metal',
-      name: type.name,
+      name: isElite ? 'Elite ' + type.name : type.name,
       isBoss: type.isBoss || false,
       isRanged: type.isRanged || false,
-      shootTimer: type.shootTimer || 0,
-      shootCooldown: type.shootCooldown || 2,
+      shootTimer: type.shootTimer || rand(0, 1),
+      shootCooldown: (type.shootCooldown || 2) * rand(0.85, 1.15),
       spawnTimer: type.spawnTimer || 0,
-      burnTimer: 0
+      burnTimer: 0,
+      isElite: isElite
     };
     enemies.push(e);
   }
@@ -331,9 +343,42 @@
     if (waveNum >= 6) types.push(cfg.giant);
     if (waveNum >= 7) types.push(cfg.hound);
 
-    var baseCount = 8 + waveNum * 3;
-    for (var i = 0; i < baseCount; i++) {
-      var t = types[randInt(0, types.length - 1)];
+    // Random count: base + extra, with some variance
+    var minCount = 6 + waveNum * 2;
+    var maxCount = 12 + waveNum * 4;
+    var totalCount = randInt(minCount, maxCount);
+
+    // Weighted random: sometimes spawn themed groups
+    var themeRoll = Math.random();
+    var themeElement = null;
+    if (themeRoll < 0.12) {
+      // All-fire wave — cavalry heavy
+      themeElement = 'fire';
+    } else if (themeRoll < 0.22) {
+      // All-water wave — archer heavy
+      themeElement = 'water';
+    } else if (themeRoll < 0.30) {
+      // All-wood swarm — many fast hounds
+      themeElement = 'wood';
+    }
+
+    for (var i = 0; i < totalCount; i++) {
+      var t;
+      if (themeElement) {
+        // Filter types by theme element if possible
+        var themed = [];
+        for (var j = 0; j < types.length; j++) {
+          if (types[j].element === themeElement) themed.push(types[j]);
+        }
+        t = themed.length > 0 ? themed[randInt(0, themed.length - 1)] : types[randInt(0, types.length - 1)];
+      } else {
+        // Normal weighted pick: heavier types less common
+        var roll = Math.random();
+        if (roll < 0.30) t = types[0]; // soldier most common
+        else if (roll < 0.55 && types.length > 1) t = types[1];
+        else if (roll < 0.75 && types.length > 2) t = types[randInt(2, Math.min(3, types.length - 1))];
+        else t = types[randInt(0, types.length - 1)];
+      }
       spawnEnemy(t);
     }
 
@@ -874,30 +919,32 @@
 
   /* ---- Wave System ---- */
   var trickleTimer = 0;
+  var nextWaveTime = 30;
   function checkWave() {
-    if (waveTimer >= 30) {
+    if (waveTimer >= nextWaveTime) {
       waveTimer = 0;
+      // Randomize next wave timing: 25–35 seconds
+      nextWaveTime = rand(25, 35);
       wave++;
       spawnWave(wave);
       updateMusicIntensity();
     }
-    // Continuous trickle spawn (every 1.2 seconds if below cap)
+    // Continuous trickle spawn (randomized interval)
     trickleTimer -= 0.016;
-    if (trickleTimer <= 0 && enemies.length < 15 + wave * 2) {
-      trickleTimer = 1.2;
+    var trickleCap = 12 + wave * 3;
+    if (trickleTimer <= 0 && enemies.length < trickleCap) {
+      // Random interval: faster at higher waves
+      trickleTimer = rand(0.5, Math.max(0.6, 1.8 - wave * 0.05));
       var cfg = getWaveConfig();
+      // Include all unlocked types, not just first 3
       var types = [cfg.soldier];
       if (wave >= 2) types.push(cfg.general);
       if (wave >= 3) types.push(cfg.cavalry);
+      if (wave >= 4) types.push(cfg.archer);
+      if (wave >= 6) types.push(cfg.giant);
+      if (wave >= 7) types.push(cfg.hound);
       var t = types[randInt(0, types.length - 1)];
-      // Clone to avoid mutating config reference
-      spawnEnemy({
-        hp: t.hp, speed: t.speed, damage: t.damage,
-        radius: t.radius, color: t.color, element: t.element,
-        name: t.name,
-        isBoss: t.isBoss || false, isRanged: t.isRanged || false,
-        shootCooldown: t.shootCooldown, spawnTimer: t.spawnTimer
-      });
+      spawnEnemy(t);
     }
   }
 
@@ -1269,6 +1316,17 @@
       ctx.save();
       ctx.globalAlpha = e.stunned > 0 ? 0.5 + 0.5 * Math.sin(gameTime * 20) : 1;
 
+      // Elite glow
+      if (e.isElite) {
+        var eliteGlow = ctx.createRadialGradient(e.x, e.y, e.radius * 0.6, e.x, e.y, e.radius * 1.8);
+        eliteGlow.addColorStop(0, 'rgba(255,215,0,0.5)');
+        eliteGlow.addColorStop(1, 'rgba(255,215,0,0)');
+        ctx.fillStyle = eliteGlow;
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, e.radius * 1.8, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
       drawEnemyShape(e);
       drawElementParticles(e);
 
@@ -1501,6 +1559,8 @@
     AudioEngine.unmuteMusic();
     initState();
     celebrateTimer = 0;
+    nextWaveTime = rand(25, 35);
+    trickleTimer = 0;
     var celOverlay = document.getElementById('celebrate-overlay');
     if (celOverlay) celOverlay.classList.remove('active');
     document.getElementById('death-overlay').classList.remove('active');
