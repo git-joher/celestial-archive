@@ -174,6 +174,7 @@
   function randInt(min, max) { return Math.floor(rand(min, max + 1)); }
   function dist(a, b) { var dx = a.x - b.x; var dy = a.y - b.y; return Math.sqrt(dx * dx + dy * dy); }
   function angle(a, b) { return Math.atan2(b.y - a.y, b.x - a.x); }
+  function hexToRgb(hex) { var r = parseInt(hex.slice(1, 3), 16); var g = parseInt(hex.slice(3, 5), 16); var b = parseInt(hex.slice(5, 7), 16); return r + ',' + g + ',' + b; }
 
   /* ============================================================
      Game State
@@ -212,7 +213,11 @@
       jumpVy: 0,
       _lastForwardPress: 0,
       _isJumping: false,
-      _damageFlash: 0
+      _damageFlash: 0,
+      skillTimers: {},
+      _skillSpeedMult: 1,
+      _skillDamageMult: 1,
+      quickShieldHits: 0
     };
     enemies = [];
     particles = [];
@@ -227,9 +232,11 @@
     level = 1;
     xpToNext = 30;
     activeUpgrades = [];
+    skillOrbs = [];
     gameOver = false;
     deathData = null;
     initUpgradePool();
+    initSkillPool();
   }
 
   /* ============================================================
@@ -252,6 +259,51 @@
       { id: 'fullcircle', nameZh: 'Ruyi Jingu Bang', nameEn: 'Ruyi Jingu Bang', desc: 'Attack becomes 360° full circle', rarity: 'rare', apply: function () { player.fullCircle = true; } },
       { id: 'revive', nameZh: 'Undying Body', nameEn: 'Undying Body', desc: 'Revive once at 50% HP on death', rarity: 'rare', apply: function () { player.revive = true; } },
       { id: 'shockwave', nameZh: 'Great Sage Returns', nameEn: 'Great Sage Returns', desc: 'Every 20s: screen-clearing shockwave', rarity: 'legendary', apply: function () { player.shockwaveTimer = 2; } }
+    ];
+  }
+
+  /* ============================================================
+     Skill Pool (temporary orbs dropped by enemies)
+     ============================================================ */
+  var skillPool = [];
+  function initSkillPool() {
+    skillPool = [
+      // Tier 1 — Waves 1-4
+      { id: 'speedBurst', tier: 1, nameEn: 'Speed Burst', nameZh: 'Wind Sprint', desc: '+50% speed for 6s', color: '#4fc3f7', icon: 'S',
+        apply: function(p) { p._skillSpeedMult = 1.5; p.skillTimers.speedBurst = 6; } },
+      { id: 'damageBurst', tier: 1, nameEn: 'Damage Burst', nameZh: 'Power Surge', desc: '+50% damage for 6s', color: '#4fc3f7', icon: 'D',
+        apply: function(p) { p._skillDamageMult = 1.5; p.skillTimers.damageBurst = 6; } },
+      { id: 'heal', tier: 1, nameEn: 'Heal', nameZh: 'Elixir', desc: 'Restore 40 HP', color: '#4fc3f7', icon: '+',
+        apply: function(p) { p.hp = Math.min(p.maxHp, p.hp + 40); spawnParticles(p.x, p.y, 15, '#4fc3f7', 0.5); } },
+      { id: 'quickShield', tier: 1, nameEn: 'Quick Shield', nameZh: 'Gold Bell', desc: 'Absorb 2 hits for 8s', color: '#4fc3f7', icon: 'Q',
+        apply: function(p) { p.quickShieldHits = 2; p.skillTimers.quickShield = 8; } },
+      // Tier 2 — Waves 5-9
+      { id: 'flameNova', tier: 2, nameEn: 'Flame Nova', nameZh: 'Fire Storm', desc: 'Damage all enemies 2x', color: '#ab47bc', icon: 'F',
+        apply: function(p) { for (var i = enemies.length - 1; i >= 0; i--) { var dmg = Math.floor(p.attackDamage * (p._skillDamageMult || 1) * 2); enemies[i].hp -= dmg; spawnDmgNumber(enemies[i].x, enemies[i].y, dmg, '#ff7043'); spawnParticles(enemies[i].x, enemies[i].y, 8, '#ff7043', 0.4); if (enemies[i].hp <= 0) killEnemy(enemies[i]); } } },
+      { id: 'iceFreeze', tier: 2, nameEn: 'Ice Freeze', nameZh: 'Frozen World', desc: 'Freeze all enemies 3s', color: '#ab47bc', icon: 'I',
+        apply: function(p) { for (var i = 0; i < enemies.length; i++) { enemies[i].stunned = 3; spawnParticles(enemies[i].x, enemies[i].y, 4, '#4fc3f7', 0.3); } } },
+      { id: 'chainLightning', tier: 2, nameEn: 'Chain Lightning', nameZh: 'Thunder Strike', desc: 'Hit 6 nearest for 3x', color: '#ab47bc', icon: 'L',
+        apply: function(p) { var sorted = enemies.slice().sort(function(a, b) { return dist(p, a) - dist(p, b); }); var count = Math.min(6, sorted.length); for (var i = 0; i < count; i++) { var dmg = Math.floor(p.attackDamage * (p._skillDamageMult || 1) * 3); sorted[i].hp -= dmg; spawnDmgNumber(sorted[i].x, sorted[i].y, dmg, '#ab47bc'); spawnParticles(sorted[i].x, sorted[i].y, 6, '#ab47bc', 0.3); if (sorted[i].hp <= 0) killEnemy(sorted[i]); } } },
+      { id: 'xpMagnet', tier: 2, nameEn: 'XP Magnet', nameZh: 'Treasure Basin', desc: 'Pull all XP + double for 5s', color: '#ab47bc', icon: 'X',
+        apply: function(p) { p.skillTimers.xpMagnet = 5; for (var i = 0; i < xpOrbs.length; i++) { xpOrbs[i].x = p.x; xpOrbs[i].y = p.y; } } },
+      // Tier 3 — Waves 10-14
+      { id: 'samadhiFire', tier: 3, nameEn: 'Samadhi Fire', nameZh: 'True Fire', desc: 'Screen-wide burn for 6s', color: '#ff7043', icon: 'S',
+        apply: function(p) { p.skillTimers.samadhiFire = 6; for (var i = 0; i < enemies.length; i++) { enemies[i].burnTimer = 6; spawnParticles(enemies[i].x, enemies[i].y, 6, '#ff7043', 0.5); } } },
+      { id: 'cloneArmy', tier: 3, nameEn: 'Clone Army', nameZh: 'Monkey Army', desc: 'Spawn 8 clones for 12s', color: '#ff7043', icon: 'C',
+        apply: function(p) { p.skillTimers.cloneArmy = 12; p.cloneArmyList = []; for (var i = 0; i < 8; i++) { var a2 = i * Math.PI / 4; p.cloneArmyList.push({ x: p.x + Math.cos(a2) * 40, y: p.y + Math.sin(a2) * 40, hp: 30 }); spawnParticles(p.cloneArmyList[i].x, p.cloneArmyList[i].y, 4, '#ff7043', 0.3); } } },
+      { id: 'thunderstorm', tier: 3, nameEn: 'Thunderstorm', nameZh: 'Sky Thunder', desc: '12 strikes over 4s', color: '#ff7043', icon: 'T',
+        apply: function(p) { p.skillTimers.thunderstorm = 4; p._thunderstormStrikes = 12; p._thunderstormTick = 0; } },
+      { id: 'timeSlow', tier: 3, nameEn: 'Time Slow', nameZh: 'Frozen Time', desc: 'Enemies at 25% speed 8s', color: '#ff7043', icon: 'Z',
+        apply: function(p) { p.skillTimers.timeSlow = 8; for (var i = 0; i < enemies.length; i++) { if (enemies[i]._origSpeed === undefined) enemies[i]._origSpeed = enemies[i].speed; enemies[i].speed *= 0.25; spawnParticles(enemies[i].x, enemies[i].y, 3, '#4fc3f7', 0.3); } } },
+      // Tier 4 — Waves 15+
+      { id: 'greatSage', tier: 4, nameEn: 'Great Sage Descends', nameZh: 'Sage Arrives', desc: 'Kill all non-boss enemies', color: '#ffd700', icon: 'G',
+        apply: function(p) { for (var i = enemies.length - 1; i >= 0; i--) { if (!enemies[i].isBoss) { enemies[i].hp -= 99999; spawnParticles(enemies[i].x, enemies[i].y, 10, '#ffd700', 0.5); if (enemies[i].hp <= 0) killEnemy(enemies[i]); } else { var dmg = Math.floor(p.attackDamage * (p._skillDamageMult || 1) * 10); enemies[i].hp -= dmg; spawnDmgNumber(enemies[i].x, enemies[i].y, dmg, '#ffd700'); } } } },
+      { id: 'invincible', tier: 4, nameEn: '72 Transformations', nameZh: 'Transform', desc: '4s full invincibility', color: '#ffd700', icon: 'I',
+        apply: function(p) { p.skillTimers.invincible = 4; spawnParticles(p.x, p.y, 30, '#ffd700', 0.8); } },
+      { id: 'extendedBang', tier: 4, nameEn: 'Ruyi Jingu Bang', nameZh: 'Staff Extends', desc: '2x range + 360° for 10s', color: '#ffd700', icon: 'R',
+        apply: function(p) { p._restoreRange = p.attackRange; p.attackRange *= 2; p.fullCircle = true; p.skillTimers.extendedBang = 10; spawnParticles(p.x, p.y, 20, '#ffd700', 0.6); } },
+      { id: 'heavenRoar', tier: 4, nameEn: 'Heaven-Shaking Roar', nameZh: 'Heaven Roar', desc: 'Stun all 5s + 5x damage', color: '#ffd700', icon: 'H',
+        apply: function(p) { for (var i = enemies.length - 1; i >= 0; i--) { enemies[i].stunned = 5; var dmg = Math.floor(p.attackDamage * (p._skillDamageMult || 1) * 5); enemies[i].hp -= dmg; spawnDmgNumber(enemies[i].x, enemies[i].y, dmg, '#ffd700'); spawnParticles(enemies[i].x, enemies[i].y, 10, '#ffd700', 0.5); if (enemies[i].hp <= 0) killEnemy(enemies[i]); } } }
     ];
   }
 
@@ -461,6 +513,7 @@
       // Still update visuals during celebration
       updateParticles(dtClamped);
       updateXpOrbs(dtClamped);
+      updateSkillOrbs(dtClamped);
       updateHUD();
       return;
     }
@@ -475,6 +528,8 @@
     updateParticles(dtClamped);
     updateDmgNumbers(dtClamped);
     updateXpOrbs(dtClamped);
+    updateSkillOrbs(dtClamped);
+    updateActiveSkills(dtClamped);
     updateToast(dtClamped);
     checkWave();
     // Re-check music intensity based on HP
@@ -546,8 +601,9 @@
       // Normal movement
       var mag = Math.sqrt(ix * ix + iy * iy);
       if (mag > 1) { ix /= mag; iy /= mag; }
-      player.x += ix * player.speed * dt;
-      player.y += iy * player.speed * dt;
+      var effSpeed = player.speed * (player._skillSpeedMult || 1);
+      player.x += ix * effSpeed * dt;
+      player.y += iy * effSpeed * dt;
 
       // Bounds
       player.x = Math.max(20, Math.min(W - 20, player.x));
@@ -669,7 +725,7 @@
     }
 
     if (target) {
-      var dmg = player.attackDamage;
+      var dmg = Math.floor(player.attackDamage * (player._skillDamageMult || 1));
       target.hp -= dmg;
       AudioEngine.playSfx('attack');
       spawnDmgNumber(target.x, target.y, dmg, '#ffd700');
@@ -684,8 +740,9 @@
       for (var j = enemies.length - 1; j >= 0; j--) {
         if (enemies[j] === target) continue;
         if (dist(player, enemies[j]) < range) {
-          enemies[j].hp -= player.attackDamage;
-          spawnDmgNumber(enemies[j].x, enemies[j].y, player.attackDamage, '#ffd700');
+          var fullDmg = Math.floor(player.attackDamage * (player._skillDamageMult || 1));
+          enemies[j].hp -= fullDmg;
+          spawnDmgNumber(enemies[j].x, enemies[j].y, fullDmg, '#ffd700');
           spawnParticles(enemies[j].x, enemies[j].y, 3, '#d4b878', 0.3);
           if (enemies[j].hp <= 0) killEnemy(enemies[j]);
         }
@@ -753,7 +810,46 @@
       fire: 'kill_fire', earth: 'kill_earth', all: 'kill_metal'
     };
     AudioEngine.playSfx(elementSfx[enemy.element] || 'kill_metal');
+
+    // Skill orb drop
+    if (shouldDropSkillOrb(wave)) {
+      var tier = pickSkillTier(wave);
+      var skill = pickSkillForTier(tier);
+      if (skill) spawnSkillOrb(enemy.x, enemy.y, skill.id);
+    }
+    // Boss bonus drop
+    if (enemy.isBoss && Math.random() < 0.5) {
+      var bTier = pickSkillTier(wave);
+      var bSkill = pickSkillForTier(bTier);
+      if (bSkill) spawnSkillOrb(enemy.x + rand(-25, 25), enemy.y + rand(-25, 25), bSkill.id);
+    }
+
     enemies.splice(idx, 1);
+  }
+
+  function shouldDropSkillOrb(waveNum) {
+    var chance = Math.min(10 + waveNum, 25);
+    return Math.random() * 100 < chance;
+  }
+  function pickSkillTier(waveNum) {
+    var available = [];
+    for (var t = 1; t <= 4; t++) { if (waveNum >= (t - 1) * 5 + 1) available.push(t); }
+    if (available.length === 0) available = [1];
+    // Higher tiers weighted more
+    var weights = [];
+    for (var w = 0; w < available.length; w++) { weights.push(available[w] * available[w]); }
+    var total = 0;
+    for (var w2 = 0; w2 < weights.length; w2++) total += weights[w2];
+    var roll = Math.random() * total;
+    var cum = 0;
+    for (var w3 = 0; w3 < available.length; w3++) { cum += weights[w3]; if (roll < cum) return available[w3]; }
+    return available[available.length - 1];
+  }
+  function pickSkillForTier(tier) {
+    var tierSkills = [];
+    for (var i = 0; i < skillPool.length; i++) { if (skillPool[i].tier === tier) tierSkills.push(skillPool[i]); }
+    if (tierSkills.length === 0) return null;
+    return tierSkills[randInt(0, tierSkills.length - 1)];
   }
 
   function damagePlayer(dmg, element) {
@@ -762,6 +858,18 @@
       player._slowed = true;
       player._slowTimer = 2;
       player.speed *= 0.7;
+    }
+
+    // Invincibility (72 Transformations skill)
+    if (player.skillTimers && player.skillTimers.invincible > 0) {
+      spawnParticles(player.x, player.y, 8, '#ffd700', 0.3);
+      return;
+    }
+    // Quick Shield
+    if (player.quickShieldHits > 0) {
+      player.quickShieldHits--;
+      spawnParticles(player.x, player.y, 10, '#4fc3f7', 0.4);
+      return;
     }
 
     if (player.dodgeChance > 0 && Math.random() < player.dodgeChance) {
@@ -912,7 +1020,7 @@
       }
       // Collect
       if (d < 18) {
-        xp += o.value;
+        xp += (player.skillTimers && player.skillTimers.xpMagnet > 0 ? o.value * 2 : o.value);
         xpOrbs.splice(i, 1);
         checkLevelUp();
       }
@@ -963,6 +1071,154 @@
 
   /* ---- Level Up ---- */
   var celebrateTimer = 0;
+
+  /* ---- Skill Orbs ---- */
+  function spawnSkillOrb(x, y, skillId) {
+    var skill = null;
+    for (var i = 0; i < skillPool.length; i++) { if (skillPool[i].id === skillId) { skill = skillPool[i]; break; } }
+    if (!skill) return;
+    var tierRadii = [0, 7, 9, 11, 13];
+    skillOrbs.push({
+      x: x, y: y,
+      radius: tierRadii[skill.tier],
+      color: skill.color,
+      skillId: skillId,
+      life: 15,
+      maxLife: 15,
+      pulsePhase: rand(0, Math.PI * 2)
+    });
+  }
+
+  function updateSkillOrbs(dt) {
+    for (var i = skillOrbs.length - 1; i >= 0; i--) {
+      var o = skillOrbs[i];
+      o.life -= dt;
+      if (o.life <= 0) { skillOrbs.splice(i, 1); continue; }
+      var d = dist(player, o);
+      if (d < 100) {
+        var a = angle(o, player);
+        o.x += Math.cos(a) * 350 * dt;
+        o.y += Math.sin(a) * 350 * dt;
+      }
+      if (d < 22) {
+        applySkill(o.skillId);
+        spawnParticles(o.x, o.y, 12, o.color, 0.5);
+        skillOrbs.splice(i, 1);
+      }
+    }
+  }
+
+  function applySkill(skillId) {
+    var skill = null;
+    for (var i = 0; i < skillPool.length; i++) { if (skillPool[i].id === skillId) { skill = skillPool[i]; break; } }
+    if (!skill) return;
+    skill.apply(player);
+    spawnParticles(player.x, player.y, 15, skill.color, 0.6);
+    AudioEngine.playSfx('levelup');
+    toastMsg = skill.nameEn + ' (' + skill.nameZh + ')';
+    toastTimer = 2.5;
+  }
+
+  /* ---- Active Skills Update ---- */
+  function updateActiveSkills(dt) {
+    // Tick timers
+    var expired = [];
+    for (var skillId in player.skillTimers) {
+      if (!player.skillTimers.hasOwnProperty(skillId)) continue;
+      player.skillTimers[skillId] -= dt;
+      if (player.skillTimers[skillId] <= 0) expired.push(skillId);
+    }
+    for (var e = 0; e < expired.length; e++) { expireSkill(expired[e]); }
+
+    // Per-frame effects
+    if (player.skillTimers.samadhiFire > 0) updateSamadhiFire(dt);
+    if (player.skillTimers.thunderstorm > 0) updateThunderstorm(dt);
+    if (player.skillTimers.cloneArmy > 0) updateCloneArmy(dt);
+  }
+
+  function expireSkill(skillId) {
+    switch (skillId) {
+      case 'speedBurst': player._skillSpeedMult = 1; break;
+      case 'damageBurst': player._skillDamageMult = 1; break;
+      case 'quickShield': player.quickShieldHits = 0; break;
+      case 'timeSlow':
+        for (var i = 0; i < enemies.length; i++) { if (enemies[i]._origSpeed !== undefined) { enemies[i].speed = enemies[i]._origSpeed; delete enemies[i]._origSpeed; } }
+        break;
+      case 'cloneArmy':
+        if (player.cloneArmyList) { for (var ci = 0; ci < player.cloneArmyList.length; ci++) spawnParticles(player.cloneArmyList[ci].x, player.cloneArmyList[ci].y, 8, '#ff7043', 0.5); player.cloneArmyList = []; }
+        break;
+      case 'extendedBang':
+        if (player._restoreRange !== undefined) { player.attackRange = player._restoreRange; delete player._restoreRange; }
+        if (activeUpgrades.indexOf('fullcircle') === -1) player.fullCircle = false;
+        break;
+    }
+    delete player.skillTimers[skillId];
+  }
+
+  function updateSamadhiFire(dt) {
+    for (var i = 0; i < enemies.length; i++) { enemies[i].burnTimer = 6; }
+    if (Math.random() < 0.3 && enemies.length > 0) {
+      var re = enemies[randInt(0, enemies.length - 1)];
+      spawnParticles(re.x, re.y, 2, '#ff7043', 0.4);
+    }
+  }
+
+  var _thunderCount = 0;
+  function updateThunderstorm(dt) {
+    if (player._thunderstormStrikes === undefined) return;
+    player._thunderstormTick -= dt;
+    if (player._thunderstormTick <= 0 && player._thunderstormStrikes > 0) {
+      player._thunderstormTick = 4 / 12;
+      player._thunderstormStrikes--;
+      _thunderCount++;
+      if (enemies.length > 0) {
+        var target = enemies[randInt(0, enemies.length - 1)];
+        var dmg = Math.floor(player.attackDamage * (player._skillDamageMult || 1) * 3);
+        target.hp -= dmg;
+        spawnDmgNumber(target.x, target.y, dmg, '#ab47bc');
+        spawnParticles(target.x, target.y, 12, '#ab47bc', 0.3);
+        // Draw a lightning bolt line from above
+        if (_thunderCount % 3 === 0) {
+          for (var li = 0; li < 4; li++) {
+            var lx = target.x + rand(-15, 15);
+            var ly = target.y - 60 + li * 15;
+            spawnParticles(lx, ly, 1, '#ffffff', 0.15);
+          }
+        }
+        if (target.hp <= 0) killEnemy(target);
+      }
+    }
+  }
+
+  function updateCloneArmy(dt) {
+    if (!player.cloneArmyList) return;
+    for (var i = 0; i < player.cloneArmyList.length; i++) {
+      var c = player.cloneArmyList[i];
+      var nearest = null, nearestDist = 200;
+      for (var j = 0; j < enemies.length; j++) {
+        var d2 = dist(c, enemies[j]);
+        if (d2 < nearestDist) { nearestDist = d2; nearest = enemies[j]; }
+      }
+      if (nearest) {
+        var a2 = angle(c, nearest);
+        c.x += Math.cos(a2) * 180 * dt;
+        c.y += Math.sin(a2) * 180 * dt;
+        if (dist(c, nearest) < 25 && !c._attackCd) {
+          nearest.hp -= Math.floor(player.attackDamage * (player._skillDamageMult || 1) * 0.5);
+          spawnDmgNumber(nearest.x, nearest.y, Math.floor(player.attackDamage * (player._skillDamageMult || 1) * 0.5), '#ff7043');
+          spawnParticles(nearest.x, nearest.y, 3, '#ff7043', 0.2);
+          if (nearest.hp <= 0) killEnemy(nearest);
+          c._attackCd = 0.8;
+        }
+        if (c._attackCd) c._attackCd -= dt;
+      }
+      // Clone glow
+      ctx.fillStyle = 'rgba(255,112,67,0.4)';
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, 10, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
 
   function checkLevelUp() {
     if (xp >= xpToNext) {
@@ -1282,6 +1538,60 @@
       ctx.fill();
     }
 
+    // Skill orbs
+    for (var si = 0; si < skillOrbs.length; si++) {
+      var so = skillOrbs[si];
+      var sAlpha = Math.min(1, so.life / 3);
+      var pulse = 1 + 0.15 * Math.sin(gameTime * 4 + so.pulsePhase);
+      var sr = so.radius * pulse;
+
+      // Outer glow
+      var glow = ctx.createRadialGradient(so.x, so.y, sr * 0.3, so.x, so.y, sr * 2.2);
+      glow.addColorStop(0, 'rgba(' + hexToRgb(so.color) + ',' + sAlpha * 0.5 + ')');
+      glow.addColorStop(1, 'rgba(' + hexToRgb(so.color) + ',0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(so.x, so.y, sr * 2.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Core
+      ctx.fillStyle = so.color;
+      ctx.globalAlpha = sAlpha;
+      ctx.beginPath();
+      ctx.arc(so.x, so.y, sr, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bright center
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.beginPath();
+      ctx.arc(so.x, so.y, sr * 0.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Tier 4 extra shimmer
+      if (so.radius >= 13) {
+        ctx.strokeStyle = 'rgba(255,215,0,0.5)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(so.x, so.y, sr + 4, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // Clone army rendering
+    if (player.cloneArmyList) {
+      for (var ci = 0; ci < player.cloneArmyList.length; ci++) {
+        var cl = player.cloneArmyList[ci];
+        ctx.fillStyle = 'rgba(255,112,67,0.6)';
+        ctx.beginPath();
+        ctx.arc(cl.x, cl.y, 10, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255,112,67,0.9)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+    }
+
     // Projectiles
     for (var pi = 0; pi < projectiles.length; pi++) {
       var pr = projectiles[pi];
@@ -1532,6 +1842,47 @@
       ctx.font = '11px Cinzel, serif';
       ctx.textAlign = 'center';
       ctx.fillText('GYRO ON • TILT TO MOVE', W / 2, H - 80);
+    }
+
+    // Active skill HUD
+    var activeSkills = [];
+    for (var sk in player.skillTimers) {
+      if (player.skillTimers.hasOwnProperty(sk) && player.skillTimers[sk] > 0) activeSkills.push(sk);
+    }
+    if (activeSkills.length > 0) {
+      var hudY = H - 100;
+      var hudXStart = W / 2 - (activeSkills.length * 50) / 2;
+      for (var ai = 0; ai < activeSkills.length; ai++) {
+        var skillId = activeSkills[ai];
+        var skillDef = null;
+        for (var sd = 0; sd < skillPool.length; sd++) { if (skillPool[sd].id === skillId) { skillDef = skillPool[sd]; break; } }
+        var sc = skillDef ? skillDef.color : '#d4b878';
+        var sx = hudXStart + ai * 50;
+        var remaining = player.skillTimers[skillId];
+        var maxTime = 12; // reference max
+
+        ctx.fillStyle = 'rgba(10,6,4,0.75)';
+        ctx.fillRect(sx - 20, hudY - 10, 40, 30);
+        ctx.strokeStyle = sc;
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(sx - 20, hudY - 10, 40, 30);
+
+        var barRatio = Math.min(1, remaining / (skillDef && skillDef.tier >= 3 ? 12 : 8));
+        ctx.fillStyle = sc;
+        ctx.globalAlpha = 0.5;
+        ctx.fillRect(sx - 18, hudY + 14, 36 * barRatio, 3);
+        ctx.globalAlpha = 1;
+
+        ctx.fillStyle = sc;
+        ctx.font = 'bold 11px Cinzel, serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(skillDef ? skillDef.nameEn.charAt(0) : '?', sx, hudY + 3);
+
+        ctx.fillStyle = 'rgba(232,220,200,0.7)';
+        ctx.font = '9px monospace';
+        ctx.fillText(Math.ceil(remaining) + 's', sx, hudY + 28);
+      }
     }
 
     ctx.globalAlpha = 1;
