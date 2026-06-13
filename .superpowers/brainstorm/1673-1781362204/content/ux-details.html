@@ -1,0 +1,74 @@
+<h2>UX Details — Polishing the ritual</h2>
+<p class="subtitle">A few remaining decisions to complete the experience design.</p>
+
+<div class="section">
+  <h3>Q1: Include 筊杯 (Moon Block) confirmation?</h3>
+  <p class="subtitle">In real temples, after a stick falls, you throw two crescent-shaped wooden blocks (筊杯/杯筊). One flat side up + one round side up = 圣杯 (the deity accepts). Both flat = 笑杯 (deity laughs, try again). Both round = 怒杯 (deity is angry, reconsider your question).</p>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="jiaobei-yes" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Include 筊杯 — Full ritual</h3>
+      <p>Shake → stick falls → throw moon blocks → if 圣杯, reveal fortune. If not, shake again. Adds authenticity and drama.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="jiaobei-no" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Skip 筊杯 — Streamlined</h3>
+      <p>Shake → stick falls → reveal fortune directly. Simpler flow, less friction for casual users.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:28px">
+  <h3>Q2: Fortune history & sharing?</h3>
+</div>
+
+<div class="options" data-multiselect>
+  <div class="option" data-choice="history" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content">
+      <h3>Save history (localStorage)</h3>
+      <p>Users can see their past fortunes. Stored in browser. Each entry shows: date, deity, tier, stick number, poem snippet.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="share" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content">
+      <h3>Share card (image/text)</h3>
+      <p>Generate a shareable card with the fortune poem, deity name, and tier. Copy text or download as image. Good for social media virality.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="daily-limit" onclick="toggleSelect(this)">
+    <div class="letter">3</div>
+    <div class="content">
+      <h3>Daily limit (1 draw/day)</h3>
+      <p>One free draw per day. Makes each fortune feel special. Prevents spam-clicking. "The celestial court only answers once a day."</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:28px">
+  <h3>Q3: Page URL location?</h3>
+  <p class="subtitle">Where does this live in the site structure? Currently it's listed in CELESTIAL_GAMES on the homepage.</p>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="url-games" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>/games/celestial-divination.html</h3>
+      <p>New /games/ directory for all interactive experiences. Clean separation from content pages. A dedicated games section.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="url-root" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>/celestial-divination.html</h3>
+      <p>At the root level, like the current index.html (game hub). Simpler URL. Matches the flat file structure of the existing site.</p>
+    </div>
+  </div>
+</div>

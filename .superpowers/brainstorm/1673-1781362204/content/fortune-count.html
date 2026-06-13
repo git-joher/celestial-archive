@@ -1,0 +1,62 @@
+<h2>签文规模 — How many fortunes?</h2>
+<p class="subtitle">Traditional temples have 100 lots. Each one needs: a 4-line poem, interpretation, deity message, life domain guidance, and English translation. That's a lot of content.</p>
+
+<div class="options">
+  <div class="option" data-choice="28" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>28 Lots (二十八宿)</h3>
+      <p>One for each Lunar Mansion. 7 per tier (上上×5, 上×8, 中×8, 下×5, 下下×2). Manageable content scope, rich astronomical theme. Each fortune tied to a constellation.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="36" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>36 Lots (三十六天罡)</h3>
+      <p>One for each Heavenly Spirit star. 36 fortunes with even distribution. Good balance of variety and content effort. Tied to the 36 Stars of Destiny from Water Margin / Daoist cosmology.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="60" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>60 Lots (六十甲子)</h3>
+      <p>One for each sexagenary cycle combination. 60 fortunes — the traditional middle ground used by many temples. Rich 干支 theme. More content but thematically perfect.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="100" onclick="toggleSelect(this)">
+    <div class="letter">D</div>
+    <div class="content">
+      <h3>100 Lots (百签全典)</h3>
+      <p>Full traditional set. 100 fortunes. The most authentic but enormous content undertaking. Could start with a subset and expand over time.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:28px">
+  <h3>Also: How do we generate the fortune content?</h3>
+  <p class="subtitle">Classical Chinese poems + deity messages + interpretations is specialized content.</p>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="gen-llm" onclick="toggleSelect(this)">
+    <div class="letter">X</div>
+    <div class="content">
+      <h3>LLM-generated + human review</h3>
+      <p>Generate fortune poems and interpretations via LLM, then review and curate. Fast, consistent quality, easy to produce at scale.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="gen-mixed" onclick="toggleSelect(this)">
+    <div class="letter">Y</div>
+    <div class="content">
+      <h3>Mixed: reference real classics + adapt</h3>
+      <p>Base poems on real classical Chinese poetry and 签文 from actual temples (public domain), adapt and remix with deity-specific twists.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="gen-write" onclick="toggleSelect(this)">
+    <div class="letter">Z</div>
+    <div class="content">
+      <h3>Hand-write with LLM help</h3>
+      <p>Design the structure and themes, write key poems by hand, use LLM to fill in the rest with careful curation.</p>
+    </div>
+  </div>
+</div>

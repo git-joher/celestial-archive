@@ -1,0 +1,93 @@
+<h2>签文结构 — What does a fortune slip look like?</h2>
+<p class="subtitle">Each fortune needs a structure. Which combination feels right for "天庭求签"?</p>
+
+<div class="section">
+  <h3>A real Chinese temple fortune slip (签文) contains:</h3>
+  <div style="background:#faf7f2;border:2px solid #b8a06e;border-radius:12px;padding:20px;max-width:500px;margin:0 auto;text-align:center">
+    <p style="font-family:serif;font-size:1.5rem;color:#8B0000;margin:0 0 4px">第 四十二 签</p>
+    <p style="font-size:0.8rem;color:#6b5e4e;margin:0 0 8px">上上签 · 大吉</p>
+    <div style="width:40px;height:1px;background:#b8a06e;margin:12px auto"></div>
+    <p style="font-family:serif;font-size:1.1rem;color:#2c2416;line-height:1.8;margin:0">
+      云开日出见光明<br>
+      花发春来万物荣<br>
+      行人已至家书近<br>
+      自有贵人指路行
+    </p>
+    <div style="width:40px;height:1px;background:#b8a06e;margin:12px auto"></div>
+    <p style="font-size:0.85rem;color:#6b5e4e;line-height:1.6;margin:0">
+      <strong>解曰：</strong>时机将至，贵人相助。宜守不宜攻，静待佳音。所求之事，三月内必有结果。
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Question 1: Fortune tier system (签等)</h3>
+  <p class="subtitle">Traditional temples grade lots from best to worst. Should we include tiers?</p>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="tier-full" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Full 5-tier (traditional)</h3>
+      <p>上上签 · 上签 · 中签 · 下签 · 下下签 — full authentic temple grading with proportionally distributed odds</p>
+    </div>
+  </div>
+  <div class="option" data-choice="tier-positive" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Positive-only (3 tiers)</h3>
+      <p>大吉 · 吉 · 平 — skip the bad fortunes. Keep the experience uplifting. Nobody wants a "下下签" as a web experience.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="tier-none" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>No tiers — pure wisdom</h3>
+      <p>All fortunes are poetic wisdom. No grading at all — each is a unique message from the deity. More like an oracle than a lottery.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:32px">
+  <h3>Question 2: Fortune content structure</h3>
+  <p class="subtitle">What should each fortune contain?</p>
+</div>
+
+<div class="options" data-multiselect>
+  <div class="option" data-choice="poem" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content">
+      <h3>签诗 (Fortune Poem)</h3>
+      <p>4-line classical Chinese poem — the heart of traditional 签文. Essential for authenticity.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="interpretation" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content">
+      <h3>解签 (Interpretation)</h3>
+      <p>Plain-language explanation of what the poem means for your life. Bridges classical poetry to modern understanding.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="deity-message" onclick="toggleSelect(this)">
+    <div class="letter">3</div>
+    <div class="content">
+      <h3>Deity Personal Message</h3>
+      <p>A personal note from the deity in their unique voice (like inscriptions.js). Sun Wukong's would be bold, Guanyin's compassionate, etc.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="life-domain" onclick="toggleSelect(this)">
+    <div class="letter">4</div>
+    <div class="content">
+      <h3>Life Domain Guidance</h3>
+      <p>Specific guidance for: Career · Love · Health · Wealth · Travel. Each fortune maps to one domain.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="english" onclick="toggleSelect(this)">
+    <div class="letter">5</div>
+    <div class="content">
+      <h3>English Translation</h3>
+      <p>Full English rendering of the poem and interpretation. Important for an English-language website — not all visitors read Chinese.</p>
+    </div>
+  </div>
+</div>
