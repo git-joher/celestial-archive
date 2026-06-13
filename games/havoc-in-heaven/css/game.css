@@ -308,3 +308,100 @@ body.game-active { background: #0a0604; overflow: hidden; margin: 0; padding: 0;
   letter-spacing: 2px;
   pointer-events: none;
 }
+
+/* ---- Death Screen Enhanced ---- */
+.death-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  border: 3px solid rgba(196,77,52,0.6);
+  box-shadow: 0 0 40px rgba(196,77,52,0.3), 0 0 80px rgba(196,77,52,0.1);
+  margin-bottom: 16px;
+  animation: death-img-pulse 2s ease-in-out infinite;
+}
+@keyframes death-img-pulse {
+  0%, 100% { box-shadow: 0 0 40px rgba(196,77,52,0.3), 0 0 80px rgba(196,77,52,0.1); }
+  50% { box-shadow: 0 0 60px rgba(196,77,52,0.5), 0 0 120px rgba(196,77,52,0.2); }
+}
+.death-title-main {
+  font-family: var(--font-chinese-display);
+  font-size: 2.6rem;
+  color: #c44d34;
+  text-shadow: 0 0 30px rgba(196,77,52,0.4);
+  margin-bottom: 6px;
+  animation: death-title-shake 0.6s ease-out;
+}
+@keyframes death-title-shake {
+  0% { transform: translateX(-20px); opacity: 0; }
+  30% { transform: translateX(12px); }
+  60% { transform: translateX(-6px); }
+  100% { transform: translateX(0); opacity: 1; }
+}
+.death-title-sub {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--accent-gold);
+  text-shadow: 0 0 12px rgba(184,160,110,0.3);
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+
+/* ---- Level-Up Celebration ---- */
+#celebrate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(10,6,4,0.8);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+#celebrate-overlay.active { display: flex; }
+.celebrate-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  border: 4px solid rgba(184,160,110,0.8);
+  box-shadow: 0 0 60px rgba(184,160,110,0.5), 0 0 120px rgba(184,160,110,0.2);
+  animation: celebrate-bounce 0.6s ease-out;
+}
+@keyframes celebrate-bounce {
+  0% { transform: scale(0.3); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.celebrate-text {
+  font-family: var(--font-chinese-display);
+  font-size: 2.4rem;
+  color: var(--accent-gold);
+  text-shadow: 0 0 40px rgba(184,160,110,0.6), 0 0 80px rgba(184,160,110,0.3);
+  margin-top: 20px;
+  animation: celebrate-text-glow 0.8s ease-in-out infinite alternate;
+}
+@keyframes celebrate-text-glow {
+  0% { text-shadow: 0 0 40px rgba(184,160,110,0.6); }
+  100% { text-shadow: 0 0 80px rgba(255,215,0,0.9), 0 0 120px rgba(184,160,110,0.5); }
+}
+.celebrate-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ---- Pause hint update ---- */
+.pause-hint {
+  bottom: 16px;
+  left: 50%;
+  z-index: 15;
+  font-size: 0.65rem;
+  color: rgba(200,180,140,0.25);
+  letter-spacing: 2px;
+  pointer-events: none;
+}
