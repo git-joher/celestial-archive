@@ -143,7 +143,8 @@
     if (keys['a'] || keys['arrowleft']) x -= 1;
     if (keys['d'] || keys['arrowright']) x += 1;
     if (touchMove.active) { x += touchMove.dx; }
-    if (gyro.active && !(keys['a'] || keys['d'] || keys['arrowleft'] || keys['arrowright'])) { x += gyro.dx; }
+    var hasOtherInput = keys['a'] || keys['d'] || keys['arrowleft'] || keys['arrowright'] || touchMove.active;
+    if (gyro.active && !hasOtherInput) { x += gyro.dx; }
     return Math.max(-1, Math.min(1, x));
   }
   function getInputY() {
@@ -151,7 +152,8 @@
     if (keys['w'] || keys['arrowup']) y -= 1;
     if (keys['s'] || keys['arrowdown']) y += 1;
     if (touchMove.active) { y += touchMove.dy; }
-    if (gyro.active && !(keys['w'] || keys['s'] || keys['arrowup'] || keys['arrowdown'])) { y += gyro.dy; }
+    var hasOtherInput = keys['w'] || keys['s'] || keys['arrowup'] || keys['arrowdown'] || touchMove.active;
+    if (gyro.active && !hasOtherInput) { y += gyro.dy; }
     return Math.max(-1, Math.min(1, y));
   }
 
