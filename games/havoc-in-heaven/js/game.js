@@ -7,6 +7,21 @@
   'use strict';
   document.body.classList.add('game-active');
 
+  // Resume AudioContext on first user gesture (browser autoplay policy)
+  var _audioResumed = false;
+  function _tryResumeAudio() {
+    if (_audioResumed) return;
+    _audioResumed = true;
+    AudioEngine.init();
+    AudioEngine.resume();
+    document.removeEventListener('click', _tryResumeAudio);
+    document.removeEventListener('keydown', _tryResumeAudio);
+    document.removeEventListener('touchstart', _tryResumeAudio);
+  }
+  document.addEventListener('click', _tryResumeAudio);
+  document.addEventListener('keydown', _tryResumeAudio);
+  document.addEventListener('touchstart', _tryResumeAudio);
+
   /* ============================================================
      Image Preloading
      ============================================================ */
@@ -179,7 +194,7 @@
   /* ============================================================
      Game State
      ============================================================ */
-  var player, enemies, particles, xpOrbs, projectiles, dmgNumbers;
+  var player, enemies, particles, xpOrbs, projectiles, dmgNumbers, skillOrbs;
   var wave, waveTimer, gameTime, kills, xp, level, xpToNext;
   var upgradePool, activeUpgrades;
   var gameOver, deathData;

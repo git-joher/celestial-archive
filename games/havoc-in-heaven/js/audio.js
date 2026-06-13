@@ -55,11 +55,23 @@ var AudioEngine = (function () {
     sfxGain.gain.value = 0.7;
     sfxGain.connect(masterGain);
 
-    // Set up persistent bass drone
-    createBassDrone();
-    createDrone();
-
     started = true;
+
+    // Defer oscillator start — browsers block AudioContext until user gesture
+    _ensureResumed();
+  }
+
+  function _ensureResumed() {
+    if (!ctx || ctx.state === 'closed') return;
+    if (ctx.state === 'suspended') {
+      ctx.resume().then(function () {
+        createBassDrone();
+        createDrone();
+      }).catch(function () {});
+    } else if (ctx.state === 'running') {
+      createBassDrone();
+      createDrone();
+    }
   }
 
   function createBassDrone() {
@@ -114,6 +126,7 @@ var AudioEngine = (function () {
   function playSfx(name) {
     if (!started || muted || !ctx) return;
     resume();
+    _ensureResumed();
 
     switch (name) {
       case 'attack':
@@ -516,6 +529,7 @@ var AudioEngine = (function () {
   function update(dt) {
     if (!started || muted) return;
     resume();
+    _ensureResumed();
 
     // Transition between intensities
     if (transitionProgress < 1) {
