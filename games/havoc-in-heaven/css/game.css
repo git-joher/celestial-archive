@@ -285,13 +285,16 @@ body.game-active { background: #0a0604; overflow: hidden; margin: 0; padding: 0;
   position: absolute;
   width: 72px;
   height: 72px;
-  background: rgba(184,160,110,0.4);
-  border: 2px solid rgba(184,160,110,0.7);
+  background-image: url(../../images/sun-wukong/sun-wukong-hero.jpg);
+  background-size: cover;
+  background-position: center 20%;
+  border: 3px solid rgba(184,160,110,0.8);
   border-radius: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: none;
+  box-shadow: 0 0 18px rgba(184,160,110,0.3);
 }
 /* ---- Pause Hint ---- */
 .pause-hint {
