@@ -8,6 +8,23 @@
   document.body.classList.add('game-active');
 
   /* ============================================================
+     Image Preloading
+     ============================================================ */
+  var IMG = {};
+  function preloadImages() {
+    var images = {
+      playerHead: '../../images/sun-wukong/sun-wukong-ice.jpg',
+      celebrate: '../../images/sun-wukong/sun-wukong-hero3.jpg',
+      death: '../../images/sun-wukong/sun-wukong-hero2.jpg'
+    };
+    for (var key in images) {
+      IMG[key] = new Image();
+      IMG[key].src = images[key];
+    }
+  }
+  preloadImages();
+
+  /* ============================================================
      Canvas Setup
      ============================================================ */
   var canvas = document.getElementById('game-canvas');
@@ -179,7 +196,8 @@
       fieryEyesTimer: 0, // 火眼金睛 cooldown
       stunTimer: 0, // 定身术 cooldown
       shockwaveTimer: 0, // 大圣归来 cooldown
-      clones: [] // 分身术
+      clones: [], // 分身术
+      _damageFlash: 0
     };
     enemies = [];
     particles = [];
@@ -566,6 +584,7 @@
     var actualDmg = Math.max(1, Math.floor(dmg * (1 - player.damageReduction)));
     player.hp -= actualDmg;
     spawnParticles(player.x, player.y, 4, '#ff4040', 0.3);
+    player._damageFlash = 0.2;
     if (player.hp <= 0) {
       if (player.revive && !player.reviveUsed) {
         player.reviveUsed = true;
@@ -905,24 +924,57 @@
 
     // Player
     var px = player.x, py = player.y;
-    // Glow
-    var glowGrad = ctx.createRadialGradient(px, py, 8, px, py, 30);
-    glowGrad.addColorStop(0, 'rgba(184,160,110,0.5)');
+
+    // Glow behind player
+    var glowGrad = ctx.createRadialGradient(px, py, 8, px, py, 34);
+    glowGrad.addColorStop(0, 'rgba(184,160,110,0.6)');
     glowGrad.addColorStop(1, 'rgba(184,160,110,0)');
     ctx.fillStyle = glowGrad;
     ctx.beginPath();
-    ctx.arc(px, py, 30, 0, Math.PI * 2);
+    ctx.arc(px, py, 34, 0, Math.PI * 2);
     ctx.fill();
 
-    // Body
-    ctx.fillStyle = '#d4b878';
+    // Player head image (circular clip)
+    ctx.save();
     ctx.beginPath();
-    ctx.arc(px, py, 14, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = '#e8d5b0';
+    ctx.arc(px, py, 16, 0, Math.PI * 2);
+    ctx.clip();
+
+    // Rotate slightly toward movement direction
+    var ix = getInputX();
+    var iy = getInputY();
+    var moveAngle = 0;
+    if (ix !== 0 || iy !== 0) {
+      moveAngle = Math.atan2(iy, ix) * 0.25;
+    }
+    ctx.translate(px, py);
+    ctx.rotate(moveAngle);
+    if (IMG.playerHead && IMG.playerHead.complete && IMG.playerHead.naturalWidth > 0) {
+      ctx.drawImage(IMG.playerHead, -16, -16, 32, 32);
+    } else {
+      // Fallback: gold circle
+      ctx.fillStyle = '#d4b878';
+      ctx.beginPath();
+      ctx.arc(0, 0, 16, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // Golden ring border
+    ctx.strokeStyle = 'rgba(184,160,110,0.8)';
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.arc(px, py, 8, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.arc(px, py, 16, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Damage flash (white overlay when recently hit)
+    if (player._damageFlash > 0) {
+      ctx.fillStyle = 'rgba(255,255,255,' + (player._damageFlash / 0.2 * 0.5) + ')';
+      ctx.beginPath();
+      ctx.arc(px, py, 16, 0, Math.PI * 2);
+      ctx.fill();
+      player._damageFlash -= 0.016;
+    }
 
     // Attack arc flash
     if (player._attackFlash > 0) {
