@@ -155,21 +155,8 @@
     return Math.max(-1, Math.min(1, y));
   }
 
-  // Double-tap jump detection
+  // Double-tap jump detection (logic runs in updatePlayer)
   var jumpTriggered = false;
-  var forwardPressed = keys['w'] || keys['arrowup'];
-
-  if (forwardPressed) {
-    var now = performance.now() / 1000;
-    if (player._lastForwardPress > 0 && (now - player._lastForwardPress) < 0.3 && player.jumpCooldown <= 0 && player.jumpAirTimer <= 0) {
-      jumpTriggered = true;
-      player._lastForwardPress = 0;
-    } else if (player._lastForwardPress <= 0) {
-      player._lastForwardPress = now;
-    }
-  } else {
-    player._lastForwardPress = 0;
-  }
 
   /* ============================================================
      Pause
@@ -518,6 +505,21 @@
       // Bounds
       player.x = Math.max(20, Math.min(W - 20, player.x));
       player.y = Math.max(20, Math.min(H - 20, player.y));
+    }
+
+    // Double-tap jump detection
+    jumpTriggered = false;
+    var forwardPressed = keys['w'] || keys['arrowup'];
+    if (forwardPressed) {
+      var now = performance.now() / 1000;
+      if (player._lastForwardPress > 0 && (now - player._lastForwardPress) < 0.3 && player.jumpCooldown <= 0 && player.jumpAirTimer <= 0) {
+        jumpTriggered = true;
+        player._lastForwardPress = 0;
+      } else if (player._lastForwardPress <= 0) {
+        player._lastForwardPress = now;
+      }
+    } else {
+      player._lastForwardPress = 0;
     }
 
     // Jump trigger
