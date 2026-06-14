@@ -482,14 +482,18 @@
        ================================================================ */
     function saveFortune() {
       var today = getTodayStr();
-      localStorage.setItem(STORAGE_DATE, today);
+      try {
+        localStorage.setItem(STORAGE_DATE, today);
+      } catch (e) { /* localStorage full or unavailable */ }
 
       var fortuneRecord = {
         date: today,
         lot: currentLot,
         deity: { slug: currentDeity.slug, name: currentDeity.name, nameZh: currentDeity.nameZh }
       };
-      localStorage.setItem(STORAGE_LAST, JSON.stringify(fortuneRecord));
+      try {
+        localStorage.setItem(STORAGE_LAST, JSON.stringify(fortuneRecord));
+      } catch (e) { /* localStorage full or unavailable */ }
 
       var history = loadHistory();
       history.unshift({
@@ -706,6 +710,15 @@
       if (btnReturn) {
         btnReturn.addEventListener('click', function () {
           checkDailyLimit();
+        });
+      }
+
+      var btnReturnLocked = document.getElementById('btn-return-locked');
+      if (btnReturnLocked) {
+        btnReturnLocked.addEventListener('click', function () {
+          if (historyDrawer) historyDrawer.classList.remove('open');
+          showPhase(phaseCylinder);
+          shakeActive = true;
         });
       }
 

@@ -46,11 +46,19 @@ body {
   position: relative;
   width: 140px;
   height: 300px;
-  background: linear-gradient(
-    180deg,
-    #8B6914 0%, #A0782C 15%, #C4A04A 30%,
-    #8B6914 50%, #6B4F10 70%, #4A3608 100%
-  );
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 8px,
+      rgba(0,0,0,0.08) 8px,
+      rgba(0,0,0,0.08) 9px
+    ),
+    linear-gradient(
+      180deg,
+      #8B6914 0%, #A0782C 15%, #C4A04A 30%,
+      #8B6914 50%, #6B4F10 70%, #4A3608 100%
+    );
   border-radius: 20px 20px 12px 12px;
   box-shadow:
     0 0 40px rgba(184,160,110,0.15),
@@ -59,14 +67,6 @@ body {
   cursor: grab;
   transition: transform 0.15s ease, box-shadow 0.3s ease;
   user-select: none;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 8px,
-      rgba(0,0,0,0.08) 8px,
-      rgba(0,0,0,0.08) 9px
-    );
 }
 .cylinder:hover {
   box-shadow:
@@ -582,11 +582,6 @@ body {
   inset: 0;
   z-index: 250;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.divination-overlay.active {
-  opacity: 1;
 }
 
 /* ---- Gold particles ---- */
