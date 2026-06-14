@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>八卦炉 — Eight Trigrams Furnace | Celestial Archive</title>
+  <meta name="description" content="Survive Taishang Laojun's cosmic crucible as Sun Wukong. Dodge the Samadhi Fire, master the eight trigrams, and forge the legendary Fiery Golden Eyes — or be consumed by the flames.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://celestial-archive.com/games/eight-trigrams-furnace/">
+  <meta property="og:title" content="八卦炉 — Eight Trigrams Furnace: Survive the Cosmic Crucible">
+  <meta property="og:description" content="Dodge the Samadhi Fire inside Taishang Laojun's furnace. Master the eight trigrams and forge the Fiery Golden Eyes.">
+  <meta property="og:image" content="https://celestial-archive.com/images/taishang-laojun/tl-furnace.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Eight Trigrams Furnace — Taishang Laojun's cosmic crucible">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://celestial-archive.com/games/eight-trigrams-furnace/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="八卦炉 — Eight Trigrams Furnace">
+  <meta name="twitter:description" content="Dodge the Samadhi Fire, master the eight trigrams, and forge the Fiery Golden Eyes.">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/taishang-laojun/tl-furnace.jpg">
+  <meta name="twitter:image:alt" content="Eight Trigrams Furnace">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="css/furnace.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRWRSLPKTM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XRWRSLPKTM');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Eight Trigrams Furnace",
+    "description": "Survive Taishang Laojun's cosmic crucible as Sun Wukong. Dodge the Samadhi Fire and forge the legendary Fiery Golden Eyes.",
+    "url": "https://celestial-archive.com/games/eight-trigrams-furnace/",
+    "image": "https://celestial-archive.com/images/taishang-laojun/tl-furnace.jpg",
+    "operatingSystem": "Web Browser",
+    "applicationCategory": "GameApplication",
+    "author": { "@type": "Organization", "name": "Celestial Archive", "url": "https://celestial-archive.com" },
+    "genre": ["Action", "Survival"],
+    "playMode": "SinglePlayer",
+    "inLanguage": "en"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== Cover Screen ===== -->
+  <div id="cover-screen" class="cover-screen">
+    <div class="cover-bg"></div>
+    <div class="cover-content">
+      <div class="cover-sigil">🔥</div>
+      <p class="cover-kicker">Taishang Laojun's Cosmic Crucible</p>
+      <h1 class="cover-title">八卦炉</h1>
+      <p class="cover-title-en">Eight Trigrams Furnace</p>
+      <div class="cover-divider"></div>
+      <p class="cover-sub">炼就火眼金睛，还是化为灰烬？</p>
+      <p class="cover-sub-en">Forge the Fiery Golden Eyes — or be consumed.</p>
+      <div class="cover-unlocks" id="cover-unlocks">已解锁 <span id="unlock-count">0</span>/3</div>
+      <button id="btn-enter" class="btn-enter">入炉受炼 Enter the Furnace</button>
+      <p class="cover-controls-hint">WASD / Arrow Keys to move · Click to choose</p>
+    </div>
+  </div>
+
+  <!-- ===== Game Canvas ===== -->
+  <canvas id="furnace-canvas"></canvas>
+
+  <!-- ===== HUD Overlay ===== -->
+  <div id="game-hud" class="game-hud">
+    <div class="hud-top">
+      <div class="hud-wave" id="hud-wave">第一劫·三昧真火</div>
+      <div class="hud-hp-container">
+        <div class="hud-hp-bar" id="hud-hp-bar"></div>
+        <span class="hud-hp-text" id="hud-hp-text">100</span>
+      </div>
+    </div>
+    <div class="hud-timer" id="hud-timer">60</div>
+    <div class="hud-narrative" id="hud-narrative"></div>
+  </div>
+
+  <!-- ===== Choice Modal ===== -->
+  <div id="choice-modal" class="choice-modal">
+    <div class="choice-backdrop"></div>
+    <div class="choice-container">
+      <p class="choice-prompt" id="choice-prompt"></p>
+      <div class="choice-cards">
+        <button id="choice-a" class="choice-card choice-card-a">
+          <span class="choice-card-emoji"></span>
+          <span class="choice-card-label"></span>
+          <span class="choice-card-desc"></span>
+        </button>
+        <button id="choice-b" class="choice-card choice-card-b">
+          <span class="choice-card-emoji"></span>
+          <span class="choice-card-label"></span>
+          <span class="choice-card-desc"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Damage Pulse Overlay ===== -->
+  <div id="damage-pulse" class="damage-pulse"></div>
+
+  <!-- ===== Ending Screen ===== -->
+  <div id="ending-screen" class="ending-screen">
+    <div class="ending-content">
+      <div class="ending-icon" id="ending-icon"></div>
+      <h2 class="ending-title" id="ending-title"></h2>
+      <p class="ending-title-zh" id="ending-title-zh"></p>
+      <div class="ending-divider"></div>
+      <p class="ending-text" id="ending-text"></p>
+      <p class="ending-quote" id="ending-quote"></p>
+      <div class="ending-actions">
+        <button id="btn-retry" class="btn-retry">再入炉中 Enter Again</button>
+        <button id="btn-exit" class="btn-exit">返回封面 Return to Cover</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-heading">Explore</div>
+          <nav class="footer-nav">
+            <a href="../../library.html">Knowledge Base</a>
+            <a href="../../deities/taishang-laojun/furnace.html">The Furnace Explained</a>
+            <a href="../../deities/sun-wukong/">Sun Wukong</a>
+            <a href="../../">Game Hub</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <nav class="footer-nav">
+            <a href="../../about.html">About Us</a>
+            <a href="../../contact.html">Contact Us</a>
+            <a href="../../privacy-policy.html">Privacy Policy</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../../js/deities.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="js/furnace.js"></script>
+  <script>initFurnace();</script>
+
+</body>
+</html>
