@@ -244,7 +244,7 @@ var CELESTIAL_GAMES = [
     nameZh: '蟠桃盛会',
     nameEn: 'Peach Banquet Heist',
     description: 'Infiltrate the Queen Mother\'s Peach Banquet and devour the fruits of immortality. Avoid celestial guards and become the greatest thief in heaven.',
-    status: 'coming',
+    status: 'live',
     image: 'images/xiwangmu/xmw-peach-garden.jpg'
   },
   {
