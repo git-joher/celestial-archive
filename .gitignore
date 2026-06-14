@@ -5,3 +5,4 @@ images/**/*.md
 js/config.js
 .claude
 .claudeignore
+.worktrees
