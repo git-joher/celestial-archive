@@ -6,23 +6,31 @@
 /* ---- Page body ---- */
 body.game-active .site-nav { display: none !important; }
 body.game-active .site-footer { display: none !important; }
+body.game-active {
+  background: #0d0a14;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
 body {
   background: #0d0a14;
   color: var(--text-on-dark);
   margin: 0;
   padding: 0;
   overflow: hidden;
-  min-height: 100vh;
-  min-height: 100dvh;
   font-family: var(--font-body);
 }
 
-/* ---- Canvas ---- */
-#furnace-canvas {
+/* ---- Canvas Container ---- */
+#game-wrapper {
   position: fixed;
   inset: 0;
   z-index: 1;
+}
+#furnace-canvas {
   display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* ---- Cover Screen ---- */

@@ -114,6 +114,9 @@
     var touchDeltaY = 0;
     var lastTouchX = 0;
     var lastTouchY = 0;
+    var gyroEnabled = false;
+    var gyroGamma = 0;  // left/right tilt (-90 to 90)
+    var gyroBeta = 0;   // front/back tilt (-180 to 180)
 
     /* ================================================================
        Timing
@@ -126,15 +129,8 @@
        Canvas sizing
        ================================================================ */
     function resizeCanvas() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      var w = window.innerWidth;
-      var h = window.innerHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      canvas.style.width = w + 'px';
-      canvas.style.height = h + 'px';
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
 
     /* ================================================================
@@ -142,9 +138,9 @@
        ================================================================ */
     function furnaceCenter() {
       return {
-        x: canvas.width / (window.devicePixelRatio || 2) / 2,
-        y: canvas.height / (window.devicePixelRatio || 2) / 2,
-        size: Math.min(canvas.width, canvas.height) / (window.devicePixelRatio || 2)
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        size: Math.min(canvas.width, canvas.height)
       };
     }
 
@@ -394,7 +390,7 @@
       outerGrad.addColorStop(0.7, '#0d0a14');
       outerGrad.addColorStop(1, '#060408');
       ctx.fillStyle = outerGrad;
-      ctx.fillRect(0, 0, canvas.width / (window.devicePixelRatio || 2), canvas.height / (window.devicePixelRatio || 2));
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Furnace floor — warm copper disc
       var floorGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
@@ -505,8 +501,8 @@
        Rendering: vignette
        ================================================================ */
     function drawVignette() {
-      var w = canvas.width / (window.devicePixelRatio || 2);
-      var h = canvas.height / (window.devicePixelRatio || 2);
+      var w = canvas.width;
+      var h = canvas.height;
       var cx = w / 2;
       var cy = h / 2;
       var r = Math.max(w, h) * 0.7;
@@ -607,6 +603,13 @@
         dy = touchDeltaY * 0.02;
         touchDeltaX *= 0.9;
         touchDeltaY *= 0.9;
+      } else if (gyroEnabled) {
+        // Tilt device to move: gamma = left/right, beta = forward/back
+        dx = gyroGamma / 30;   // normalize -90..90 to -3..3
+        dy = gyroBeta / 45;    // normalize -180..180 to -4..4
+        // Clamp
+        if (dx > 1) dx = 1; else if (dx < -1) dx = -1;
+        if (dy > 1) dy = 1; else if (dy < -1) dy = -1;
       }
 
       if (dx !== 0 && dy !== 0) {
@@ -836,9 +839,7 @@
       lastFrameTime = timestamp;
       frameCount++;
 
-      var w = canvas.width / (window.devicePixelRatio || 2);
-      var h = canvas.height / (window.devicePixelRatio || 2);
-      ctx.clearRect(0, 0, w, h);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       updateShake(dt);
       updatePlayerMovement(dt);
@@ -946,6 +947,33 @@
       if (state.wave === 1) makeChoice(1, 'pill');
       else if (state.wave === 2) makeChoice(2, 'shake');
     });
+
+    // Gyroscope / device orientation
+    if (window.DeviceOrientationEvent) {
+      // iOS 13+ requires permission
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        // Show a prompt only on first touch
+        document.addEventListener('touchstart', function requestGyro() {
+          DeviceOrientationEvent.requestPermission()
+            .then(function (state) {
+              if (state === 'granted') {
+                window.addEventListener('deviceorientation', handleOrientation);
+                gyroEnabled = true;
+              }
+            })
+            .catch(function () { /* denied */ });
+          document.removeEventListener('touchstart', requestGyro);
+        }, { once: false });
+      } else {
+        window.addEventListener('deviceorientation', handleOrientation);
+        gyroEnabled = true;
+      }
+    }
+
+    function handleOrientation(e) {
+      gyroGamma = e.gamma || 0;
+      gyroBeta = e.beta || 0;
+    }
 
     window.addEventListener('resize', resizeCanvas);
 
