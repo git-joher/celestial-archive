@@ -188,6 +188,8 @@
   var hazards = [];
   var particles = [];
   var floatingTexts = [];
+  var cutsceneTimer = 0;
+  var cutscenePhase = 0;
 
   // Visual FX state
   var screenShake = { intensity: 0, duration: 0, timer: 0 };
@@ -333,7 +335,8 @@
   }
 
   function skipCutscene() {
-    gameState = STATE.PLAYING;
+    if (gameState !== STATE.CUTSCENE) return;
+    startLevel(currentLevelIndex);
   }
 
   function restartGame() {
@@ -1008,19 +1011,102 @@
   }
 
   function renderCutscene(ctx) {
-    // Will be implemented in Task 13
+    if (!levelData) return;
+    var poem = levelData.cutscenePoem.zh.split('\n');
+    cutsceneTimer += deltaTime;
+
+    // Phase 0: Fade to black (0–0.8s)
+    if (cutscenePhase === 0) {
+      var fadeAlpha = Math.min(1, cutsceneTimer / 0.8);
+      ctx.fillStyle = 'rgba(0,0,0,' + fadeAlpha + ')'; ctx.fillRect(0, 0, W, H);
+      if (cutsceneTimer >= 0.8) { cutscenePhase = 1; cutsceneTimer = 0; }
+      return;
+    }
+
+    // Black background
+    ctx.fillStyle = '#000000'; ctx.fillRect(0, 0, W, H);
+
+    // Phase 1: Level name calligraphy (0–1.5s)
+    if (cutscenePhase === 1) {
+      var titleProgress = Math.min(1, cutsceneTimer / 0.8);
+      ctx.globalAlpha = titleProgress;
+      ctx.fillStyle = '#d4b878'; ctx.font = '2.8rem "Ma Shan Zheng", serif'; ctx.textAlign = 'center';
+      ctx.fillText(levelData.name, W / 2, H / 2 - 30);
+      ctx.fillStyle = 'rgba(200,180,140,0.6)'; ctx.font = '0.8rem "Cinzel", serif';
+      ctx.fillText(levelData.nameEn.toUpperCase(), W / 2, H / 2 + 20);
+      ctx.globalAlpha = 1; ctx.textAlign = 'start';
+      if (cutsceneTimer >= 1.5) { cutscenePhase = 2; cutsceneTimer = 0; }
+      return;
+    }
+
+    // Phase 2: Poem lines reveal
+    if (cutscenePhase === 2) {
+      var lineIndex = Math.min(poem.length - 1, Math.floor(cutsceneTimer / 0.8));
+      for (var l = 0; l <= lineIndex; l++) {
+        var lineAlpha = l === lineIndex ? Math.min(1, (cutsceneTimer - l * 0.8) / 0.4) : 1;
+        ctx.globalAlpha = lineAlpha;
+        ctx.fillStyle = '#e8dcc8'; ctx.font = '1.4rem "Ma Shan Zheng", serif'; ctx.textAlign = 'center';
+        ctx.fillText(poem[l], W / 2, H / 2 - 40 + l * 50);
+      }
+      ctx.globalAlpha = 1; ctx.textAlign = 'start';
+      ctx.fillStyle = 'rgba(200,180,140,0.3)'; ctx.font = '0.7rem "Source Serif 4", serif'; ctx.textAlign = 'center';
+      ctx.fillText('Press any key to skip', W / 2, H - 40); ctx.textAlign = 'start';
+      if (cutsceneTimer >= poem.length * 0.8 + 0.5) { cutscenePhase = 3; cutsceneTimer = 0; }
+      return;
+    }
+
+    // Phase 3: Iris expand (0–0.6s)
+    if (cutscenePhase === 3) {
+      var irisProgress = Math.min(1, cutsceneTimer / 0.6);
+      var maxRadius = Math.sqrt(W * W + H * H);
+      var irisR = maxRadius * (1 - irisProgress);
+      ctx.fillStyle = '#000000'; ctx.fillRect(0, 0, W, H);
+      ctx.save(); ctx.beginPath(); ctx.arc(W / 2, H / 2, irisR, 0, Math.PI*2); ctx.clip(); ctx.clearRect(0, 0, W, H); ctx.restore();
+      if (cutsceneTimer >= 0.6) { startLevel(currentLevelIndex); }
+      return;
+    }
   }
 
   function renderTitleScreen(ctx) {
-    // Will be implemented in Task 13
+    ctx.fillStyle = '#d4b878'; ctx.shadowColor = 'rgba(212,184,120,0.5)'; ctx.shadowBlur = 30;
+    ctx.font = '3.2rem "Ma Shan Zheng", serif'; ctx.textAlign = 'center'; ctx.fillText('蟠桃盛会', W / 2, H / 2 - 50); ctx.shadowBlur = 0;
+    ctx.fillStyle = 'rgba(200,180,140,0.6)'; ctx.font = '0.9rem "Cinzel", serif'; ctx.fillText('PEACH BANQUET HEIST', W / 2, H / 2);
+    ctx.fillStyle = 'rgba(200,180,140,0.4)'; ctx.font = '0.75rem "Source Serif 4", serif'; ctx.fillText('Infiltrate • Devour • Survive • Defy', W / 2, H / 2 + 35);
+    var pulse = 0.4 + 0.3 * Math.sin(performance.now() / 1000 * 1.5); ctx.fillStyle = 'rgba(232,220,200,' + pulse + ')'; ctx.font = '0.85rem "Source Serif 4", serif'; ctx.fillText('Press SPACE or tap to begin', W / 2, H / 2 + 90);
+    try { var best = localStorage.getItem(GAME_CONSTANTS.STORAGE_KEY_BEST); if (best) { best = JSON.parse(best); ctx.fillStyle = 'rgba(200,180,140,0.3)'; ctx.font = '0.65rem "Source Serif 4", serif'; ctx.fillText('Best: ' + best.score + ' pts · ' + best.stars + '/5 stars', W / 2, H / 2 + 120); } } catch (e) {}
+    ctx.textAlign = 'start';
   }
 
   function renderDeathScreen(ctx) {
-    // Will be implemented in Task 13
+    ctx.fillStyle = 'rgba(10,6,4,0.85)'; ctx.fillRect(0, 0, W, H);
+    if (IMG.playerDeath && IMG.playerDeath.complete) { var dImgSize = Math.min(140, W * 0.25); ctx.save(); ctx.beginPath(); ctx.arc(W / 2, H * 0.25, dImgSize / 2, 0, Math.PI*2); ctx.clip(); ctx.drawImage(IMG.playerDeath, W / 2 - dImgSize / 2, H * 0.25 - dImgSize / 2, dImgSize, dImgSize); ctx.restore(); ctx.strokeStyle = 'rgba(196,77,52,0.6)'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(W / 2, H * 0.25, dImgSize / 2, 0, Math.PI*2); ctx.stroke(); }
+    ctx.fillStyle = '#c44d34'; ctx.shadowColor = 'rgba(196,77,52,0.4)'; ctx.shadowBlur = 20; ctx.font = '2.4rem "Ma Shan Zheng", serif'; ctx.textAlign = 'center'; ctx.fillText('天命难违？', W / 2, H * 0.25 + 100); ctx.shadowBlur = 0;
+    ctx.fillStyle = '#d4b878'; ctx.font = '0.9rem "Cinzel", serif'; ctx.fillText('HEAVEN IS UNJUST', W / 2, H * 0.25 + 135);
+    var stats = [{ label: 'Level Reached', value: (currentLevelIndex + 1) + ' / 4' }, { label: 'Peaches', value: String(totalPeaches) }, { label: 'Survival Time', value: Math.floor(totalTime) + 's' }, { label: 'Score', value: String(totalScore) }];
+    var statY2 = H * 0.25 + 180; var statSpacing = Math.min(80, W / 5);
+    for (var s = 0; s < stats.length; s++) { var sx = W / 2 - (stats.length - 1) * statSpacing / 2 + s * statSpacing; ctx.fillStyle = '#e8dcc8'; ctx.font = '1.6rem "Cinzel", serif'; ctx.fillText(stats[s].value, sx, statY2); ctx.fillStyle = 'rgba(200,180,140,0.5)'; ctx.font = '0.6rem "Source Serif 4", serif'; ctx.fillText(stats[s].label.toUpperCase(), sx, statY2 + 22); }
+    var btnY = statY2 + 80, btnW = 220, btnH = 48;
+    ctx.fillStyle = 'rgba(184,160,110,0.1)'; ctx.strokeStyle = 'rgba(184,160,110,0.5)'; ctx.lineWidth = 2; roundRect(ctx, W / 2 - btnW / 2, btnY, btnW, btnH, 24); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#d4b878'; ctx.font = '1.1rem "Ma Shan Zheng", serif'; ctx.fillText('再闹一次  ·  FIGHT AGAIN', W / 2, btnY + 31);
+    ctx.fillStyle = 'rgba(200,180,140,0.3)'; ctx.font = '0.6rem "Source Serif 4", serif'; ctx.fillText('Press ENTER', W / 2, btnY + btnH + 22);
+    ctx.textAlign = 'start';
   }
 
   function renderVictoryScreen(ctx) {
-    // Will be implemented in Task 13
+    ctx.fillStyle = '#0a0804'; ctx.fillRect(0, 0, W, H);
+    var vicGrad = ctx.createRadialGradient(W / 2, H / 2, W * 0.2, W / 2, H / 2, W * 0.7); vicGrad.addColorStop(0, 'rgba(212,184,120,0.08)'); vicGrad.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = vicGrad; ctx.fillRect(0, 0, W, H);
+    if (IMG.playerCelebrate && IMG.playerCelebrate.complete) { var vImgSize = Math.min(160, W * 0.28); ctx.save(); ctx.beginPath(); ctx.arc(W / 2, H * 0.22, vImgSize / 2, 0, Math.PI*2); ctx.clip(); ctx.drawImage(IMG.playerCelebrate, W / 2 - vImgSize / 2, H * 0.22 - vImgSize / 2, vImgSize, vImgSize); ctx.restore(); ctx.strokeStyle = 'rgba(184,160,110,0.8)'; ctx.lineWidth = 4; ctx.shadowColor = 'rgba(184,160,110,0.5)'; ctx.shadowBlur = 30; ctx.beginPath(); ctx.arc(W / 2, H * 0.22, vImgSize / 2, 0, Math.PI*2); ctx.stroke(); ctx.shadowBlur = 0; }
+    ctx.fillStyle = '#d4b878'; ctx.shadowColor = 'rgba(212,184,120,0.6)'; ctx.shadowBlur = 30; ctx.font = '3rem "Ma Shan Zheng", serif'; ctx.textAlign = 'center'; ctx.fillText('踏碎凌霄！', W / 2, H * 0.22 + 110); ctx.shadowBlur = 0;
+    ctx.fillStyle = 'rgba(212,184,120,0.6)'; ctx.font = '0.8rem "Cinzel", serif'; ctx.fillText('HEAVEN SHATTERED · TRIUMPHANT RETURN', W / 2, H * 0.22 + 145);
+    var stars = calculateStars(); var starCY = H * 0.22 + 180;
+    for (var st = 0; st < 5; st++) { ctx.fillStyle = st < stars ? '#ffd700' : 'rgba(255,255,255,0.15)'; ctx.font = '2rem serif'; ctx.fillText('★', W / 2 - 55 + st * 28, starCY); }
+    var vStats = [{ label: 'Levels Cleared', value: '4 / 4' }, { label: 'Total Time', value: Math.floor(totalTime) + 's' }, { label: 'Score', value: String(totalScore) }];
+    for (var s2 = 0; s2 < vStats.length; s2++) { ctx.fillStyle = '#d4b878'; ctx.font = '1.2rem "Cinzel", serif'; ctx.fillText(vStats[s2].value, W / 2, starCY + 40 + s2 * 35); ctx.fillStyle = 'rgba(200,180,140,0.4)'; ctx.font = '0.6rem "Source Serif 4", serif'; ctx.fillText(vStats[s2].label.toUpperCase(), W / 2, starCY + 40 + s2 * 35 + 18); }
+    var vBtnY = starCY + 155; ctx.fillStyle = 'rgba(184,160,110,0.1)'; ctx.strokeStyle = 'rgba(184,160,110,0.5)'; ctx.lineWidth = 2; roundRect(ctx, W / 2 - 110, vBtnY, 220, 48, 24); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#d4b878'; ctx.font = '1.1rem "Ma Shan Zheng", serif'; ctx.fillText('再来一次  ·  PLAY AGAIN', W / 2, vBtnY + 31);
+    ctx.fillStyle = 'rgba(200,180,140,0.3)'; ctx.font = '0.6rem "Source Serif 4", serif'; ctx.fillText('Press ENTER', W / 2, vBtnY + 70);
+    ctx.textAlign = 'start';
+    if (Math.random() < 0.5) { spawnParticle(W / 2 + (Math.random()-0.5)*W*0.6, H, (Math.random()-0.5)*30, -80-Math.random()*60, 'gold-dust', 2+Math.random()*2); }
   }
 
   /* ============================================================
