@@ -126,6 +126,16 @@
     keys[e.key.toLowerCase()] = false;
   });
 
+  // Mouse click on canvas — restart on death/victory screens
+  canvas.addEventListener('click', function (e) {
+    if (gameState === STATE.DEATH || gameState === STATE.VICTORY) {
+      restartGame();
+    }
+    if (gameState === STATE.TITLE) {
+      startGame();
+    }
+  });
+
   var touchMove = { active: false, dx: 0, dy: 0 };
   var lastTouchEndTime = 0;
   var joystickEl = document.getElementById('mobile-joystick');
