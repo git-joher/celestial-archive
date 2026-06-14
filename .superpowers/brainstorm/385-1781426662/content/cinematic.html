@@ -1,0 +1,99 @@
+<h2>神兽收集 — 影视级体验设计</h2>
+<p class="subtitle">Same 20 beasts · 6 regions · Riddle encounters — elevated to cinematic quality</p>
+
+<div class="section">
+  <h3>🎬 Cinematic Experience Layers</h3>
+</div>
+
+<div style="background:#1a120a;border:1px solid rgba(184,160,110,0.2);border-radius:16px;padding:24px;max-width:700px;margin:0 auto">
+
+  <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:20px">
+    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c44d34,#b8a06e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;flex-shrink:0">1</div>
+    <div>
+      <p style="color:#e8d5b0;margin:0;font-weight:600">Mythological World Map · 山河社稷图</p>
+      <p style="color:rgba(200,180,140,0.5);font-size:0.78rem;margin:4px 0">A living, breathing map — not a static image. Ink-wash mountains fade in and out of mist. Rivers shimmer with golden light. Each region has its own atmosphere: Kunlun glows with immortal radiance, the Underworld pulses with faint purple energy. Clouds drift across the map in parallax layers. The map IS the main interface.</p>
+      <p style="color:rgba(200,180,140,0.3);font-size:0.7rem">Technique: Layered CSS/SVG backgrounds, CSS animations, opacity transitions on region hover</p>
+    </div>
+  </div>
+
+  <div style="width:2px;height:14px;background:rgba(184,160,110,0.2);margin-left:18px"></div>
+
+  <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:20px">
+    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c44d34,#b8a06e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;flex-shrink:0">2</div>
+    <div>
+      <p style="color:#e8d5b0;margin:0;font-weight:600">Cinematic Exploration Sequence · 探秘过场</p>
+      <p style="color:rgba(200,180,140,0.5);font-size:0.78rem;margin:4px 0">Click a region → screen darkens dramatically → ink-brush text writes itself across the screen line by line, describing the journey into the region. Camera "zooms in" on the region (CSS transform scale + opacity on map). Ambient particles match the region: snow in the North, embers in the West, fireflies in the South, starlight in Heaven.</p>
+      <p style="color:rgba(200,180,140,0.3);font-size:0.7rem">Technique: Full-screen overlay, timed text-reveal animation, region-themed particle system</p>
+    </div>
+  </div>
+
+  <div style="width:2px;height:14px;background:rgba(184,160,110,0.2);margin-left:18px"></div>
+
+  <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:20px">
+    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c44d34,#b8a06e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;flex-shrink:0">3</div>
+    <div>
+      <p style="color:#e8d5b0;margin:0;font-weight:600">Riddle Reveal · 天机谜题</p>
+      <p style="color:rgba(200,180,140,0.5);font-size:0.78rem;margin:4px 0">The riddle doesn't just appear — it materializes. Ancient Chinese characters glow into existence one by one on aged parchment, accompanied by subtle ink-brush sound cues. Three beast silhouettes fade in from smoke below the riddle. Silhouettes are dark, mysterious shapes with glowing eyes — you can see the outline but not the details. Hovering a silhouette makes it pulse with light.</p>
+      <p style="color:rgba(200,180,140,0.3);font-size:0.7rem">Technique: CSS text animations, SVG silhouette shapes, hover glow effects</p>
+    </div>
+  </div>
+
+  <div style="width:2px;height:14px;background:rgba(184,160,110,0.2);margin-left:18px"></div>
+
+  <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:20px">
+    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c44d34,#b8a06e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;flex-shrink:0">4</div>
+    <div>
+      <p style="color:#e8d5b0;margin:0;font-weight:600">Beast Revelation · 神兽现世</p>
+      <p style="color:rgba(200,180,140,0.5);font-size:0.78rem;margin:4px 0">The reveal is the emotional peak. Correct guess: the silhouette EXPLODES into golden light — the beast illustration bursts forth from the center with a shockwave of particles. The beast's roar/cry echoes (optional audio). Wrong guess: the silhouette dissolves into smoke, the correct beast emerges from the smoke — still dramatic but with a "the truth was hiding" feel. Beast card then unfurls like an ancient scroll, with gold leaf edges.</p>
+      <p style="color:rgba(200,180,140,0.3);font-size:0.7rem">Technique: CSS keyframe explosion, radial particle burst, scroll-unfurl animation (reuse from divination)</p>
+    </div>
+  </div>
+
+  <div style="width:2px;height:14px;background:rgba(184,160,110,0.2);margin-left:18px"></div>
+
+  <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:20px">
+    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c44d34,#b8a06e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;flex-shrink:0">5</div>
+    <div>
+      <p style="color:#e8d5b0;margin:0;font-weight:600">Beast Card · 神兽图鉴卡</p>
+      <p style="color:rgba(200,180,140,0.5);font-size:0.78rem;margin:4px 0">Not a simple card — a museum-grade display. The beast illustration dominates the card with a subtle parallax drift (slight movement on mouse/tilt). Rarity determines the card's border treatment: Divine beasts have animated gold foil edges. Stats are rendered as elegant radial charts or ink-brush bar fills. The lore text appears in a scrollable parchment panel with drop-cap and classical formatting.</p>
+    </div>
+  </div>
+
+  <div style="width:2px;height:14px;background:rgba(184,160,110,0.2);margin-left:18px"></div>
+
+  <div style="display:flex;align-items:flex-start;gap:14px">
+    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c44d34,#b8a06e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;flex-shrink:0">6</div>
+    <div>
+      <p style="color:#e8d5b0;margin:0;font-weight:600">Bestiary Gallery · 万兽图谱</p>
+      <p style="color:rgba(200,180,140,0.5);font-size:0.78rem;margin:4px 0">The collected beasts are displayed in a grand gallery view — not a grid of thumbnails. Cards are arranged in a ceremonial formation with undiscovered slots shown as empty pedestals with swirling mystery smoke. Completion milestones trigger celebration effects. The gallery can be filtered by region, rarity, or type with smooth animated transitions.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="section" style="margin-top:24px">
+  <h3>🎨 Visual Reference: Region Atmospheres</h3>
+  <table style="width:100%;text-align:left;border-collapse:collapse;font-size:0.82rem">
+    <tr style="color:#b8a06e">
+      <th style="padding:8px">Region</th><th>Particles</th><th>Color</th><th>Mood</th>
+    </tr>
+    <tr style="border-top:1px solid rgba(184,160,110,0.1)">
+      <td style="padding:8px">昆仑仙境</td><td>Golden motes, cherry blossoms</td><td>Warm gold, jade green</td><td>Ethereal, sacred</td>
+    </tr>
+    <tr>
+      <td style="padding:8px">南山经</td><td>Fireflies, drifting leaves</td><td>Emerald, vermillion</td><td>Verdant, wild</td>
+    </tr>
+    <tr>
+      <td style="padding:8px">西荒大漠</td><td>Embers, sand wisps</td><td>Amber, burnt orange</td><td>Harsh, ancient</td>
+    </tr>
+    <tr>
+      <td style="padding:8px">北冥冰原</td><td>Snowflakes, frost sparkles</td><td>Ice blue, silver</td><td>Cold, mystical</td>
+    </tr>
+    <tr>
+      <td style="padding:8px">天庭神兽</td><td>Stardust, golden beams</td><td>White gold, celestial blue</td><td>Divine, majestic</td>
+    </tr>
+    <tr>
+      <td style="padding:8px">幽冥地府</td><td>Purple wisps, soul lights</td><td>Deep purple, ghost green</td><td>Dark, mysterious</td>
+    </tr>
+  </table>
+</div>

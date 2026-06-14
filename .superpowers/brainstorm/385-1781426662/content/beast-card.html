@@ -1,0 +1,78 @@
+<h2>神兽卡片 — What does a beast card contain?</h2>
+<p class="subtitle">Each collected beast gets a card in the bestiary. What information should it display?</p>
+
+<div style="background:#1a120a;border:2px solid #b8a06e;border-radius:16px;padding:28px;max-width:400px;margin:20px auto;text-align:center">
+  <div style="width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#3d2a10,#1a120a);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;border:3px solid #b8a06e;box-shadow:0 0 30px rgba(184,160,110,0.2)">
+    <span style="font-size:4rem">🦊</span>
+  </div>
+  <p style="font-family:'Ma Shan Zheng',serif;font-size:2rem;color:#e8d5b0;margin:0">九尾狐</p>
+  <p style="font-family:Cinzel,serif;font-size:0.8rem;color:#b8a06e;letter-spacing:3px;margin:4px 0">NINE-TAILED FOX</p>
+  <div style="width:40px;height:1px;background:#b8a06e;margin:12px auto"></div>
+  <p style="font-size:0.85rem;color:rgba(200,180,140,0.7);line-height:1.6">青丘之山，有兽焉，其状如狐而九尾，其音如婴儿，能食人，食者不蛊。</p>
+  <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
+    <span style="background:#c44d34;color:#fff;padding:3px 10px;border-radius:10px;font-size:0.7rem">稀有</span>
+    <span style="background:rgba(184,160,110,0.2);color:#b8a06e;padding:3px 10px;border-radius:10px;font-size:0.7rem">青丘山</span>
+    <span style="background:rgba(184,160,110,0.2);color:#b8a06e;padding:3px 10px;border-radius:10px;font-size:0.7rem">妖</span>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:24px">Choose which elements to include on each beast card:</p>
+
+<div class="options" data-multiselect>
+  <div class="option" data-choice="name" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content">
+      <h3>名称 (Name)</h3>
+      <p>Chinese name + English name. Essential.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="illustration" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content">
+      <h3>神兽图鉴 (Illustration)</h3>
+      <p>A visual representation — SVG icon, emoji, or image placeholder. Gives each beast visual identity.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="classic-text" onclick="toggleSelect(this)">
+    <div class="letter">3</div>
+    <div class="content">
+      <h3>古籍原文 (Classic Source Text)</h3>
+      <p>The original Classical Chinese description from 山海经 or other ancient texts. Scholarly authenticity.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="lore" onclick="toggleSelect(this)">
+    <div class="letter">4</div>
+    <div class="content">
+      <h3>传说故事 (Lore & Stories)</h3>
+      <p>A paragraph (zh+en) about the beast's mythology — famous appearances, legends, cultural significance.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="stats" onclick="toggleSelect(this)">
+    <div class="letter">5</div>
+    <div class="content">
+      <h3>属性数值 (Stats)</h3>
+      <p>Game-like attributes: Power, Wisdom, Mystery, Ferocity, Benevolence. Fun for comparison and collection.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="region" onclick="toggleSelect(this)">
+    <div class="letter">6</div>
+    <div class="content">
+      <h3>栖息地 (Habitat & Region)</h3>
+      <p>Where the beast lives — region on the map, terrain type. Connects to the exploration mechanic.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="rarity" onclick="toggleSelect(this)">
+    <div class="letter">7</div>
+    <div class="content">
+      <h3>稀有度 (Rarity Tier)</h3>
+      <p>Common / Rare / Legendary / Mythic. Drives collection satisfaction and encounter rates.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="type" onclick="toggleSelect(this)">
+    <div class="letter">8</div>
+    <div class="content">
+      <h3>分类 (Beast Type)</h3>
+      <p>Dragon / Phoenix / Qilin / Beast / Spirit / Demon. Categorization for filtering the bestiary.</p>
+    </div>
+  </div>
+</div>

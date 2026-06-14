@@ -228,7 +228,7 @@ var CELESTIAL_GAMES = [
     nameZh: '龙宫探宝',
     nameEn: 'Dragon Palace Treasure',
     description: 'Dive into the Dragon King\'s underwater palace. Navigate coral labyrinths and claim treasures from the depths of the Eastern Sea.',
-    status: 'coming',
+    status: 'live',
     image: 'images/white-dragon-horse/wlh-hero.jpg'
   },
   {

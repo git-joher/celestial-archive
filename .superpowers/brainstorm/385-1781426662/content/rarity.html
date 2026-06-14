@@ -1,0 +1,52 @@
+<h2>神兽收集 — Rarity & Encounter Mechanics</h2>
+<p class="subtitle">How rare is each beast, and what happens when you explore a region?</p>
+
+<div class="section">
+  <h3>Q1: Rarity Tiers & Distribution (20 beasts)</h3>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="rarity-simple" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>3 Tiers: 普通 · 稀有 · 传说</h3>
+      <p>Common (10) / Rare (6) / Legendary (4). Simple and clear. Each region has 1 legendary beast as its "boss."</p>
+    </div>
+  </div>
+  <div class="option" data-choice="rarity-four" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>4 Tiers: 凡 · 灵 · 仙 · 神</h3>
+      <p>Mortal (8) / Spirit (6) / Immortal (4) / Divine (2). Thematically Chinese tiers. Divine beasts are almost mythical in rarity — only 2 exist in the entire collection.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:28px">
+  <h3>Q2: Exploration Mechanic</h3>
+  <p class="subtitle">When the user clicks a region to explore, what happens?</p>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="encounter-auto" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Automatic Encounter</h3>
+      <p>Click region → short narrative text plays out ("You venture into the misty peaks of Kunlun...") → a beast is randomly revealed from that region's pool (weighted by rarity). Simple, no friction. One free exploration per day.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="encounter-puzzle" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Riddle Challenge</h3>
+      <p>Click region → a classical riddle or clue about a specific beast appears → user guesses which beast it is from 3 options → correct guess reveals the beast. Wrong guess still reveals it but with a "near miss" note. More engaging.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="encounter-track" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Footprint Tracking</h3>
+      <p>Click region → see "tracks" or "signs" of 2-3 beasts → choose which trail to follow → encounter the chosen beast. Gives user agency over which beast they pursue. Rare beasts have fainter tracks.</p>
+    </div>
+  </div>
+</div>
