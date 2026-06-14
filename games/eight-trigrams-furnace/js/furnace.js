@@ -11,6 +11,7 @@
  */
 (function () {
   'use strict';
+  document.body.classList.add('game-active');
 
   window.initFurnace = function () {
     /* ================================================================

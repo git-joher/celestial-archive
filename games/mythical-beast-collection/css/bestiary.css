@@ -3,6 +3,9 @@
    墨韵敦煌 — dark cinematic beast-hunting game aesthetic
    ============================================================ */
 
+body.game-active .site-nav { display: none !important; }
+body.game-active .site-footer { display: none !important; }
+
 /* ============================================================
    1. Page Body
    ============================================================ */

@@ -98,6 +98,64 @@
      ============================================================ */
   var keys = {};
 
+  // Gyroscope / tilt control (mobile)
+  var gyro = { active: false, dx: 0, dy: 0, calibrated: false, baseBeta: 0, baseGamma: 0, indicatorTimer: 0 };
+
+  function startGyro() {
+    window.addEventListener('deviceorientation', handleOrientation);
+    window.addEventListener('deviceorientationabsolute', handleOrientation);
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then(function (state) { if (state === 'granted') { gyro.indicatorTimer = 3; } })
+        .catch(function () {});
+    }
+  }
+
+  function handleOrientation(e) {
+    if (e.beta === null || e.gamma === null) return;
+    if (!gyro.calibrated) {
+      gyro.baseBeta = e.beta;
+      gyro.baseGamma = e.gamma;
+      gyro.calibrated = true;
+      gyro.active = true;
+      gyro.indicatorTimer = 2;
+      return;
+    }
+    var rawDY = (e.beta - gyro.baseBeta);
+    var rawDX = (e.gamma - gyro.baseGamma);
+    var sens = 0.1;
+    gyro.dy = Math.abs(rawDY) < 1.5 ? 0 : Math.max(-1, Math.min(1, rawDY * sens));
+    gyro.dx = Math.abs(rawDX) < 1.5 ? 0 : Math.max(-1, Math.min(1, rawDX * sens));
+  }
+
+  // Re-calibrate gyro on tap
+  document.addEventListener('click', function (e) {
+    if (gyro.active && gameState === STATE.PLAYING) {
+      gyro.calibrated = false;
+      gyro.indicatorTimer = 1.5;
+    }
+  });
+
+  // Start gyro immediately
+  startGyro();
+
+  function getInputX() {
+    var x = 0;
+    if (keys['a'] || keys['arrowleft']) x -= 1;
+    if (keys['d'] || keys['arrowright']) x += 1;
+    if (touchMove.active) { x += touchMove.dx; }
+    if (gyro.active && !(keys['a'] || keys['d'] || keys['arrowleft'] || keys['arrowright'] || touchMove.active)) { x += gyro.dx; }
+    return Math.max(-1, Math.min(1, x));
+  }
+  function getInputY() {
+    var y = 0;
+    if (keys['w'] || keys['arrowup']) y -= 1;
+    if (keys['s'] || keys['arrowdown']) y += 1;
+    if (touchMove.active) { y += touchMove.dy; }
+    if (gyro.active && !(keys['w'] || keys['s'] || keys['arrowup'] || keys['arrowdown'] || touchMove.active)) { y += gyro.dy; }
+    return Math.max(-1, Math.min(1, y));
+  }
+
   window.addEventListener('keydown', function (e) {
     var key = e.key;
     keys[key.toLowerCase()] = true;
@@ -384,11 +442,7 @@
     player.dashCooldownTimer = GAME_CONSTANTS.DASH_COOLDOWN;
     player.invincibleTimer = Math.max(player.invincibleTimer, GAME_CONSTANTS.DASH_INVINCIBILITY);
 
-    var dx = 0, dy = 0;
-    if (keys['w'] || keys['arrowup']) dy = -1;
-    if (keys['s'] || keys['arrowdown']) dy = 1;
-    if (keys['a'] || keys['arrowleft']) dx = -1;
-    if (keys['d'] || keys['arrowright']) dx = 1;
+    var dx = getInputX(), dy = getInputY();
     if (dx === 0 && dy === 0) { dx = 1; }
 
     var len = Math.sqrt(dx * dx + dy * dy);
@@ -448,13 +502,8 @@
       player.x += player.dashDx * dashSpeed * dt;
       player.y += player.dashDy * dashSpeed * dt;
     } else {
-      var mx = 0, my = 0;
-      if (keys['w'] || keys['arrowup']) my = -1;
-      if (keys['s'] || keys['arrowdown']) my = 1;
-      if (keys['a'] || keys['arrowleft']) mx = -1;
-      if (keys['d'] || keys['arrowright']) mx = 1;
-
-      if (touchMove.active) { mx = touchMove.dx; my = touchMove.dy; }
+      var mx = getInputX();
+      var my = getInputY();
 
       if (mx !== 0 && my !== 0) { var diag = 1 / Math.sqrt(2); mx *= diag; my *= diag; }
 
@@ -1061,6 +1110,15 @@
     ctx.fillStyle = hpGrad; roundRect(ctx, padding + 2, bottomY + 2, (barWidth - 4) * hpRatio, barHeight - 4, 5); ctx.fill();
     ctx.fillStyle = '#e8dcc8'; ctx.font = '0.7rem monospace'; ctx.fillText('HP ' + Math.ceil(player.hp) + '/' + player.maxHp, padding + 8, bottomY + 11);
 
+    // Gyro indicator toast
+    if (gyro.active && gyro.indicatorTimer > 0) {
+      var gyroY = bottomY - 30;
+      ctx.globalAlpha = Math.min(1, gyro.indicatorTimer / 0.5);
+      ctx.fillStyle = 'rgba(100,200,200,0.7)'; ctx.font = '0.6rem "Source Serif 4", serif'; ctx.textAlign = 'center';
+      ctx.fillText('◈ GYRO ON', W / 2, gyroY);
+      ctx.textAlign = 'left'; ctx.globalAlpha = 1;
+    }
+
     // Dash cooldown
     var dashX = padding + barWidth + 24, dashY = bottomY + barHeight / 2, dashRadius = 12;
     ctx.strokeStyle = 'rgba(184,160,110,0.4)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(dashX, dashY, dashRadius, 0, Math.PI*2); ctx.stroke();
@@ -1336,6 +1394,7 @@
     switch (gameState) {
       case STATE.PLAYING:
         levelTimer += scaledDt;
+        if (gyro.indicatorTimer > 0) gyro.indicatorTimer -= scaledDt;
 
         updatePlayer(scaledDt);
         updateEnemies(scaledDt);

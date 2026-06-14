@@ -4,6 +4,8 @@
    ============================================================ */
 
 /* ---- Page body ---- */
+body.game-active .site-nav { display: none !important; }
+body.game-active .site-footer { display: none !important; }
 body {
   background: #0d0a14;
   color: var(--text-on-dark);

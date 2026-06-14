@@ -3,6 +3,9 @@
    "墨韵敦煌" design system — dark celestial stage
    ============================================================ */
 
+body.game-active .site-nav { display: none !important; }
+body.game-active .site-footer { display: none !important; }
+
 /* ---- Page body override ---- */
 body {
   background: #1a120a;
