@@ -249,7 +249,10 @@
      ============================================================ */
   function rand(min, max) { return Math.random() * (max - min) + min; }
   function randInt(min, max) { return Math.floor(rand(min, max + 1)); }
-  function dist(a, b) { var dx = a.x - b.x; var dy = a.y - b.y; return Math.sqrt(dx * dx + dy * dy); }
+  function dist(x1, y1, x2, y2) {
+    var dx = x1 - x2, dy = y1 - y2;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
 
   /* ============================================================
      Stub: startGame / startLevel / togglePause  (Task 5)
@@ -394,12 +397,213 @@
     player.y = Math.max(r, Math.min(H - r, player.y));
   }
 
+  function spawnLevelEnemies() {
+    if (!levelData || !levelData.enemies) return;
+    enemies = [];
+    for (var i = 0; i < levelData.enemies.length; i++) {
+      var cfg = levelData.enemies[i];
+      for (var j = 0; j < cfg.count; j++) { spawnEnemy(cfg); }
+    }
+  }
+
+  function spawnEnemy(cfg) {
+    var margin = cfg.territoryMargin || 0.1;
+    var enemy = {
+      x: W * (margin + Math.random() * (1 - margin * 2)),
+      y: H * (margin + Math.random() * (1 - margin * 2)),
+      type: cfg.type, speed: cfg.speed, size: cfg.size, hp: cfg.hp || 1,
+      patrolPattern: cfg.patrolPattern,
+      patrolDir: Math.random() > 0.5 ? 1 : -1,
+      patrolTimer: 0,
+      special: cfg.special || null, specialCooldown: 0,
+      attack: cfg.attack || null, attackCooldown: 0,
+      render: cfg.render, territoryMargin: margin
+    };
+    enemies.push(enemy);
+  }
+
+  function spawnHazard(type, cfg) {
+    var hazard = {
+      type: type, x: 0, y: 0,
+      warningTime: cfg.warningTime, warningTimer: cfg.warningTime,
+      active: false, damage: cfg.damage, radius: cfg.radius || 30,
+      color: cfg.color || '#ff0000', warningColor: cfg.warningColor || 'rgba(255,0,0,0.4)',
+      pattern: cfg.pattern || 'point', timer: 0, duration: cfg.duration || 1500, data: {}
+    };
+    switch (cfg.pattern) {
+      case 'cross':
+        var wall = Math.floor(Math.random() * 4);
+        if (wall === 0) { hazard.x = W / 2; hazard.y = 0; }
+        else if (wall === 1) { hazard.x = W / 2; hazard.y = H; }
+        else if (wall === 2) { hazard.x = 0; hazard.y = H / 2; }
+        else { hazard.x = W; hazard.y = H / 2; }
+        hazard.data.wall = wall;
+        break;
+      case 'random-line':
+        hazard.x = Math.random() * W; hazard.y = Math.random() * H;
+        hazard.data.angle = Math.random() * Math.PI;
+        hazard.data.length = 100 + Math.random() * 200;
+        break;
+      case 'fullscreen':
+        hazard.x = W / 2; hazard.y = H / 2;
+        hazard.radius = Math.max(W, H);
+        break;
+      default:
+        do { hazard.x = W * 0.1 + Math.random() * W * 0.8; hazard.y = H * 0.1 + Math.random() * H * 0.8; }
+        while (dist(hazard.x, hazard.y, player.x, player.y) < 150);
+        break;
+    }
+    hazards.push(hazard);
+  }
+
   function updateEnemies(dt) {
-    // Will be implemented in Task 8
+    if (!levelData) return;
+    for (var i = 0; i < enemies.length; i++) {
+      var e = enemies[i];
+      var margin = e.territoryMargin;
+      switch (e.patrolPattern) {
+        case 'horizontal':
+          e.x += e.speed * e.patrolDir * dt;
+          if (e.x < W * margin || e.x > W * (1 - margin)) e.patrolDir *= -1;
+          break;
+        case 'vertical':
+          e.y += e.speed * e.patrolDir * dt;
+          if (e.y < H * margin || e.y > H * (1 - margin)) e.patrolDir *= -1;
+          break;
+        case 'random':
+          e.patrolTimer -= dt;
+          if (e.patrolTimer <= 0) { e.patrolTimer = 1.5 + Math.random() * 2; e.patrolDir = Math.random() * Math.PI * 2; }
+          e.x += Math.cos(e.patrolDir) * e.speed * 0.6 * dt;
+          e.y += Math.sin(e.patrolDir) * e.speed * 0.6 * dt;
+          e.x = Math.max(W * margin, Math.min(W * (1 - margin), e.x));
+          e.y = Math.max(H * margin, Math.min(H * (1 - margin), e.y));
+          break;
+      }
+      if (e.specialCooldown > 0) e.specialCooldown -= dt;
+      if (e.attackCooldown > 0) e.attackCooldown -= dt;
+
+      // Tu Di Gong root snare
+      if (e.type === 'tu-di-gong' && e.special && e.specialCooldown <= 0) {
+        e.specialCooldown = e.special.cooldown;
+        hazards.push({
+          type: 'root-snare', x: player.x, y: player.y,
+          warningTime: e.special.warningTime, warningTimer: e.special.warningTime,
+          active: false, damage: 0, radius: e.special.snareRadius,
+          color: '#5a3a1a', warningColor: 'rgba(100,180,80,0.3)',
+          pattern: 'point', timer: e.special.snareDuration, duration: e.special.snareDuration,
+          data: { snareActive: false, slowFactor: 0.4 }
+        });
+        AudioEngine.playSfx('snare');
+      }
+
+      // Seven Fairies fan wave
+      if (e.type === 'seven-fairies' && e.attack && e.attackCooldown <= 0) {
+        e.attackCooldown = e.attack.fireRate;
+        var atk = e.attack;
+        var adx = player.x - e.x, ady = player.y - e.y;
+        var angleToPlayer = Math.atan2(ady, adx);
+        var startAngle = angleToPlayer - atk.spreadAngle / 2;
+        for (var p = 0; p < atk.projectiles; p++) {
+          var pAngle = startAngle + (atk.spreadAngle / (atk.projectiles - 1)) * p;
+          projectiles.push({
+            x: e.x, y: e.y,
+            vx: Math.cos(pAngle) * atk.projectileSpeed,
+            vy: Math.sin(pAngle) * atk.projectileSpeed,
+            size: atk.projectileSize, color: atk.projectileColor, damage: 10, life: 3
+          });
+        }
+      }
+    }
+
+    // Xiwangmu boss (Level 2)
+    if (levelData && levelData.boss && levelData.winCondition === 'collect') {
+      var boss = levelData.boss;
+      if (levelTimer >= boss.triggerTime && !levelData._bossActive) {
+        levelData._bossActive = true; levelData._bossAttackTimer = 0;
+        AudioEngine.playSfx('boss-appear');
+        triggerScreenShake(15, 0.8);
+        spawnParticleBurst(W / 2, H / 2, 40, 'spark', 200, 1.5);
+      }
+      if (levelData._bossActive) {
+        levelData._bossAttackTimer += dt;
+        if (levelData._bossAttackTimer >= boss.attackInterval) {
+          levelData._bossAttackTimer = 0;
+          hazards.push({ type: 'water-burst', x: player.x, y: player.y, warningTime: 500, warningTimer: 500, active: false, damage: boss.attacks[0].damage, radius: boss.attacks[0].radius, color: 'rgba(100,180,220,0.6)', warningColor: 'rgba(100,180,220,0.3)', pattern: 'point', timer: 1000, duration: 1000, data: {} });
+          setTimeout(function () { if (gameState !== STATE.PLAYING) return; hazards.push({ type: 'water-burst', x: player.x + (Math.random()-0.5)*120, y: player.y + (Math.random()-0.5)*120, warningTime: 400, warningTimer: 400, active: false, damage: boss.attacks[0].damage*0.7, radius: boss.attacks[0].radius*0.8, color: 'rgba(100,180,220,0.5)', warningColor: 'rgba(100,180,220,0.25)', pattern: 'point', timer: 800, duration: 800, data: {} }); }, 600);
+          setTimeout(function () { if (gameState !== STATE.PLAYING) return; hazards.push({ type: 'water-burst', x: player.x + (Math.random()-0.5)*120, y: player.y + (Math.random()-0.5)*120, warningTime: 400, warningTimer: 400, active: false, damage: boss.attacks[0].damage*0.7, radius: boss.attacks[0].radius*0.8, color: 'rgba(100,180,220,0.5)', warningColor: 'rgba(100,180,220,0.25)', pattern: 'point', timer: 800, duration: 800, data: {} }); }, 1200);
+        }
+      }
+    }
+
+    // Bagua safe zone (Level 3)
+    if (levelData && levelData.mechanics) {
+      for (var m = 0; m < levelData.mechanics.length; m++) {
+        var mech = levelData.mechanics[m];
+        if (mech.type === 'bagua-safe-zone') {
+          levelData._baguaTimer = (levelData._baguaTimer || 0) + dt;
+          if (levelData._baguaTimer >= mech.cycleTime / 1000) { levelData._baguaTimer = 0; levelData._baguaSafeIndex = Math.floor(Math.random() * 8); }
+          if (levelData._baguaSafeIndex !== undefined) {
+            var safeAngle = (levelData._baguaSafeIndex / 8) * Math.PI * 2;
+            var safeX = W / 2 + Math.cos(safeAngle) * W * 0.25;
+            var safeY = H / 2 + Math.sin(safeAngle) * H * 0.25;
+            if (dist(player.x, player.y, safeX, safeY) > mech.safeRadius) {
+              if (player.buffType !== 'invincible' && player.invincibleTimer <= 0) { player.hp -= mech.burnDPS * dt; if (player.hp <= 0) { player.hp = 0; triggerDeath(); } }
+            }
+          }
+        }
+      }
+    }
+
+    // Furnace hazards (Level 3)
+    if (levelData && levelData.winCondition === 'survive') {
+      levelData._hazardTimer = (levelData._hazardTimer || 0) + dt;
+      if (levelData._hazardTimer > 2.5) { levelData._hazardTimer = 0; var hCfg = levelData.hazards[Math.floor(Math.random() * levelData.hazards.length)]; spawnHazard(hCfg.type, hCfg); }
+    }
+
+    // Boss rounds (Level 4)
+    if (levelData && levelData.winCondition === 'boss' && gameState === STATE.PLAYING) {
+      if (bossRoundIndex < levelData.bossRounds.length) {
+        bossRoundTimer += dt;
+        var round = levelData.bossRounds[bossRoundIndex];
+        levelData._roundSpawnTimer = (levelData._roundSpawnTimer || 0) + dt;
+        var spawnInterval = round.duration / (round.attacks[0].count || 10);
+        if (levelData._roundSpawnTimer >= spawnInterval) { levelData._roundSpawnTimer = 0; spawnBossRoundAttack(round); }
+        if (bossRoundTimer >= round.duration) { bossRoundIndex++; bossRoundTimer = 0; levelData._roundSpawnTimer = 0; triggerScreenShake(8, 0.5); AudioEngine.playSfx('level-complete'); }
+      }
+    }
+  }
+
+  function spawnBossRoundAttack(round) {
+    var atk = round.attacks[0];
+    switch (atk.type) {
+      case 'lightning-strike':
+        hazards.push({ type: 'lightning', x: W*0.1+Math.random()*W*0.8, y: H*0.1+Math.random()*H*0.6, warningTime: atk.warningTime, warningTimer: atk.warningTime, active: false, damage: atk.damage, radius: atk.boltRadius, color: '#ffffff', warningColor: atk.warningColor, pattern: 'point', timer: 400, duration: 400, data: {} });
+        break;
+      case 'fire-rain':
+        var fx = Math.random() * W;
+        hazards.push({ type: 'fireball', x: fx, y: -10, warningTime: atk.warningTime, warningTimer: atk.warningTime, active: false, damage: atk.damage, radius: atk.fireballRadius, color: atk.fireballColor, warningColor: 'rgba(255,100,30,0.4)', pattern: 'point', timer: 2000, duration: 2000, data: { residualFire: atk.residualFire, residualRadius: atk.residualRadius, residualDuration: atk.residualDuration } });
+        break;
+      case 'wind-push':
+        var windAngle = Math.random() * Math.PI * 2;
+        player.x += Math.cos(windAngle) * (atk.force || 150) * (1/60);
+        player.y += Math.sin(windAngle) * (atk.force || 150) * (1/60);
+        player.x = Math.max(player.radius, Math.min(W - player.radius, player.x));
+        player.y = Math.max(player.radius, Math.min(H - player.radius, player.y));
+        spawnParticleBurst(player.x - Math.cos(windAngle)*50, player.y - Math.sin(windAngle)*50, 5, 'ice', 100, 0.6);
+        if (Math.random() < 0.3) AudioEngine.playSfx('wind-gust');
+        break;
+      case 'ice-shard':
+        var iAngle = Math.random() * Math.PI * 2;
+        projectiles.push({ x: player.x + Math.cos(iAngle+Math.PI)*300, y: player.y + Math.sin(iAngle+Math.PI)*300, vx: Math.cos(iAngle)*atk.speed, vy: Math.sin(iAngle)*atk.speed, size: atk.radius, color: atk.color, damage: atk.damage, life: 4 });
+        break;
+    }
   }
 
   function updateProjectiles(dt) {
-    // Will be implemented in Task 9
+    for (var i = projectiles.length - 1; i >= 0; i--) {
+      var p = projectiles[i]; p.x += p.vx * dt; p.y += p.vy * dt; p.life -= dt;
+      if (p.life <= 0 || p.x < -50 || p.x > W+50 || p.y < -50 || p.y > H+50) { projectiles.splice(i, 1); }
+    }
   }
 
   function updateCollectibles(dt) {
@@ -407,7 +611,11 @@
   }
 
   function updateHazards(dt) {
-    // Will be implemented in Task 10
+    for (var i = hazards.length - 1; i >= 0; i--) {
+      var h = hazards[i];
+      if (!h.active) { h.warningTimer -= dt; if (h.warningTimer <= 0) { h.active = true; if (h.type === 'flame-jet' || h.type === 'fireball') AudioEngine.playSfx('fire-jet'); if (h.type === 'lightning') AudioEngine.playSfx('lightning'); if (h.type === 'pressure-blast') AudioEngine.playSfx('pressure-blast'); } }
+      else { h.timer -= dt; if (h.timer <= 0) { if (h.data && h.data.residualFire) { hazards.push({ type: 'residual-fire', x: h.x, y: h.y, warningTime: 0, warningTimer: 0, active: true, damage: 8, radius: h.data.residualRadius, color: 'rgba(255,80,20,0.4)', pattern: 'point', timer: h.data.residualDuration, duration: h.data.residualDuration, data: {} }); } hazards.splice(i, 1); } }
+    }
   }
 
   function spawnParticle(x, y, vx, vy, type, life) {
@@ -495,7 +703,21 @@
   }
 
   function checkCollisions() {
-    // Will be implemented in Task 11
+    for (var i = 0; i < enemies.length; i++) { var e = enemies[i]; if (dist(player.x, player.y, e.x, e.y) < player.radius + e.size) { hurtPlayer(15); } }
+    for (var j = projectiles.length - 1; j >= 0; j--) { var proj = projectiles[j]; if (dist(player.x, player.y, proj.x, proj.y) < player.radius + proj.size) { hurtPlayer(proj.damage || 10); projectiles.splice(j, 1); } }
+    for (var k = 0; k < hazards.length; k++) { var haz = hazards[k]; if (!haz.active) continue; var d = dist(player.x, player.y, haz.x, haz.y); if (d < haz.radius) { if (haz.type === 'root-snare' && !haz.data.snareActive) { haz.data.snareActive = true; player.speed *= haz.data.slowFactor; } if (haz.damage > 0) { hurtPlayer(haz.damage); } } }
+  }
+
+  function hurtPlayer(damage) {
+    if (player.invincibleTimer > 0 || player.buffType === 'invincible') return;
+    player.hp -= damage;
+    player.invincibleTimer = GAME_CONSTANTS.INVINCIBILITY_MS / 1000;
+    AudioEngine.playSfx('hurt');
+    triggerScreenShake(6, 0.3);
+    triggerScreenFlash('rgba(255,0,0,0.3)', 0.3, 0.15);
+    spawnParticleBurst(player.x, player.y, 10, 'spark', 60, 0.4);
+    if (player.hp <= 0) { player.hp = 0; triggerDeath(); }
+    else if (player.hp <= 30) { AudioEngine.setLowHealth(true); }
   }
 
   function drawArchElement(ctx, x, y, type, w, h, tint) {
@@ -632,7 +854,52 @@
   }
 
   function renderEntities(ctx) {
-    // Will be implemented in Task 12
+    // Enemies
+    for (var i = 0; i < enemies.length; i++) {
+      var e = enemies[i]; var r = e.render; if (!r) continue;
+      ctx.fillStyle = r.glowColor; ctx.beginPath(); ctx.arc(e.x, e.y, e.size+6, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = r.bodyColor; ctx.beginPath(); ctx.arc(e.x, e.y, e.size, 0, Math.PI*2); ctx.fill();
+      if (r.hatColor) { ctx.fillStyle = r.hatColor; ctx.fillRect(e.x - e.size*0.5, e.y - e.size*1.2, e.size, e.size*0.4); }
+      if (r.ribbonColor && e.type === 'seven-fairies') { ctx.strokeStyle = r.ribbonColor; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(e.x-e.size, e.y-e.size*0.3); ctx.quadraticCurveTo(e.x, e.y-e.size, e.x+e.size, e.y-e.size*0.3); ctx.stroke(); }
+    }
+    // Projectiles
+    for (var j = 0; j < projectiles.length; j++) { var p = projectiles[j]; ctx.fillStyle = p.color; ctx.shadowColor = p.color; ctx.shadowBlur = 6; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0; }
+    // Hazards
+    for (var k = 0; k < hazards.length; k++) {
+      var h = hazards[k];
+      if (!h.active) {
+        ctx.fillStyle = h.warningColor; ctx.strokeStyle = h.warningColor; ctx.lineWidth = 2;
+        var pulse = 0.6 + 0.4 * Math.sin(h.warningTimer * 15); ctx.globalAlpha = pulse;
+        ctx.beginPath();
+        if (h.pattern === 'cross') { var chx = h.x, chy = h.y; ctx.fillRect(chx-4, chy-80, 8, 160); ctx.fillRect(chx-80, chy-4, 160, 8); }
+        else if (h.pattern === 'random-line') { ctx.beginPath(); ctx.moveTo(h.x-Math.cos(h.data.angle)*h.data.length/2, h.y-Math.sin(h.data.angle)*h.data.length/2); ctx.lineTo(h.x+Math.cos(h.data.angle)*h.data.length/2, h.y+Math.sin(h.data.angle)*h.data.length/2); ctx.stroke(); }
+        else { ctx.arc(h.x, h.y, h.radius*0.4, 0, Math.PI*2); ctx.fill(); }
+        ctx.globalAlpha = 1;
+      } else {
+        ctx.fillStyle = h.color; ctx.shadowColor = h.color; ctx.shadowBlur = 15; ctx.beginPath();
+        if (h.type === 'lightning') { ctx.moveTo(h.x, h.y-h.radius); ctx.lineTo(h.x+10, h.y-h.radius*0.3); ctx.lineTo(h.x-8, h.y); ctx.lineTo(h.x+5, h.y+h.radius*0.4); ctx.lineTo(h.x, h.y+h.radius); ctx.lineWidth = 4; ctx.strokeStyle = '#ffffff'; ctx.stroke(); ctx.lineWidth = 2; ctx.strokeStyle = '#ffd700'; ctx.stroke(); }
+        else if (h.pattern === 'cross') { ctx.fillRect(h.x-6, h.y-100, 12, 200); ctx.fillRect(h.x-100, h.y-6, 200, 12); }
+        else if (h.pattern === 'fullscreen') { ctx.fillStyle = 'rgba(255,80,20,0.2)'; ctx.fillRect(0, 0, W, H); }
+        else { ctx.arc(h.x, h.y, h.radius, 0, Math.PI*2); ctx.fill(); }
+        ctx.shadowBlur = 0;
+      }
+    }
+    // Bagua safe zone
+    if (levelData && levelData.mechanics) {
+      for (var m2 = 0; m2 < levelData.mechanics.length; m2++) { var mech2 = levelData.mechanics[m2]; if (mech2.type === 'bagua-safe-zone' && levelData._baguaSafeIndex !== undefined) { var safeAngle2 = (levelData._baguaSafeIndex / 8) * Math.PI * 2; var safeX2 = W / 2 + Math.cos(safeAngle2) * W * 0.25; var safeY2 = H / 2 + Math.sin(safeAngle2) * H * 0.25; ctx.fillStyle = mech2.safeColor; ctx.strokeStyle = 'rgba(255,215,0,0.4)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(safeX2, safeY2, mech2.safeRadius, 0, Math.PI*2); ctx.fill(); ctx.stroke(); } }
+    }
+    // Player
+    renderPlayer(ctx);
+  }
+
+  function renderPlayer(ctx) {
+    if (player.invincibleTimer > 0 && Math.floor(player.invincibleTimer * 20) % 2 === 0) { ctx.globalAlpha = 0.5; }
+    if (player.buffType === 'speed-boost') { ctx.fillStyle = 'rgba(100,200,255,0.2)'; ctx.beginPath(); ctx.arc(player.x, player.y, player.radius+8, 0, Math.PI*2); ctx.fill(); }
+    if (player.buffType === 'invincible') { ctx.fillStyle = 'rgba(255,215,0,0.25)'; ctx.beginPath(); ctx.arc(player.x, player.y, player.radius+12, 0, Math.PI*2); ctx.fill(); }
+    if (player.isDashing) { ctx.fillStyle = 'rgba(255,215,0,0.3)'; for (var t = 0; t < 3; t++) { ctx.beginPath(); ctx.arc(player.x - player.dashDx*(t+1)*12, player.y - player.dashDy*(t+1)*12, player.radius*(1-t*0.2), 0, Math.PI*2); ctx.fill(); } }
+    if (IMG.playerHead && IMG.playerHead.complete) { ctx.save(); ctx.beginPath(); ctx.arc(player.x, player.y, player.radius, 0, Math.PI*2); ctx.clip(); ctx.drawImage(IMG.playerHead, player.x-player.radius, player.y-player.radius, player.radius*2, player.radius*2); ctx.restore(); ctx.strokeStyle = '#d4b878'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(player.x, player.y, player.radius, 0, Math.PI*2); ctx.stroke(); }
+    else { ctx.fillStyle = '#d4b878'; ctx.beginPath(); ctx.arc(player.x, player.y, player.radius, 0, Math.PI*2); ctx.fill(); }
+    ctx.globalAlpha = 1;
   }
 
   function renderHUD(ctx) {
