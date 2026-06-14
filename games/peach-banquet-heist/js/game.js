@@ -126,11 +126,61 @@
     keys[e.key.toLowerCase()] = false;
   });
 
-  // Touch stubs (filled in by mobile implementation tasks)
   var touchMove = { active: false, dx: 0, dy: 0 };
-  var dashTouch = false;
-  var lastTouchTime = 0;
+  var lastTouchEndTime = 0;
+  var joystickEl = document.getElementById('mobile-joystick');
+  var knobEl = document.getElementById('mobile-joystick-knob');
 
+  if (joystickEl && knobEl) {
+    var jRect, jCx, jCy, jR;
+    joystickEl.addEventListener('touchstart', function (e) {
+      e.preventDefault();
+      jRect = joystickEl.getBoundingClientRect();
+      jCx = jRect.left + jRect.width / 2;
+      jCy = jRect.top + jRect.height / 2;
+      jR = jRect.width / 2;
+      touchMove.active = true;
+      updateJoystick(e.touches[0]);
+    });
+    joystickEl.addEventListener('touchmove', function (e) {
+      e.preventDefault();
+      updateJoystick(e.touches[0]);
+    });
+    joystickEl.addEventListener('touchend', function (e) {
+      e.preventDefault();
+      touchMove.active = false;
+      touchMove.dx = 0;
+      touchMove.dy = 0;
+      if (knobEl) { knobEl.style.transform = 'translate(-50%, -50%)'; }
+    });
+  }
+
+  function updateJoystick(touch) {
+    var tx = touch.clientX - jCx;
+    var ty = touch.clientY - jCy;
+    var dist2 = Math.sqrt(tx * tx + ty * ty);
+    var maxDist = jR;
+    if (dist2 > maxDist) { tx = tx / dist2 * maxDist; ty = ty / dist2 * maxDist; }
+    touchMove.dx = tx / maxDist;
+    touchMove.dy = ty / maxDist;
+    if (knobEl) { knobEl.style.transform = 'translate(calc(-50% + ' + tx + 'px), calc(-50% + ' + ty + 'px))'; }
+  }
+
+  // Right-side double-tap for dash, tap for menu navigation
+  document.addEventListener('touchstart', function (e) {
+    if (gameState === STATE.TITLE) { startGame(); return; }
+    if (gameState === STATE.CUTSCENE) { skipCutscene(); return; }
+    if (gameState === STATE.DEATH || gameState === STATE.VICTORY) { restartGame(); return; }
+    if (gameState !== STATE.PLAYING) return;
+    for (var t = 0; t < e.changedTouches.length; t++) {
+      var touch = e.changedTouches[t];
+      if (touch.clientX > window.innerWidth / 2) {
+        var now = Date.now();
+        if (now - lastTouchEndTime < 300) { triggerDash(); lastTouchEndTime = 0; }
+        else { lastTouchEndTime = now; }
+      }
+    }
+  });
   // Auto-pause on tab hide
   document.addEventListener('visibilitychange', function () {
     if (document.hidden && gameState === STATE.PLAYING) {
