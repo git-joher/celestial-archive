@@ -17,6 +17,7 @@
        DOM refs
        ================================================================ */
     var canvas = document.getElementById('furnace-canvas');
+    if (!canvas) return;
     var ctx = canvas.getContext('2d');
     var coverScreen = document.getElementById('cover-screen');
     var btnEnter = document.getElementById('btn-enter');
@@ -40,8 +41,6 @@
     var endingQuote = document.getElementById('ending-quote');
     var btnRetry = document.getElementById('btn-retry');
     var btnExit = document.getElementById('btn-exit');
-
-    if (!canvas) return;
 
     /* ================================================================
        localStorage keys
@@ -369,7 +368,9 @@
         ctx.beginPath();
         ctx.moveTo(c.points[0].x, c.points[0].y);
         for (var j = 1; j < c.points.length; j++) {
-          ctx.lineTo(c.points[j].x, c.points[j].y);
+          var midX = (c.points[j - 1].x + c.points[j].x) / 2;
+          var midY = (c.points[j - 1].y + c.points[j].y) / 2;
+          ctx.quadraticCurveTo(c.points[j - 1].x, c.points[j - 1].y, midX, midY);
         }
         ctx.stroke();
         ctx.restore();
@@ -889,7 +890,10 @@
        ================================================================ */
     window.addEventListener('keydown', function (e) {
       keys[e.code] = true;
-      if (e.code === 'Space') e.preventDefault();
+      if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'ArrowDown' ||
+          e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+        e.preventDefault();
+      }
     });
     window.addEventListener('keyup', function (e) { keys[e.code] = false; });
 
