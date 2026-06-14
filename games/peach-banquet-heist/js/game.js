@@ -640,34 +640,37 @@
         levelData._roundSpawnTimer = (levelData._roundSpawnTimer || 0) + dt;
         var spawnInterval = round.duration / (round.attacks[0].count || 10);
         if (levelData._roundSpawnTimer >= spawnInterval) { levelData._roundSpawnTimer = 0; spawnBossRoundAttack(round); }
-        if (bossRoundTimer >= round.duration) { bossRoundIndex++; bossRoundTimer = 0; levelData._roundSpawnTimer = 0; triggerScreenShake(8, 0.5); AudioEngine.playSfx('level-complete'); }
+        if (bossRoundTimer >= round.duration) { bossRoundIndex++; bossRoundTimer = 0; levelData._roundSpawnTimer = 0; triggerScreenShake(8, 0.5); AudioEngine.playSfx('level-complete'); spawnParticleBurst(player.x, player.y, 15, 'gold-dust', 80, 1); for (var ri = 0; ri < 3; ri++) { spawnCollectible(); } }
       }
     }
   }
 
   function spawnBossRoundAttack(round) {
-    var atk = round.attacks[0];
-    switch (atk.type) {
-      case 'lightning-strike':
-        hazards.push({ type: 'lightning', x: W*0.1+Math.random()*W*0.8, y: H*0.1+Math.random()*H*0.6, warningTime: atk.warningTime, warningTimer: atk.warningTime, active: false, damage: atk.damage, radius: atk.boltRadius, color: '#ffffff', warningColor: atk.warningColor, pattern: 'point', timer: 400, duration: 400, data: {} });
-        break;
-      case 'fire-rain':
-        var fx = Math.random() * W;
-        hazards.push({ type: 'fireball', x: fx, y: -10, warningTime: atk.warningTime, warningTimer: atk.warningTime, active: false, damage: atk.damage, radius: atk.fireballRadius, color: atk.fireballColor, warningColor: 'rgba(255,100,30,0.4)', pattern: 'point', timer: 2000, duration: 2000, data: { residualFire: atk.residualFire, residualRadius: atk.residualRadius, residualDuration: atk.residualDuration } });
-        break;
-      case 'wind-push':
-        var windAngle = Math.random() * Math.PI * 2;
-        player.x += Math.cos(windAngle) * (atk.force || 150) * (1/60);
-        player.y += Math.sin(windAngle) * (atk.force || 150) * (1/60);
-        player.x = Math.max(player.radius, Math.min(W - player.radius, player.x));
-        player.y = Math.max(player.radius, Math.min(H - player.radius, player.y));
-        spawnParticleBurst(player.x - Math.cos(windAngle)*50, player.y - Math.sin(windAngle)*50, 5, 'ice', 100, 0.6);
-        if (Math.random() < 0.3) AudioEngine.playSfx('wind-gust');
-        break;
-      case 'ice-shard':
-        var iAngle = Math.random() * Math.PI * 2;
-        projectiles.push({ x: player.x + Math.cos(iAngle+Math.PI)*300, y: player.y + Math.sin(iAngle+Math.PI)*300, vx: Math.cos(iAngle)*atk.speed, vy: Math.sin(iAngle)*atk.speed, size: atk.radius, color: atk.color, damage: atk.damage, life: 4 });
-        break;
+    // Fire ALL attack types in the round, not just the first one
+    for (var ai = 0; ai < round.attacks.length; ai++) {
+      var atk = round.attacks[ai];
+      switch (atk.type) {
+        case 'lightning-strike':
+          hazards.push({ type: 'lightning', x: W*0.1+Math.random()*W*0.8, y: H*0.1+Math.random()*H*0.6, warningTime: atk.warningTime, warningTimer: atk.warningTime, active: false, damage: atk.damage, radius: atk.boltRadius, color: '#ffffff', warningColor: atk.warningColor, pattern: 'point', timer: 400, duration: 400, data: {} });
+          break;
+        case 'fire-rain':
+          var fx = Math.random() * W;
+          hazards.push({ type: 'fireball', x: fx, y: -10, warningTime: atk.warningTime, warningTimer: atk.warningTime, active: false, damage: atk.damage, radius: atk.fireballRadius, color: atk.fireballColor, warningColor: 'rgba(255,100,30,0.4)', pattern: 'point', timer: 2000, duration: 2000, data: { residualFire: atk.residualFire, residualRadius: atk.residualRadius, residualDuration: atk.residualDuration } });
+          break;
+        case 'wind-push':
+          var windAngle = Math.random() * Math.PI * 2;
+          player.x += Math.cos(windAngle) * (atk.force || 150) * (1/60);
+          player.y += Math.sin(windAngle) * (atk.force || 150) * (1/60);
+          player.x = Math.max(player.radius, Math.min(W - player.radius, player.x));
+          player.y = Math.max(player.radius, Math.min(H - player.radius, player.y));
+          spawnParticleBurst(player.x - Math.cos(windAngle)*50, player.y - Math.sin(windAngle)*50, 5, 'ice', 100, 0.6);
+          if (Math.random() < 0.3) AudioEngine.playSfx('wind-gust');
+          break;
+        case 'ice-shard':
+          var iAngle = Math.random() * Math.PI * 2;
+          projectiles.push({ x: player.x + Math.cos(iAngle+Math.PI)*300, y: player.y + Math.sin(iAngle+Math.PI)*300, vx: Math.cos(iAngle)*atk.speed, vy: Math.sin(iAngle)*atk.speed, size: atk.radius, color: atk.color, damage: atk.damage, life: 4 });
+          break;
+      }
     }
   }
 

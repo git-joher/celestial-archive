@@ -192,7 +192,11 @@ var PEACH_BANQUET_LEVELS = [
       fgParticle: 'gold-dust'
     },
     enemies: [],
-    collectibles: [],
+    collectibles: [
+      { type: 'small-peach', label: '三千年桃', points: 1, radius: 10, color: '#f4a0a0', glowColor: 'rgba(244,160,160,0.5)', effect: null, spawnWeight: 60 },
+      { type: 'medium-peach', label: '六千年桃', points: 3, radius: 14, color: '#f08080', glowColor: 'rgba(240,128,128,0.6)', effect: 'speed-boost', effectDuration: 3000, spawnWeight: 25 },
+      { type: 'elixir-shard', label: '金丹碎片', points: 0, radius: 10, color: '#ffd700', glowColor: 'rgba(255,215,0,0.8)', effect: 'invincible', effectDuration: 3000, spawnWeight: 15 }
+    ],
     hazards: [],
     bossRounds: [
       {
