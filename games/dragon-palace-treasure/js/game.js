@@ -742,6 +742,192 @@
   }
 
   /* ============================================================
+     Enemy Drawing
+     ============================================================ */
+  function drawEnemyShape(e) {
+    var r = e.radius, x = e.x, y = e.y;
+    ctx.save();
+
+    if (e.name === 'Fish') {
+      // Fish silhouette: oval body + triangle tail
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.ellipse(x, y, r, r * 0.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+      // Tail
+      ctx.beginPath();
+      ctx.moveTo(x - r, y);
+      ctx.lineTo(x - r * 1.6, y - r * 0.6);
+      ctx.lineTo(x - r * 1.6, y + r * 0.6);
+      ctx.closePath();
+      ctx.fill();
+      // Eye
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(x + r * 0.4, y - r * 0.1, 2, 0, Math.PI * 2);
+      ctx.fill();
+
+    } else if (e.name === 'Jellyfish') {
+      // Dome + trailing tentacles
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.arc(x, y - r * 0.3, r * 0.7, Math.PI, 0);
+      ctx.fill();
+      // Tentacles
+      ctx.strokeStyle = e.color;
+      ctx.lineWidth = 1.5;
+      for (var t = 0; t < 4; t++) {
+        var tx = x - r * 0.5 + t * r * 0.35;
+        ctx.beginPath();
+        ctx.moveTo(tx, y);
+        ctx.quadraticCurveTo(tx + Math.sin(gameTime * 3 + t) * 4, y + r * 0.7, tx + Math.cos(gameTime * 2 + t) * 3, y + r * 1.1);
+        ctx.stroke();
+      }
+
+    } else if (e.name === 'Yecha Guard') {
+      // Humanoid warrior with trident
+      ctx.fillStyle = e.color;
+      // Body
+      ctx.beginPath();
+      ctx.arc(x, y - r * 0.2, r * 0.6, 0, Math.PI * 2);
+      ctx.fill();
+      // Head
+      ctx.beginPath();
+      ctx.arc(x, y - r, r * 0.4, 0, Math.PI * 2);
+      ctx.fill();
+      // Trident
+      ctx.strokeStyle = '#c0c0c0';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(x + r * 0.5, y - r * 0.3);
+      ctx.lineTo(x + r * 1.2, y - r * 1.2);
+      ctx.stroke();
+      // Trident prongs
+      for (var tp = -1; tp <= 1; tp++) {
+        ctx.beginPath();
+        ctx.moveTo(x + r * 1.2, y - r * 1.2);
+        ctx.lineTo(x + r * 1.5, y - r * 1.2 + tp * 3);
+        ctx.stroke();
+      }
+
+    } else if (e.name === 'Sea Snake') {
+      // Wavy snake body
+      ctx.strokeStyle = e.color;
+      ctx.lineWidth = r * 0.6;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(x - r, y);
+      for (var s = 0; s < 6; s++) {
+        var sx = x - r + s * r * 0.35;
+        var sy = y + Math.sin(s * 1.2 + gameTime * 4) * r * 0.4;
+        ctx.lineTo(sx, sy);
+      }
+      ctx.stroke();
+      // Head
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.arc(x + r * 0.6, y, r * 0.45, 0, Math.PI * 2);
+      ctx.fill();
+
+    } else if (e.name === 'Eel') {
+      // Similar to snake but with electric sparks
+      ctx.strokeStyle = e.color;
+      ctx.lineWidth = r * 0.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(x - r, y);
+      for (var el = 0; el < 6; el++) {
+        ctx.lineTo(x - r + el * r * 0.35, y + Math.sin(el * 1.2 + gameTime * 3) * r * 0.3);
+      }
+      ctx.stroke();
+      // Electric sparks
+      if (Math.random() < 0.3) {
+        ctx.fillStyle = '#ffff80';
+        var sparkX = x + rand(-r, r);
+        var sparkY = y + rand(-r, r);
+        ctx.beginPath();
+        ctx.arc(sparkX, sparkY, 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+    } else if (e.name === 'Shark') {
+      // Large fish shape with fin
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.ellipse(x, y, r, r * 0.45, 0, 0, Math.PI * 2);
+      ctx.fill();
+      // Dorsal fin
+      ctx.beginPath();
+      ctx.moveTo(x, y - r * 0.5);
+      ctx.lineTo(x - r * 0.3, y - r * 1.3);
+      ctx.lineTo(x + r * 0.3, y - r * 0.4);
+      ctx.closePath();
+      ctx.fill();
+      // Tail
+      ctx.beginPath();
+      ctx.moveTo(x - r, y);
+      ctx.lineTo(x - r * 1.5, y - r * 0.7);
+      ctx.lineTo(x - r * 1.5, y + r * 0.7);
+      ctx.closePath();
+      ctx.fill();
+
+    } else if (e.name === 'Dragon General') {
+      // Boss: dragon-like warrior
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.arc(x, y, r * 0.8, 0, Math.PI * 2);
+      ctx.fill();
+      // Crown/helmet
+      ctx.fillStyle = '#ffd700';
+      ctx.beginPath();
+      ctx.moveTo(x - r * 0.5, y - r * 0.6);
+      ctx.lineTo(x, y - r * 1.3);
+      ctx.lineTo(x + r * 0.5, y - r * 0.6);
+      ctx.closePath();
+      ctx.fill();
+      // Arms with weapons
+      ctx.strokeStyle = '#c0c0c0';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(x - r * 0.6, y);
+      ctx.lineTo(x - r * 1.2, y - r * 0.5);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x + r * 0.6, y);
+      ctx.lineTo(x + r * 1.2, y - r * 0.5);
+      ctx.stroke();
+
+    } else if (e.name === 'Turtle Minister') {
+      // Boss: turtle with shell
+      ctx.fillStyle = '#406030';
+      ctx.beginPath();
+      ctx.ellipse(x, y, r * 0.9, r * 0.65, 0, 0, Math.PI * 2);
+      ctx.fill();
+      // Shell pattern
+      ctx.strokeStyle = '#80a060';
+      ctx.lineWidth = 1.5;
+      for (var sh = 0; sh < 3; sh++) {
+        ctx.beginPath();
+        ctx.arc(x, y, r * (0.3 + sh * 0.25), 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      // Head
+      ctx.fillStyle = '#608040';
+      ctx.beginPath();
+      ctx.arc(x + r * 0.8, y, r * 0.3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.restore();
+
+    // Common: bright eye/center dot
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.beginPath();
+    ctx.arc(x, y, r * 0.2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  /* ============================================================
      Rendering
      ============================================================ */
   function render() {
@@ -754,6 +940,36 @@
     bgGrad.addColorStop(1, cfg.bgBot);
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, W, H);
+
+    // Ambient seaweed/kelp
+    ctx.strokeStyle = 'rgba(32,160,96,0.15)';
+    ctx.lineWidth = 2;
+    for (var kw = 0; kw < 8; kw++) {
+      var kx = kw * (W / 7) + Math.sin(gameTime * 0.3 + kw) * 10;
+      ctx.beginPath();
+      ctx.moveTo(kx, H);
+      for (var ky = 0; ky < 5; ky++) {
+        var ky2 = H - ky * 35;
+        ctx.lineTo(kx + Math.sin(ky * 0.8 + gameTime * 0.5 + kw) * (15 + ky * 3), ky2);
+      }
+      ctx.stroke();
+    }
+
+    // Floating light rays from above
+    for (var lr = 0; lr < 3; lr++) {
+      var rx = W * (0.2 + lr * 0.3) + Math.sin(gameTime * 0.2 + lr) * 40;
+      var grad = ctx.createLinearGradient(rx, 0, rx, H * 0.4);
+      grad.addColorStop(0, 'rgba(255,255,200,0.04)');
+      grad.addColorStop(1, 'rgba(255,255,200,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.moveTo(rx - 30, 0);
+      ctx.lineTo(rx + 30, 0);
+      ctx.lineTo(rx + 80, H * 0.4);
+      ctx.lineTo(rx - 80, H * 0.4);
+      ctx.closePath();
+      ctx.fill();
+    }
 
     // Bubble particles (ambient)
     for (var bi = 0; bi < bubbles.length; bi++) {
@@ -782,25 +998,29 @@
       ctx.globalAlpha = 1;
     }
 
-    // Enemies (simple circles for now)
+    // Enemies
     for (var ei = 0; ei < enemies.length; ei++) {
       var en = enemies[ei];
-      ctx.fillStyle = en.stunned > 0 ? '#ffffff' : en.color;
-      ctx.beginPath();
-      ctx.arc(en.x, en.y, en.radius, 0, Math.PI * 2);
-      ctx.fill();
+      if (en.stunned > 0) ctx.globalAlpha = 0.5 + 0.5 * Math.sin(gameTime * 20);
+      drawEnemyShape(en);
+      ctx.globalAlpha = 1;
+
+      // Boss HP bar
       if (en.isBoss) {
         var barW = en.radius * 2;
-        var barH = 5;
-        var barY = en.y - en.radius - 10;
-        ctx.fillStyle = 'rgba(0,0,0,0.6)';
+        var barH = 6;
+        var barY = en.y - en.radius - 14;
+        ctx.fillStyle = 'rgba(0,0,0,0.7)';
         ctx.fillRect(en.x - barW / 2, barY, barW, barH);
         ctx.fillStyle = '#c44d34';
         ctx.fillRect(en.x - barW / 2, barY, barW * (en.hp / en.maxHp), barH);
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(en.x - barW / 2, barY, barW, barH);
         ctx.fillStyle = '#e8dcc8';
-        ctx.font = '10px Cinzel, serif';
+        ctx.font = 'bold 10px Cinzel, "Noto Serif SC", serif';
         ctx.textAlign = 'center';
-        ctx.fillText(en.name, en.x, barY - 4);
+        ctx.fillText(en.name, en.x, barY - 5);
       }
     }
 
@@ -814,26 +1034,96 @@
       ctx.fill();
     }
 
-    // Player
+    // Player — White Dragon Horse
     var px = player.x, py = player.y;
-    // Glow
-    var glowGrad = ctx.createRadialGradient(px, py, 6, px, py, 30);
-    glowGrad.addColorStop(0, 'rgba(64,192,192,0.5)');
-    glowGrad.addColorStop(1, 'rgba(64,192,192,0)');
-    ctx.fillStyle = glowGrad;
+
+    // Teal glow
+    var pGlow = ctx.createRadialGradient(px, py, 4, px, py, 32);
+    pGlow.addColorStop(0, 'rgba(64,192,192,0.6)');
+    pGlow.addColorStop(1, 'rgba(64,192,192,0)');
+    ctx.fillStyle = pGlow;
     ctx.beginPath();
-    ctx.arc(px, py, 30, 0, Math.PI * 2);
+    ctx.arc(px, py, 32, 0, Math.PI * 2);
     ctx.fill();
-    // Body
+
+    // Dragon body
     ctx.fillStyle = '#40c0c0';
+    // Main body (longer oval — dragon shape)
     ctx.beginPath();
-    ctx.arc(px, py, 14, 0, Math.PI * 2);
+    ctx.ellipse(px, py, 16, 10, -0.2, 0, Math.PI * 2);
     ctx.fill();
-    // Inner
-    ctx.fillStyle = '#80e8e8';
+
+    // Head
+    ctx.fillStyle = '#60e0e0';
     ctx.beginPath();
-    ctx.arc(px, py, 7, 0, Math.PI * 2);
+    ctx.arc(px + 14, py - 2, 8, 0, Math.PI * 2);
     ctx.fill();
+
+    // Eye
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(px + 17, py - 4, 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#000';
+    ctx.beginPath();
+    ctx.arc(px + 18, py - 4, 1.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Horns
+    ctx.strokeStyle = '#c0e8e8';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(px + 16, py - 8);
+    ctx.lineTo(px + 22, py - 16);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(px + 12, py - 8);
+    ctx.lineTo(px + 16, py - 16);
+    ctx.stroke();
+
+    // Whiskers
+    ctx.strokeStyle = '#a0d8d8';
+    ctx.lineWidth = 1;
+    for (var wh = -1; wh <= 1; wh += 2) {
+      ctx.beginPath();
+      ctx.moveTo(px + 20, py - 2);
+      ctx.quadraticCurveTo(px + 28, py - 4 + wh * 8, px + 24, py - 2 + wh * 12);
+      ctx.stroke();
+    }
+
+    // Tail
+    ctx.strokeStyle = '#40c0c0';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(px - 14, py);
+    ctx.quadraticCurveTo(px - 22, py - 8, px - 20, py - 16);
+    ctx.stroke();
+
+    // Damage flash
+    if (player._damageFlash > 0) {
+      ctx.fillStyle = 'rgba(255,255,255,' + (player._damageFlash / 0.2 * 0.4) + ')';
+      ctx.beginPath();
+      ctx.arc(px, py, 18, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Water shield visual
+    if (player.waterShieldHits > 0) {
+      ctx.strokeStyle = 'rgba(64,128,255,0.6)';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(px, py, 20, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    // Invincibility golden glow
+    if (player.skillTimers.invincible > 0) {
+      ctx.strokeStyle = 'rgba(255,215,0,' + (0.4 + 0.3 * Math.sin(gameTime * 8)) + ')';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(px, py, 24, 0, Math.PI * 2);
+      ctx.stroke();
+    }
 
     // Portal
     if (portalActive) {
@@ -874,6 +1164,46 @@
       ctx.font = 'bold ' + (13 + (1 - dAlpha) * 6) + 'px Cinzel, serif';
       ctx.textAlign = 'center';
       ctx.fillText(dnn.value, dnn.x, dnn.y);
+    }
+
+    // Active item HUD
+    var activeSkills = [];
+    for (var sk in player.skillTimers) {
+      if (player.skillTimers.hasOwnProperty(sk) && player.skillTimers[sk] > 0) activeSkills.push(sk);
+    }
+    if (activeSkills.length > 0) {
+      var hudY2 = H - 90;
+      var startX = W / 2 - (activeSkills.length * 48) / 2;
+      for (var ai = 0; ai < activeSkills.length; ai++) {
+        var sid = activeSkills[ai];
+        var rem = player.skillTimers[sid];
+        var sColor = '#40c0c0';
+        if (sid === 'waterShield') sColor = '#4080ff';
+        if (sid === 'speedSwim') sColor = '#40ff80';
+        if (sid === 'seaPearl') sColor = '#ff80ff';
+        if (sid === 'invincible') sColor = '#ffd700';
+
+        var sx2 = startX + ai * 48;
+        ctx.fillStyle = 'rgba(6,16,32,0.75)';
+        ctx.fillRect(sx2 - 18, hudY2 - 10, 36, 28);
+        ctx.strokeStyle = sColor;
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(sx2 - 18, hudY2 - 10, 36, 28);
+
+        var barRatio = Math.min(1, rem / 12);
+        ctx.fillStyle = sColor;
+        ctx.globalAlpha = 0.5;
+        ctx.fillRect(sx2 - 16, hudY2 + 12, 32 * barRatio, 3);
+        ctx.globalAlpha = 1;
+
+        ctx.fillStyle = sColor;
+        ctx.font = 'bold 10px Cinzel, serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(sid.charAt(0).toUpperCase(), sx2, hudY2 + 3);
+        ctx.fillStyle = 'rgba(200,220,240,0.7)';
+        ctx.font = '8px monospace';
+        ctx.fillText(Math.ceil(rem) + 's', sx2, hudY2 + 24);
+      }
     }
 
     ctx.globalAlpha = 1;
