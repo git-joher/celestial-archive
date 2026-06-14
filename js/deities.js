@@ -220,7 +220,7 @@ var CELESTIAL_GAMES = [
     nameZh: '天庭求签',
     nameEn: 'Celestial Divination',
     description: 'Seek guidance from the celestial court. Draw sacred lots before the Jade Emperor\'s throne and uncover your fate written in the stars.',
-    status: 'coming',
+    status: 'live',
     image: 'images/jade-emperor/je-court.jpg'
   },
   {
