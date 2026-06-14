@@ -88,7 +88,7 @@
       choice2: null,
       playerX: 0.5,
       playerY: 0.5,
-      playerRadius: 0.04,
+      playerRadius: 0.02,
       furnaceRadius: 0.42,
       shakeX: 0,
       shakeY: 0,
