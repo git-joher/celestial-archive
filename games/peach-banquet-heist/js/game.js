@@ -715,7 +715,8 @@
 
   function collectItem(c) {
     collectCount++; totalScore += c.points * GAME_CONSTANTS.SCORE_PER_PEACH; totalPeaches += c.points;
-    floatingTexts.push({ x: c.x, y: c.y, text: c.label + ' +' + c.points, life: 1.5, maxLife: 1.5, color: c.color });
+    var ftLabel = c.label + (c.labelEn ? ' ' + c.labelEn : '') + ' +' + c.points;
+    floatingTexts.push({ x: c.x, y: c.y, text: ftLabel, life: 1.5, maxLife: 1.5, color: c.color });
     if (c.type === 'small-peach') AudioEngine.playSfx('peach-small');
     else if (c.type === 'medium-peach') AudioEngine.playSfx('peach-medium');
     else if (c.type === 'large-peach') AudioEngine.playSfx('peach-large');
@@ -1084,7 +1085,8 @@
 
   function renderCutscene(ctx) {
     if (!levelData) return;
-    var poem = levelData.cutscenePoem.zh.split('\n');
+    var poemZh = levelData.cutscenePoem.zh.split('\n');
+    var poemEn = levelData.cutscenePoem.en ? levelData.cutscenePoem.en.split('\n') : [];
     cutsceneTimer += deltaTime;
 
     // Phase 0: Fade to black (0–0.8s)
@@ -1111,19 +1113,26 @@
       return;
     }
 
-    // Phase 2: Poem lines reveal
+    // Phase 2: Poem lines reveal (Chinese + English)
     if (cutscenePhase === 2) {
-      var lineIndex = Math.min(poem.length - 1, Math.floor(cutsceneTimer / 0.8));
+      var lineIndex = Math.min(poemZh.length - 1, Math.floor(cutsceneTimer / 0.8));
       for (var l = 0; l <= lineIndex; l++) {
         var lineAlpha = l === lineIndex ? Math.min(1, (cutsceneTimer - l * 0.8) / 0.4) : 1;
+        var lineY = H / 2 - 60 + l * 36;
         ctx.globalAlpha = lineAlpha;
-        ctx.fillStyle = '#e8dcc8'; ctx.font = '1.4rem "Ma Shan Zheng", serif'; ctx.textAlign = 'center';
-        ctx.fillText(poem[l], W / 2, H / 2 - 40 + l * 50);
+        // Chinese line
+        ctx.fillStyle = '#e8dcc8'; ctx.font = '1.3rem "Ma Shan Zheng", serif'; ctx.textAlign = 'center';
+        ctx.fillText(poemZh[l], W / 2, lineY);
+        // English line (smaller, below)
+        if (poemEn[l]) {
+          ctx.fillStyle = 'rgba(200,180,140,0.5)'; ctx.font = '0.7rem "Source Serif 4", serif';
+          ctx.fillText(poemEn[l], W / 2, lineY + 18);
+        }
       }
       ctx.globalAlpha = 1; ctx.textAlign = 'start';
       ctx.fillStyle = 'rgba(200,180,140,0.3)'; ctx.font = '0.7rem "Source Serif 4", serif'; ctx.textAlign = 'center';
       ctx.fillText('Press any key to skip', W / 2, H - 40); ctx.textAlign = 'start';
-      if (cutsceneTimer >= poem.length * 0.8 + 0.5) { cutscenePhase = 3; cutsceneTimer = 0; }
+      if (cutsceneTimer >= poemZh.length * 0.8 + 0.5) { cutscenePhase = 3; cutsceneTimer = 0; }
       return;
     }
 
@@ -1309,10 +1318,13 @@
     ctx.textBaseline = 'middle';
     ctx.fillText('天机暂停', W / 2, H / 2 - 20);
 
+    ctx.fillStyle = 'rgba(200,180,140,0.5)';
+    ctx.font = '0.75rem "Cinzel", serif';
+    ctx.fillText('HEAVEN PAUSED', W / 2, H / 2 + 15);
+
     ctx.fillStyle = '#8B7355';
-    ctx.font = '18px "Source Serif 4", serif';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('P or Esc to Resume', W / 2, H / 2 + 40);
+    ctx.font = '0.7rem "Source Serif 4", serif';
+    ctx.fillText('P or Esc to Resume', W / 2, H / 2 + 45);
   }
 
   /* ============================================================

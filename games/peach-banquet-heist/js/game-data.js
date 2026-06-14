@@ -44,9 +44,9 @@ var PEACH_BANQUET_LEVELS = [
       }
     ],
     collectibles: [
-      { type: 'small-peach', label: '三千年桃', points: 1, radius: 10, color: '#f4a0a0', glowColor: 'rgba(244,160,160,0.5)', effect: null, spawnWeight: 50 },
-      { type: 'medium-peach', label: '六千年桃', points: 3, radius: 14, color: '#f08080', glowColor: 'rgba(240,128,128,0.6)', effect: 'speed-boost', effectDuration: 3000, spawnWeight: 30 },
-      { type: 'large-peach', label: '九千年桃', points: 5, radius: 18, color: '#e06060', glowColor: 'rgba(224,96,96,0.7)', effect: 'slow-motion', effectDuration: 1000, spawnWeight: 20 }
+      { type: 'small-peach', label: '三千年桃', labelEn: '3,000-yr Peach', points: 1, radius: 10, color: '#f4a0a0', glowColor: 'rgba(244,160,160,0.5)', effect: null, spawnWeight: 50 },
+      { type: 'medium-peach', label: '六千年桃', labelEn: '6,000-yr Peach', points: 3, radius: 14, color: '#f08080', glowColor: 'rgba(240,128,128,0.6)', effect: 'speed-boost', effectDuration: 3000, spawnWeight: 30 },
+      { type: 'large-peach', label: '九千年桃', labelEn: '9,000-yr Peach', points: 5, radius: 18, color: '#e06060', glowColor: 'rgba(224,96,96,0.7)', effect: 'slow-motion', effectDuration: 1000, spawnWeight: 20 }
     ],
     hazards: [
       {
@@ -58,7 +58,7 @@ var PEACH_BANQUET_LEVELS = [
         warningColor: 'rgba(255,100,50,0.4)'
       }
     ],
-    cutscenePoem: { zh: '夭夭桃林，灼灼其华。\n窃入仙园，初尝长生。' },
+    cutscenePoem: { zh: '夭夭桃林，灼灼其华。\n窃入仙园，初尝长生。', en: 'Verdant peach groves, radiant blooms.\nSneaking into the immortal garden,\nthe first taste of eternal life.' },
     bgLayers: {
       sky: { speedX: 0, speedY: 0 },
       cloud: { speedX: 0.3, speedY: 0.05, count: 8 },
@@ -110,7 +110,7 @@ var PEACH_BANQUET_LEVELS = [
       }
     ],
     collectibles: [
-      { type: 'dew-drop', label: '仙露', points: 1, radius: 8, color: '#c8e8f8', glowColor: 'rgba(200,232,248,0.7)', effect: null, spawnWeight: 100 }
+      { type: 'dew-drop', label: '仙露', labelEn: 'Celestial Dew', points: 1, radius: 8, color: '#c8e8f8', glowColor: 'rgba(200,232,248,0.7)', effect: null, spawnWeight: 100 }
     ],
     hazards: [
       { type: 'whirlpool', damage: 10, radius: 50, color: 'rgba(80,160,200,0.3)', effect: 'pull-slow', pullForce: 120 },
@@ -124,7 +124,7 @@ var PEACH_BANQUET_LEVELS = [
       ],
       attackInterval: 4000
     },
-    cutscenePoem: { zh: '瑶池潋滟，琼浆玉液。\n仙女怒目，金母降威。' },
+    cutscenePoem: { zh: '瑶池潋滟，琼浆玉液。\n仙女怒目，金母降威。', en: 'Rippling jade pool, celestial wine.\nThe fairies glare — the Queen Mother\ndescends in wrath.' },
     bgLayers: {
       sky: { speedX: 0, speedY: 0 },
       cloud: { speedX: 0.2, speedY: 0.08, count: 6 },
@@ -150,7 +150,7 @@ var PEACH_BANQUET_LEVELS = [
     },
     enemies: [],
     collectibles: [
-      { type: 'elixir-shard', label: '金丹碎片', points: 0, radius: 10, color: '#ffd700', glowColor: 'rgba(255,215,0,0.8)', effect: 'invincible', effectDuration: 3000, spawnWeight: 100 }
+      { type: 'elixir-shard', label: '金丹碎片', labelEn: 'Elixir Shard', points: 0, radius: 10, color: '#ffd700', glowColor: 'rgba(255,215,0,0.8)', effect: 'invincible', effectDuration: 3000, spawnWeight: 100 }
     ],
     hazards: [
       { type: 'flame-jet', warningTime: 600, damage: 25, pattern: 'cross', color: '#ff6030', warningColor: 'rgba(255,100,50,0.5)' },
@@ -167,7 +167,7 @@ var PEACH_BANQUET_LEVELS = [
         burnColor: 'rgba(255,40,10,0.12)'
       }
     ],
-    cutscenePoem: { zh: '八卦炉中，真火炼心。\n金丹碎而重生，\n不死之身已成。' },
+    cutscenePoem: { zh: '八卦炉中，真火炼心。\n金丹碎而重生，\n不死之身已成。', en: 'Within the Eight Trigrams Furnace,\ntrue fire tempers the soul.\nThe golden elixir shatters —\nand an immortal body is born.' },
     bgLayers: {
       sky: { speedX: 0, speedY: 0 },
       cloud: { speedX: 0.4, speedY: 0.1, count: 5 },
@@ -191,11 +191,29 @@ var PEACH_BANQUET_LEVELS = [
       archTint: 'rgba(30,25,15,0.8)',
       fgParticle: 'gold-dust'
     },
-    enemies: [],
+    enemies: [
+      {
+        type: 'celestial-guard',
+        count: 4,
+        speed: 130,
+        size: 20,
+        hp: 1,
+        patrolPattern: 'random',
+        territoryMargin: 0.08,
+        special: null,
+        attack: null,
+        render: {
+          bodyColor: '#d4b878',
+          robeColor: '#c4a060',
+          hatColor: '#b89840',
+          glowColor: 'rgba(212,184,120,0.35)'
+        }
+      }
+    ],
     collectibles: [
-      { type: 'small-peach', label: '三千年桃', points: 1, radius: 10, color: '#f4a0a0', glowColor: 'rgba(244,160,160,0.5)', effect: null, spawnWeight: 60 },
-      { type: 'medium-peach', label: '六千年桃', points: 3, radius: 14, color: '#f08080', glowColor: 'rgba(240,128,128,0.6)', effect: 'speed-boost', effectDuration: 3000, spawnWeight: 25 },
-      { type: 'elixir-shard', label: '金丹碎片', points: 0, radius: 10, color: '#ffd700', glowColor: 'rgba(255,215,0,0.8)', effect: 'invincible', effectDuration: 3000, spawnWeight: 15 }
+      { type: 'small-peach', label: '三千年桃', labelEn: '3,000-yr Peach', points: 1, radius: 10, color: '#f4a0a0', glowColor: 'rgba(244,160,160,0.5)', effect: null, spawnWeight: 60 },
+      { type: 'medium-peach', label: '六千年桃', labelEn: '6,000-yr Peach', points: 3, radius: 14, color: '#f08080', glowColor: 'rgba(240,128,128,0.6)', effect: 'speed-boost', effectDuration: 3000, spawnWeight: 25 },
+      { type: 'elixir-shard', label: '金丹碎片', labelEn: 'Elixir Shard', points: 0, radius: 10, color: '#ffd700', glowColor: 'rgba(255,215,0,0.8)', effect: 'invincible', effectDuration: 3000, spawnWeight: 15 }
     ],
     hazards: [],
     bossRounds: [
@@ -225,7 +243,7 @@ var PEACH_BANQUET_LEVELS = [
         ]
       }
     ],
-    cutscenePoem: { zh: '凌霄殿上，天威浩荡。\n俺老孙偏不信命，\n踏碎这凌霄！' },
+    cutscenePoem: { zh: '凌霄殿上，天威浩荡。\n俺老孙偏不信命，\n踏碎这凌霄！', en: 'Upon the Throne of Heaven,\ncelestial might bears down.\nBut I, old Sun, defy fate itself —\nI\'ll shatter this very firmament!' },
     bgLayers: {
       sky: { speedX: 0, speedY: 0 },
       cloud: { speedX: 0.15, speedY: 0.03, count: 4 },
