@@ -339,6 +339,15 @@
     gameState = STATE.PLAYING;
     AudioEngine.setMusicLevel(index + 1);
 
+    // Clean mutable state from previous run
+    if (levelData._bossActive !== undefined) delete levelData._bossActive;
+    if (levelData._bossAttackTimer !== undefined) delete levelData._bossAttackTimer;
+    if (levelData._collectibleTimer !== undefined) delete levelData._collectibleTimer;
+    if (levelData._baguaTimer !== undefined) delete levelData._baguaTimer;
+    if (levelData._baguaSafeIndex !== undefined) delete levelData._baguaSafeIndex;
+    if (levelData._hazardTimer !== undefined) delete levelData._hazardTimer;
+    if (levelData._roundSpawnTimer !== undefined) delete levelData._roundSpawnTimer;
+
     spawnLevelEnemies();
     spawnInitialCollectibles();
     initBackground();
@@ -804,7 +813,7 @@
   function checkCollisions() {
     for (var i = 0; i < enemies.length; i++) { var e = enemies[i]; if (dist(player.x, player.y, e.x, e.y) < player.radius + e.size) { hurtPlayer(15); } }
     for (var j = projectiles.length - 1; j >= 0; j--) { var proj = projectiles[j]; if (dist(player.x, player.y, proj.x, proj.y) < player.radius + proj.size) { hurtPlayer(proj.damage || 10); projectiles.splice(j, 1); } }
-    for (var k = 0; k < hazards.length; k++) { var haz = hazards[k]; if (!haz.active) continue; var d = dist(player.x, player.y, haz.x, haz.y); if (d < haz.radius) { if (haz.type === 'root-snare' && !haz.data.snareActive) { haz.data.snareActive = true; player.speed *= haz.data.slowFactor; } if (haz.damage > 0) { hurtPlayer(haz.damage); } } }
+    for (var k = 0; k < hazards.length; k++) { var haz = hazards[k]; if (!haz.active) continue; var d = dist(player.x, player.y, haz.x, haz.y); if (d < haz.radius) { if (haz.type === 'root-snare' && !haz.data.snareActive) { haz.data.snareActive = true; var savedSpeed = player.speed; player.speed *= haz.data.slowFactor; setTimeout(function () { if (player.buffType !== 'speed-boost') { player.speed = levelData ? levelData.playerSpeed : 280; } }, haz.duration); } if (haz.damage > 0) { hurtPlayer(haz.damage); } } }
   }
 
   function hurtPlayer(damage) {
@@ -1204,7 +1213,12 @@
 
     if (currentLevelIndex < PEACH_BANQUET_LEVELS.length - 1) {
       currentLevelIndex++;
-      startLevel();
+      setTimeout(function () {
+        gameState = STATE.CUTSCENE;
+        cutsceneTimer = 0;
+        cutscenePhase = 0;
+        AudioEngine.setMusicLevel(0);
+      }, 1500);
     } else {
       triggerVictory();
     }
@@ -1231,13 +1245,18 @@
      ============================================================ */
   function saveBestScore() {
     try {
-      var best = localStorage.getItem(GAME_CONSTANTS.STORAGE_KEY_BEST);
-      if (!best || totalScore > parseInt(best, 10)) {
-        localStorage.setItem(GAME_CONSTANTS.STORAGE_KEY_BEST, String(totalScore));
+      var existing = localStorage.getItem(GAME_CONSTANTS.STORAGE_KEY_BEST);
+      var best = existing ? JSON.parse(existing) : { score: 0 };
+      if (totalScore > best.score) {
+        localStorage.setItem(GAME_CONSTANTS.STORAGE_KEY_BEST, JSON.stringify({
+          score: totalScore,
+          level: currentLevelIndex + 1,
+          time: Math.floor(totalTime),
+          stars: calculateStars(),
+          date: new Date().toISOString()
+        }));
       }
-    } catch (e) {
-      // localStorage unavailable — silently ignore
-    }
+    } catch (e) { /* localStorage unavailable */ }
   }
 
   function saveFirstClear() {
@@ -1292,7 +1311,6 @@
     switch (gameState) {
       case STATE.PLAYING:
         levelTimer += scaledDt;
-        bossRoundTimer += scaledDt;
 
         updatePlayer(scaledDt);
         updateEnemies(scaledDt);
