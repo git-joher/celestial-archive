@@ -598,16 +598,17 @@
       if (keys['KeyA'] || keys['ArrowLeft']) dx -= 1;
       if (keys['KeyD'] || keys['ArrowRight']) dx += 1;
 
-      if (touchActive) {
+      var hasKeyboardInput = (dx !== 0 || dy !== 0);
+
+      if (!hasKeyboardInput && touchActive) {
         dx = touchDeltaX * 0.02;
         dy = touchDeltaY * 0.02;
         touchDeltaX *= 0.9;
         touchDeltaY *= 0.9;
-      } else if (gyroEnabled) {
+      } else if (!hasKeyboardInput && !touchActive && gyroEnabled) {
         // Tilt device to move: gamma = left/right, beta = forward/back
-        dx = gyroGamma / 30;   // normalize -90..90 to -3..3
-        dy = gyroBeta / 45;    // normalize -180..180 to -4..4
-        // Clamp
+        dx = gyroGamma / 30;
+        dy = gyroBeta / 45;
         if (dx > 1) dx = 1; else if (dx < -1) dx = -1;
         if (dy > 1) dy = 1; else if (dy < -1) dy = -1;
       }
