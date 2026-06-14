@@ -200,49 +200,48 @@
      Stub: startGame / startLevel / togglePause  (Task 5)
      ============================================================ */
   function startGame() {
-    AudioEngine.start();
-    AudioEngine.unmuteMusic();
-    AudioEngine.setMusicLevel(1);
+    gameState = STATE.PLAYING;
     currentLevelIndex = 0;
     totalScore = 0;
     totalPeaches = 0;
     totalTime = 0;
     levelsCleared = 0;
-    startLevel();
+    startLevel(0);
   }
 
-  function startLevel() {
-    if (currentLevelIndex >= PEACH_BANQUET_LEVELS.length) {
-      triggerVictory();
-      return;
-    }
-
-    levelData = PEACH_BANQUET_LEVELS[currentLevelIndex];
-    levelDuration = levelData.duration || 0;
+  function startLevel(index) {
+    currentLevelIndex = index;
+    levelData = PEACH_BANQUET_LEVELS[index];
     levelTimer = 0;
+    levelDuration = levelData.duration || 999;
     collectCount = 0;
     collectTarget = levelData.collectTarget || 0;
     bossRoundIndex = 0;
     bossRoundTimer = 0;
 
-    // Clear entity arrays
     enemies = [];
     projectiles = [];
     collectibles = [];
     hazards = [];
-    particles = [];
     floatingTexts = [];
 
     resetPlayer();
-    AudioEngine.setMusicLevel(currentLevelIndex + 1);
-    gameState = STATE.CUTSCENE;
+    gameState = STATE.PLAYING;
+    AudioEngine.setMusicLevel(index + 1);
+
+    spawnLevelEnemies();
+    spawnInitialCollectibles();
+    initBackground();
   }
 
   function togglePause() {
     if (gameState === STATE.PLAYING) {
       gameState = STATE.PAUSED;
+      AudioEngine.setMuted(true);
     } else if (gameState === STATE.PAUSED) {
       gameState = STATE.PLAYING;
+      AudioEngine.setMuted(false);
+      lastTime = performance.now();
     }
   }
 
@@ -250,7 +249,29 @@
      Stub: triggerDash / skipCutscene / restartGame  (Tasks 5-6)
      ============================================================ */
   function triggerDash() {
-    // Will be implemented in Task 6
+    if (player.dashCooldownTimer > 0 || player.isDashing) return;
+    player.isDashing = true;
+    player.dashTimer = GAME_CONSTANTS.DASH_DURATION;
+    player.dashCooldownTimer = GAME_CONSTANTS.DASH_COOLDOWN;
+    player.invincibleTimer = Math.max(player.invincibleTimer, GAME_CONSTANTS.DASH_INVINCIBILITY);
+
+    var dx = 0, dy = 0;
+    if (keys['w'] || keys['arrowup']) dy = -1;
+    if (keys['s'] || keys['arrowdown']) dy = 1;
+    if (keys['a'] || keys['arrowleft']) dx = -1;
+    if (keys['d'] || keys['arrowright']) dx = 1;
+    if (dx === 0 && dy === 0) { dx = 1; }
+
+    var len = Math.sqrt(dx * dx + dy * dy);
+    player.dashDx = dx / len;
+    player.dashDy = dy / len;
+
+    AudioEngine.playSfx('dash');
+    for (var i = 0; i < 8; i++) {
+      spawnParticle(player.x, player.y, -player.dashDx * 100 + (Math.random() - 0.5) * 80,
+                    -player.dashDy * 100 + (Math.random() - 0.5) * 80,
+                    'gold-dust', 0.5);
+    }
   }
 
   function skipCutscene() {
@@ -258,18 +279,64 @@
   }
 
   function restartGame() {
+    AudioEngine.unmuteMusic();
     gameState = STATE.TITLE;
+    currentLevelIndex = 0;
+    levelData = null;
+    enemies = [];
+    projectiles = [];
+    collectibles = [];
+    hazards = [];
+    particles = [];
+    floatingTexts = [];
     totalScore = 0;
-    totalPeaches = 0;
     totalTime = 0;
     levelsCleared = 0;
+    AudioEngine.setMusicLevel(0);
+    resetPlayer();
   }
 
   /* ============================================================
      Stub: Update functions  (Tasks 7-11)
      ============================================================ */
   function updatePlayer(dt) {
-    // Will be implemented in Task 7
+    if (player.invincibleTimer > 0) player.invincibleTimer -= dt;
+    if (player.dashCooldownTimer > 0) player.dashCooldownTimer -= dt;
+    if (player.buffTimer > 0) {
+      player.buffTimer -= dt;
+      if (player.buffTimer <= 0) {
+        player.buffType = null;
+        player.speed = levelData ? levelData.playerSpeed : 280;
+        timeScaleTarget = 1;
+      }
+    }
+
+    if (player.isDashing) {
+      player.dashTimer -= dt;
+      if (player.dashTimer <= 0) { player.isDashing = false; }
+      var dashSpeed = player.speed * GAME_CONSTANTS.DASH_SPEED_MULT;
+      player.x += player.dashDx * dashSpeed * dt;
+      player.y += player.dashDy * dashSpeed * dt;
+    } else {
+      var mx = 0, my = 0;
+      if (keys['w'] || keys['arrowup']) my = -1;
+      if (keys['s'] || keys['arrowdown']) my = 1;
+      if (keys['a'] || keys['arrowleft']) mx = -1;
+      if (keys['d'] || keys['arrowright']) mx = 1;
+
+      if (touchMove.active) { mx = touchMove.dx; my = touchMove.dy; }
+
+      if (mx !== 0 && my !== 0) { var diag = 1 / Math.sqrt(2); mx *= diag; my *= diag; }
+
+      player.vx = mx * player.speed;
+      player.vy = my * player.speed;
+      player.x += player.vx * dt;
+      player.y += player.vy * dt;
+    }
+
+    var r = player.radius;
+    player.x = Math.max(r, Math.min(W - r, player.x));
+    player.y = Math.max(r, Math.min(H - r, player.y));
   }
 
   function updateEnemies(dt) {
