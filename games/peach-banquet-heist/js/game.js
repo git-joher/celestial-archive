@@ -189,6 +189,57 @@
   var particles = [];
   var floatingTexts = [];
 
+  // Background scroll offsets
+  var bgScrollX = 0;
+  var bgScrollY = 0;
+  var bgClouds = [];
+  var bgArchElements = [];
+  var bgFgParticles = [];
+
+  function initBackground() {
+    if (!levelData) return;
+    bgClouds = [];
+    bgArchElements = [];
+    bgFgParticles = [];
+
+    var layerCfg = levelData.bgLayers;
+    var cloudCount = layerCfg.cloud.count || 6;
+    for (var i = 0; i < cloudCount; i++) {
+      bgClouds.push({
+        x: Math.random() * W,
+        y: Math.random() * H * 0.6,
+        radius: 60 + Math.random() * 120,
+        alpha: 0.05 + Math.random() * 0.1,
+        speedX: 15 + Math.random() * 25,
+        speedY: 3 + Math.random() * 6
+      });
+    }
+
+    var archTypes = layerCfg.arch.elements || [];
+    for (var j = 0; j < archTypes.length; j++) {
+      bgArchElements.push({
+        x: (W / (archTypes.length + 1)) * (j + 1),
+        y: H * 0.5 + j * 30,
+        type: archTypes[j],
+        width: W * 0.25,
+        height: H * 0.4
+      });
+    }
+
+    var fgCount = 30;
+    for (var k = 0; k < fgCount; k++) {
+      bgFgParticles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        size: 2 + Math.random() * 6,
+        alpha: 0.2 + Math.random() * 0.5,
+        speedX: -10 - Math.random() * 20,
+        speedY: 15 + Math.random() * 40,
+        life: Math.random()
+      });
+    }
+  }
+
   /* ============================================================
      Random Helpers
      ============================================================ */
@@ -363,11 +414,137 @@
     // Will be implemented in Task 11
   }
 
-  /* ============================================================
-     Stub: Render functions  (Tasks 5-13)
-     ============================================================ */
+  function drawArchElement(ctx, x, y, type, w, h, tint) {
+    ctx.fillStyle = tint;
+    ctx.strokeStyle = tint;
+    ctx.lineWidth = 2;
+    switch (type) {
+      case 'peach-tree':
+        ctx.fillRect(x + w * 0.45, y + h * 0.3, w * 0.1, h * 0.7);
+        ctx.beginPath(); ctx.arc(x + w * 0.5, y + h * 0.2, w * 0.35, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + w * 0.25, y + h * 0.25, w * 0.2, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + w * 0.75, y + h * 0.25, w * 0.2, 0, Math.PI * 2); ctx.fill();
+        break;
+      case 'garden-wall':
+        ctx.fillRect(x, y + h * 0.7, w, h * 0.05);
+        ctx.fillRect(x, y + h * 0.7, w * 0.02, h * 0.3);
+        ctx.fillRect(x + w * 0.98, y + h * 0.7, w * 0.02, h * 0.3);
+        break;
+      case 'jade-pavilion':
+        ctx.beginPath(); ctx.moveTo(x, y + h * 0.3); ctx.lineTo(x + w * 0.5, y); ctx.lineTo(x + w, y + h * 0.3); ctx.closePath(); ctx.fill();
+        ctx.fillRect(x + w * 0.1, y + h * 0.3, w * 0.8, h * 0.5);
+        break;
+      case 'lotus-terrace':
+        ctx.beginPath(); ctx.ellipse(x + w * 0.5, y + h * 0.5, w * 0.4, h * 0.15, 0, 0, Math.PI * 2); ctx.fill();
+        break;
+      case 'waterfall':
+        ctx.fillRect(x + w * 0.45, y, w * 0.1, h);
+        break;
+      case 'furnace-wall':
+        ctx.fillRect(x, y, w, h * 0.8);
+        ctx.strokeStyle = 'rgba(255,60,20,0.3)'; ctx.lineWidth = 3;
+        for (var v = 0; v < 4; v++) { ctx.beginPath(); ctx.moveTo(x + w * (0.2 + v * 0.2), y); ctx.lineTo(x + w * (0.1 + v * 0.2), y + h * 0.8); ctx.stroke(); }
+        ctx.strokeStyle = tint; ctx.lineWidth = 2;
+        break;
+      case 'magma-vein':
+        ctx.strokeStyle = 'rgba(255,80,20,0.4)'; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(x, y + h * 0.6); ctx.quadraticCurveTo(x + w * 0.5, y + h * 0.2, x + w, y + h * 0.5); ctx.stroke();
+        ctx.strokeStyle = tint; ctx.lineWidth = 2;
+        break;
+      case 'dragon-pillar':
+        ctx.fillRect(x + w * 0.45, y, w * 0.1, h);
+        ctx.fillRect(x + w * 0.3, y, w * 0.4, h * 0.08);
+        break;
+      case 'throne-dais':
+        for (var step = 0; step < 3; step++) { var sw = w - step * w * 0.2; ctx.fillRect(x + (w - sw) / 2, y + h * 0.7 + step * h * 0.1, sw, h * 0.08); }
+        break;
+      default:
+        ctx.fillRect(x, y + h * 0.5, w, h * 0.4);
+    }
+  }
+
   function renderBackground(ctx) {
-    // Will be implemented in Task 12
+    if (!levelData) {
+      var titleGrad = ctx.createLinearGradient(0, 0, 0, H);
+      titleGrad.addColorStop(0, '#0a0a18');
+      titleGrad.addColorStop(1, '#1a1030');
+      ctx.fillStyle = titleGrad;
+      ctx.fillRect(0, 0, W, H);
+      return;
+    }
+
+    var colors = levelData.bgColors;
+
+    // Layer 1: Sky gradient
+    var skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+    skyGrad.addColorStop(0, colors.skyTop);
+    skyGrad.addColorStop(1, colors.skyBot);
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Stars
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    for (var s = 0; s < 40; s++) {
+      var sx = ((s * 137 + 50) % W);
+      var sy = ((s * 251 + 30) % (H * 0.5));
+      var sr = 0.5 + (s % 3) * 0.5;
+      ctx.beginPath();
+      ctx.arc(sx, sy, sr, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Layer 2: Clouds
+    var cloudScrollX = bgScrollX * levelData.bgLayers.cloud.speedX;
+    var cloudScrollY = bgScrollY * levelData.bgLayers.cloud.speedY;
+    for (var c = 0; c < bgClouds.length; c++) {
+      var cloud = bgClouds[c];
+      var cx = ((cloud.x + cloudScrollX * cloud.speedX) % (W + 400)) - 200;
+      var cy = ((cloud.y + cloudScrollY * cloud.speedY) % (H + 200)) - 100;
+      var cGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, cloud.radius);
+      cGrad.addColorStop(0, colors.cloudTint);
+      cGrad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = cGrad;
+      ctx.fillRect(cx - cloud.radius, cy - cloud.radius, cloud.radius * 2, cloud.radius * 2);
+    }
+
+    // Layer 3: Architecture
+    var archScrollX = bgScrollX * levelData.bgLayers.arch.speedX;
+    for (var a = 0; a < bgArchElements.length; a++) {
+      var arch = bgArchElements[a];
+      var ax = ((arch.x + archScrollX * 0.3) % (W + 600)) - 300;
+      drawArchElement(ctx, ax, arch.y, arch.type, arch.width, arch.height, colors.archTint);
+    }
+
+    // Layer 4: Foreground particles
+    var fgCfg = levelData.bgLayers.fg;
+    if (Math.random() < fgCfg.particleRate * deltaTime) {
+      bgFgParticles.push({
+        x: W + 20, y: Math.random() * H,
+        size: 2 + Math.random() * 6,
+        alpha: 0.2 + Math.random() * 0.5,
+        speedX: -20 - Math.random() * 40,
+        speedY: -10 + Math.random() * 20,
+        life: 0
+      });
+    }
+    for (var fp = bgFgParticles.length - 1; fp >= 0; fp--) {
+      var fpData = bgFgParticles[fp];
+      fpData.life += deltaTime;
+      fpData.x += fpData.speedX * deltaTime;
+      fpData.y += fpData.speedY * deltaTime;
+      if (fpData.life > 8 || fpData.x < -50 || fpData.y < -50 || fpData.y > H + 50) {
+        bgFgParticles.splice(fp, 1); continue;
+      }
+      ctx.fillStyle = fgCfg.particleColor;
+      ctx.beginPath();
+      if (fgCfg.particleType === 'petal') {
+        ctx.ellipse(fpData.x, fpData.y, fpData.size, fpData.size * 0.5, Math.PI / 4, 0, Math.PI * 2);
+      } else {
+        ctx.arc(fpData.x, fpData.y, fpData.size, 0, Math.PI * 2);
+      }
+      ctx.fill();
+    }
+    while (bgFgParticles.length > 80) { bgFgParticles.shift(); }
   }
 
   function renderEntities(ctx) {
@@ -537,6 +714,9 @@
         updateParticles(scaledDt);
         checkCollisions();
         checkLevelProgress();
+
+        bgScrollX += player.vx * deltaTime * 0.03;
+        bgScrollY += player.vy * deltaTime * 0.03;
 
         // Smooth timeScale interpolation
         if (timeScale !== timeScaleTarget) {
