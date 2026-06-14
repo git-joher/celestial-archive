@@ -459,7 +459,7 @@
     }
 
     /* ================================================================
-       Rendering: player
+       Rendering: player — Sun Wukong
        ================================================================ */
     function drawPlayer() {
       var center = furnaceCenter();
@@ -469,34 +469,179 @@
       var r = size * state.playerRadius;
       var t = performance.now() * 0.001;
 
-      // Qi halo
-      var haloAlpha = 0.25 + Math.sin(t * 2) * 0.08;
-      var haloGrad = ctx.createRadialGradient(px, py, r * 0.8, px, py, r * 2.5);
-      haloGrad.addColorStop(0, 'rgba(255,200,100,' + haloAlpha + ')');
+      // Scale factor: r is the base unit (~15px mobile, ~38px desktop)
+      // All proportions relative to r
+
+      // 1. Qi halo — protective golden aura
+      var haloAlpha = 0.20 + Math.sin(t * 2) * 0.06;
+      var haloGrad = ctx.createRadialGradient(px, py, r * 0.6, px, py, r * 3.0);
+      haloGrad.addColorStop(0, 'rgba(255,200,100,' + (haloAlpha + 0.05) + ')');
+      haloGrad.addColorStop(0.5, 'rgba(255,180,60,' + haloAlpha + ')');
       haloGrad.addColorStop(1, 'transparent');
       ctx.fillStyle = haloGrad;
       ctx.beginPath();
-      ctx.arc(px, py, r * 2.5, 0, Math.PI * 2);
+      ctx.arc(px, py, r * 3.0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Body — golden silhouette
-      var bodyGrad = ctx.createRadialGradient(px, py, 0, px, py, r);
-      bodyGrad.addColorStop(0, 'rgba(255,220,150,0.9)');
-      bodyGrad.addColorStop(0.6, 'rgba(200,150,80,0.7)');
-      bodyGrad.addColorStop(1, 'rgba(150,100,40,0)');
-      ctx.fillStyle = bodyGrad;
+      // 2. Red cape — flowing behind
+      ctx.save();
+      ctx.fillStyle = 'rgba(180,40,30,0.7)';
       ctx.beginPath();
-      ctx.arc(px, py, r, 0, Math.PI * 2);
+      ctx.moveTo(px - r * 1.0, py + r * 0.4);
+      ctx.quadraticCurveTo(px - r * 1.8, py - r * 0.6, px - r * 0.8, py - r * 1.6);
+      ctx.quadraticCurveTo(px, py - r * 0.8, px + r * 0.8, py - r * 1.6);
+      ctx.quadraticCurveTo(px + r * 1.8, py - r * 0.6, px + r * 1.0, py + r * 0.4);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+
+      // 3. Golden staff (Ruyi Jingu Bang) — diagonal behind body
+      ctx.save();
+      ctx.strokeStyle = '#daa520';
+      ctx.lineWidth = r * 0.15;
+      ctx.shadowColor = 'rgba(255,215,0,0.4)';
+      ctx.shadowBlur = r * 0.3;
+      ctx.beginPath();
+      ctx.moveTo(px - r * 1.8, py + r * 1.0);
+      ctx.lineTo(px + r * 1.5, py - r * 1.3);
+      ctx.stroke();
+      // Staff ends (gold caps)
+      ctx.fillStyle = '#ffd700';
+      ctx.beginPath();
+      ctx.arc(px - r * 1.8, py + r * 1.0, r * 0.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(px + r * 1.5, py - r * 1.3, r * 0.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // 4. Body — red and gold robe
+      ctx.save();
+      // Main robe
+      var robeGrad = ctx.createLinearGradient(px, py + r * 0.2, px, py + r * 1.6);
+      robeGrad.addColorStop(0, '#c44d34');
+      robeGrad.addColorStop(1, '#8b1a1a');
+      ctx.fillStyle = robeGrad;
+      ctx.beginPath();
+      ctx.moveTo(px - r * 1.0, py - r * 0.3);
+      ctx.quadraticCurveTo(px - r * 1.1, py + r * 0.3, px - r * 1.05, py + r * 1.5);
+      ctx.lineTo(px + r * 1.05, py + r * 1.5);
+      ctx.quadraticCurveTo(px + r * 1.1, py + r * 0.3, px + r * 1.0, py - r * 0.3);
+      ctx.closePath();
+      ctx.fill();
+      // Gold sash
+      ctx.fillStyle = '#daa520';
+      ctx.fillRect(px - r * 1.0, py + r * 0.5, r * 2.0, r * 0.15);
+      ctx.restore();
+
+      // 5. Arms
+      ctx.save();
+      ctx.strokeStyle = '#d4956b';
+      ctx.lineWidth = r * 0.35;
+      ctx.lineCap = 'round';
+      // Left arm
+      ctx.beginPath();
+      ctx.moveTo(px - r * 0.85, py + r * 0.3);
+      ctx.quadraticCurveTo(px - r * 1.3, py - r * 0.2, px - r * 1.0, py - r * 0.8);
+      ctx.stroke();
+      // Right arm
+      ctx.beginPath();
+      ctx.moveTo(px + r * 0.85, py + r * 0.3);
+      ctx.quadraticCurveTo(px + r * 1.3, py - r * 0.2, px + r * 1.0, py - r * 0.8);
+      ctx.stroke();
+      ctx.restore();
+
+      // 6. Head — brown monkey head
+      var headCY = py - r * 0.5;
+      ctx.save();
+      // Head base
+      var headGrad = ctx.createRadialGradient(px, headCY - r * 0.1, r * 0.1, px, headCY, r * 1.05);
+      headGrad.addColorStop(0, '#e8b88a');
+      headGrad.addColorStop(0.7, '#c4956b');
+      headGrad.addColorStop(1, '#8b6040');
+      ctx.fillStyle = headGrad;
+      ctx.beginPath();
+      ctx.arc(px, headCY, r * 0.95, 0, Math.PI * 2);
       ctx.fill();
 
-      // Eye glow
-      var eyeGlow = ctx.createRadialGradient(px, py - r * 0.2, 0, px, py - r * 0.2, r * 0.6);
-      eyeGlow.addColorStop(0, 'rgba(255,200,50,0.7)');
+      // Monkey face — heart-shaped lighter area
+      var faceCY = headCY + r * 0.15;
+      ctx.fillStyle = '#f5d5b8';
+      ctx.beginPath();
+      ctx.moveTo(px, faceCY + r * 0.75);
+      ctx.quadraticCurveTo(px - r * 0.55, faceCY + r * 0.2, px - r * 0.6, faceCY - r * 0.25);
+      ctx.quadraticCurveTo(px - r * 0.15, faceCY - r * 0.6, px, faceCY - r * 0.15);
+      ctx.quadraticCurveTo(px + r * 0.15, faceCY - r * 0.6, px + r * 0.6, faceCY - r * 0.25);
+      ctx.quadraticCurveTo(px + r * 0.55, faceCY + r * 0.2, px, faceCY + r * 0.75);
+      ctx.fill();
+      ctx.restore();
+
+      // 7. Eyes — golden burning pupils (火眼金睛)
+      ctx.save();
+      var eyeY = headCY - r * 0.05;
+      var eyeGlow = ctx.createRadialGradient(px, eyeY, 0, px, eyeY, r * 0.55);
+      eyeGlow.addColorStop(0, 'rgba(255,240,100,0.9)');
+      eyeGlow.addColorStop(0.3, 'rgba(255,180,30,0.5)');
       eyeGlow.addColorStop(1, 'transparent');
       ctx.fillStyle = eyeGlow;
       ctx.beginPath();
-      ctx.arc(px, py - r * 0.2, r * 0.6, 0, Math.PI * 2);
+      ctx.arc(px, eyeY, r * 0.55, 0, Math.PI * 2);
       ctx.fill();
+
+      // Left eye
+      ctx.fillStyle = '#ffd700';
+      ctx.shadowColor = 'rgba(255,200,30,0.8)';
+      ctx.shadowBlur = r * 0.25;
+      ctx.beginPath();
+      ctx.ellipse(px - r * 0.2, eyeY, r * 0.15, r * 0.2, 0, 0, Math.PI * 2);
+      ctx.fill();
+      // Pupil
+      ctx.fillStyle = '#1a0800';
+      ctx.shadowBlur = 0;
+      ctx.beginPath();
+      ctx.arc(px - r * 0.2, eyeY, r * 0.07, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Right eye
+      ctx.fillStyle = '#ffd700';
+      ctx.shadowColor = 'rgba(255,200,30,0.8)';
+      ctx.shadowBlur = r * 0.25;
+      ctx.beginPath();
+      ctx.ellipse(px + r * 0.2, eyeY, r * 0.15, r * 0.2, 0, 0, Math.PI * 2);
+      ctx.fill();
+      // Pupil
+      ctx.fillStyle = '#1a0800';
+      ctx.shadowBlur = 0;
+      ctx.beginPath();
+      ctx.arc(px + r * 0.2, eyeY, r * 0.07, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // 8. Golden circlet (紧箍咒) — thin gold band across forehead
+      ctx.save();
+      ctx.strokeStyle = '#ffd700';
+      ctx.lineWidth = r * 0.1;
+      ctx.shadowColor = 'rgba(255,215,0,0.6)';
+      ctx.shadowBlur = r * 0.2;
+      ctx.beginPath();
+      ctx.arc(px, headCY - r * 0.35, r * 0.82, Math.PI * 0.85, Math.PI * 0.15, true);
+      ctx.stroke();
+      // Small jewel at center of circlet
+      ctx.fillStyle = '#ff4444';
+      ctx.shadowBlur = r * 0.3;
+      ctx.beginPath();
+      ctx.arc(px, headCY - r * 1.1, r * 0.1, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // 9. Mouth — confident smirk
+      ctx.save();
+      ctx.strokeStyle = '#6b3020';
+      ctx.lineWidth = r * 0.06;
+      ctx.beginPath();
+      ctx.arc(px, headCY + r * 0.35, r * 0.18, 0.1 * Math.PI, 0.9 * Math.PI);
+      ctx.stroke();
+      ctx.restore();
     }
 
     /* ================================================================
