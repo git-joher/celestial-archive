@@ -251,8 +251,8 @@ var CELESTIAL_GAMES = [
     slug: 'eight-trigrams-furnace',
     nameZh: '八卦炉',
     nameEn: 'Eight Trigrams Furnace',
-    description: 'Master the alchemical arts inside Taishang Laojun\'s cosmic furnace. Refine elixirs, concoct potions, and unlock the secrets of immortality.',
-    status: 'coming',
+    description: 'Survive the Samadhi Fire inside Taishang Laojun\'s cosmic crucible. Dodge the flames, master the eight trigrams, and forge the legendary Fiery Golden Eyes.',
+    status: 'live',
     image: 'images/taishang-laojun/tl-furnace.jpg'
   }
 ];
