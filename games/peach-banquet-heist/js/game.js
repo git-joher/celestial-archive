@@ -189,6 +189,10 @@
   var particles = [];
   var floatingTexts = [];
 
+  // Visual FX state
+  var screenShake = { intensity: 0, duration: 0, timer: 0 };
+  var screenFlash = { alpha: 0, color: 'rgba(0,0,0,0)', timer: 0 };
+
   // Background scroll offsets
   var bgScrollX = 0;
   var bgScrollY = 0;
@@ -406,8 +410,88 @@
     // Will be implemented in Task 10
   }
 
+  function spawnParticle(x, y, vx, vy, type, life) {
+    if (particles.length >= GAME_CONSTANTS.MAX_PARTICLES) { particles.shift(); }
+    particles.push({
+      x: x, y: y, vx: vx, vy: vy, type: type,
+      life: life, maxLife: life,
+      size: 2 + Math.random() * 5, alpha: 1
+    });
+  }
+
+  function spawnParticleBurst(x, y, count, type, speed, life) {
+    for (var i = 0; i < count; i++) {
+      var angle = (Math.PI * 2 / count) * i + Math.random() * 0.5;
+      var spd = speed * (0.5 + Math.random() * 0.5);
+      spawnParticle(x, y, Math.cos(angle) * spd, Math.sin(angle) * spd, type, life);
+    }
+  }
+
   function updateParticles(dt) {
-    // Will be implemented in Task 11
+    if (screenShake.timer > 0) { screenShake.timer -= dt; screenShake.intensity *= 0.9; }
+    else { screenShake.intensity = 0; }
+    if (screenFlash.timer > 0) { screenFlash.timer -= dt; screenFlash.alpha *= 0.85; }
+    else { screenFlash.alpha = 0; }
+
+    for (var i = particles.length - 1; i >= 0; i--) {
+      var p = particles[i];
+      p.life -= dt;
+      if (p.life <= 0) { particles.splice(i, 1); continue; }
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      p.alpha = Math.max(0, p.life / p.maxLife);
+      if (p.type === 'petal') { p.vy += 30 * dt; p.vx += Math.sin(p.life * 4) * 20 * dt; }
+      else if (p.type === 'ember') { p.vy -= 40 * dt; p.size *= 0.998; }
+      else if (p.type === 'gold-dust') { p.vy -= 20 * dt; p.size *= 0.995; }
+      else if (p.type === 'ice') { p.vx *= 0.98; p.vy *= 0.98; }
+    }
+
+    if (gameState === STATE.TITLE && Math.random() < 0.3) {
+      spawnParticle(Math.random() * W, H + 5, (Math.random() - 0.5) * 20, -30 - Math.random() * 40, 'gold-dust', 3 + Math.random() * 4);
+    }
+  }
+
+  function renderParticles(ctx) {
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      ctx.globalAlpha = p.alpha;
+      switch (p.type) {
+        case 'petal':
+          ctx.fillStyle = '#f4a0a0';
+          ctx.beginPath(); ctx.ellipse(p.x, p.y, p.size, p.size * 0.5, Math.PI / 4, 0, Math.PI * 2); ctx.fill();
+          break;
+        case 'gold-dust':
+          ctx.fillStyle = '#ffd700'; ctx.shadowColor = 'rgba(255,215,0,0.6)'; ctx.shadowBlur = p.size * 2;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.6, 0, Math.PI * 2); ctx.fill(); ctx.shadowBlur = 0;
+          break;
+        case 'ember':
+          var eg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+          eg.addColorStop(0, 'rgba(255,200,50,0.8)'); eg.addColorStop(0.5, 'rgba(255,100,20,0.4)'); eg.addColorStop(1, 'rgba(255,30,5,0)');
+          ctx.fillStyle = eg; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+          break;
+        case 'ice':
+          ctx.fillStyle = 'rgba(200,220,255,0.8)'; ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2); ctx.fill();
+          break;
+        case 'spark':
+          ctx.fillStyle = '#ffffff'; ctx.shadowColor = 'rgba(255,255,255,0.8)'; ctx.shadowBlur = 4;
+          ctx.fillRect(p.x - p.size * 0.3, p.y - p.size * 0.3, p.size * 0.6, p.size * 0.6); ctx.shadowBlur = 0;
+          break;
+        default:
+          ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function triggerScreenShake(intensity, duration) {
+    screenShake.intensity = Math.max(screenShake.intensity, intensity);
+    screenShake.duration = duration;
+    screenShake.timer = duration;
+  }
+
+  function triggerScreenFlash(color, alpha, duration) {
+    screenFlash.color = color;
+    screenFlash.alpha = alpha;
+    screenFlash.timer = duration;
   }
 
   function checkCollisions() {
@@ -748,42 +832,53 @@
      ============================================================ */
   function render() {
     ctx.clearRect(0, 0, W, H);
-
     renderBackground(ctx);
+
+    if (screenShake.intensity > 0.5) {
+      ctx.save();
+      ctx.translate((Math.random() - 0.5) * screenShake.intensity, (Math.random() - 0.5) * screenShake.intensity);
+    }
 
     switch (gameState) {
       case STATE.TITLE:
         renderTitleScreen(ctx);
+        renderParticles(ctx);
         break;
-
       case STATE.PLAYING:
-        renderEntities(ctx);
-        renderHUD(ctx);
-        break;
-
       case STATE.PAUSED:
         renderEntities(ctx);
         renderHUD(ctx);
-        renderPauseOverlay(ctx);
+        renderParticles(ctx);
+        if (gameState === STATE.PAUSED) renderPauseOverlay(ctx);
         break;
-
       case STATE.CUTSCENE:
         renderCutscene(ctx);
+        renderParticles(ctx);
         break;
-
       case STATE.LEVEL_COMPLETE:
         renderEntities(ctx);
         renderHUD(ctx);
+        renderParticles(ctx);
         break;
-
-      case STATE.VICTORY:
-        renderVictoryScreen(ctx);
-        break;
-
       case STATE.DEATH:
+        renderEntities(ctx);
+        renderParticles(ctx);
         renderDeathScreen(ctx);
         break;
+      case STATE.VICTORY:
+        renderVictoryScreen(ctx);
+        renderParticles(ctx);
+        break;
     }
+
+    if (screenFlash.alpha > 0.01) {
+      ctx.fillStyle = screenFlash.color;
+      ctx.globalAlpha = screenFlash.alpha;
+      ctx.fillRect(0, 0, W, H);
+      ctx.globalAlpha = 1;
+    }
+
+    if (screenShake.intensity > 0.5) { ctx.restore(); }
 
     renderVignette(ctx);
   }
