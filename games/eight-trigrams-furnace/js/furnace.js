@@ -1031,12 +1031,10 @@
       coverScreen.classList.add('hidden');
       state.phase = 'INTRO';
       gameHud.classList.add('active');
-      hudWave.textContent = 'Entering the Furnace...';
+      hudWave.textContent = 'Eight Trigrams Furnace';
       updateHud();
-      // Show Ready? Go! overlay after 3 seconds
-      setTimeout(function () {
-        readyGoOverlay.classList.add('active');
-      }, 3000);
+      // Show Ready? Go! immediately
+      readyGoOverlay.classList.add('active');
     }
 
     function startGame() {
