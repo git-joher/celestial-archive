@@ -1,5 +1,5 @@
 /**
- * Eight Trigrams Furnace — 八卦炉 Core Logic
+ * Eight Trigrams Furnace — Core Logic
  * Wave-survival dodge game inside Taishang Laojun's cosmic crucible.
  * Cinematic 5-layer Canvas rendering with particle system.
  *
@@ -67,9 +67,9 @@
        Wave configuration
        ================================================================ */
     var WAVE_CONFIG = {
-      1: { spawners: 3, speed: 1.2, interval: 1800, damage: 8, smoke: 0, title: '第一劫·三昧真火', narZh: '三昧真火扑面而来，八卦炉中无处可逃…' },
-      2: { spawners: 5, speed: 1.8, interval: 1200, damage: 12, smoke: 3, title: '第二劫·八卦轮转', narZh: '炉中八卦运转，风火相激，浓烟蔽目…' },
-      3: { spawners: 7, speed: 2.4, interval: 800, damage: 16, smoke: 5, title: '第三劫·炉破天惊', narZh: '炉壁崩裂，金光透入——撑住，就快出去了！' }
+      1: { spawners: 3, speed: 1.2, interval: 1800, damage: 8, smoke: 0, title: 'Wave I · Samadhi Fire', narZh: 'The Samadhi Fire surges forth — there is no escape from the Eight Trigrams Furnace...' },
+      2: { spawners: 5, speed: 1.8, interval: 1200, damage: 12, smoke: 3, title: 'Wave II · Trigram Wheel', narZh: 'The eight trigrams spin and churn — wind and fire clash, blinding smoke fills the crucible...' },
+      3: { spawners: 7, speed: 2.4, interval: 800, damage: 16, smoke: 5, title: 'Wave III · Furnace Breaks', narZh: 'The furnace walls crack — golden light pours in. Hold on, you are almost out!' }
     };
 
     /* ================================================================
@@ -648,21 +648,21 @@
       choiceModal.classList.add('active');
 
       if (choiceNum === 1) {
-        choicePrompt.textContent = '烈火焚身，如何应对？ The flames close in — what do you do?';
+        choicePrompt.textContent = 'The flames close in — what do you do?';
         choiceA.querySelector('.choice-card-emoji').textContent = '🌬️';
-        choiceA.querySelector('.choice-card-label').textContent = '躲进嵿位风眼';
-        choiceA.querySelector('.choice-card-desc').textContent = 'Hide in Wind\'s Eye — 嵿为风，风眼无火。下一劫减伤20%，但消耗真气。';
+        choiceA.querySelector('.choice-card-label').textContent = 'Hide in Wind\'s Eye';
+        choiceA.querySelector('.choice-card-desc').textContent = 'Xun is Wind — where wind flows, fire cannot reach. 20% damage reduction next wave, but consumes Qi.';
         choiceB.querySelector('.choice-card-emoji').textContent = '💊';
-        choiceB.querySelector('.choice-card-label').textContent = '硬抗烈火吞金丹';
-        choiceB.querySelector('.choice-card-desc').textContent = 'Swallow the Golden Pill — 吞下炉中残丹，恢复30%生命，但下一劫火势更烈。';
+        choiceB.querySelector('.choice-card-label').textContent = 'Swallow the Golden Pill';
+        choiceB.querySelector('.choice-card-desc').textContent = 'Consume a remnant elixir pill in the furnace. Restores 30% HP, but the fire burns fiercer next wave.';
       } else if (choiceNum === 2) {
-        choicePrompt.textContent = '炉中八卦轮转，如何破局？ The trigrams spin — what\'s your move?';
+        choicePrompt.textContent = 'The trigrams spin — what\'s your move?';
         choiceA.querySelector('.choice-card-emoji').textContent = '🌀';
-        choiceA.querySelector('.choice-card-label').textContent = '运转内息';
-        choiceA.querySelector('.choice-card-desc').textContent = 'Circulate Inner Qi — 真气贯通全身，移动速度+30%。';
+        choiceA.querySelector('.choice-card-label').textContent = 'Circulate Inner Qi';
+        choiceA.querySelector('.choice-card-desc').textContent = 'Channel Qi through your entire body. Movement speed +30% for the final wave.';
         choiceB.querySelector('.choice-card-emoji').textContent = '💥';
-        choiceB.querySelector('.choice-card-label').textContent = '撼动炉壁';
-        choiceB.querySelector('.choice-card-desc').textContent = 'Shake the Furnace — 用金箠棒砸炉壁，下一劫缩短15秒，但火焰更密集。';
+        choiceB.querySelector('.choice-card-label').textContent = 'Shake the Furnace';
+        choiceB.querySelector('.choice-card-desc').textContent = 'Strike the furnace walls with the Ruyi Jingu Bang. Final wave shortened by 15 seconds, but fire is denser.';
       }
     }
 
@@ -724,25 +724,25 @@
 
       var endings = {
         'fire-eyes': {
-          icon: '🔥👁‍🗨',
+          icon: '🔥👁️',
           title: 'Fiery Golden Eyes',
-          zh: '火眼金睛',
-          text: '炉壁崩裂，金光万丈。悟空双眼灼灼如熔金，一掌推开千斤炉盖——三昧真火非但未伤他分毫，反将肉身炼成了不坏金身。那双眼睛，从此可辨妖邪、识变化、看穿三界一切幻象。',
-          quote: '“老孙出来了！这炉子，不过如此！”'
+          zh: 'Fire-Forged Sight',
+          text: 'The furnace walls shatter — golden light floods the chamber. Wukong\'s eyes blaze like molten gold as he pushes aside the thousand-pound lid with one palm. The Samadhi Fire did not destroy him — it forged his body into an indestructible vajra form. Those eyes can now see through all illusions, discern demons from gods, and pierce the veils of the Three Realms.',
+          quote: '"I\'m out! This furnace was nothing!"'
         },
         'cloud-escape': {
           icon: '☁️',
           title: 'Cloud Escape',
-          zh: '劫后余生',
-          text: '悟空撑到了炉壁裂开的一刻，翻一个筋斗云冲出火海。虽然没有炼成火眼金睛，但能活着从八卦炉里出来，已是万中无一。他远远望着离恨天兜率宫，咬牙暗自发誓。',
-          quote: '“这笔账，改日再算。”'
+          zh: 'Survivor Against the Odds',
+          text: 'Wukong held on until the furnace walls cracked, then somersaulted out on his cloud through the sea of fire. Though he did not forge the Fiery Golden Eyes, surviving the Eight Trigrams Furnace at all is a feat few in the celestial realm can claim. From afar, he gazes back at the Tushita Palace, grinding his teeth.',
+          quote: '"I\'ll settle this score another day."'
         },
         'nirvana': {
           icon: '🕯️',
           title: 'Nirvana in Furnace',
-          zh: '炉中涅槃',
-          text: '火焰吞没了悟空的身躯……但石猴本非凡胎。炉灰之中，一点金光不灭。八卦炉能炼化万物，却炼不化一颗不屈的猴心。下一次，他会更强。',
-          quote: '“俺老孙……还没完。”'
+          zh: 'Reborn from the Ashes',
+          text: 'The flames consumed Wukong\'s body... but the Stone Monkey was never mere flesh. Amidst the ashes, a single golden spark still glows. The Eight Trigrams Furnace can refine all things in creation — but it cannot refine an unbreakable monkey\'s heart. Next time, he will rise stronger.',
+          quote: '"This old monkey... isn\'t done yet."'
         }
       };
 
@@ -880,7 +880,7 @@
       coverScreen.classList.add('hidden');
       state.phase = 'INTRO';
       gameHud.classList.add('active');
-      hudWave.textContent = '入炉... Entering the Furnace';
+      hudWave.textContent = 'Entering the Furnace...';
       updateHud();
       setTimeout(function () { startWave(1); }, 3000);
     }
