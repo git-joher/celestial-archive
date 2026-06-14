@@ -1,0 +1,76 @@
+/* ============================================================
+   蟠桃盛会 — Peach Banquet Heist
+   Cinematic Dodge-Run — Page Scaffolding
+   ============================================================ */
+
+/* Hide site nav on game page */
+body.game-active .site-nav { display: none !important; }
+body.game-active { background: #0a0604; overflow: hidden; margin: 0; padding: 0; }
+
+/* Canvas Container */
+#game-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile Controls */
+#mobile-controls {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  display: none;
+}
+@media (max-width: 767px) {
+  #mobile-controls { display: block; }
+}
+.mobile-joystick {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 173px;
+  height: 173px;
+  background: rgba(184,160,110,0.1);
+  border: 2px solid rgba(184,160,110,0.4);
+  border-radius: 50%;
+  pointer-events: auto;
+  box-shadow: 0 0 30px rgba(184,160,110,0.08);
+}
+.mobile-joystick-knob {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background-image: url(../../../images/sun-wukong/sun-wukong-ice.jpg);
+  background-size: cover;
+  background-position: center 20%;
+  border: 3px solid rgba(184,160,110,0.8);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: none;
+  box-shadow: 0 0 18px rgba(184,160,110,0.3);
+}
+
+/* Pause Hint */
+.pause-hint {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  font-size: 0.65rem;
+  color: rgba(200,180,140,0.25);
+  letter-spacing: 2px;
+  pointer-events: none;
+}
+
+/* Footer hidden on game page */
+body.game-active .site-footer { display: none !important; }
