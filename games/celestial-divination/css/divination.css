@@ -1,0 +1,618 @@
+/* ============================================================
+   Celestial Divination — 天庭求签 Page Styles
+   "墨韵敦煌" design system — dark celestial stage
+   ============================================================ */
+
+/* ---- Page body override ---- */
+body {
+  background: #1a120a;
+  color: var(--text-on-dark);
+  padding-top: 52px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---- Main stage ---- */
+.divination-stage {
+  position: relative;
+  min-height: calc(100vh - 52px - 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.divination-phase {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+.divination-phase.active {
+  display: flex;
+}
+
+/* ---- Cylinder (签筒) ---- */
+.cylinder-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.cylinder {
+  position: relative;
+  width: 140px;
+  height: 300px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 8px,
+      rgba(0,0,0,0.08) 8px,
+      rgba(0,0,0,0.08) 9px
+    ),
+    linear-gradient(
+      180deg,
+      #8B6914 0%, #A0782C 15%, #C4A04A 30%,
+      #8B6914 50%, #6B4F10 70%, #4A3608 100%
+    );
+  border-radius: 20px 20px 12px 12px;
+  box-shadow:
+    0 0 40px rgba(184,160,110,0.15),
+    inset 0 2px 4px rgba(255,255,200,0.15),
+    inset 0 -4px 8px rgba(0,0,0,0.4);
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+.cylinder:hover {
+  box-shadow:
+    0 0 60px rgba(184,160,110,0.25),
+    inset 0 2px 4px rgba(255,255,200,0.2),
+    inset 0 -4px 8px rgba(0,0,0,0.4);
+}
+.cylinder:active {
+  cursor: grabbing;
+}
+.cylinder.shaking {
+  animation: cylinder-shake 0.15s ease-in-out infinite;
+}
+@keyframes cylinder-shake {
+  0%, 100% { transform: rotate(-3deg) translateX(-2px); }
+  50% { transform: rotate(3deg) translateX(2px); }
+}
+
+/* Sticks visible at top of cylinder */
+.cylinder-sticks {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1px;
+  padding: 4px;
+}
+.cylinder-stick-tip {
+  width: 3px;
+  height: 18px;
+  background: linear-gradient(180deg, #f5e6c8, #c4a04a);
+  border-radius: 1px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.cylinder-hint {
+  font-family: var(--font-chinese-display);
+  font-size: 1rem;
+  color: rgba(184,160,110,0.6);
+  text-align: center;
+  animation: hint-pulse 2.5s ease-in-out infinite;
+}
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* ---- Fortune Scroll ---- */
+.fortune-scroll {
+  background: linear-gradient(180deg, #faf7f2 0%, #f0ead8 50%, #e8dcc0 100%);
+  border: 2px solid #b8a06e;
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-md);
+  max-width: 520px;
+  width: 100%;
+  box-shadow:
+    0 4px 24px rgba(0,0,0,0.4),
+    0 0 40px rgba(184,160,110,0.1);
+  position: relative;
+  color: var(--text-primary);
+  transform-origin: top center;
+  animation: scroll-unfurl 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+@keyframes scroll-unfurl {
+  0% { transform: scaleY(0); opacity: 0; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+.fortune-scroll::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 12px;
+  background: #c4a04a;
+  border-radius: 3px;
+}
+.fortune-scroll::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 12px;
+  background: #c4a04a;
+  border-radius: 3px;
+}
+
+/* Fortune sections */
+.fortune-tier {
+  text-align: center;
+  margin-bottom: var(--space-sm);
+}
+.fortune-tier-badge {
+  display: inline-block;
+  font-family: var(--font-chinese-display);
+  font-size: 1.6rem;
+  padding: 6px 20px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 2px;
+}
+.fortune-tier-badge.supreme {
+  color: #fff;
+  background: var(--accent-vermillion);
+  box-shadow: 0 0 16px rgba(196,77,52,0.4);
+}
+.fortune-tier-badge.good {
+  color: #fff;
+  background: var(--accent-gold);
+  box-shadow: 0 0 12px rgba(184,160,110,0.4);
+}
+.fortune-tier-badge.neutral {
+  color: #fff;
+  background: var(--accent-stone);
+}
+.fortune-tier-badge.cautionary {
+  color: #fff;
+  background: #8b7355;
+}
+.fortune-tier-badge.ill {
+  color: #fff;
+  background: #555;
+}
+
+.fortune-poem {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+.fortune-poem-zh {
+  font-family: var(--font-chinese-display);
+  font-size: 1.3rem;
+  line-height: 2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+.fortune-poem-en {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.fortune-interpretation {
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm);
+  background: rgba(184,160,110,0.08);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.fortune-interpretation-label {
+  font-family: var(--font-chinese-display);
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+  margin-bottom: 4px;
+}
+.fortune-interpretation-zh {
+  font-family: var(--font-chinese);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+.fortune-interpretation-en {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.fortune-deity-message {
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm);
+  text-align: center;
+  border-top: 1px dashed rgba(184,160,110,0.3);
+  border-bottom: 1px dashed rgba(184,160,110,0.3);
+}
+.fortune-deity-label {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 6px;
+}
+.fortune-deity-zh {
+  font-family: var(--font-chinese-display);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.fortune-deity-en {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.fortune-domain {
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+.fortune-domain-label {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-stone);
+  margin-bottom: 4px;
+}
+.fortune-domain-zh {
+  font-family: var(--font-chinese);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+.fortune-domain-en {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* ---- Stick number display ---- */
+.stick-reveal {
+  text-align: center;
+  margin-bottom: var(--space-md);
+  animation: stick-glow-in 1.5s ease forwards;
+}
+@keyframes stick-glow-in {
+  0% { opacity: 0; transform: translateY(60px); }
+  60% { opacity: 0; transform: translateY(60px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.stick-reveal-number {
+  font-family: var(--font-chinese-display);
+  font-size: 2.4rem;
+  color: var(--accent-gold);
+  text-shadow: 0 0 20px rgba(184,160,110,0.5), 0 0 60px rgba(184,160,110,0.2);
+}
+.stick-reveal-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(184,160,110,0.5);
+}
+
+/* ---- 筊杯 (Moon Blocks) ---- */
+.jiaobei-container {
+  display: flex;
+  gap: var(--space-lg);
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+.jiaobei-block {
+  width: 60px;
+  height: 90px;
+  background: linear-gradient(135deg, #f5e6c8, #d4b878);
+  border-radius: 30px 30px 8px 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+.jiaobei-block:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 20px rgba(184,160,110,0.3);
+}
+.jiaobei-block.throwing {
+  animation: jiaobei-tumble 0.8s ease-out forwards;
+}
+@keyframes jiaobei-tumble {
+  0% { transform: translateY(0) rotateX(0deg); }
+  20% { transform: translateY(-120px) rotateX(360deg); }
+  60% { transform: translateY(-40px) rotateX(900deg); }
+  100% { transform: translateY(0) rotateX(1080deg); }
+}
+.jiaobei-block.result-sheng {
+  box-shadow: 0 0 30px rgba(255,220,100,0.6);
+}
+.jiaobei-block.result-xiao {
+  box-shadow: 0 0 20px rgba(184,160,110,0.3);
+}
+.jiaobei-block.result-nu {
+  box-shadow: 0 0 20px rgba(200,80,40,0.4);
+}
+
+.jiaobei-result-text {
+  text-align: center;
+  font-family: var(--font-chinese-display);
+  font-size: 1.4rem;
+  margin-top: var(--space-sm);
+  animation: result-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes result-pop {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.jiaobei-result-text.sheng { color: #ffd464; text-shadow: 0 0 20px rgba(255,212,100,0.5); }
+.jiaobei-result-text.xiao { color: var(--accent-gold); }
+.jiaobei-result-text.nu { color: #c85028; }
+
+/* ---- Deity reveal ---- */
+.deity-reveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  animation: deity-appear 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes deity-appear {
+  0% { transform: scale(0.3); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.deity-reveal-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-chinese-display);
+  font-size: 2rem;
+  color: #fff;
+  box-shadow: 0 0 30px rgba(184,160,110,0.3);
+}
+.deity-reveal-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+}
+.deity-reveal-title {
+  font-size: 0.85rem;
+  color: rgba(232,220,200,0.5);
+  font-style: italic;
+}
+
+/* ---- Actions ---- */
+.fortune-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(232,220,200,0.1);
+}
+.fortune-actions button {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+  border: 1px solid;
+}
+.btn-share {
+  background: var(--accent-gold);
+  color: #1a120a;
+  border-color: var(--accent-gold);
+}
+.btn-share:hover {
+  background: #c9b380;
+  box-shadow: 0 0 16px rgba(184,160,110,0.3);
+}
+.btn-history {
+  background: transparent;
+  color: var(--accent-gold);
+  border-color: rgba(184,160,110,0.3);
+}
+.btn-history:hover {
+  background: rgba(184,160,110,0.1);
+  border-color: var(--accent-gold);
+}
+.btn-return {
+  background: transparent;
+  color: rgba(232,220,200,0.4);
+  border-color: rgba(232,220,200,0.15);
+}
+.btn-return:hover {
+  color: rgba(232,220,200,0.7);
+  border-color: rgba(232,220,200,0.4);
+}
+
+/* ---- Locked state ---- */
+.phase-locked {
+  text-align: center;
+}
+.phase-locked-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+  opacity: 0.6;
+}
+.phase-locked-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--accent-gold);
+  margin-bottom: var(--space-sm);
+}
+.phase-locked-sub {
+  font-size: 0.95rem;
+  color: rgba(232,220,200,0.6);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+.countdown-timer {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--accent-gold);
+  margin-bottom: var(--space-lg);
+  text-shadow: 0 0 12px rgba(184,160,110,0.3);
+}
+
+/* ---- History drawer ---- */
+.history-drawer {
+  position: fixed;
+  top: 52px;
+  right: -400px;
+  width: 380px;
+  max-width: 90vw;
+  height: calc(100vh - 52px);
+  background: #1f1810;
+  border-left: 1px solid rgba(184,160,110,0.15);
+  z-index: 300;
+  overflow-y: auto;
+  padding: var(--space-md);
+  transition: right 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.history-drawer.open {
+  right: 0;
+}
+.history-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid rgba(184,160,110,0.15);
+}
+.history-drawer-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+}
+.history-drawer-close {
+  background: none;
+  border: none;
+  color: rgba(232,220,200,0.4);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.history-drawer-close:hover { color: var(--text-on-dark); }
+
+.history-item {
+  background: rgba(184,160,110,0.05);
+  border: 1px solid rgba(184,160,110,0.1);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+.history-item-date {
+  font-size: 0.75rem;
+  color: rgba(232,220,200,0.4);
+  margin-bottom: 4px;
+}
+.history-item-tier {
+  font-family: var(--font-chinese-display);
+  font-size: 1rem;
+  display: inline-block;
+  margin-right: 8px;
+}
+.history-item-deity {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+  letter-spacing: 1px;
+}
+.history-item-poem {
+  font-family: var(--font-chinese-display);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(232,220,200,0.6);
+  margin-top: 4px;
+}
+
+.history-empty {
+  text-align: center;
+  padding: var(--space-xl);
+  color: rgba(232,220,200,0.3);
+  font-style: italic;
+}
+
+/* ---- Overlay ---- */
+.divination-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  pointer-events: none;
+}
+
+/* ---- Gold particles ---- */
+.divination-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particle-float 3s ease-in-out forwards;
+}
+@keyframes particle-float {
+  0% { transform: translate(0, 0) scale(0); opacity: 0; }
+  20% { transform: translate(var(--px), var(--py)) scale(1); opacity: 0.8; }
+  100% { transform: translate(calc(var(--px) * 3), calc(var(--py) * 3)) scale(0); opacity: 0; }
+}
+
+/* ---- Share canvas (hidden) ---- */
+.share-canvas {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .cylinder { height: 240px; }
+}
+@media (max-width: 767px) {
+  .cylinder { height: 200px; width: 120px; }
+  .fortune-scroll { padding: var(--space-md) var(--space-sm); }
+  .fortune-poem-zh { font-size: 1.1rem; }
+  .fortune-actions { flex-direction: column; align-items: stretch; }
+  .fortune-actions button { text-align: center; }
+  .history-drawer { width: 100vw; right: -100vw; }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>天庭求签 — Celestial Divination | Celestial Archive</title>
+  <meta name="description" content="Experience the ancient Chinese temple ritual of 求签 (qiú qiān). Shake the bamboo cylinder, throw moon blocks, and receive your fortune from the celestial court.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://celestial-archive.com/games/celestial-divination/">
+  <!-- Open Graph -->
+  <meta property="og:title" content="天庭求签 — Celestial Divination: Draw Your Fortune from the Chinese Gods">
+  <meta property="og:description" content="Shake the bamboo cylinder, throw moon blocks, and uncover your fate written in the stars.">
+  <meta property="og:image" content="https://celestial-archive.com/images/jade-emperor/je-court.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Celestial Divination — Draw sacred lots before the Jade Emperor's throne">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://celestial-archive.com/games/celestial-divination/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="天庭求签 — Celestial Divination">
+  <meta name="twitter:description" content="Shake the bamboo cylinder, throw moon blocks, and uncover your fate.">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/jade-emperor/je-court.jpg">
+  <meta name="twitter:image:alt" content="Celestial Divination — Draw sacred lots before the Jade Emperor's throne">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="css/divination.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRWRSLPKTM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XRWRSLPKTM');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "天庭求签 — Celestial Divination",
+    "url": "https://celestial-archive.com/games/celestial-divination/",
+    "description": "Experience the ancient Chinese temple ritual of 求签 (qiú qiān). Shake the bamboo cylinder, throw moon blocks, and receive your fortune from the celestial court.",
+    "applicationCategory": "Entertainment",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Overlay for particle effects -->
+  <div id="divination-overlay" class="divination-overlay"></div>
+
+  <!-- Main stage -->
+  <main class="divination-stage" aria-label="Celestial Divination Ritual">
+
+    <!-- Phase 1: Cylinder (shake to draw) -->
+    <section id="phase-cylinder" class="divination-phase" aria-label="Shake the bamboo cylinder">
+      <div class="cylinder-container">
+        <div id="cylinder" class="cylinder" title="Shake to draw your lot" role="button" tabindex="0" aria-label="Bamboo divination cylinder — shake to draw a sacred lot">
+          <div id="cylinder-sticks" class="cylinder-sticks"></div>
+        </div>
+        <p class="cylinder-hint">虔心摇签 · Shake to draw your lot</p>
+      </div>
+    </section>
+
+    <!-- Phase 2: 筊杯 (throw moon blocks) -->
+    <section id="phase-jiaobei" class="divination-phase" aria-label="Throw moon blocks">
+      <p class="cylinder-hint" style="font-size:1.2rem;margin-bottom:var(--space-lg)">掷筊问天 · Throw the Moon Blocks</p>
+      <div id="jiaobei-blocks" class="jiaobei-container"></div>
+      <div id="jiaobei-result"></div>
+    </section>
+
+    <!-- Phase 3: Deity reveal -->
+    <section id="phase-deity" class="divination-phase" aria-label="Deity appears">
+      <div id="deity-reveal" class="deity-reveal"></div>
+      <p class="cylinder-hint" style="animation:none;opacity:0.7">神明降临 · A deity descends...</p>
+    </section>
+
+    <!-- Phase 4: Fortune reveal -->
+    <section id="phase-fortune" class="divination-phase" aria-label="Your fortune">
+      <div id="fortune-container"></div>
+      <div id="fortune-actions" class="fortune-actions" style="display:none">
+        <button id="btn-share" class="btn-share">Download Share Card</button>
+        <button id="btn-history" class="btn-history">View History</button>
+        <button id="btn-return" class="btn-return">Draw Again Tomorrow</button>
+      </div>
+    </section>
+
+    <!-- Locked state: already drew today -->
+    <section id="phase-locked" class="divination-phase phase-locked" aria-label="Already drawn today">
+      <div class="phase-locked-icon">🔮</div>
+      <h2 class="phase-locked-title">天庭今日已有批示</h2>
+      <p class="phase-locked-sub">
+        The celestial court has already spoken today.<br>
+        Heaven answers only once each day — return after midnight.<br>
+        一日一签，心诚则灵。
+      </p>
+      <div id="countdown-timer" class="countdown-timer">--:--:--</div>
+      <button id="btn-view-last" class="btn-share" style="margin-bottom:var(--space-sm)">View Today's Fortune</button>
+      <button id="btn-return-locked" class="btn-return" style="display:block;margin:0 auto">← Back to Cylinder</button>
+    </section>
+
+  </main>
+
+  <!-- History drawer -->
+  <aside id="history-drawer" class="history-drawer" aria-label="Fortune history">
+    <div class="history-drawer-header">
+      <span class="history-drawer-title">Fortune History · 签文历史</span>
+      <button id="btn-history-close" class="history-drawer-close" aria-label="Close history">&times;</button>
+    </div>
+    <div id="history-list"></div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <nav class="footer-nav">
+            <a href="../../about.html">About Us</a>
+            <a href="../../contact.html">Contact Us</a>
+            <a href="../../privacy-policy.html">Privacy Policy</a>
+            <a href="../../library.html">Knowledge Base</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../../js/deities.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="js/divination-data.js"></script>
+  <script src="js/divination.js"></script>
+  <script>initDivination();</script>
+
+</body>
+</html>
