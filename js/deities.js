@@ -236,7 +236,7 @@ var CELESTIAL_GAMES = [
     nameZh: '神兽收集',
     nameEn: 'Mythical Beast Collection',
     description: 'Track and befriend the mythical beasts of Chinese legend. From Qilin to the Nine-tailed Fox, build your own menagerie of magical creatures.',
-    status: 'coming',
+    status: 'live',
     image: 'images/bull-demon-king/bdk-hero.jpg'
   },
   {

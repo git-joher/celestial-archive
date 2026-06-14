@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>神兽收集 — Mythical Beast Collection | Celestial Archive</title>
+  <meta name="description" content="Explore a living mythological map of China. Solve ancient riddles, discover 20 mythical beasts, and build your museum-grade bestiary — from Qilin to the Nine-Tailed Fox.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://celestial-archive.com/games/mythical-beast-collection/">
+  <meta property="og:title" content="神兽收集 — Mythical Beast Collection: Discover China's Legendary Creatures">
+  <meta property="og:description" content="Explore a living map of mythical China. Solve riddles, collect 20 legendary beasts.">
+  <meta property="og:image" content="https://celestial-archive.com/images/bull-demon-king/bdk-hero.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://celestial-archive.com/games/mythical-beast-collection/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Celestial Archive">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="神兽收集 — Mythical Beast Collection">
+  <meta name="twitter:description" content="Explore a living map of mythical China. Solve riddles, collect 20 legendary beasts.">
+  <meta name="twitter:image" content="https://celestial-archive.com/images/bull-demon-king/bdk-hero.jpg">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="css/bestiary.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRWRSLPKTM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date()); gtag('config', 'G-XRWRSLPKTM');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "神兽收集 — Mythical Beast Collection",
+    "url": "https://celestial-archive.com/games/mythical-beast-collection/",
+    "description": "Explore a living mythological map of China. Solve ancient riddles and discover 20 mythical beasts from Chinese folklore.",
+    "applicationCategory": "Entertainment",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+<body>
+
+  <div id="bestiary-overlay" class="bestiary-overlay"></div>
+
+  <main class="bestiary-stage" aria-label="Mythical Beast Collection">
+
+    <section id="phase-map" class="bestiary-phase active">
+      <div class="map-container" id="map-container">
+        <div class="map-bg-layer map-bg-deep"></div>
+        <div class="map-bg-layer map-bg-mid"></div>
+        <div class="map-bg-layer map-bg-fore"></div>
+        <div class="map-regions" id="map-regions"></div>
+        <div class="map-mist map-mist-1"></div>
+        <div class="map-mist map-mist-2"></div>
+      </div>
+      <div class="map-header">
+        <h1 class="map-title">神兽收集</h1>
+        <p class="map-subtitle">Mythical Beast Collection</p>
+        <div class="map-counter" id="collection-counter">0 / 20</div>
+      </div>
+      <div class="map-actions">
+        <button id="btn-gallery" class="btn-gallery">View Bestiary</button>
+      </div>
+    </section>
+
+    <section id="phase-explore" class="bestiary-phase">
+      <div class="explore-overlay" id="explore-overlay">
+        <div class="explore-text" id="explore-text"></div>
+        <div class="explore-particles" id="explore-particles"></div>
+      </div>
+    </section>
+
+    <section id="phase-riddle" class="bestiary-phase">
+      <div class="riddle-parchment" id="riddle-parchment">
+        <div class="riddle-text-zh" id="riddle-zh"></div>
+        <div class="riddle-text-en" id="riddle-en"></div>
+      </div>
+      <div class="silhouette-row" id="silhouette-row"></div>
+    </section>
+
+    <section id="phase-reveal" class="bestiary-phase">
+      <div class="reveal-container" id="reveal-container">
+        <div class="reveal-shockwave" id="reveal-shockwave"></div>
+        <div class="reveal-beast" id="reveal-beast"></div>
+        <div class="reveal-result" id="reveal-result"></div>
+      </div>
+    </section>
+
+    <section id="phase-card" class="bestiary-phase">
+      <div class="beast-card-container" id="beast-card-container"></div>
+      <div class="beast-card-actions">
+        <button id="btn-share" class="btn-share">Download Share Card</button>
+        <button id="btn-continue" class="btn-continue">Return to Map</button>
+      </div>
+    </section>
+
+    <section id="phase-locked" class="bestiary-phase phase-locked">
+      <div class="phase-locked-icon">🏔️</div>
+      <h2 class="phase-locked-title">今日探索已毕</h2>
+      <p class="phase-locked-sub">The mythical realms rest today. Return at dawn for a new encounter.<br>神兽亦需安歇，明日再续仙缘。</p>
+      <div id="countdown-timer" class="countdown-timer">--:--:--</div>
+      <button id="btn-view-collection-locked" class="btn-gallery">View Bestiary</button>
+    </section>
+
+  </main>
+
+  <aside id="gallery-drawer" class="gallery-drawer" aria-label="Beast collection gallery">
+    <div class="gallery-header">
+      <span class="gallery-title">万兽图谱 · Bestiary</span>
+      <button id="btn-gallery-close" class="gallery-close">&times;</button>
+    </div>
+    <div class="gallery-filters">
+      <button class="gallery-filter active" data-filter="all">All</button>
+      <button class="gallery-filter" data-filter="kunlun">昆仑</button>
+      <button class="gallery-filter" data-filter="south">南山</button>
+      <button class="gallery-filter" data-filter="west">西荒</button>
+      <button class="gallery-filter" data-filter="north">北冥</button>
+      <button class="gallery-filter" data-filter="heaven">天庭</button>
+      <button class="gallery-filter" data-filter="underworld">幽冥</button>
+    </div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </aside>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <nav class="footer-nav">
+            <a href="../../about.html">About Us</a>
+            <a href="../../contact.html">Contact Us</a>
+            <a href="../../privacy-policy.html">Privacy Policy</a>
+            <a href="../../library.html">Knowledge Base</a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 Celestial Archive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../../js/deities.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="js/beast-data.js"></script>
+  <script src="js/bestiary.js"></script>
+  <script>initBestiary();</script>
+
+</body>
+</html>
