@@ -29,6 +29,8 @@
     var hudHpText = document.getElementById('hud-hp-text');
     var hudTimer = document.getElementById('hud-timer');
     var hudNarrative = document.getElementById('hud-narrative');
+    var readyGoOverlay = document.getElementById('ready-go-overlay');
+    var btnReadyGo = document.getElementById('btn-ready-go');
     var choiceModal = document.getElementById('choice-modal');
     var choicePrompt = document.getElementById('choice-prompt');
     var choiceA = document.getElementById('choice-a');
@@ -822,6 +824,7 @@
 
       endingScreen.classList.remove('active');
       gameHud.classList.remove('active');
+      readyGoOverlay.classList.remove('active');
       hideChoice();
       updateCoverUnlocks();
       coverScreen.classList.remove('hidden');
@@ -885,7 +888,15 @@
       gameHud.classList.add('active');
       hudWave.textContent = 'Entering the Furnace...';
       updateHud();
-      setTimeout(function () { startWave(1); }, 3000);
+      // Show Ready? Go! overlay after 3 seconds
+      setTimeout(function () {
+        readyGoOverlay.classList.add('active');
+      }, 3000);
+    }
+
+    function startGame() {
+      readyGoOverlay.classList.remove('active');
+      startWave(1);
     }
 
     /* ================================================================
@@ -927,6 +938,7 @@
     });
 
     btnEnter.addEventListener('click', startIntro);
+    btnReadyGo.addEventListener('click', startGame);
     btnRetry.addEventListener('click', function () {
       endingScreen.classList.remove('active');
       resetGame();
