@@ -1047,6 +1047,31 @@
        ================================================================ */
     window.addEventListener('keydown', function (e) {
       keys[e.code] = true;
+
+      // Enter / Space to trigger on-screen buttons
+      if (e.code === 'Enter' || e.code === 'Space') {
+        // Cover screen visible → enter the furnace
+        if (!coverScreen.classList.contains('hidden')) {
+          e.preventDefault();
+          startIntro();
+          return;
+        }
+        // Ready? Go! overlay visible → start the game
+        if (readyGoOverlay.classList.contains('active')) {
+          e.preventDefault();
+          startGame();
+          return;
+        }
+        // Ending screen visible → retry
+        if (endingScreen.classList.contains('active')) {
+          e.preventDefault();
+          endingScreen.classList.remove('active');
+          resetGame();
+          startIntro();
+          return;
+        }
+      }
+
       if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'ArrowDown' ||
           e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
         e.preventDefault();

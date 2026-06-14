@@ -257,6 +257,12 @@ body {
   color: var(--accent-gold);
   margin-bottom: var(--space-lg);
 }
+.ready-go-hint {
+  font-size: 0.65rem;
+  color: rgba(232,220,200,0.3);
+  letter-spacing: 1px;
+  margin-top: var(--space-sm);
+}
 .btn-ready-go {
   display: inline-block;
   font-family: var(--font-display);
